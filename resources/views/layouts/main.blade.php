@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halo</title>
+  <title>{{ $title ?? "SIMBAT" }}</title>
   @vite('resources/css/app.css')
 </head>
 <body>
-  <h1 class="text-3xl font-bold">
-    Hello world!
-  </h1>
+    @include('components.sidebar')
+    @yield('container')
+    <h1>MAIN</h1>
 </body>
 </html>
