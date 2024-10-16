@@ -10,6 +10,7 @@ export default {
     },
     extend: {
       colors: {
+        abu: 'F7F7F9',
         indigo: {
           DEFAULT: '#666CFF',
           100: '#D9DBFF',
