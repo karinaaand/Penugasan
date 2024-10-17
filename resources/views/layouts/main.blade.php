@@ -7,8 +7,9 @@
   @vite('resources/css/app.css')
 </head>
 <body>
-    @include('components.sidebar')
-    @yield('container')
-    <h1>MAIN</h1>
+        @include('components.sidebar')
+    <div class="p-4 sm:ml-64">
+        @yield('container')
+    </div>
 </body>
 </html>
