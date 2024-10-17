@@ -9,7 +9,7 @@
        <ul class="space-y-2 font-medium">
         <li>
             <div style="margin-bottom: 30px; margin-left: 40px;">
-                <img src="assets/logo simbat.png" alt="Simbat Logo" style="width: 40px; height: 40px; margin-right: 3px; vertical-align: middle; display: inline-block;">
+                <img src="{{ asset('assets/logo simbat.png') }}" alt="Simbat Logo" style="width: 40px; height: 40px; margin-right: 3px; vertical-align: middle; display: inline-block;">
                 <span style="font-size: 20px; font-weight: bold; vertical-align: middle; display: inline-block;">Simbat</span>
             </div>
 
@@ -39,31 +39,31 @@
              </button>
              <ul id="dropdown-masterdata" class="list-none hidden py-2 space-y-2">
                 <li>
-                    <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                    <a href="{{ route('master.category.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                         <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                         <span class="text-sm">Kategori Obat</span>
                     </a>
                 </li>
             <li>
-                <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                <a href="{{ route('master.variant.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                     <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                     <span class="text-sm">Jenis Obat</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                <a href="{{ route('master.manufacture.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                     <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                     <span class="text-sm">Produsen Obat</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                <a href="{{ route('master.vendor.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                     <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                     <span class="text-sm">Vendor Obat</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                <a href="{{ route('master.drug.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                     <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                     <span class="text-sm">Nama Obat</span>
                 </a>
@@ -83,13 +83,13 @@
                 </button>
                 <ul id="dropdown-inventory" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('inventory.inflows.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">Barang Masuk</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('inventory.stocks.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">List Stok</span>
                         </a>
@@ -108,13 +108,13 @@
                 </button>
                 <ul id="dropdown-klinik" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('clinic.inflows.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">Obat Masuk</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('clinic.stocks.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">List Stok</span>
                         </a>
@@ -133,13 +133,13 @@
                 </button>
                 <ul id="dropdown-laporan" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('report.drugs.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">Laporan obat</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('report.transactions.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">Laporan transaksi</span>
                         </a>
@@ -158,13 +158,13 @@
                 </button>
                 <ul id="dropdown-manajementransaksi" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('management.bill.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                             <span class="text-sm">Tagihan</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                        <a href="{{ route('management.retur.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full  bg-gray-500 inline-block ms-1"></span>
                             <span class= "text-sm">Retur</span>
                         </a>
