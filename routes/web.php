@@ -53,7 +53,7 @@ Route::prefix('master')->as('master.')->group(function () {
     Route::resource('vendor',VendorController::class)->except(['create','show']);
     Route::resource('variant',VariantController::class)->except(['create','show']);
     Route::resource('manufacture',ManufactureController::class)->except(['create','show']);
-    Route::resource('drug',DrugController::class)->except(['create','show']);
+    Route::resource('drug',DrugController::class)->except(['show']);
 });
 
 Route::prefix("report")->as("report.")->group(function(){

@@ -10,6 +10,10 @@ class DrugController extends Controller
     {
         return view('pages.master.drug');
     }
+    public function create()
+    {
+        return view('pages.master.createDrug');
+    }
     public function store(Request $request)
     {
     }
