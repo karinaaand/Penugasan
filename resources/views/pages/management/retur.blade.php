@@ -11,6 +11,7 @@
                     <th class="py-3 px-6 text-left">JUMLAH BARANG</th>
                     <th class="py-3 px-6 text-left">TGL RETUR</th>
                     <th class="py-3 px-6 text-left">STATUS</th>
+                    <th class="py-3 px-6 text-left">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
@@ -25,6 +26,10 @@
                             ONGOING
                         </a>
                     </td>
+                    <td class="py-3 px-6 text-center">
+                    <a href="{{ route('management.retur.show',1)}}">
+                        <button class="bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors duration-200">View</button>
+                    </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left">2</td>
@@ -34,6 +39,10 @@
                     <td class="py-3 px-6 text-left">01-01-2001</td>
                     <td class="py-3 px-6 text-left">
                         <span class="bg-orange-500 text-white py-1 px-3 rounded-full text-xs">ONGOING</span>
+                    </td>
+                    <td class="py-3 px-6 text-center">
+                    <a href="{{ route('management.retur.show',1)}}">
+                        <button class="bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors duration-200">View</button>
                     </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
@@ -45,6 +54,10 @@
                     <td class="py-3 px-6 text-left">
                         <span class="text-green-500 font-bold">DONE</span>
                     </td>
+                    <td class="py-3 px-6 text-center">
+                    <a href="{{ route('management.retur.show',1)}}">
+                        <button class="bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors duration-200">View</button>
+                    </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left">4</td>
@@ -55,6 +68,10 @@
                     <td class="py-3 px-6 text-left">
                         <span class="text-green-500 font-bold">DONE</span>
                     </td>
+                    <td class="py-3 px-6 text-center">
+                    <a href="{{ route('management.retur.show',1)}}">
+                        <button class="bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors duration-200">View</button>
+                    </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left">5</td>
@@ -64,6 +81,10 @@
                     <td class="py-3 px-6 text-left">01-01-2001</td>
                     <td class="py-3 px-6 text-left">
                         <span class="text-green-500 font-bold">DONE</span>
+                    </td>
+                    <td class="py-3 px-6 text-center">
+                    <a href="{{ route('management.retur.show',1)}}">
+                        <button class="bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors duration-200">View</button>
                     </td>
                 </tr>
             </tbody>
