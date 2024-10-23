@@ -12,8 +12,6 @@
                 <img src="{{ asset('assets/logo simbat.png') }}" alt="Simbat Logo" style="width: 40px; height: 40px; margin-right: 3px; vertical-align: middle; display: inline-block;">
                 <span style="font-size: 20px; font-weight: bold; vertical-align: middle; display: inline-block;">Simbat</span>
             </div>
-
-
             <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-gray-900 bg-blue-500 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700 group mb-4">
                 <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.50033 16.4167H16.5003V7.39392L11.0003 2.39442L5.50033 7.39392V16.4167ZM17.417 18.25H4.58366C4.34054 18.25 4.10739 18.1534 3.93548 17.9815C3.76357 17.8096 3.66699 17.5765 3.66699 17.3333V9.08334H0.916992L10.3834 0.477675C10.5522 0.324113 10.7722 0.239014 11.0003 0.239014C11.2285 0.239014 11.4485 0.324113 11.6172 0.477675L21.0837 9.08334H18.3337V17.3333C18.3337 17.5765 18.2371 17.8096 18.0652 17.9815C17.8933 18.1534 17.6601 18.25 17.417 18.25ZM6.87533 10.9167H8.70866C8.70866 11.5245 8.9501 12.1074 9.37987 12.5371C9.80964 12.9669 10.3925 13.2083 11.0003 13.2083C11.6081 13.2083 12.191 12.9669 12.6208 12.5371C13.0506 12.1074 13.292 11.5245 13.292 10.9167H15.1253C15.1253 12.0107 14.6907 13.0599 13.9171 13.8335C13.1436 14.6071 12.0943 15.0417 11.0003 15.0417C9.90631 15.0417 8.8571 14.6071 8.08351 13.8335C7.30992 13.0599 6.87533 12.0107 6.87533 10.9167Z" fill="#ffffff"/>
@@ -171,6 +169,26 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="{{ route('user.index') }}" class="flex items-center p-2 text-gray-900 bg-blue-500 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700 group mb-4">
+                    <img src="{{ asset('assets/Vector manage.png') }}" alt="Manage Accounts" style="width: 20px; height: 20px; margin-right: 3px; vertical-align: middle; display: inline-block;">
+                    <span class="ms-3">Manage Accounts</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('user.settings') }}" class="flex items-center p-2 text-gray-900 bg-blue-500 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700 group mb-4">
+                    <img src="{{ asset('assets/Vector settings.png') }}" alt="Manage Settings" style="width: 20px; height: 20px; margin-right: 3px; vertical-align: middle; display: inline-block;">
+                    <span class="ms-3">Manage Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-gray-900 bg-blue-500 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700 group mb-4">
+                    <img src="{{ asset('assets/logo simbat.png') }}" alt="Logo Simbat" style="width: 20px; height: 20px; margin-right: 3px; vertical-align: middle; display: inline-block;">
+                    <span class="ms-3">Simbat</span>
+
+                </a>
+            </li>
+
        </ul>
        <div class="navbar">
         <button class="flex items-center bg-gray-400 hover:bg-gray-400 text-black py-2 px-6 w-[230px] h-[40px] rounded-lg transition mt-2">
@@ -183,6 +201,10 @@
         </button>
         </div>
     </div>
+
+
+
+
  </aside>
 
 <script>
