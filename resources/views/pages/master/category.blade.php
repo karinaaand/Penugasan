@@ -15,7 +15,6 @@
         <input type="text" class="border border-gray-300 rounded p-2 w-1/3 ml-10" placeholder="Search">
     </div>
 
-    <!-- Table -->
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal">
             <thead>
