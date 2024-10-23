@@ -6,7 +6,6 @@
     <!-- Header -->
     <h1 class="text-3xl font-bold text-gray-700 mb-6">Kategori Obat</h1>
 
-    <!-- Add Button -->
     <div class="flex justify-between mb-4">
         <div class="w-1/2">
             <input type="text" class="border border-gray-300 rounded p-2 w-3/4" placeholder="Inputkan kategori obat">
