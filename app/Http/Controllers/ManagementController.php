@@ -24,6 +24,12 @@ class ManagementController extends Controller
     public function retur(){
         return view("pages.management.returDetail");
     }
+    public function trashes(){
+        return view("pages.management.trash");        
+    }
+    public function trash(){
+        return view("pages.management.trashDetail");
+    }
     public function returPrint(){
 
     }

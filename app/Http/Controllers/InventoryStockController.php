@@ -25,4 +25,10 @@ class InventoryStockController extends Controller
             return view("pages.inventory.retur");
         }
     }
+    public function trash(Request $request,string $batch)
+    {
+        if($request->isMethod('get')){
+            return view("pages.inventory.trash");
+        }
+    }
 }

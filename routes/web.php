@@ -37,6 +37,7 @@ Route::prefix("inventory")->as('inventory.')->group(function(){
         'edit','update','destroy'
     ]);
     Route::match(['get','post'],"stocks/retur/{batch}",[InventoryStockController::class,"retur"])->name('retur');
+    Route::match(['get','post'],"stocks/trash/{batch}",[InventoryStockController::class,"trash"])->name('trash');
     Route::resource('stocks',InventoryStockController::class)->only([
         'index','show','destroy'
     ]);
@@ -82,6 +83,10 @@ Route::prefix('management')->group(function () {
             Route::get("{retur}", "retur")->name("show");
             Route::post("{retur}/pay", "returPay")->name("pay");
             Route::get("{retur}/print", "returPrint")->name("print");
+        });
+        Route::prefix("trash")->as("trash.")->group(function () {
+            Route::get("/", "trashes")->name("index");
+            Route::get("{trash}", "trash")->name("show");
         });
     });
 });
