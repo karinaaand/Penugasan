@@ -141,7 +141,7 @@
                     <td class="py-3 px-6 text-center">150</td>
                     <td class="py-3 px-6 text-center">
                         <a href="{{ route('inventory.retur',1) }}" class="bg-yellow-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition-colors duration-200">Retur</a>
-                        <a href="{{ route('inventory.stocks.show',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
+                        <a href="{{ route('inventory.trash',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
                     </td>
                 </tr>
                 <!-- Data Row 2 -->
@@ -151,7 +151,7 @@
                     <td class="py-3 px-6 text-center">150</td>
                     <td class="py-3 px-6 text-center">
                         <a href="{{ route('inventory.retur',1) }}" class="bg-yellow-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition-colors duration-200">Retur</a>
-                        <a href="{{ route('inventory.stocks.show',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
+                        <a href="{{ route('inventory.trash',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
                     </td>
                 </tr>
                 <!-- Data Row 3 -->
@@ -161,7 +161,7 @@
                     <td class="py-3 px-6 text-center">150</td>
                     <td class="py-3 px-6 text-center">
                         <a href="{{ route('inventory.retur',1) }}" class="bg-yellow-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition-colors duration-200">Retur</a>
-                        <a href="{{ route('inventory.stocks.show',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
+                        <a href="{{ route('inventory.trash',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
                     </td>
                 </tr>
                 <!-- Data Row 4 -->
@@ -171,7 +171,7 @@
                     <td class="py-3 px-6 text-center">150</td>
                     <td class="py-3 px-6 text-center">
                         <a href="{{ route('inventory.retur',1) }}" class="bg-yellow-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition-colors duration-200">Retur</a>
-                        <a href="{{ route('inventory.stocks.show',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
+                        <a href="{{ route('inventory.trash',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
                     </td>
                 </tr>
                 <!-- Data Row 5 -->
@@ -181,7 +181,7 @@
                     <td class="py-3 px-6 text-center">150</td>
                     <td class="py-3 px-6 text-center">
                         <a href="{{ route('inventory.retur',1) }}" class="bg-yellow-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition-colors duration-200">Retur</a>
-                        <a href="{{ route('inventory.stocks.show',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
+                        <a href="{{ route('inventory.trash',1) }}" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">Buang</a>
                     </td>
                 </tr>
             </tbody>

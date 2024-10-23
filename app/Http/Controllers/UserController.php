@@ -12,7 +12,7 @@ class UserController extends Controller
     }
     public function create()
     {
-        return view('pages.super.tambahUser');
+        return view('pages.super.addUser');
     }
     public function store(Request $request)
     {
