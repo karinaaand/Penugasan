@@ -9,6 +9,7 @@ use App\Http\Controllers\InventoryStockController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\VendorController;
@@ -26,6 +27,8 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get','post'],'/settings','settings')->name('user.settings');
     Route::post("/logout",'logout')->name("user.logout");
 });
+
+Route::resource('transaction',TransactionController::class)->except(['edit','update','destroy']);
 Route::resource('user', UserController::class)->except(['show']);
 
 Route::prefix("inventory")->as('inventory.')->group(function(){
