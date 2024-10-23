@@ -1,12 +1,22 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $title ?? "SIMBAT" }}</title>
-  @vite('resources/css/app.css')
-</head>
-<body>
-    
-</body>
-</html>
+@extends('layouts.form')
+@section('container')
+<div class="shadow-lg ring-black rounded-xl w-96 p-12">
+  <h1 class="text-center text-3xl mb-8 font-bold">Forgot Password</h1>
+  <form action="" >
+    <div class="mb-5">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+      <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@flowbite.com" required />
+    </div>
+    <div class="mb-5">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your password</label>
+      <input type="passsword" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@flowbite.com" required />
+    </div>
+    <button type="submit" class="bg-lavender hover:bg-lavender-700 rounded-full text-white w-full py-2">Log In</button>
+    <h1 class="text-center mt-3">
+      <a href="{{ route('user.forgot') }}" class="text-center text-xs hover:underline m-auto">Lupa sandi?</a>
+
+    </h1>
+  </form>
+
+</div>
+@endsection
