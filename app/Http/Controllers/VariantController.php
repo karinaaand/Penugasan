@@ -13,10 +13,6 @@ class VariantController extends Controller
     public function store(Request $request)
     {
     }
-    public function edit(string $id)
-    {
-        return view('pages.master.editVariant');
-    }
     public function update(Request $request, string $id)
     {
     }

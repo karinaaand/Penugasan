@@ -53,10 +53,10 @@ Route::prefix("clinic")->as('clinic.')->group(function(){
 });
 
 Route::prefix('master')->as('master.')->group(function () {
-    Route::resource('category',CategoryController::class)->except(['create','show']);
+    Route::resource('category',CategoryController::class)->except(['create','show','edit']);
     Route::resource('vendor',VendorController::class)->except(['create','show']);
-    Route::resource('variant',VariantController::class)->except(['create','show']);
-    Route::resource('manufacture',ManufactureController::class)->except(['create','show']);
+    Route::resource('variant',VariantController::class)->except(['create','show','edit']);
+    Route::resource('manufacture',ManufactureController::class)->except(['create','show','edit']);
     Route::resource('drug',DrugController::class)->except(['show']);
 });
 
