@@ -36,15 +36,19 @@
                 </tr>
             </tbody>
         </table>
-        <div class="flex justify-between items-center p-4">
-            <div class="flex items-center ml-auto">
-                <button class="bg-gray-200 text-gray-600 px-3 py-1 rounded-l"> < </button>
-                <button class="bg-blue-500 text-white px-3 py-1">1</button>
-                <button class="bg-gray-200 text-gray-600 px-3 py-1">2</button>
-                <span class="px-3 py-1">...</span>
-                <button class="bg-gray-200 text-gray-600 px-3 py-1">9</button>
-                <button class="bg-gray-200 text-gray-600 px-3 py-1">10</button>
-                <button class="bg-gray-200 text-gray-600 px-3 py-1 rounded-r"> > </button>
+        <div class="flex justify-end items-center mt-4 gap-4">
+            <div class="text-sm">Showing 1 to 10 of 50 entries</div>
+                <!-- Pagination -->
+                <div class="flex justify-end">
+                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

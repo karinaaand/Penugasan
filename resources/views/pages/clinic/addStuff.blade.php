@@ -182,15 +182,19 @@
                 </tbody>
             </table>
             <div class="flex flex-col items-end mt-4">
-                <div class="flex items-end space-x-4 mb-4">
-                    <div class="flex items-center space-x-1">
-                        <button class="px-2 py-1 text-gray-500 bg-gray-200 rounded"><i class="fas fa-chevron-left"></i><</button>
-                        <button class="px-2 py-1 text-blue-500 border border-blue-500 rounded">1</button>
-                        <button class="px-2 py-1 text-gray-500 bg-gray-200 rounded">2</button>
-                        <span class="px-2 py-1 text-gray-500">...</span>
-                        <button class="px-2 py-1 text-gray-500 bg-gray-200 rounded">9</button>
-                        <button class="px-2 py-1 text-gray-500 bg-gray-200 rounded">10</button>
-                        <button class="px-2 py-1 text-gray-500 bg-gray-200 rounded"><i class="fas fa-chevron-right"></i>></button>
+                <div class="flex justify-end items-center mt-4 gap-4">
+                    <div class="text-sm">Showing 1 to 10 of 50 entries</div>
+                        <!-- Pagination -->
+                        <div class="flex justify-end">
+                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 <button class="flex items-center justify-center w-1/8 px-4 py-2 text-white bg-green-400 rounded shadow-md hover:bg-green-500">

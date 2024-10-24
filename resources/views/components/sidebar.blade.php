@@ -175,31 +175,7 @@
                     <span class="ms-3">Manage Accounts</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('user.settings') }}" class="flex items-center p-2 text-gray-900 bg-blue-500 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700 group mb-4">
-                    <img src="{{ asset('assets/Vector settings.png') }}" alt="Manage Settings" style="width: 20px; height: 20px; margin-right: 3px; vertical-align: middle; display: inline-block;">
-                    <span class="ms-3">Manage Settings</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-gray-900 bg-blue-500 rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700 group mb-4">
-                    <img src="{{ asset('assets/logo simbat.png') }}" alt="Logo Simbat" style="width: 20px; height: 20px; margin-right: 3px; vertical-align: middle; display: inline-block;">
-                    <span class="ms-3">Simbat</span>
-
-                </a>
-            </li>
-
        </ul>
-       <div class="navbar">
-        <button class="flex items-center bg-gray-400 hover:bg-gray-400 text-black py-2 px-6 w-[230px] h-[40px] rounded-lg transition mt-2">
-            <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.5 16H5.5V18H17.5V2H5.5V4H3.5V1C3.5 0.734784 3.60536 0.48043 3.79289 0.292893C3.98043 0.105357 4.23478 0 4.5 0H18.5C18.7652 0 19.0196 0.105357 19.2071 0.292893C19.3946 0.48043 19.5 0.734784 19.5 1V19C19.5 19.2652 19.3946 19.5196 19.2071 19.7071C19.0196 19.8946 18.7652 20 18.5 20H4.5C4.23478 20 3.98043 19.8946 3.79289 19.7071C3.60536 19.5196 3.5 19.2652 3.5 19V16ZM5.5 9H12.5V11H5.5V14L0.5 10L5.5 6V9Z" fill="#000000" fill-opacity="0.9"/>
-                </svg>
-                <span style="padding-left: 10px;">Log Out</span>
-            </div>
-        </button>
-        </div>
     </div>
 
 
