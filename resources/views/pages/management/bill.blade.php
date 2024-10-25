@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('container')
 <div class="bg-white shadow-md rounded-xl p-6 w-full max-w-8xl">
+    <div class="mb-4">
+        <input type="text" placeholder="Masukkan nama vendor" class="w-1/3 p-2 border border-gray-300 rounded">
+    </div>
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead>

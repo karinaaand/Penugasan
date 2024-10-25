@@ -78,6 +78,7 @@
                         <h1 class="font-bold text-lg">Hari dengan Keuntungan Tertinggi</h1>
                         <h1 class="text-gray-400 font-bold text-xs">Senin</h1>
                     </div>
+                    <a href="" class="bg-indigo rounded-lg w-8 h-8 h-max text-center items-center font-bold text-white">></a>
                 </div>
                 
             </div>
