@@ -72,14 +72,12 @@
         <div class="w-full">
             <div class="w-full rounded-lg shadow-lg p-6">
                 <h1 class="font-bold text-lg">Grafik Keuntungan 7 Hari Terakhir</h1>
-                <h1 class="text-gray-400 font-bold text-xs">Total 228k kunjungan</h1>
                 <canvas id="penjualan"></canvas>
                 <div class="flex justify-between">
                     <div>
-                        <h1 class="font-bold text-lg">Most Visited Day</h1>
-                        <h1 class="text-gray-400 font-bold text-xs">Total 228k kunjungan</h1>
+                        <h1 class="font-bold text-lg">Hari dengan Keuntungan Tertinggi</h1>
+                        <h1 class="text-gray-400 font-bold text-xs">Senin</h1>
                     </div>
-                    <a href="" class="bg-indigo rounded-lg w-8 h-8 h-max text-center items-center font-bold text-white">></a>
                 </div>
                 
             </div>
