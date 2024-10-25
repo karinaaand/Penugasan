@@ -29,7 +29,7 @@
                     <label for="jenis_obat" class="w-1/4 text-gray-700">Jenis Obat:</label>
                     <select id="kategori_obat" class="border border-gray-300 rounded p-2 w-3/4">
                         <option value="">Pilih Jenis Obat</option>
-                    </select>                
+                    </select>
                 </div>
                 <div class="flex w-full mb-4">
                     <label for="produsen_obat" class="w-1/4 text-gray-700">Produsen Obat:</label>
@@ -51,7 +51,7 @@
             <div class="bg-white border rounded-lg p-6 shadow-sm w-full h-max col-span-2">
                 <!-- Line 1: Harga -->
                 <div class="flex items-center mb-4">
-                    <label for="harga" class="w-1/4 text-gray-700 mr-2">Harga:</label>
+                    <label for="harga" class="w-1/4 text-gray-700">Harga:</label>
                     <input type="text" id="harga" class="border border-gray-300 rounded p-2 w-1/2 mr-2" placeholder="Inputkan harga">
                     <button class="bg-blue-500 text-white rounded hover:bg-blue-600 px-4 py-2">Simpan</button>
                 </div>

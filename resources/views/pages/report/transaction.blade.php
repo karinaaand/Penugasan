@@ -1,11 +1,27 @@
 @extends('layouts.main')
 @section('container')
+<div class="flex-1 justify-end flex">
+    <button id="printButton" class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg">CETAK</button>
+</div>
+
 <form action="" class="flex flex-row justify-between w-max gap-3">
     <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
     <h1>sampai</h1>
     <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
     <button class="bg-indigo px-3 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
 </form>
+
+<!-- Opsi Cetak (disembunyikan pada awal) -->
+<div id="printOptions" class="hidden mb-4">
+    <label for="format" class="text-lg font-semibold">Pilih format cetak:</label>
+    <select id="format" class="ml-2 border rounded-md">
+        <option value="pdf">PDF</option>
+        <option value="excel">Excel</option>
+    </select>
+    <button id="confirmPrint" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg ml-2">Download</button>
+</div>
+
+
 <div class="flex justify-end">
     <form action="">
         <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2">
@@ -41,7 +57,7 @@
         </tbody>
     </table>
     <div class="flex justify-between items-center">
-        <a href="" class="bg-bright shadow-md rounded-md p-2 text-xs ml-4">CETAK</a>
+        {{-- <a href="" class="bg-bright shadow-md rounded-md p-2 text-xs ml-4">CETAK</a> --}}
         <div class="flex justify-end items-center mt-4 gap-4">
             <div class="text-sm">Showing 1 to 10 of 50 entries</div>
                 <!-- Pagination -->
@@ -62,3 +78,30 @@
 
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Event listener untuk tombol CETAK
+        document.getElementById('printButton').addEventListener('click', function() {
+            const printOptions = document.getElementById('printOptions');
+            // Toggle opsi cetak: sembunyikan atau tampilkan
+            if (printOptions.classList.contains('hidden')) {
+                printOptions.classList.remove('hidden');
+            } else {
+                printOptions.classList.add('hidden');
+            }
+        });
+
+        // Event listener untuk tombol konfirmasi cetak
+        document.getElementById('confirmPrint').addEventListener('click', function() {
+            const format = document.getElementById('format').value;
+            if (format === 'pdf') {
+                alert("Mencetak dalam format PDF...");
+            } else if (format === 'excel') {
+                alert("Mencetak dalam format Excel...");
+            }
+            document.getElementById('printOptions').classList.add('hidden');
+        });
+    });
+</script>
+
