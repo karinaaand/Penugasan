@@ -205,5 +205,5 @@
             console.log(`Dropdown ${targetId} toggled`);
         });
     });
-    });
+});
 </script>

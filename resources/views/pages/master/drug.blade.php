@@ -8,14 +8,16 @@
 
     <!-- Add Button and Search -->
     <div class="flex justify-between mb-4">
-        <a href="{{ route('master.drug.create')}}" class="bg-green-500 text-white rounded hover:bg-green-600 px-6 py-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-            Tambah Obat
-        </a>
-        <input type="text" class="border border-gray-300 rounded p-2 w-1/3 ml-10" placeholder="Search">
+            <a href="{{ route('master.drug.create') }}">
+                <button class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    + Tambah
+                </button>
+            </a>
+        <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
     </div>
+
 
     <!-- Table -->
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
