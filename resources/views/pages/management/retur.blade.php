@@ -38,9 +38,7 @@
                     <td class="py-3 px-6 text-left">10</td>
                     <td class="py-3 px-6 text-left">01-01-2001</td>
                     <td class="py-3 px-6 text-left">
-                        <a href="{{ route('management.retur.show', 1) }}" class="bg-orange-500 text-white py-1 px-3 rounded-full text-xs">
-                            ONGOING
-                        </a>
+                        <span class="bg-orange-500 text-white py-1 px-3 rounded-full text-xs">ONGOING</span>
                     </td>
                     <td class="flex justify-center py-3">
                         <a href="{{ route('management.retur.show', 1) }}" class="bg-lavender-200 hover:bg-lavender p-1 rounded-md">
