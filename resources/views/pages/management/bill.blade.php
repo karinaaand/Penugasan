@@ -1,11 +1,20 @@
 @extends('layouts.main')
 @section('container')
 <div class="bg-white shadow-md rounded-xl p-6 w-full max-w-8xl">
+    <!-- Form lainnya dan tabel -->
+    <form action="" class="flex flex-row justify-between w-max gap-3">
+        <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
+        <h1>sampai</h1>
+        <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
+        <button class="bg-indigo px-2 py-1 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
+    </form>
+
     <div class="flex justify-end">
         <form action="">
             <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-12">
         </form>
     </div>
+
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead>

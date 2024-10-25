@@ -1,13 +1,19 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 @section('container')
 <div class="p-6 bg-white rounded-lg shadow-lg">
 <h2 class="text-2xl font-bold mb-4">Manage Account</h2>
+
+<div class="flex justify-between items-center mb-4">
+
     <!-- Add Button -->
-    <div class="mb-4">
-        <a href="{{ route('user.create') }}">
-            <button class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+ Add User</button>
-        </a>
-    </div>
+    <a href="{{ route('user.create') }}">
+        <button class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+ Add User</button>
+    </a>
+
+     <!-- Search Input -->
+     <input type="text" placeholder="Search" class="border rounded-full px-4 py-2">
+</div>
+
 
     <!-- Table -->
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
