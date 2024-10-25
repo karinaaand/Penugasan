@@ -167,6 +167,12 @@
                             <span class= "text-sm">Retur</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('management.trash.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
+                            <span class="w-2 h-2 rounded-full  bg-gray-500 inline-block ms-1"></span>
+                            <span class= "text-sm">Buang</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
