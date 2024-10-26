@@ -16,7 +16,9 @@ use App\Http\Controllers\VendorController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 
-
+Route::redirect('/github','https://github.com/d-arsya/simbat_pad.git');
+Route::redirect('/drive','https://drive.google.com/drive/folders/1SQLVZcn1y_XOcjy6E53WwudAiFLIaf-J');
+Route::redirect('/figma','https://www.figma.com/design/4NIUdh1KTOoyEH3WYWPRH6/SIMBAT-PAD-24?node-id=0-1&t=bbnNvAjBdq5SYAoq-1');
 // 'index','create','store','show','edit','update','destroy'
 Route::redirect('/','/dashboard');
 Route::view('/dashboard', 'pages.dashboard')->name("dashboard");
