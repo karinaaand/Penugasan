@@ -1,7 +1,17 @@
 @extends('layouts.main')
 
 @section('container')
-
+@session('success')
+<h1>BERHASIL</h1>    
+@endsession
+@if ($errors->any())
+    <h1>GAGAL</h1>
+@endif
+<form action="{{ route('master.category.store') }}" method="POST">
+    @csrf
+    <input type="text" name="name" placeholder="Nama" id="">
+    <button type="submit">Submit</button>
+</form>
 <div class="container mx-auto mt-8">
     <!-- Header -->
     <h1 class="text-3xl font-bold text-gray-700 mb-6">Kategori Obat</h1>
