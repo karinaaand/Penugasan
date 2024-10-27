@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('container')
-<div class="container mx-auto p-4">
+<div class="p-6 bg-white rounded-lg shadow-lg">
     <div class="flex justify-end mb-4">
         <input type="text" placeholder="Search" class="border rounded-full px-4 py-2">
     </div>
@@ -35,19 +35,19 @@
                 </tr>
             </tbody>
         </table>
-        <div class="flex justify-end items-center mt-4 gap-4">
-            <div class="text-sm">Showing 1 to 10 of 50 entries</div>
-                <!-- Pagination -->
-                <div class="flex justify-end">
-                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
-                    </nav>
-                </div>
+    </div>
+    <div class="flex justify-end items-center mt-4 gap-4">
+        <div class="text-sm">Showing 1 to 10 of 50 entries</div>
+            <!-- Pagination -->
+            <div class="flex justify-end">
+                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                </nav>
             </div>
         </div>
     </div>

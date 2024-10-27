@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('container')
 
+<div class="p-6 bg-white rounded-lg shadow-lg">
 <!-- Tombol CETAK -->
 <div class="flex-1 justify-end flex">
     <button id="printButton" class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg">CETAK</button>
@@ -61,25 +62,24 @@
             @endfor
         </tbody>
     </table>
-
-    <div class="flex justify-between items-center">
-        <div class="flex justify-end items-center mt-4 gap-4">
-            <div class="text-sm">Showing 1 to 10 of 50 entries</div>
-            <!-- Pagination -->
-            <div class="flex justify-end">
-                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
-                </nav>
-            </div>
+</div>
+<div class="flex justify-end items-center">
+    <div class="flex justify-end items-center mt-4 gap-4">
+        <div class="text-sm">Showing 1 to 10 of 50 entries</div>
+        <!-- Pagination -->
+        <div class="flex justify-end">
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+            </nav>
         </div>
     </div>
 </div>
-
+</div>
 @endsection
 
 <script>

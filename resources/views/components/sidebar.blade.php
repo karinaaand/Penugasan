@@ -35,9 +35,9 @@
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                    </svg>
              </button>
-             <ul id="dropdown-masterdata" class="list-none block py-2 space-y-2">
+             <ul id="dropdown-masterdata" class="list-none aria-expanded="false" py-2 space-y-2">
                 <li>
-                    <a href="{{ route('master.category.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200 active">
+                    <a href="{{ route('master.category.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                         <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                         <span class="text-sm">Kategori Obat</span>
                     </a>
@@ -79,7 +79,7 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-inventory" class="hidden py-2 space-y-2">
+                <ul id="dropdown-inventory" class="aria-expanded="false" py-2 space-y-2">
                     <li>
                         <a href="{{ route('inventory.inflows.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -104,7 +104,7 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-klinik" class="hidden py-2 space-y-2">
+                <ul id="dropdown-klinik" class="aria-expanded="false" py-2 space-y-2">
                     <li>
                         <a href="{{ route('clinic.inflows.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -129,7 +129,7 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-laporan" class="hidden py-2 space-y-2">
+                <ul id="dropdown-laporan" class="aria-expanded="false" py-2 space-y-2">
                     <li>
                         <a href="{{ route('report.drugs.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -154,7 +154,7 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-manajementransaksi" class="hidden py-2 space-y-2">
+                <ul id="dropdown-manajementransaksi" class="aria-expanded="false" py-2 space-y-2">
                     <li>
                         <a href="{{ route('management.bill.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-2009*">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -186,7 +186,7 @@
 
  </aside>
 
-{{-- <script>
+<script>
     document.addEventListener("DOMContentLoaded", function() {
     const dropdownToggles = document.querySelectorAll('[data-collapse-toggle]');
 
@@ -203,32 +203,4 @@
         });
     });
 });
-</script> --}}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const buttons = document.querySelectorAll('[data-collapse-toggle]');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', function () {
-                const targetId = button.getAttribute('data-collapse-toggle');
-                const targetDropdown = document.getElementById(targetId);
-
-                // Tutup semua dropdown lainnya
-                buttons.forEach(btn => {
-                    const otherTargetId = btn.getAttribute('data-collapse-toggle');
-                    const otherDropdown = document.getElementById(otherTargetId);
-                    if (otherDropdown !== targetDropdown && !otherDropdown.classList.contains('hidden')) {
-                        otherDropdown.classList.add('hidden');
-                        otherDropdown.classList.remove('block');
-                    }
-                });
-
-                // Toggle dropdown yang diklik
-                targetDropdown.classList.toggle('hidden');
-                targetDropdown.classList.toggle('block');
-            });
-        });
-    });
-    </script>
-
+</script>
