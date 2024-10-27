@@ -28,7 +28,7 @@
                     <th class="py-3 px-6 text-left">JUMLAH BARANG</th>
                     <th class="py-3 px-6 text-left">TGL BUANG</th>
                     <th class="py-3 px-6 text-left">STATUS</th>
-                    <th class="flex justify-center items-center">ACTION</th>
+                    <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">

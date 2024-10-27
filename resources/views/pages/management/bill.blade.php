@@ -18,14 +18,14 @@
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead>
-                <tr class="w-full bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left">NO</th>
-                    <th class="py-3 px-6 text-left">KODE LPB</th>
-                    <th class="py-3 px-6 text-left">TANGGAL DATANG</th>
-                    <th class="py-3 px-6 text-left">JATUH TEMPO</th>
-                    <th class="py-3 px-6 text-left">SUBTOTAL</th>
-                    <th class="py-3 px-6 text-left">STATUS</th>
-                    <th class="flex justify-center items-center">ACTION</th>
+                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left" style="width: 10%;">NO</th>
+                    <th class="py-3 px-6 text-left" style="width: 15%;">KODE LPB</th>
+                    <th class="py-3 px-6 text-left" style="width: 20%;">TANGGAL DATANG</th>
+                    <th class="py-3 px-6 text-left" style="width: 20%;">JATUH TEMPO</th>
+                    <th class="py-3 px-6 text-left" style="width: 15%;">SUBTOTAL</th>
+                    <th class="py-3 px-6 text-left" style="width: 20%;">STATUS</th>
+                    <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">

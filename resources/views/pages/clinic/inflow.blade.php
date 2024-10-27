@@ -19,7 +19,7 @@
                         <th class="py-3 px-4 text-left">KODE LPB</th>
                         <th class="py-3 px-4 text-left">NAMA VENDOR</th>
                         <th class="py-3 px-4 text-left">TGL MASUK</th>
-                        <th class="py-3 px-4 text-left">ACTION</th>
+                        <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
