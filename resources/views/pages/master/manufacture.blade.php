@@ -1,16 +1,13 @@
 @extends('layouts.main')
 
 @section('container')
-
-<div class="container mx-auto mt-8">
-    <!-- Header -->
-    <h1 class="text-3xl font-bold text-gray-700 mb-6">Produsen Obat</h1>
-
-    <!-- Add Button -->
     <div class="flex justify-between mb-4">
         <div class="w-1/2">
-            <input type="text" class="border border-gray-300 rounded p-2 w-3/4" placeholder="Inputkan Produsen obat">
-        <button class="bg-purple-500 text-white rounded hover:bg-purple-600 px-6 py-2  ">Submit</button>
+            <form action="{{ route('master.manufacture.store') }}" method="POST">
+                @csrf
+                <input type="text" name="name" class="border border-gray-300 rounded p-2 w-3/4" placeholder="Inputkan Produsen obat">
+                <button type="submit" class="bg-purple-500 text-white rounded hover:bg-purple-600 px-6 py-2  ">Submit</button>
+            </form>
         </div>
 
         <div class="flex justify-end">
@@ -33,10 +30,10 @@
             </thead>
             <tbody class="text-gray-700 text-sm font-light">
                 <!-- Data Rows -->
-                @for ($i = 1; $i <= 10; $i++)
+                @foreach ($manufactures as $number=>$item)
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">{{ $i }}</td>
-                    <td class="py-3 px-6 text-left">Produsen {{ $i }}</td>
+                    <td class="py-3 px-6 text-left">{{ $number+1 }}</td>
+                    <td class="py-3 px-6 text-left">{{ $item->name }}</td>
                     <td class="py-3 px-6 text-center">
                         <button class="bg-yellow-300 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,15 +41,19 @@
                             </svg>
                             Edit
                         </button>
-                        <button class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                            Delete
-                        </button>
+                        <form action="{{ route('master.manufacture.destroy',$item->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Yakin ingin dihapus?')" class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -71,6 +72,5 @@
             </div>
         </div>
     </div>
-</div>
 
 @endsection

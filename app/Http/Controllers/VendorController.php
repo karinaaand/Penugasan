@@ -9,7 +9,9 @@ class VendorController extends Controller
 {
     public function index()
     {
-        return view('pages.master.vendor');
+        $judul = "Vendor Obat";
+        $vendors = Vendor::all();
+        return view('pages.master.vendor',compact('judul','vendors'));
     }
     public function create()
     {
@@ -17,25 +19,35 @@ class VendorController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request);
         $validate = $request->validate([
-            "name"=> "required|min:3|max:25|string"
+            "name"=> "required|min:3|max:25|string",
+            "phone"=>"required|max:14",
+            "address"=>"required|string|max:255",
         ]);
-        if($validate){
-            Vendor::create([
-                "name"=>$request->name
-            ]);
-            return back(201)->with('success','Vendor berhasil dibuat');
+        try {
+            Vendor::create($validate);
+            return redirect()->route('master.vendor.index')->with('success','Vendor berhasil dibuat');
+        } catch (\Throwable $th) {
+            return redirect()->route('master.vendor.index')->with('error','Vendor gagal dibuat');
         }
-        return back(400)->with('error','Vendor gagal dibuat');
     }
-    public function edit(string $id)
+    public function edit(Vendor $vendor)
     {
-        return view('pages.master.editVendor');
+        return view('pages.master.editVendor',compact('vendor'));
     }
-    public function update(Request $request, string $id)
+    public function update(Request $request, Vendor $vendor)
     {
+        $vendor->update($request->all());
+        return redirect()->route('master.vendor.index');
     }
-    public function destroy(string $id)
+    public function destroy(Vendor $vendor)
     {
+        try {
+            $vendor->delete();
+            return back()->with('success', 'Vendor berhasil dihapus');
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Vendor gagal dihapus');
+        }
     }
 }
