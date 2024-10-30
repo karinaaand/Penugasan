@@ -32,15 +32,15 @@
 </div>
 
 <div class="shadow-lg mt-8 p-4 rounded-md">
-    <table class="w-full">
+    <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
         <thead class="bg-gray-200 text-sm">
-            <th class="py-4 rounded-l-sm">NO</th>
+            <th class="py-4">NO</th>
             <th class="py-4">KODE OBAT</th>
             <th class="py-4">NAMA OBAT</th>
             <th class="py-4">STOK KONVERSI</th>
             <th class="py-4">EXP TERDEKAT</th>
             <th class="py-4">STATUS</th>
-            <th class="py-4 rounded-r-sm">ACTION</th>
+            <th class="py-4">ACTION</th>
         </thead>
         <tbody>
             @for ($i = 0; $i < 10; $i++)

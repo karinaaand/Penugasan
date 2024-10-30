@@ -30,15 +30,15 @@
     </form>
 </div>
 <div class="shadow-lg mt-8 p-4 rounded-md">
-    <table class="w-full">
+    <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
         <thead class="bg-gray-200 text-sm">
-            <th class="py-4 rounded-l-sm">NO</th>
+            <th class="py-4">NO</th>
             <th class="py-4">KODE</th>
             <th class="py-4">TANGGAL</th>
             <th class="py-4">JENIS</th>
             <th class="py-4">KUANTITI</th>
             <th class="py-4">SUBTOTAL</th>
-            <th class="py-4 rounded-r-sm">ACTION</th>
+            <th class="py-4">ACTION</th>
         </thead>
         <tbody>
             @for ($i = 0; $i < 10; $i++)

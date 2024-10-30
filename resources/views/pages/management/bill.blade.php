@@ -16,7 +16,7 @@
         </form>
     </div>
 
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto rounded-lg">
         <table class="min-w-full bg-white">
             <thead>
                 <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
