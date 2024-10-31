@@ -8,11 +8,12 @@
 </div>
 
 <!-- Form lainnya dan tabel -->
+
 <form action="" class="flex flex-row justify-between w-max gap-3">
     <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
     <h1>sampai</h1>
     <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
-    <button class="bg-indigo px-2 py-1 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
+    <button class="bg-indigo px-3 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
 </form>
 
 <!-- Opsi Cetak (disembunyikan pada awal) -->
@@ -31,23 +32,23 @@
     </form>
 </div>
 
-<div class="shadow-lg mt-8 p-4 rounded-md">
-    <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <table class="min-w-full leading-normal">
         <thead class="bg-gray-200 text-sm">
-            <th class="py-4">NO</th>
-            <th class="py-4">KODE OBAT</th>
-            <th class="py-4">NAMA OBAT</th>
-            <th class="py-4">STOK KONVERSI</th>
-            <th class="py-4">EXP TERDEKAT</th>
-            <th class="py-4">STATUS</th>
-            <th class="py-4">ACTION</th>
+            <th class="py-4 text-center">NO</th>
+            <th class="py-4 text-center">KODE OBAT</th>
+            <th class="py-4 text-center">NAMA OBAT</th>
+            <th class="py-4 text-center">STOK KONVERSI</th>
+            <th class="py-4 text-center">EXP TERDEKAT</th>
+            <th class="py-4 text-center">STATUS</th>
+            <th class="py-4 text-center">ACTION</th>
         </thead>
         <tbody>
             @for ($i = 0; $i < 10; $i++)
-            <tr>
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
                 <td class="text-center py-3">{{ $i + 1 }}</td>
                 <td class="text-center py-3">#AAA111</td>
-                <td class="py-3">Paracetamol Gatau Apa Merk nya</td>
+                <td class="text-center py-3">Paracetamol Gatau Apa Merk nya</td>
                 <td class="text-center py-3">70 Box</td>
                 <td class="text-center py-3">20 Januari 2024</td>
                 <td class="text-center py-3">-</td>

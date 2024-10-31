@@ -8,23 +8,23 @@
         <table class="min-w-full bg-white">
             <thead class="bg-gray-100 text-gray-600">
                 <tr>
-                    <th class="py-2 px-4 text-left">NO</th>
-                    <th class="py-2 px-4 text-left">KODE OBAT</th>
-                    <th class="py-2 px-4 text-left">NAMA OBAT</th>
-                    <th class="py-2 px-4 text-left">STOK KONVERSI</th>
-                    <th class="py-2 px-4 text-left">EXP TERDEKAT</th>
-                    <th class="py-2 px-4 text-left">STATUS</th>
+                    <th class="py-2 px-4 text-center">NO</th>
+                    <th class="py-2 px-4 text-center">KODE OBAT</th>
+                    <th class="py-2 px-4 text-center">NAMA OBAT</th>
+                    <th class="py-2 px-4 text-center">STOK KONVERSI</th>
+                    <th class="py-2 px-4 text-center">EXP TERDEKAT</th>
+                    <th class="py-2 px-4 text-center">STATUS</th>
                     <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="border-t">
-                    <td class="py-2 px-4">1</td>
-                    <td class="py-2 px-4">#AAA111</td>
-                    <td class="py-2 px-4">OBAT 1</td>
-                    <td class="py-2 px-4">...</td>
-                    <td class="py-2 px-4">...</td>
-                    <td class="py-2 px-4">...</td>
+                    <td class="py-2 px-4 text-center">1</td>
+                    <td class="py-2 px-4 text-center">#AAA111</td>
+                    <td class="py-2 px-4 text-center">OBAT 1</td>
+                    <td class="py-2 px-4 text-center">...</td>
+                    <td class="py-2 px-4 text-center">...</td>
+                    <td class="py-2 px-4 text-center">...</td>
                     <td class="flex justify-center py-3">
                         <a href="{{ route('clinic.stocks.show', 1) }}" class="bg-lavender-200 hover:bg-lavender p-1 rounded-md">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

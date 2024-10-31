@@ -15,20 +15,20 @@
             <table class="min-w-full bg-white">
                 <thead class="bg-gray-100 text-gray-600">
                     <tr>
-                        <th class="py-3 px-4 text-left">NO</th>
-                        <th class="py-3 px-4 text-left">KODE LPB</th>
-                        <th class="py-3 px-4 text-left">NAMA VENDOR</th>
-                        <th class="py-3 px-4 text-left">TGL MASUK</th>
+                        <th class="py-3 px-4 text-center">NO</th>
+                        <th class="py-3 px-4 text-center">KODE LPB</th>
+                        <th class="py-3 px-4 text-center">NAMA VENDOR</th>
+                        <th class="py-3 px-4 text-center">TGL MASUK</th>
                         <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
                     @for ($i = 1; $i <= 5; $i++)
                     <tr class="border-t">
-                        <td class="py-3 px-4">{{ $i }}</td>
-                        <td class="py-3 px-4">#AAA111</td>
-                        <td class="py-3 px-4">VENDOR 1</td>
-                        <td class="py-3 px-4">01-01-2001</td>
+                        <td class="py-3 px-4 text-center">{{ $i }}</td>
+                        <td class="py-3 px-4 text-center">#AAA111</td>
+                        <td class="py-3 px-4 text-center">VENDOR 1</td>
+                        <td class="py-3 px-4 text-center">01-01-2001</td>
                         <td class="flex justify-center py-3">
                             <a href="{{ route('clinic.inflows.show', 1) }}" class="bg-lavender-200 hover:bg-lavender p-1 rounded-md">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

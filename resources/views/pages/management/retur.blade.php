@@ -7,7 +7,7 @@
         <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
         <h1>sampai</h1>
         <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
-        <button class="bg-indigo px-2 py-1 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
+        <button class="bg-indigo px-3 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
     </form>
 
     <div class="flex justify-end">
@@ -21,23 +21,23 @@
         <table class="min-w-full bg-white">
             <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
                 <tr>
-                    <th class="py-3 px-6 text-left">NO</th>
-                    <th class="py-3 px-6 text-left">KODE RETUR</th>
-                    <th class="py-3 px-6 text-left">NAMA OBAT</th>
-                    <th class="py-3 px-6 text-left">JUMLAH BARANG</th>
-                    <th class="py-3 px-6 text-left">TGL RETUR</th>
-                    <th class="py-3 px-6 text-left">STATUS</th>
+                    <th class="py-3 px-6 text-center">NO</th>
+                    <th class="py-3 px-6 text-center">KODE RETUR</th>
+                    <th class="py-3 px-6 text-center">NAMA OBAT</th>
+                    <th class="py-3 px-6 text-center">JUMLAH BARANG</th>
+                    <th class="py-3 px-6 text-center">TGL RETUR</th>
+                    <th class="py-3 px-6 text-center">STATUS</th>
                     <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">1</td>
-                    <td class="py-3 px-6 text-left">#AAA111</td>
-                    <td class="py-3 px-6 text-left">VENDOR 1</td>
-                    <td class="py-3 px-6 text-left">10</td>
-                    <td class="py-3 px-6 text-left">01-01-2001</td>
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-6 text-center">1</td>
+                    <td class="py-3 px-6 text-center">#AAA111</td>
+                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-center">10</td>
+                    <td class="py-3 px-6 text-center">01-01-2001</td>
+                    <td class="py-3 px-6 text-center">
                         <span class="bg-orange-500 text-white py-1 px-3 rounded-full text-xs">ONGOING</span>
                     </td>
                     <td class="flex justify-center py-3">
@@ -49,12 +49,12 @@
                     </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">2</td>
-                    <td class="py-3 px-6 text-left">#AAA111</td>
-                    <td class="py-3 px-6 text-left">VENDOR 1</td>
-                    <td class="py-3 px-6 text-left">10</td>
-                    <td class="py-3 px-6 text-left">01-01-2001</td>
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-6 text-center">2</td>
+                    <td class="py-3 px-6 text-center">#AAA111</td>
+                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-center">10</td>
+                    <td class="py-3 px-6 text-center">01-01-2001</td>
+                    <td class="py-3 px-6 text-center">
                         <span class="bg-orange-500 text-white py-1 px-3 rounded-full text-xs">ONGOING</span>
                     </td>
                     <td class="flex justify-center py-3">
@@ -66,12 +66,12 @@
                     </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">3</td>
-                    <td class="py-3 px-6 text-left">#AAA111</td>
-                    <td class="py-3 px-6 text-left">VENDOR 1</td>
-                    <td class="py-3 px-6 text-left">10</td>
-                    <td class="py-3 px-6 text-left">01-01-2001</td>
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-6 text-center">3</td>
+                    <td class="py-3 px-6 text-center">#AAA111</td>
+                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-center">10</td>
+                    <td class="py-3 px-6 text-center">01-01-2001</td>
+                    <td class="py-3 px-6 text-center">
                         <span class="text-green-500 font-bold">DONE</span>
                     </td>
                     <td class="flex justify-center py-3">
@@ -83,12 +83,12 @@
                     </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">4</td>
-                    <td class="py-3 px-6 text-left">#AAA111</td>
-                    <td class="py-3 px-6 text-left">VENDOR 1</td>
-                    <td class="py-3 px-6 text-left">10</td>
-                    <td class="py-3 px-6 text-left">01-01-2001</td>
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-6 text-center">4</td>
+                    <td class="py-3 px-6 text-center">#AAA111</td>
+                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-center">10</td>
+                    <td class="py-3 px-6 text-center">01-01-2001</td>
+                    <td class="py-3 px-6 text-center">
                         <span class="text-green-500 font-bold">DONE</span>
                     </td>
                     <td class="flex justify-center py-3">
@@ -100,12 +100,12 @@
                     </td>
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-left">5</td>
-                    <td class="py-3 px-6 text-left">#AAA111</td>
-                    <td class="py-3 px-6 text-left">VENDOR 1</td>
-                    <td class="py-3 px-6 text-left">10</td>
-                    <td class="py-3 px-6 text-left">01-01-2001</td>
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-6 text-center">5</td>
+                    <td class="py-3 px-6 text-center">#AAA111</td>
+                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-center">10</td>
+                    <td class="py-3 px-6 text-center">01-01-2001</td>
+                    <td class="py-3 px-6 text-center">
                         <span class="text-green-500 font-bold">DONE</span>
                     </td>
                     <td class="flex justify-center py-3">

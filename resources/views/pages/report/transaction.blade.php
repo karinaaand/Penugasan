@@ -29,8 +29,8 @@
         <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2">
     </form>
 </div>
-<div class="shadow-lg mt-8 p-4 rounded-md">
-    <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <table class="min-w-full leading-normal">
         <thead class="bg-gray-200 text-sm">
             <th class="py-4">NO</th>
             <th class="py-4">KODE</th>
@@ -42,7 +42,7 @@
         </thead>
         <tbody>
             @for ($i = 0; $i < 10; $i++)
-            <tr>
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
                 <td class="text-center py-3">1</td>
                 <td class="text-center py-3">#AAA111</td>
                 <td class="text-center py-3">27 Januari 2025</td>

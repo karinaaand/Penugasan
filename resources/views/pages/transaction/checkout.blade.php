@@ -66,7 +66,11 @@
                 </tbody>
             </table>
             <h1 class="text-end mt-6">Total Harga : 99.000</h1>
-            <button class="bg-lavender rounded-xl hover:bg-lavender-700 py-2 w-full text-white font-bold mt-6">Checkout</button>
+            <a href="{{ route('transaction.show', 1) }}"
+                class="bg-lavender rounded-xl hover:bg-lavender-700 py-2 w-full text-white font-bold mt-6 text-center inline-block">
+                Checkout
+            </a>
+
         </div>
     </div>
 @endsection

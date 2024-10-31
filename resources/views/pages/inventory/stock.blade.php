@@ -9,13 +9,13 @@
         <table class="min-w-full leading-normal">
             <thead>
                     <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                        <th class="border p-2">No</th>
-                        <th class="border p-2">Kode Obat</th>
-                        <th class="border p-2">Nama Obat</th>
-                        <th class="border p-2">Jumlah</th>
-                        <th class="border p-2">Expired Terdekat</th>
-                        <th class="border p-2">Status</th>
-                        <th class="border p-2">Action</th>
+                        <th class="py-3 px-6 text-center">No</th>
+                        <th class="py-3 px-6 text-center">Kode Obat</th>
+                        <th class="py-3 px-6 text-center">Nama Obat</th>
+                        <th class="py-3 px-6 text-center">Jumlah</th>
+                        <th class="py-3 px-6 text-center">Expired Terdekat</th>
+                        <th class="py-3 px-6 text-center">Status</th>
+                        <th class="py-3 px-6 text-center">Action</th>
                     </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-light">
