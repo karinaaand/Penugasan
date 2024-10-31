@@ -11,8 +11,16 @@
             <input type="text" id="lpb" class="border-b border-gray-300 focus:outline-none focus:border-gray-500 mr-2">
         </div>
         <div class="flex-1 justify-end flex">
-            <a href="" class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg">CETAK</a>
+            <a href="#" id="printButton" class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg">CETAK</a>
         </div>
+    </div>
+    <div id="printOptions" class="hidden mb-4">
+        <label for="format" class="text-lg font-semibold">Pilih format cetak:</label>
+        <select id="format" class="ml-2 border rounded-md">
+            <option value="pdf">PDF</option>
+            <option value="excel">Excel</option>
+        </select>
+        <button id="confirmPrint" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg ml-2">Download</button>
     </div>
 
     <h1 class="text-center text-3xl font-bold">INVOICE CHECKOUT</h1>
@@ -37,14 +45,39 @@
                     <td class="py-3 px-6 text-center">Rp 10.000</td>
                     <td class="py-3 px-6 text-center">Rp 100.000</td>
                 </tr>
-                    
                 @endfor
             </tbody>
         </table>
     </div>
-        <div class="flex justify-end items-center mt-4">
-            <p class="font-semibold mr-2">Grand total :</p>
-            <input type="text" value="Rp 750.000" class="border-b border-gray-400 focus:outline-none focus:border-black text-center w-48" readonly>
-        </div>
+    <div class="flex justify-end items-center mt-4">
+        <p class="font-semibold mr-2">Grand total :</p>
+        <input type="text" value="Rp 750.000" class="border-b border-gray-400 focus:outline-none focus:border-black text-center w-48" readonly>
     </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Event listener untuk tombol CETAK
+        document.getElementById('printButton').addEventListener('click', function() {
+            const printOptions = document.getElementById('printOptions');
+            // Toggle opsi cetak: sembunyikan atau tampilkan
+            if (printOptions.classList.contains('hidden')) {
+                printOptions.classList.remove('hidden');
+            } else {
+                printOptions.classList.add('hidden');
+            }
+        });
+
+        // Event listener untuk tombol konfirmasi cetak
+        document.getElementById('confirmPrint').addEventListener('click', function() {
+            const format = document.getElementById('format').value;
+            if (format === 'pdf') {
+                alert("Mencetak dalam format PDF...");
+            } else if (format === 'excel') {
+                alert("Mencetak dalam format Excel...");
+            }
+            document.getElementById('printOptions').classList.add('hidden');
+        });
+    });
+</script>
 @endsection

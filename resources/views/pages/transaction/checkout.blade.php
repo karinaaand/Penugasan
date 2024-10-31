@@ -39,21 +39,21 @@
 
             <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
                 <thead class="bg-gray-200">
-                    <th class="py-2">NO</th>
-                    <th class="py-2">NAMA BARANG</th>
-                    <th class="py-2">JUMLAH</th>
-                    <th class="py-2">HARGA SATUAN</th>
-                    <th class="py-2">SUBTOTAL</th>
-                    <th class="py-2">ACTION</th>
+                    <th class="py-4 text-center">NO</th>
+                    <th class="py-4 text-center">NAMA BARANG</th>
+                    <th class="py-4 text-center">JUMLAH</th>
+                    <th class="py-4 text-center">HARGA SATUAN</th>
+                    <th class="py-4 text-center">SUBTOTAL</th>
+                    <th class="py-4 text-center">ACTION</th>
                 </thead>
                 <tbody>
                     @for ($i = 0; $i < 10; $i++)
                     <tr>
-                        <td class="text-center">1</td>
-                        <td>Gatau Obat Apa</td>
-                        <td class="text-center">Rp 10.000</td>
-                        <td class="text-center">Rp 10.000</td>
-                        <td class="text-center">Rp 10.000</td>
+                        <td class="py-4 text-center">1</td>
+                        <td class="py-4 text-center">Gatau Obat Apa</td>
+                        <td class="py-4 text-center">Rp 10.000</td>
+                        <td class="py-4 text-center">Rp 10.000</td>
+                        <td class="py-4 text-center">Rp 10.000</td>
                         <td class="flex justify-center py-3"><a href="{{ route('transaction.show', 1) }}"
                                 class="bg-pink-500 hover:bg-pink-700 p-1 rounded-md"><svg width="17" height="17" viewBox="0 0 17 17" fill="white" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.792 3.50008H16.9587V5.16675H15.292V16.0001C15.292 16.2211 15.2042 16.4331 15.0479 16.5893C14.8916 16.7456 14.6797 16.8334 14.4587 16.8334H2.79199C2.57098 16.8334 2.35902 16.7456 2.20274 16.5893C2.04646 16.4331 1.95866 16.2211 1.95866 16.0001V5.16675H0.291992V3.50008H4.45866V1.00008C4.45866 0.779068 4.54646 0.567106 4.70274 0.410826C4.85902 0.254545 5.07098 0.166748 5.29199 0.166748H11.9587C12.1797 0.166748 12.3916 0.254545 12.5479 0.410826C12.7042 0.567106 12.792 0.779068 12.792 1.00008V3.50008ZM13.6253 5.16675H3.62533V15.1667H13.6253V5.16675ZM6.12533 1.83341V3.50008H11.1253V1.83341H6.12533Z" fill="white"/>

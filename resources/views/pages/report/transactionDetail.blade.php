@@ -48,7 +48,7 @@
                     <td class="py-3 px-6 text-center">Rp 10.000</td>
                     <td class="py-3 px-6 text-center">Rp 100.000</td>
                 </tr>
-                    
+
                 @endfor
             </tbody>
         </table>
