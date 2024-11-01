@@ -102,7 +102,6 @@
                             class="bg-pink text-black text-sm px-2 py-1 rounded-lg shadow hover:bg-pink-700 transition-colors duration-200">Buang</a>
                     </td>
                 </tr>
-
                 @endfor
             </tbody>
         </table>
