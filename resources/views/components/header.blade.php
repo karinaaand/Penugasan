@@ -2,7 +2,7 @@
     <h1 class="text-2xl font-bold">
         {{ $judul ?? 'SIMBAT' }}
     </h1>
-    <div class="flex gap-6">
+    <div class="flex items-center gap-6">
         @if (Request::is('transaction/create'))
             <a href="{{ route('transaction.index') }}" class="bg-bright hover:bg-bright-700 p-2 h-max rounded-xl">
                 History
@@ -20,7 +20,7 @@
             <!-- Button to toggle the dropdown -->
             <div>
                 <button onclick="toggleDropdown()" class="flex items-center justify-center w-10 h-10 bg-white border-none rounded-full focus:outline-none">
-                    <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar" style="width: 40px; height: 40px; margin-right: 3px; vertical-align: middle; display: inline-block;">
+                    <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar"  class="w-10 h-10 rounded-full">
                     <path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.333 0-10 1.667-10 5v1h20v-1c0-3.333-6.667-5-10-5z"/>
                     </svg>
                 </button>

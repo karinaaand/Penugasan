@@ -54,12 +54,30 @@
                         <td class="py-4 text-center">Rp 10.000</td>
                         <td class="py-4 text-center">Rp 10.000</td>
                         <td class="py-4 text-center">Rp 10.000</td>
-                        <td class="flex justify-center py-3"><a href="{{ route('transaction.show', 1) }}"
-                                class="bg-pink-500 hover:bg-pink-700 p-1 rounded-md"><svg width="17" height="17" viewBox="0 0 17 17" fill="white" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.792 3.50008H16.9587V5.16675H15.292V16.0001C15.292 16.2211 15.2042 16.4331 15.0479 16.5893C14.8916 16.7456 14.6797 16.8334 14.4587 16.8334H2.79199C2.57098 16.8334 2.35902 16.7456 2.20274 16.5893C2.04646 16.4331 1.95866 16.2211 1.95866 16.0001V5.16675H0.291992V3.50008H4.45866V1.00008C4.45866 0.779068 4.54646 0.567106 4.70274 0.410826C4.85902 0.254545 5.07098 0.166748 5.29199 0.166748H11.9587C12.1797 0.166748 12.3916 0.254545 12.5479 0.410826C12.7042 0.567106 12.792 0.779068 12.792 1.00008V3.50008ZM13.6253 5.16675H3.62533V15.1667H13.6253V5.16675ZM6.12533 1.83341V3.50008H11.1253V1.83341H6.12533Z" fill="white"/>
-                                    </svg>
+                        <td class="py-3 px-6 text-center">
+                            <div class="flex items-center justify-center">
+                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
+                                    <i class="fas fa-trash"></i>
+                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
+                                </button>
+                            </div>
+                        </td>
 
-                            </a></td>
+                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                </svg>
+                                <span class="sr-only">Check icon</span>
+                            </div>
+                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
+                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                        </div>
                     </tr>
 
                     @endfor
@@ -73,4 +91,19 @@
 
         </div>
     </div>
+
+    <script>
+        function showDeleteToast() {
+            const toastDelete = document.getElementById('toast-delete');
+            toastDelete.classList.remove('hidden'); // Show delete toast
+            setTimeout(() => {
+                hideToast(); // Automatically hide after 3 seconds
+            }, 3000);
+        }
+
+        function hideToast() {
+            document.getElementById('toast-delete').classList.add('hidden'); // Hide delete toast
+        }
+    </script>
+
 @endsection
