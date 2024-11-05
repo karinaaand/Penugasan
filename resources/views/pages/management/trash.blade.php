@@ -35,7 +35,7 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-center">1</td>
                     <td class="py-3 px-6 text-center">#AAA111</td>
-                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-left">VENDOR 1</td>
                     <td class="py-3 px-6 text-center">10</td>
                     <td class="py-3 px-6 text-center">01-01-2001</td>
                     <td class="py-3 px-6 text-center">
@@ -52,7 +52,7 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-center">2</td>
                     <td class="py-3 px-6 text-center">#AAA111</td>
-                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-left">VENDOR 1</td>
                     <td class="py-3 px-6 text-center">10</td>
                     <td class="py-3 px-6 text-center">01-01-2001</td>
                     <td class="py-3 px-6 text-center">
@@ -69,7 +69,7 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-center">3</td>
                     <td class="py-3 px-6 text-center">#AAA111</td>
-                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-left">VENDOR 1</td>
                     <td class="py-3 px-6 text-center">10</td>
                     <td class="py-3 px-6 text-center">01-01-2001</td>
                     <td class="py-3 px-6 text-center">
@@ -86,7 +86,7 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-center">4</td>
                     <td class="py-3 px-6 text-center">#AAA111</td>
-                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-left">VENDOR 1</td>
                     <td class="py-3 px-6 text-center">10</td>
                     <td class="py-3 px-6 text-center">01-01-2001</td>
                     <td class="py-3 px-6 text-center">
@@ -103,7 +103,7 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-center">5</td>
                     <td class="py-3 px-6 text-center">#AAA111</td>
-                    <td class="py-3 px-6 text-center">VENDOR 1</td>
+                    <td class="py-3 px-6 text-left">VENDOR 1</td>
                     <td class="py-3 px-6 text-center">10</td>
                     <td class="py-3 px-6 text-center">01-01-2001</td>
                     <td class="py-3 px-6 text-center">

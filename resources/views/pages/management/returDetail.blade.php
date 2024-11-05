@@ -25,16 +25,25 @@
             <textarea class="border border-gray-300 p-4 rounded w-full h-40" placeholder="Tuliskan alasan" rows="4"></textarea>
         </div>
     </div>
-    <div class="flex justify-between mt-4 items-center gap-3">
-        <div class="flex flex-col items-start gap-1">
-            <label class="flex items-center cursor-pointer gap-3">
-                <input type="checkbox" value="" class="sr-only peer">
-                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                <span class="text-sm font-medium text-gray-900 dark:text-gray-300">Selesai</span>
-            </label>
-            <p class="text-red-500 text-sm mt-1">*Klik apabila sudah retur</p>
+    <!-- Container for Toggle Switch, Text, and Save Button -->
+    <div class="flex flex-col items-end space-y-1"> <!-- Stack items vertically -->
+        <div class="flex justify-end items-center space-x-12"> <!-- Horizontal alignment for toggle and button -->
+            <div class="flex items-center space-x-2">
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" class="sr-only peer">
+                    <div class="w-12 h-6 bg-black rounded-full peer peer-checked:bg-blue-500"></div>
+                    <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-6"></div>
+                </label>
+                <span class="text-gray-500">Selesai</span>
+            </div>
+            <button onclick="showToast()" class="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full shadow-md hover:bg-yellow-500 transition-colors" style="width: 100px; height: 40px;">
+                SAVE
+            </button>
         </div>
-        <button onclick="showToast()" class="bg-yellow-500 text-black font-bold px-6 py-2 rounded-full hover:bg-yellow-600">SAVE</button>
+        <!-- Note directly below the toggle and button -->
+        <div class="text-red-500 text-xs mt-1 mx-28"> <!-- Adjust mt-* for spacing if needed -->
+            *Klik apabila sudah retur
+        </div>
     </div>
     <div id="toast-success" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
