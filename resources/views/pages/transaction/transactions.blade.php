@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('container')
 <div class="shadow-lg mt-8 p-4 rounded-md">
-    <table class="w-full">
+    <table class="w-full border border-gray-300 rounded-lg mt-8 p-4 overflow-hidden shadow-lg">
         <thead class="bg-gray-200 text-sm">
             <th class="py-4 rounded-l-sm">NO TRANSAKSI</th>
             <th class="py-4">TANGGAL</th>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             @for ($i = 0; $i < 10; $i++)
-            <tr>
+            <tr class="border-b" >
                 <td class="text-center py-3">#AAA111</td>
                 <td class="text-center py-3">20 Januari 2024</td>
                 <td class="text-center py-3">07.56</td>
@@ -19,7 +19,7 @@
                     </svg>
                     </a></td>
             </tr>
-                
+
             @endfor
         </tbody>
     </table>
@@ -29,12 +29,12 @@
                 <!-- Pagination -->
                 <div class="flex justify-end">
                     <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">1</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
                         <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">3</a>
                         <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">9</a>
-                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">10</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                        <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
                     </nav>
                 </div>
             </div>

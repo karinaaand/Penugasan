@@ -37,7 +37,7 @@
         <div class="w-full p-6">
 
 
-            <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
+            <table class="w-full border border-gray-300 rounded-lg overflow-hidden shadow-md">
                 <thead class="bg-gray-200">
                     <th class="py-4 text-center">NO</th>
                     <th class="py-4 text-center">NAMA BARANG</th>
@@ -48,7 +48,7 @@
                 </thead>
                 <tbody>
                     @for ($i = 0; $i < 10; $i++)
-                    <tr>
+                    <tr class="border-b">
                         <td class="py-4 text-center">1</td>
                         <td class="py-4 text-center">Gatau Obat Apa</td>
                         <td class="py-4 text-center">Rp 10.000</td>
@@ -65,9 +65,9 @@
                     @endfor
                 </tbody>
             </table>
-            <h1 class="text-end mt-6">Total Harga : 99.000</h1>
+            <h1 class="text-end mt-4 py-4 mx-44 text-xl">Total Harga : Rp 99.000</h1>
             <a href="{{ route('transaction.show', 1) }}"
-                class="bg-lavender rounded-xl hover:bg-lavender-700 py-2 w-full text-white font-bold mt-6 text-center inline-block">
+                class="bg-lavender rounded-xl hover:bg-lavender-700 py-2 w-full text-white font-bold mt-4 text-center inline-block">
                 Checkout
             </a>
 
