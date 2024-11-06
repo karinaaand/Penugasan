@@ -10,7 +10,7 @@ class CategoryController extends Controller
     public function index()
     {
         $judul = "Kategori Obat";
-        $categories = Category::all();
+        $categories = Category::paginate(5);
         return view('pages.master.category',compact('judul','categories'));
     }
     public function store(Request $request)

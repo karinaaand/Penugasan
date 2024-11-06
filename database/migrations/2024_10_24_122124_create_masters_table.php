@@ -46,21 +46,21 @@ return new class extends Migration
             $table->integer('last_discount')->nullable();
             $table->integer('maximum_capacity');
             $table->integer('minimum_capacity');
-            $table->integer('box_quantity');
-            $table->integer('box_margin');
             $table->integer('pack_quantity');
             $table->integer('pack_margin');
             $table->integer('piece_quantity');
             $table->integer('piece_margin');
+            $table->integer('piece_netto');
+            $table->enum('piece_unit',['ml','gr','butir']);
             $table->timestamps();
         });
         Schema::create('repacks',function(Blueprint $table){
             $table->id();
             $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->enum('unit',['box','pack','ml','pcs','gr']);
             $table->integer('quantity');
             $table->integer('margin');
+            $table->integer('price');
             $table->timestamps();
         });
     }

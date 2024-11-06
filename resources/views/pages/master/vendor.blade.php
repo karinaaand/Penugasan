@@ -1,25 +1,22 @@
 @extends('layouts.main')
-
 @section('container')
-    <!-- Tombol + Tambah yang membuka modal -->
     <button onclick="showTambahModal()" class="bg-indigo hover:bg-indigo-700 rounded-md p-2 text-white">+ Tambah</button>
-
-    <!-- Modal -->
     <div id="tambahModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-96">
             <h2 class="text-center text-xl font-semibold mb-6">Tambah Vendor</h2>
-            <form>
+            <form action="{{ route('master.vendor.store') }}" method="POST">
+                @csrf
                 <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="nama">Nama</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="nama" name="nama">
+                    <label class="block text-gray-700 mb-2" for="name">Nama</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="telepon">Telepon</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="telepon" name="telepon">
+                    <label class="block text-gray-700 mb-2" for="phone">Telepon</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="phone" name="phone">
                 </div>
                 <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="alamat">Alamat</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="alamat" name="alamat">
+                    <label class="block text-gray-700 mb-2" for="address">Alamat</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="address" name="address">
                 </div>
                 <div class="flex justify-end space-x-4">
                     <button type="button" id="closeModal" onclick="closeTambahModal()"
@@ -35,19 +32,21 @@
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">NO</th>
-                    <th class="py-3 px-6 text-left">NAMA Vendor</th>
+                    <th class="py-3 px-6 text-left">Nama</th>
+                    <th class="py-3 px-6 text-left">Telepon</th>
+                    <th class="py-3 px-6 text-left">ALamat</th>
                     <th class="py-3 px-6 text-center">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-light">
-                <!-- Data Rows -->
                 @foreach ($vendors as $number => $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left">{{ $number + 1 }}</td>
                         <td class="py-3 px-6 text-left">{{ $item->name }}</td>
+                        <td class="py-3 px-6 text-left">{{ $item->phone }}</td>
+                        <td class="py-3 px-6 text-left">{{ $item->address }}</td>
                         <td class="py-3 px-6 text-center">
-                            <!-- Tombol Edit -->
-                            <a href="javascript:void(0)" onclick="showEditModal()"
+                            <a onclick="showEditModal('{{ $item->name }}','{{ $item->address }}','{{ $item->phone }}',{{ $item->id }})"
                                 class="bg-yellow-300 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -56,125 +55,138 @@
                                 </svg>
                                 Edit
                             </a>
-                            <!-- Modal -->
-                            <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-                                <div class="bg-white rounded-lg shadow-lg p-8 w-96">
-                                    <h2 class="text-center text-xl font-semibold mb-6">Edit Vendor</h2>
-                                    <form>
-                                        <div class="mb-4">
-                                            <label class="block text-start text-gray-700 mb-2" for="nama">Nama</label>
-                                            <input class="w-full px-3 py-2 border rounded-lg" type="text" id="nama" name="nama">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-start text-gray-700 mb-2" for="telepon">Telepon</label>
-                                            <input class="w-full px-3 py-2 border rounded-lg" type="text" id="telepon" name="telepon">
-                                        </div>
-                                        <div class="mb-6">
-                                            <label class="block text-start text-gray-700 mb-2" for="alamat">Alamat</label>
-                                            <input class="w-full px-3 py-2 border rounded-lg" type="text" id="alamat" name="alamat">
-                                        </div>
+                            <button type="button" onclick="showDeleteModal({{ $item->id }})"
+                                class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Delete
+                            </button>
 
-                                        <div class="flex justify-end space-x-4">
-                                            <button type="button" id="closeModal" onclick="closeEditModal()"
-                                                class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300">Cancel</button>
-                                            <button type="submit" class="px-4 py-2 bg-lime-500 text-white rounded-lg">Edit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
 
-                            <!-- Form untuk menghapus data -->
-                            <form id="deleteForm" action="{{ route('master.vendor.destroy', $item->id) }}" method="POST"
-                                class="inline">
-                                @csrf
-                                @method('DELETE')
 
-                                <!-- Tombol Delete -->
-                                <button type="button" onclick="showDeleteModal()"
-                                    class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                    Delete
-                                </button>
-                            </form>
-
-                            <!-- Modal Background -->
-                            <div id="deleteModal"
-                                class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
-                                <!-- Modal Content -->
-                                <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-                                    <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
-                                    </p>
-                                    <div class="flex justify-center space-x-4">
-                                        <!-- Ubah pemanggilan fungsi closeModal() menjadi closeDeleteModal() -->
-                                        <button onclick="closeDeleteModal()"
-                                            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
-                                        <button onclick="submitDeleteForm()"
-                                            class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <div class="flex justify-end items-center mt-4 gap-4">
-        <div class="text-sm">Showing 1 to 10 of 50 entries</div>
-        <!-- Pagination -->
-        <div class="flex justify-end">
-            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                <a href="#"
-                    class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">
-                    <</a>
-                        <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                        <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                        <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                        <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                        <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
-            </nav>
+    <div class="mt-6">
+        {{ $vendors->links() }}
+    </div>
+    </div>
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
+            </p>
+            <div class="flex justify-center space-x-4">
+                <form id="deleteForm" action="" method="POST" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="reset" onclick="return closeDeleteModal()"
+                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
+                    <button onclick="submitDeleteForm()" class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
+                </form>
+            </div>
         </div>
     </div>
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-96">
+            <h2 class="text-center text-xl font-semibold mb-6">Edit Vendor</h2>
+            <form method="POST">
+                @csrf
+                @method('PUT')
+                <div class="mb-4">
+                    <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-start text-gray-700 mb-2" for="phone">Telepon</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="phone" name="phone">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-start text-gray-700 mb-2" for="address">Alamat</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="address" name="address">
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="closeModal" onclick="closeEditModal()"
+                        class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-lime-500 text-white rounded-lg">Edit</button>
+                </div>
+            </form>
+        </div>
     </div>
+    @session('success')
+    <div id="toast-success"
+        class="fixed hidden right-5 top-5 mb-4 flex w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400"
+        role="alert">
+        <div
+            class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+            <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            </svg>
+            <span class="sr-only">Check icon</span>
+        </div>
+        <div class="ml-3 text-sm font-normal">{{ session('success') }}</div>
+        <button type="button" onclick=""
+            class="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-white"
+            aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+        </button>
+    </div>  
+    <script>
+        const toast = document.getElementById('toast-success');
+        toast.classList.remove('hidden'); // Tampilkan toast
+        setTimeout(() => {
+            document.getElementById('toast-success').classList.add('hidden');
+        }, 2000);
+        </script>      
+    @endsession
 @endsection
 
 <script>
-    // Menampilkan modal
-    function showDeleteModal() {
+    function showDeleteModal(id) {
+        console.log(id)
+        document.getElementById('deleteForm').setAttribute('action', `vendor/${id}`)
         document.getElementById('deleteModal').classList.remove('hidden');
     }
 
-    function showEditModal() {
-    document.getElementById('editModal').classList.remove('hidden');
+    function showEditModal(name, address, phone, id) {
+        document.querySelector('#editModal input[name="name"]').value = name;
+        document.querySelector('#editModal input[name="address"]').value = address;
+        document.querySelector('#editModal input[name="phone"]').value = phone;
+        document.querySelector('#editModal form').setAttribute('action', `{{ route('master.vendor.index') }}/${id}`);
+        document.getElementById('editModal').classList.remove('hidden');
     }
 
     function showTambahModal() {
         document.getElementById('tambahModal').classList.remove('hidden');
     }
 
-    // Menyembunyikan modal
     function closeDeleteModal() {
         document.getElementById('deleteModal').classList.add('hidden');
     }
 
     function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
+        document.getElementById('editModal').classList.add('hidden');
     }
 
     function closeTambahModal() {
         document.getElementById('tambahModal').classList.add('hidden');
     }
-    // Mengirimkan form untuk menghapus data
+
     function closeTambahModal() {
         document.getElementById('tambahModal').classList.add('hidden');
     }
+        
 </script>

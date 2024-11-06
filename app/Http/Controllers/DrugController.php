@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Master\Category;
 use App\Models\Master\Drug;
 use App\Models\Master\Manufacture;
+use App\Models\Master\Repack;
 use App\Models\Master\Variant;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Nette\Utils\Strings;
 
 class DrugController extends Controller
 {
@@ -29,9 +29,10 @@ class DrugController extends Controller
     {
         $category = Category::find($request->category_id)->first();
         $request["code"] = $this->generateCode($category);
+        $drug = Drug::create($request->all());
+        $drug->default_repacks();
+        return redirect()->route('master.drug.edit',$drug->id);
         try {
-            Drug::create($request->all());
-            return redirect()->route('master.drug.index')->with('success','Obat berhasil dibuat');
         } catch (\Throwable $th) {
             return redirect()->route('master.drug.index')->with('error','Obat gagal dibuat');
         }
@@ -47,7 +48,37 @@ class DrugController extends Controller
     }
     public function update(Request $request, Drug $drug)
     {
-        $drug->update($request->all());
+        if($drug->last_price!=$request->last_price){
+            $drug->update($request->all());
+            $repacks = $drug->repacks();
+            foreach ($repacks as $item) {
+                $item->update_price($request->last_price);
+            }
+        }else{
+            $drug->update($request->all());
+        }
+        return redirect()->back();
+    }
+    public function repack(Request $request,Drug $drug,Repack $repack)
+    {
+        if($request->isMethod('DELETE')){
+            if($repack->quantity!=$drug->piece_quantity*$drug->piece_netto && $repack->quantity!=$drug->piece_netto){
+                $repack->delete();
+            }
+        }else{
+            $quantity = $request->quantity;
+            if($request->piece_unit=="pcs"){
+                $quantity = $request->quantity*$drug->piece_netto;
+            }
+            // dd($quantity);
+            Repack::create([
+                "drug_id"=>$drug->id,
+                "name"=>$request->name,
+                "quantity"=>$request->quantity,
+                "margin"=>$request->margin,
+                "price"=>$drug->calculate_price($quantity,$request->margin)
+            ]);
+        }
         return back();
     }
     public function destroy(Drug $drug)

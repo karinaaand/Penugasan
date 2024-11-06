@@ -10,7 +10,7 @@ class VariantController extends Controller
     public function index()
     {
         $judul = "Jenis Obat";
-        $variants = Variant::all();
+        $variants = Variant::paginate(5);
         return view('pages.master.variant',compact('judul','variants'));
     }
     public function store(Request $request)

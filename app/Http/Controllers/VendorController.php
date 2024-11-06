@@ -10,7 +10,7 @@ class VendorController extends Controller
     public function index()
     {
         $judul = "Vendor Obat";
-        $vendors = Vendor::all();
+        $vendors = Vendor::paginate(5);
         return view('pages.master.vendor',compact('judul','vendors'));
     }
     public function create()
@@ -29,7 +29,7 @@ class VendorController extends Controller
             Vendor::create($validate);
             return redirect()->route('master.vendor.index')->with('success','Vendor berhasil dibuat');
         } catch (\Throwable $th) {
-            return redirect()->route('master.vendor.index')->with('error','Vendor gagal dibuat');
+            return redirect()->route('master.vendor.index')->with('success','Vendor gagal dibuat');
         }
     }
     public function edit(Vendor $vendor)
@@ -39,7 +39,7 @@ class VendorController extends Controller
     public function update(Request $request, Vendor $vendor)
     {
         $vendor->update($request->all());
-        return redirect()->route('master.vendor.index');
+        return redirect()->route('master.vendor.index')->with('success','Vendor berhasil diubah');
     }
     public function destroy(Vendor $vendor)
     {
@@ -47,7 +47,7 @@ class VendorController extends Controller
             $vendor->delete();
             return back()->with('success', 'Vendor berhasil dihapus');
         } catch (\Throwable $e) {
-            return back()->with('error', 'Vendor gagal dihapus');
+            return back()->with('success', 'Vendor gagal dihapus');
         }
     }
 }

@@ -10,7 +10,7 @@ class ManufactureController extends Controller
     public function index()
     {
         $judul = "Produsen Obat";
-        $manufactures = Manufacture::all();
+        $manufactures = Manufacture::paginate(5);
         return view('pages.master.manufacture',compact('judul','manufactures'));
     }
     public function store(Request $request)
