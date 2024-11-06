@@ -83,18 +83,18 @@
         <table class="min-w-full leading-normal">
             <thead>
                 <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                    <th class="border p-2">No</th>
-                    <th class="border p-2">Waktu Expired Obat</th>
-                    <th class="border p-2">Kuantiti</th>
-                    <th class="border p-2">Action</th>
+                    <th class="border p-2 text-sm font-inter">No</th>
+                    <th class="border p-2 text-sm font-inter">Waktu Expired Obat</th>
+                    <th class="border p-2 text-sm font-inter">Kuantiti</th>
+                    <th class="border p-2 text-sm font-inter">Action</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-light">
                 @for ($i = 1; $i < 8; $i++)
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">{{ $i }}</td>
-                    <td class="py-3 px-6 text-center">12 Desember 2024</td>
-                    <td class="py-3 px-6 text-center">150</td>
+                    <td class="py-3 px-6 text-center text-sm font-inter"">{{ $i }}</td>
+                    <td class="py-3 px-6 text-center text-sm font-inter"">12 Desember 2024</td>
+                    <td class="py-3 px-6 text-center text-sm font-inter"">150</td>
                     <td class="py-3 px-6 text-center">
                         <a href="{{ route('inventory.retur', 1) }}"
                             class="bg-gold text-black text-sm px-2 py-1 rounded-lg shadow hover:bg-gold-700 transition-colors duration-200">Retur</a>
@@ -106,7 +106,7 @@
             </tbody>
         </table>
         <div class="flex justify-end items-center mt-4 gap-4">
-            <div class="text-sm">Showing 1 to 10 of 50 entries</div>
+            <div class="text-sm font-inter">Showing 1 to 10 of 50 entries</div>
             <!-- Pagination -->
             <div class="flex justify-end">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">

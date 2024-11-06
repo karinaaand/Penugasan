@@ -3,8 +3,8 @@
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
     <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
     </svg>
- </button>
- <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+</button>
+<aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-abu">
        <ul class="space-y-2 font-medium">
         <li>
@@ -35,8 +35,13 @@
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                    </svg>
              </button>
-             <ul id="dropdown-masterdata" class="list-none aria-expanded="false" py-2 space-y-2">
-                <li>
+             <ul id="dropdown-masterdata" aria-expanded="false" class="py-2 space-y-2
+             @if(in_array(request()->route()->getName(), ['master.category.index', 'master.variant.index', 'master.manufacture.index', 'master.vendor.index', 'master.drug.index']))
+                 block
+             @else
+                 hidden
+             @endif">
+                         <li>
                     <a href="{{ route('master.category.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                         <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
                         <span class="text-sm">Kategori Obat</span>
@@ -79,7 +84,12 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-inventory" class="aria-expanded="false" py-2 space-y-2">
+                <ul id="dropdown-inventory" aria-expanded="false" class="py-2 space-y-2
+                @if(in_array(request()->route()->getName(), ['inventory.inflows.index', 'inventory.stocks.index']))
+                    block
+                @else
+                    hidden
+                @endif">
                     <li>
                         <a href="{{ route('inventory.inflows.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -104,7 +114,12 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-klinik" class="aria-expanded="false" py-2 space-y-2">
+                <ul id="dropdown-klinik" aria-expanded="false" class="py-2 space-y-2
+                @if(in_array(request()->route()->getName(), ['clinic.inflows.index', 'clinic.stocks.index']))
+                    block
+                @else
+                    hidden
+                @endif">
                     <li>
                         <a href="{{ route('clinic.inflows.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -129,7 +144,12 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-laporan" class="aria-expanded="false" py-2 space-y-2">
+                <ul id="dropdown-laporan" aria-expanded="false" class="py-2 space-y-2
+                @if(in_array(request()->route()->getName(), ['report.drugs.index', 'report.transactions.index']))
+                    block
+                @else
+                    hidden
+                @endif">
                     <li>
                         <a href="{{ route('report.drugs.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-200">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -154,7 +174,12 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                       </svg>
                 </button>
-                <ul id="dropdown-manajementransaksi" class="aria-expanded="false" py-2 space-y-2">
+                <ul id="dropdown-manajementransaksi" aria-expanded="false" class="py-2 space-y-2
+                @if(in_array(request()->route()->getName(), ['management.bill.index', 'management.retur.index', 'management.trash.index']))
+                    block
+                @else
+                    hidden
+                @endif">
                     <li>
                         <a href="{{ route('management.bill.index') }}" class="flex items-center space-x-5 p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-black dark:hover:bg-gray-2009*">
                             <span class="w-2 h-2 rounded-full bg-gray-500 inline-block ms-1"></span>
@@ -183,8 +208,7 @@
             </li>
        </ul>
     </div>
-
- </aside>
+</aside>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {

@@ -16,49 +16,53 @@
                     fill="#262B43" fill-opacity="0.9" />
             </svg>
         </a>
-        <div class="relative inline-block text-left">
-            <!-- Button to toggle the dropdown -->
-            <div>
-                <button onclick="toggleDropdown()" class="flex items-center justify-center w-10 h-10 bg-white border-none rounded-full focus:outline-none">
-                    <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar"  class="w-10 h-10 rounded-full">
-                    <path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.333 0-10 1.667-10 5v1h20v-1c0-3.333-6.667-5-10-5z"/>
+        <!-- Button to open the modal -->
+<div class="relative inline-block text-left">
+    <button onclick="toggleModal()" class="flex items-center justify-center w-10 h-10 bg-white border-none rounded-full focus:outline-none">
+        <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar" class="w-10 h-10 rounded-full">
+    </button>
+</div>
+
+        <!-- Modal overlay and content -->
+        <div id="modal" class="fixed inset-0 hidden bg-black bg-opacity-50 z-50">
+            <!-- Modal box positioned at top-right -->
+            <div class="bg-white w-72 rounded-lg shadow-lg p-6 absolute top-4 right-4 text-left">
+                <!-- Close button -->
+                <button onclick="toggleModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-            </div>
 
-            <!-- Dropdown content -->
-            <div id="dropdown" class="hidden origin-top-right absolute right-0 mt-2 w-72 h-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div class="py-4 flex flex-col items-ce">
-                    <!-- Profile Image and Green Dot -->
-                    <div class="relative w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-7">
-                        <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar"class="rounded-full w-full h-full">
-                        <span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+               <!-- Profile Image and Green Dot -->
+               <div class="relative w-16 h-16 bg-gray-200 rounded-full flex ml-5 justify-start">
+                    <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar" class="rounded-full w-full h-full">
+                    <span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+                </div>
+
+                <div class="mt-4 w-full px-6">
+                    <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
+                        <span class="w-20 text-left flex-shrink-0">Username</span>
+                        <span class="">:</span>
+                        <span class="ml-1">ADMIN123</span>
                     </div>
-
-
-                    <!-- User Info -->
-                    <div class="mt-4 w-full px-6">
-                        <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
-                            <span class="w-24">Username</span><span>:</span>
-                            <span class="ml-2">ADMIN123</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
-                            <span class="w-24">Role</span><span>:</span>
-                            <span class="ml-2">ADMIN</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600 font-semibold mb-4">
-                            <span class="w-24">Email</span><span>:</span>
-                            <span class="ml-2">ADMIN@gmail.com</span>
-                        </div>
+                    <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
+                        <span class="w-20 text-left flex-shrink-0">Role</span>
+                        <span class="">:</span>
+                        <span class="ml-1">ADMIN</span>
                     </div>
-
-                    <!-- Logout Button with Top Margin -->
-                    <div class="mt-1 w-full flex justify-center">
-                        <a href=""{{ route('user.logout') }}" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg flex items-center justify-center w-4/5">
-                            <i class="fas fa-sign-out-alt mr-2"></i>
-                            Log Out
-                        </a>
+                    <div class="flex items-center text-sm text-gray-600 font-semibold mb-4">
+                        <span class="w-20 text-left flex-shrink-0">Email</span>
+                        <span class="">:</span>
+                        <span class="ml-1">ADMIN@gmail.com</span>
                     </div>
+                </div>
+
+                <!-- Logout Button -->
+                <div class="mt-4 flex justify-center">
+                    <a href="{{ route('user.logout') }}" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg flex items-center justify-center w-4/5">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                    </a>
                 </div>
             </div>
         </div>
@@ -66,9 +70,9 @@
 </div>
 
 <script>
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdown');
-        dropdown.classList.toggle('hidden');
+    function toggleModal() {
+        const modal = document.getElementById('modal');
+        modal.classList.toggle('hidden');
     }
 </script>
 

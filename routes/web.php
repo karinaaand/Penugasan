@@ -27,7 +27,7 @@ Route::controller(UserController::class)->group(function () {
     Route::match(['get','post'],'/login','login')->name('user.login');
     Route::match(['get','post'],'/forgot','forgot')->name('user.forgot');
     Route::match(['get','post'],'/settings','settings')->name('user.settings');
-    Route::post("/logout",'logout')->name("user.logout");
+    Route::get("/logout",'logout')->name("user.logout");
 });
 
 Route::resource('transaction',TransactionController::class)->except(['edit','update','destroy']);
