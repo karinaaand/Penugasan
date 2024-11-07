@@ -1,14 +1,19 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @extends('layouts.main')
 @section('container')
     <div class="rounded-lg bg-white p-6 shadow-lg">
         <div class="mb-4 flex items-center">
             <div class="flex-1">
-                <h2 class="text-2xl font-bold">NAMA KLINIK</h2>
-                <p class="text-gray-600">Tanggal : 19 September 2024</p>
+                <h2 class="text-2xl font-bold">{{ $transaction->vendor()->name }}</h2>
+                <p class="text-gray-600">Tanggal : {{ Carbon::parse($transaction->created_at)->translatedFormat('j F Y') }}</p>
             </div>
             <div class="flex flex-1 items-center justify-center">
                 <label for="lpb" class="mr-2 text-lg font-normal text-black">No. LPB :</label>
                 <input
+                disabled
+                value="{{ $transaction->code }}"
                     type="text"
                     id="lpb"
                     class="mr-2 border-b border-gray-300 focus:border-gray-500 focus:outline-none"
@@ -45,51 +50,17 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm font-light text-gray-700">
-                    <!-- Data Row 1 -->
+                    @foreach ($details as $number=>$item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">1</td>
-                        <td class="px-6 py-3 text-center">#AAA111</td>
-                        <td class="px-6 py-3 text-center">Obat 1</td>
-                        <td class="px-6 py-3 text-center">10</td>
-                        <td class="px-6 py-3 text-center">Rp 10.000</td>
-                        <td class="px-6 py-3 text-center">Rp 100.000</td>
+                        <td class="px-6 py-3 text-center">{{ $number+1 }}</td>
+                        <td class="px-6 py-3 text-center">{{ $item->drug()->code }}</td>
+                        <td class="px-6 py-3 text-center">{{ $item->drug()->name }}</td>
+                        <td class="px-6 py-3 text-center">{{ $item->quantity }}</td>
+                        <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}</td>
+                        <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}</td>
                     </tr>
-                    <!-- Data Row 2 -->
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">2</td>
-                        <td class="px-6 py-3 text-center">#AAA111</td>
-                        <td class="px-6 py-3 text-center">Obat 1</td>
-                        <td class="px-6 py-3 text-center">10</td>
-                        <td class="px-6 py-3 text-center">Rp 10.000</td>
-                        <td class="px-6 py-3 text-center">Rp 100.000</td>
-                    </tr>
-                    <!-- Data Row 3 -->
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">3</td>
-                        <td class="px-6 py-3 text-center">#AAA111</td>
-                        <td class="px-6 py-3 text-center">Obat 1</td>
-                        <td class="px-6 py-3 text-center">10</td>
-                        <td class="px-6 py-3 text-center">Rp 10.000</td>
-                        <td class="px-6 py-3 text-center">Rp 100.000</td>
-                    </tr>
-                    <!-- Data Row 4 -->
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">4</td>
-                        <td class="px-6 py-3 text-center">#AAA111</td>
-                        <td class="px-6 py-3 text-center">Obat 1</td>
-                        <td class="px-6 py-3 text-center">10</td>
-                        <td class="px-6 py-3 text-center">Rp 10.000</td>
-                        <td class="px-6 py-3 text-center">Rp 100.000</td>
-                    </tr>
-                    <!-- Data Row 5 -->
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">5</td>
-                        <td class="px-6 py-3 text-center">#AAA111</td>
-                        <td class="px-6 py-3 text-center">Obat 1</td>
-                        <td class="px-6 py-3 text-center">10</td>
-                        <td class="px-6 py-3 text-center">Rp 10.000</td>
-                        <td class="px-6 py-3 text-center">Rp 100.000</td>
-                    </tr>
+                        
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -97,7 +68,7 @@
             <p class="mr-2 font-semibold">Grand total :</p>
             <input
                 type="text"
-                value="Rp 750.000"
+                value="{{ 'Rp ' . number_format($transaction->outcome, 0, ',', '.') }}"
                 class="w-48 border-b border-gray-400 text-center focus:border-black focus:outline-none"
                 readonly
             />

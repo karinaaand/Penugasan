@@ -54,12 +54,27 @@ class InventoryFlowController extends Controller
                 "total_price"=>$item->price,
                 
             ]);
+            $drug = $detail->drug();
+            if($item->unit=="pcs"){
+                $newPrice = $item->piece_price;
+            }elseif($item->unit=="pack"){
+                $newPrice = $item->piece_price/$drug->piece_quantity;
+            }elseif($item->unit=="box"){
+                $newPrice = $item->piece_price/($drug->piece_quantity*$drug->pack_quantity);
+            }
+            if($drug->last_price < $newPrice){
+                $drug->last_price = $newPrice;
+                $drug->save();
+            }
+            foreach ($drug->repacks() as $repack) {
+                $repack->update_price();
+            }
             match ($item->unit) {
-                "pcs" => $quantity= $item->quantity*$detail->drug()->piece_netto,
-                "pack" => $quantity= $item->quantity*($detail->drug()->piece_netto*$detail->drug()->piece_quantity),
-                "box" => $quantity= $item->quantity*($detail->drug()->piece_netto*$detail->drug()->piece_quantity*$detail->drug()->pack_quantity),
+                "pcs" => $quantity= $item->quantity*$drug->piece_netto,
+                "pack" => $quantity= $item->quantity*($drug->piece_netto*$drug->piece_quantity),
+                "box" => $quantity= $item->quantity*($drug->piece_netto*$drug->piece_quantity*$drug->pack_quantity),
             };
-            $stock = Warehouse::where('drug_id',$detail->drug()->id)->first();
+            $stock = Warehouse::where('drug_id',$drug->id)->first();
             $stock->quantity = $stock->quantity + $quantity;
             if ($stock->oldest == null) {
                 $stock->oldest = $item->expired;
