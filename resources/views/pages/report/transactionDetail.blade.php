@@ -1,5 +1,17 @@
 @extends('layouts.main')
 @section('container')
+    <head>
+        <title>Laporan Transaksi</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    </head>
+    <div class="container mx-auto p-4">
+        <div class="flex items-center mb-4">
+            <a class="text-blue-600 flex items-center mr-4" href="{{ route('report.transactions.index') }}">
+                <i class="fas fa-arrow-left mr-2"></i></a>
+            <h1 class="text-2xl font-bold">Laporan Transaksi</h1>
+        </div>
+    </div>
     <div class="rounded-lg bg-white p-6 shadow-lg">
         <div class="mb-4 flex items-center">
             <div class="flex-1">
