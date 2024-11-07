@@ -80,7 +80,7 @@ class DrugController extends Controller
             // dd($quantity);
             Repack::create([
                 "drug_id" => $drug->id,
-                "name" => $request->name,
+                "name" => $drug->name." ".$request->quantity." ".$request->unit,
                 "quantity" => $quantity,
                 "margin" => $request->margin,
                 "price" => $drug->calculate_price($quantity, $request->margin)

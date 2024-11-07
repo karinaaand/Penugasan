@@ -14,7 +14,7 @@ class Repack extends Model
     }
     public function update_price(){
         $drug = $this->drug();
-        if(str_contains($this->name,'1 Pack')){
+        if(str_contains($this->name,'1 pack')){
             $this->quantity = $drug->piece_netto*$drug->piece_quantity;
         }
         if($this->quantity==$drug->piece_netto){
