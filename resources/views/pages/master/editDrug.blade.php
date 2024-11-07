@@ -203,7 +203,7 @@
                     <tbody class="text-gray-700 text-sm font-light">
                         @foreach ($repacks as $number => $item)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-left">{{ $loop->iteration + ($repacks->currentPage() - 1) * $repacks->perPage() }}</td>
+                                <td class="py-3 px-6 text-left">{{ $number + 1}}</td>
                                 <td class="py-3 px-6 text-left">{{ $item->name }}</td>
                                 <td class="py-3 px-6 text-left">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
                                 </td>
