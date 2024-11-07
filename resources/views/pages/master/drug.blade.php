@@ -12,17 +12,17 @@
         <table class="min-w-full leading-normal">
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left">NO</th>
-                    <th class="py-3 px-6 text-left">KODE</th>
-                    <th class="py-3 px-6 text-left">NAMA OBAT</th>
+                    <th class="py-3 px-6 text-center w-1">NO</th>
+                    <th class="py-3 px-6 text-center">KODE</th>
+                    <th class="py-3 px-6 text-center">NAMA OBAT</th>
                     <th class="py-3 px-6 text-center">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-light">
                 @foreach ($drugs as $number => $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left">{{ $loop->iteration + ($drugs->currentPage() - 1) * $drugs->perPage() }}</td>
-                        <td class="py-3 px-6 text-left">#{{ $item->code }}</td>
+                        <td class="py-3 px-6 text-center">{{ $loop->iteration + ($drugs->currentPage() - 1) * $drugs->perPage() }}</td>
+                        <td class="py-3 px-6 text-center">#{{ $item->code }}</td>
                         <td class="py-3 px-6 text-left">{{ $item->name }}</td>
                         <td class="py-3 px-6 text-center flex justify-center">
                             <a href="{{ route('master.drug.edit', $item->id) }}"

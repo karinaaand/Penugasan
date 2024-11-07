@@ -26,8 +26,10 @@ class ManufactureController extends Controller
         }
         return back()->with('error','Produsen gagal dibuat');
     }
-    public function update(Request $request, string $id)
+    public function update(Request $request, Manufacture $manufactures)
     {
+        $manufactures->update($request->all());
+        return redirect()->route('master.manufacture.index')->with('success','Produsen berhasil diubah');
     }
     public function destroy(Manufacture $manufacture)
     {
