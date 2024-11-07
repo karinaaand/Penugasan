@@ -30,7 +30,7 @@ class VariantController extends Controller
     public function update(Request $request, Variant $variant)
     {
         $variant->update($request->all());
-        return redirect()->route('master.variant.index');
+        return redirect()->route('master.variant.index')->with('success','Jenis berhasil diubah');
     }
     public function destroy(Variant $variant)
     {
