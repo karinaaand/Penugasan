@@ -1,29 +1,38 @@
 @extends('layouts.main')
 @section('container')
 <div class="p-6 bg-white rounded-lg shadow-lg">
-    <button onclick="showTambahModal()" class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+ Tambah</button>
-    <div id="tambahModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-96">
-            <h2 class="text-center text-xl font-semibold mb-6">Tambah Vendor</h2>
-            <form action="{{ route('master.vendor.store') }}" method="POST">
-                @csrf
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="name">Nama</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="phone">Telepon</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="phone" name="phone">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="address">Alamat</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="address" name="address">
-                </div>
-                <div class="flex justify-center space-x-4 mt-4">
-                    <button type="button" id="closeModal" onclick="closeTambahModal()"
-                        class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 w-full flex-1">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg w-full flex-1">Tambah</button>
-                </div>
+    <div class="flex justify-between mb-4">
+        <div>
+            <button onclick="showTambahModal()" class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+ Tambah</button>
+        </div>
+        <div id="tambahModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 w-96">
+                <h2 class="text-center text-xl font-semibold mb-6">Tambah Vendor</h2>
+                <form action="{{ route('master.vendor.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="name">Nama</label>
+                        <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="phone">Telepon</label>
+                        <input class="w-full px-3 py-2 border rounded-lg" type="text" id="phone" name="phone">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 mb-2" for="address">Alamat</label>
+                        <input class="w-full px-3 py-2 border rounded-lg" type="text" id="address" name="address">
+                    </div>
+                    <div class="flex justify-center space-x-4 mt-4">
+                        <button type="button" id="closeModal" onclick="closeTambahModal()"
+                            class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 w-full flex-1">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg w-full flex-1">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <form action="">
+                <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
             </form>
         </div>
     </div>
