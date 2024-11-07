@@ -3,11 +3,13 @@
 
 <div class="bg-white shadow-md rounded-xl p-6 w-full max-w-8xl">
     <!-- Form lainnya dan tabel -->
-    <form action="" class="flex flex-row justify-between w-max gap-3">
-        <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
-        <h1>sampai</h1>
-        <input class="ring-2 ring-gray-500 py-1 px-2 rounded-sm" type="date" name="" id="">
-        <button class="bg-indigo px-3 rounded-full text-white font-bold text-xs hover:bg-indigo-800" type="submit">APPLY</button>
+    <form action="" class="flex w-max flex-row justify-between gap-3">
+        <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
+        <h1 class="text-lg font-inter text-gray-800">sampai</h1>
+        <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
+        <button class="rounded-2xl bg-indigo-500 px-3 font-bold text-sm font-inter text-white hover:bg-indigo-800" type="submit">
+            APPLY
+        </button>
     </form>
 
     <div class="flex justify-end">
@@ -20,24 +22,24 @@
         <table class="min-w-full leading-normal">
             <thead>
                 <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-center" style="width: 10%;">NO</th>
-                    <th class="py-3 px-6 text-center" style="width: 15%;">KODE LPB</th>
-                    <th class="py-3 px-6 text-center" style="width: 20%;">TANGGAL DATANG</th>
-                    <th class="py-3 px-6 text-center" style="width: 20%;">JATUH TEMPO</th>
-                    <th class="py-3 px-6 text-center" style="width: 15%;">SUBTOTAL</th>
-                    <th class="py-3 px-6 text-center" style="width: 20%;">STATUS</th>
-                    <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 10%;">NO</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 15%;">KODE LPB</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 20%;">TANGGAL DATANG</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 20%;">JATUH TEMPO</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 15%;">SUBTOTAL</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 20%;">STATUS</th>
+                    <th class="py-3 px-6 text-center text-base font-inter" style="width: 10%;">ACTION</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">1</td>
-                    <td class="py-3 px-6 text-center">#AAA111</td>
-                    <td class="py-3 px-6 text-center">01-02-2024</td>
-                    <td class="py-3 px-6 text-center">14-02-2024</td>
-                    <td class="py-3 px-6 text-center">RP1.000.000</td>
-                    <td class="py-3 px-6 text-center">
-                        <span class="bg-orange-500 text-white py-1 px-3 text-left rounded-full text-xs">BELUM BAYAR</span>
+                    <td class="py-3 px-6 text-center text-base font-inter">1</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">#AAA111</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">01-02-2024</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">14-02-2024</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">RP1.000.000</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">
+                        <span class="bg-orange-500 text-base font-inter text-white py-1 px-3 text-left rounded-full">BELUM BAYAR</span>
                     </td>
                     <td class="flex justify-center items-center py-3">
                         <a href="{{ route('management.bill.show', 1) }}" class="bg-lavender-200 hover:bg-lavender p-1 rounded-md flex justify-center items-center">
@@ -49,13 +51,13 @@
 
                 </tr>
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">2</td>
-                    <td class="py-3 px-6 text-center">#AAA222</td>
-                    <td class="py-3 px-6 text-center">01-02-2024</td>
-                    <td class="py-3 px-6 text-center">14-02-2024</td>
-                    <td class="py-3 px-6 text-center">RP1.000.000</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">2</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">#AAA222</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">01-02-2024</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">14-02-2024</td>
+                    <td class="py-3 px-6 text-center text-base font-inter">RP1.000.000</td>
                     <td class="py-3 px-6 text-center">
-                        <span class="text-green-500 font-bold text-left">D O N E</span>
+                        <span class="text-green-500 text-base font-inter font-bold text-left">D O N E</span>
                     </td>
                     <td class="flex justify-center py-3">
                         <a href="{{ route('management.bill.show', 1) }}" class="bg-lavender-200 hover:bg-lavender p-1 rounded-md">

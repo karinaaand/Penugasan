@@ -5,9 +5,9 @@
         <!-- Form lainnya dan tabel -->
         <form action="" class="flex w-max flex-row justify-between gap-3">
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
-            <h1>sampai</h1>
+            <h1 class="text-lg font-inter text-gray-800">sampai</h1>
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
-            <button class="rounded-full bg-indigo px-3 text-xs font-bold text-white hover:bg-indigo-800" type="submit">
+            <button class="rounded-2xl bg-indigo-500 px-3 font-bold text-sm font-inter text-white hover:bg-indigo-800" type="submit">
                 APPLY
             </button>
         </form>
@@ -29,24 +29,24 @@
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-100 text-sm uppercase leading-normal text-gray-600">
                         <tr>
-                            <th class="px-6 py-3 text-center">NO</th>
-                            <th class="px-6 py-3 text-center">KODE BUANG</th>
-                            <th class="px-6 py-3 text-center">NAMA OBAT</th>
-                            <th class="px-6 py-3 text-center">JUMLAH BARANG</th>
-                            <th class="px-6 py-3 text-center">TGL BUANG</th>
-                            <th class="px-6 py-3 text-center">STATUS</th>
-                            <th class="px-6 py-3 text-center" style="width: 10%">ACTION</th>
+                            <th class="px-6 py-3 text-center text-base font-inter">NO</th>
+                            <th class="px-6 py-3 text-center text-base font-inter">KODE BUANG</th>
+                            <th class="px-6 py-3 text-center text-base font-inter">NAMA OBAT</th>
+                            <th class="px-6 py-3 text-center text-base font-inter">JUMLAH BARANG</th>
+                            <th class="px-6 py-3 text-center text-base font-inter">TGL BUANG</th>
+                            <th class="px-6 py-3 text-center text-base font-inter">STATUS</th>
+                            <th class="px-6 py-3 text-base font-inter text-center"  style="width: 10%">ACTION</th>
                         </tr>
                     </thead>
                     <tbody class="text-sm font-light text-gray-600">
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-3 text-center">1</td>
-                            <td class="px-6 py-3 text-center">#AAA111</td>
-                            <td class="px-6 py-3 text-left">VENDOR 1</td>
-                            <td class="px-6 py-3 text-center">10</td>
-                            <td class="px-6 py-3 text-center">01-01-2001</td>
-                            <td class="px-6 py-3 text-center">
-                                <span class="rounded-full bg-orange-500 px-3 py-1 text-xs text-white">ONGOING</span>
+                            <td class="px-6 py-3 text-center text-base font-inter">1</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">#AAA111</td>
+                            <td class="px-6 py-3 text-left text-base font-inter">VENDOR 1</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">10</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">01-01-2001</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">
+                                <span class="rounded-full text-base font-inter bg-orange-500 px-3 py-1 text-white">ONGOING</span>
                             </td>
                             <td class="flex justify-center py-3">
                                 <a
@@ -69,13 +69,13 @@
                             </td>
                         </tr>
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-3 text-center">2</td>
-                            <td class="px-6 py-3 text-center">#AAA111</td>
-                            <td class="px-6 py-3 text-left">VENDOR 1</td>
-                            <td class="px-6 py-3 text-center">10</td>
-                            <td class="px-6 py-3 text-center">01-01-2001</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">2</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">#AAA111</td>
+                            <td class="px-6 py-3 text-left text-base font-inter">VENDOR 1</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">10</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">01-01-2001</td>
                             <td class="px-6 py-3 text-center">
-                                <span class="rounded-full bg-orange-500 px-3 py-1 text-xs text-white">ONGOING</span>
+                                <span class="rounded-full text-base font-inter bg-orange-500 px-3 py-1 text-white">ONGOING</span>
                             </td>
                             <td class="flex justify-center py-3">
                                 <a
@@ -98,13 +98,13 @@
                             </td>
                         </tr>
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-3 text-center">3</td>
-                            <td class="px-6 py-3 text-center">#AAA111</td>
-                            <td class="px-6 py-3 text-left">VENDOR 1</td>
-                            <td class="px-6 py-3 text-center">10</td>
-                            <td class="px-6 py-3 text-center">01-01-2001</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">3</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">#AAA111</td>
+                            <td class="px-6 py-3 text-left text-base font-inter">VENDOR 1</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">10</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">01-01-2001</td>
                             <td class="px-6 py-3 text-center">
-                                <span class="font-bold text-green-500">DONE</span>
+                                <span class="font-bold text-base font-inter text-green-500">DONE</span>
                             </td>
                             <td class="flex justify-center py-3">
                                 <a
@@ -127,13 +127,13 @@
                             </td>
                         </tr>
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-3 text-center">4</td>
-                            <td class="px-6 py-3 text-center">#AAA111</td>
-                            <td class="px-6 py-3 text-left">VENDOR 1</td>
-                            <td class="px-6 py-3 text-center">10</td>
-                            <td class="px-6 py-3 text-center">01-01-2001</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">4</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">#AAA111</td>
+                            <td class="px-6 py-3 text-left text-base font-inter">VENDOR 1</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">10</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">01-01-2001</td>
                             <td class="px-6 py-3 text-center">
-                                <span class="font-bold text-green-500">DONE</span>
+                                <span class="font-bold text-base font-inter text-green-500">DONE</span>
                             </td>
                             <td class="flex justify-center py-3">
                                 <a
@@ -156,13 +156,13 @@
                             </td>
                         </tr>
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-3 text-center">5</td>
-                            <td class="px-6 py-3 text-center">#AAA111</td>
-                            <td class="px-6 py-3 text-left">VENDOR 1</td>
-                            <td class="px-6 py-3 text-center">10</td>
-                            <td class="px-6 py-3 text-center">01-01-2001</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">5</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">#AAA111</td>
+                            <td class="px-6 py-3 text-left text-base font-inter">VENDOR 1</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">10</td>
+                            <td class="px-6 py-3 text-center text-base font-inter">01-01-2001</td>
                             <td class="px-6 py-3 text-center">
-                                <span class="font-bold text-green-500">DONE</span>
+                                <span class="font-bold text-base font-inter text-green-500">DONE</span>
                             </td>
                             <td class="flex justify-center py-3">
                                 <a

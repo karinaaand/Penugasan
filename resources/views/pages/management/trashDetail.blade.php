@@ -2,32 +2,32 @@
 
 @section('container')
     <div class="rounded-lg bg-white p-6 shadow-lg">
-        <h2 class="mb-4 text-xl font-semibold">Buang Obat</h2>
+        <h2 class="mb-4 text-xl font inter font-semibold">Buang Obat</h2>
 
         <div class="mb-4 grid grid-cols-2 gap-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Nama Obat</label>
-                <p class="mt-1 text-gray-600">Paracetamol</p>
+                <label class="block text-lg font-inter text-gray-700">Nama Obat</label>
+                <p class="mt-1 text-base font-inter text-gray-600">Paracetamol</p>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Tanggal Expired</label>
-                <p class="mt-1 text-gray-600">20/12/2024</p>
+                <label class="block text-lg font-inter text-gray-700">Tanggal Expired</label>
+                <p class="mt-1 text-base font-inter text-gray-600">20/12/2024</p>
             </div>
         </div>
 
         <div class="mb-4 grid grid-cols-2 gap-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Jumlah Obat (pcs)</label>
+                <label class="block text-lg font-inter text-gray-700">Jumlah Obat (pcs)</label>
                 <input
                     type="number"
-                    class="h-10 w-full rounded border border-gray-300 p-4"
+                    class="h-10 w-full text-base font-inter rounded border border-gray-300 p-4"
                     placeholder="Inputkan jumlah obat"
                 />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Deskripsi</label>
+                <label class="block text-lg font-inter text-gray-700">Deskripsi</label>
                 <textarea
-                    class="h-40 w-full rounded border border-gray-300 p-4"
+                    class="h-40 w-full text-base font-inter rounded border border-gray-300 p-4"
                     placeholder="Tuliskan alasan"
                     rows="4"
                 ></textarea>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="mt-4 flex justify-end">
-            <button onclick="showToast()" class="rounded-lg bg-pink-500 px-6 py-2 text-white hover:bg-pink-600">
+            <button onclick="showToast()" class="rounded-lg bg-pink-500 px-6 py-2 text-white hover:bg-pink-600 text-base font-inter">
                 Buang
             </button>
         </div>

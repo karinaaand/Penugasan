@@ -6,28 +6,28 @@
 
         <div class="mb-4 grid grid-cols-2 gap-4">
             <div>
-                <label class="block text-sm font-inter text-gray-700">Nama Obat</label>
-                <p class="mt-1 text-xs font-inter text-gray-600">Paracetamol</p>
+                <label class="block text-lg font-inter text-gray-700">Nama Obat</label>
+                <p class="mt-1 text-base font-inter text-gray-600">Paracetamol</p>
             </div>
             <div>
-                <label class="block text-sm font-inter text-gray-700">Tanggal Expired</label>
-                <p class="mt-1 text-gray-600">20/12/2024</p>
+                <label class="block text-lg  font-inter text-gray-700">Tanggal Expired</label>
+                <p class="mt-1 text-base font-inter text-gray-600">20/12/2024</p>
             </div>
         </div>
 
         <div class="mb-4 grid grid-cols-2 gap-4">
             <div>
-                <label class="block text-sm font-inter text-gray-700">Jumlah Obat (pcs)</label>
+                <label class="block text-lg font-inter text-gray-700">Jumlah Obat (pcs)</label>
                 <input
                     type="number"
-                    class="h-10 w-full text-sm font-inter rounded border border-gray-300 p-4"
+                    class="h-10 w-full text-base font-inter rounded border border-gray-300 p-4"
                     placeholder="Inputkan jumlah obat"
                 />
             </div>
             <div>
-                <label class="block text-sm font-inter text-gray-700">Deskripsi</label>
+                <label class="block text-lg font-inter text-gray-700">Deskripsi</label>
                 <textarea
-                    class="h-40 w-full text-sm font-inter rounded border border-gray-300 p-4"
+                    class="h-40 w-full text-base font-inter rounded border border-gray-300 p-4"
                     placeholder="Tuliskan alasan"
                     rows="4"
                 ></textarea>
@@ -46,11 +46,11 @@
                             class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-6"
                         ></div>
                     </label>
-                    <span class="text-gray-500 text-sm font-inter">Selesai</span>
+                    <span class="text-gray-500 text-base font-inter">Selesai</span>
                 </div>
                 <button
                     onclick="showToast()"
-                    class="rounded-full bg-yellow-400 px-6 py-2 text-sm font-bold font-inter text-black shadow-md transition-colors hover:bg-yellow-500"
+                    class="rounded-2xl bg-yellow-300 px-6 py-2 text-base font-bold font-inter text-black shadow-md transition-colors hover:bg-yellow-500"
                     style="width: 100px; height: 40px"
                 >
                     SAVE
