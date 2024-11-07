@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Master\Category;
+use App\Models\Master\Drug;
 use App\Models\Master\Manufacture;
 use App\Models\Master\Variant;
 use App\Models\Master\Vendor;
@@ -72,6 +73,169 @@ class DatabaseSeeder extends Seeder
             "address" => "Jl. Ahmad Yani No.12, Makassar"
         ],
     ];
+    private $drugs = [
+        [
+            "name" => "Paracetamol 500mg",
+            "code" => "PC0001",
+            "category_id" => 1,
+            "variant_id" => 1,
+            "last_price" => 5000,
+            "last_discount" => 0,
+            "maximum_capacity" => 100,
+            "minimum_capacity" => 10,
+            "pack_quantity" => 10,
+            "pack_margin" => 5,
+            "piece_quantity" => 1,
+            "piece_margin" => 2,
+            "piece_netto" => 500,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Paracetamol Syrup",
+            "code" => "PC0002",
+            "category_id" => 1,
+            "variant_id" => 2,
+            "last_price" => 7000,
+            "last_discount" => 500,
+            "maximum_capacity" => 50,
+            "minimum_capacity" => 5,
+            "pack_quantity" => 5,
+            "pack_margin" => 3,
+            "piece_quantity" => 1,
+            "piece_margin" => 1,
+            "piece_netto" => 60,
+            "piece_unit" => "ml",
+        ],
+        [
+            "name" => "Ibuprofen",
+            "code" => "AG0001",
+            "category_id" => 2,
+            "variant_id" => 3,
+            "last_price" => 8000,
+            "last_discount" => 1000,
+            "maximum_capacity" => 150,
+            "minimum_capacity" => 10,
+            "pack_quantity" => 10,
+            "pack_margin" => 4,
+            "piece_quantity" => 1,
+            "piece_margin" => 3,
+            "piece_netto" => 400,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Aspirin",
+            "code" => "AG0002",
+            "category_id" => 2,
+            "variant_id" => 4,
+            "last_price" => 6000,
+            "last_discount" => 500,
+            "maximum_capacity" => 80,
+            "minimum_capacity" => 10,
+            "pack_quantity" => 8,
+            "pack_margin" => 3,
+            "piece_quantity" => 1,
+            "piece_margin" => 2,
+            "piece_netto" => 300,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Albendazole",
+            "code" => "AH0001",
+            "category_id" => 3,
+            "variant_id" => 5,
+            "last_price" => 12000,
+            "last_discount" => 1500,
+            "maximum_capacity" => 70,
+            "minimum_capacity" => 5,
+            "pack_quantity" => 7,
+            "pack_margin" => 5,
+            "piece_quantity" => 1,
+            "piece_margin" => 2,
+            "piece_netto" => 200,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Mebendazole",
+            "code" => "AH0002",
+            "category_id" => 3,
+            "variant_id" => 6,
+            "last_price" => 15000,
+            "last_discount" => 2000,
+            "maximum_capacity" => 60,
+            "minimum_capacity" => 6,
+            "pack_quantity" => 6,
+            "pack_margin" => 4,
+            "piece_quantity" => 1,
+            "piece_margin" => 3,
+            "piece_netto" => 500,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Metronidazole",
+            "code" => "AP0001",
+            "category_id" => 4,
+            "variant_id" => 1,
+            "last_price" => 9000,
+            "last_discount" => 1000,
+            "maximum_capacity" => 90,
+            "minimum_capacity" => 10,
+            "pack_quantity" => 9,
+            "pack_margin" => 3,
+            "piece_quantity" => 1,
+            "piece_margin" => 2,
+            "piece_netto" => 250,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Ivermectin",
+            "code" => "AP0002",
+            "category_id" => 4,
+            "variant_id" => 2,
+            "last_price" => 11000,
+            "last_discount" => 1500,
+            "maximum_capacity" => 80,
+            "minimum_capacity" => 8,
+            "pack_quantity" => 8,
+            "pack_margin" => 3,
+            "piece_quantity" => 1,
+            "piece_margin" => 2,
+            "piece_netto" => 3,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Vitamin C",
+            "code" => "VT0001",
+            "category_id" => 6,
+            "variant_id" => 3,
+            "last_price" => 3000,
+            "last_discount" => 0,
+            "maximum_capacity" => 100,
+            "minimum_capacity" => 10,
+            "pack_quantity" => 10,
+            "pack_margin" => 2,
+            "piece_quantity" => 1,
+            "piece_margin" => 1,
+            "piece_netto" => 500,
+            "piece_unit" => "gr",
+        ],
+        [
+            "name" => "Vitamin D",
+            "code" => "VT0002",
+            "category_id" => 6,
+            "variant_id" => 4,
+            "last_price" => 4000,
+            "last_discount" => 500,
+            "maximum_capacity" => 100,
+            "minimum_capacity" => 10,
+            "pack_quantity" => 10,
+            "pack_margin" => 2,
+            "piece_quantity" => 1,
+            "piece_margin" => 1,
+            "piece_netto" => 1000,
+            "piece_unit" => "gr",
+        ],
+    ];
+    
     
     public function run(): void
     {
@@ -86,6 +250,12 @@ class DatabaseSeeder extends Seeder
         }
         foreach ($this->vendors as $item) {
             Vendor::create($item);
+        }
+        foreach ($this->drugs as $item) {
+            $item["manufacture_id"] = $item["variant_id"];
+            $drug = Drug::create($item);
+            $drug->default_repacks();
+            $drug->default_stock();
         }
     }
 }

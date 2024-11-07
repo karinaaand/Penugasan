@@ -2,6 +2,8 @@
 
 namespace App\Models\Master;
 
+use App\Models\Inventory\Clinic;
+use App\Models\Inventory\Warehouse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +39,16 @@ class Drug extends Model
             "price"=>$this->calculate_price($this->piece_netto,$this->piece_margin)
         ]);
     }
+    public function default_stock(){
+        Warehouse::create([
+            "drug_id"=>$this->id,
+            "quantity"=> 0,
+        ]);
+        Clinic::create([
+            "drug_id"=>$this->id,
+            "quantity"=> 0,
+        ]);
+    }
     public function update_repacks(){
         return $this->hasMany(Repack::class)->get();
     }
@@ -47,5 +59,11 @@ class Drug extends Model
             return $quantity*$nett_price*(100+$margin)/100;
         }
         return 0;
+    }
+    public function getBoxPriceAttribute(){
+        return $this->pack_quantity*$this->piece_quantity*$this->last_price;
+    }
+    public function getPackPriceAttribute(){
+        return $this->piece_quantity*$this->last_price;
     }
 }

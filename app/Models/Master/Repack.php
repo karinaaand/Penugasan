@@ -14,6 +14,14 @@ class Repack extends Model
     }
     public function update_price(){
         $drug = $this->drug();
+        if(str_contains($this->name,'1 Pack')){
+            $this->quantity = $drug->piece_netto*$drug->piece_quantity;
+        }
+        if($this->quantity==$drug->piece_netto){
+            $this->margin = $drug->piece_margin;
+        }elseif($this->quantity==($drug->piece_netto*$drug->piece_quantity)){
+            $this->margin = $drug->pack_margin;
+        }
         $this->price = $drug->calculate_price($this->quantity,$this->margin);
         $this->save();
     }

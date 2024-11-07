@@ -13,8 +13,23 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\VendorController;
+use App\Models\Master\Drug;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
+
+
+Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
+
+
+Route::get('/get-drug-price/{name}/{type}', function ($name,$type) {
+    $drug = Drug::where('name',$name)->first();
+    match ($type) {
+        "pcs" => $price = $drug->last_price,
+        "box" => $price = $drug->box_price,
+        "pack" => $price = $drug->pack_price,
+    };
+    return response()->json(['price' => $drug ? $price : 0]);
+});
 
 Route::redirect('/github','https://github.com/d-arsya/simbat_pad.git');
 Route::redirect('/drive','https://drive.google.com/drive/folders/1SQLVZcn1y_XOcjy6E53WwudAiFLIaf-J');
@@ -55,6 +70,10 @@ Route::prefix("clinic")->as('clinic.')->group(function(){
 });
 
 Route::prefix('master')->as('master.')->group(function () {
+    Route::prefix('drug/{drug}')->group(function(){
+        Route::post('repack',[DrugController::class,'repack'])->name('drug.repack.store');
+        Route::delete('repack/{repack}',[DrugController::class,'repack'])->name("drug.repack.destroy");
+    });
     Route::resource('category',CategoryController::class)->except(['create','show','edit']);
     Route::resource('vendor',VendorController::class)->except(['show']);
     Route::resource('variant',VariantController::class)->except(['create','show','edit']);

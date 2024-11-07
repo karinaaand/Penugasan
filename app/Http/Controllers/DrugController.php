@@ -12,10 +12,20 @@ use Illuminate\Http\Request;
 
 class DrugController extends Controller
 {
+    // DrugController.php
+    public function getSuggestions(Request $request)
+    {
+        $query = $request->input('query');
+        $drugs = Drug::where('name', 'like', "%{$query}%")->get();
+
+        return response()->json($drugs);
+    }
+
     public function index(): View
     {
-        $drugs = Drug::all();
-        return view('pages.master.drug', compact('drugs'));
+        $drugs = Drug::paginate(5);
+        $judul = "Nama Obat";
+        return view('pages.master.drug', compact('drugs', 'judul'));
     }
     public function create()
     {
@@ -23,18 +33,19 @@ class DrugController extends Controller
         $variants = Variant::all();
         $manufactures = Manufacture::all();
         $judul = "Input Obat";
-        return view('pages.master.createDrug',compact('categories','variants','manufactures','judul'));
+        return view('pages.master.createDrug', compact('categories', 'variants', 'manufactures', 'judul'));
     }
     public function store(Request $request)
     {
-        $category = Category::find($request->category_id)->first();
+        $category = Category::find($request->category_id);
         $request["code"] = $this->generateCode($category);
         $drug = Drug::create($request->all());
         $drug->default_repacks();
-        return redirect()->route('master.drug.edit',$drug->id);
+        $drug->default_stock();
+        return redirect()->route('master.drug.edit', $drug->id);
         try {
         } catch (\Throwable $th) {
-            return redirect()->route('master.drug.index')->with('error','Obat gagal dibuat');
+            return redirect()->route('master.drug.index')->with('error', 'Obat gagal dibuat');
         }
     }
     public function edit(Drug $drug)
@@ -44,39 +55,35 @@ class DrugController extends Controller
         $manufactures = Manufacture::all();
         $judul = "Edit Obat";
         $repacks = $drug->repacks();
-        return view('pages.master.editDrug',compact('categories','variants','manufactures','drug','judul','repacks'));
+        return view('pages.master.editDrug', compact('categories', 'variants', 'manufactures', 'drug', 'judul', 'repacks'));
     }
     public function update(Request $request, Drug $drug)
     {
-        if($drug->last_price!=$request->last_price){
-            $drug->update($request->all());
-            $repacks = $drug->repacks();
-            foreach ($repacks as $item) {
-                $item->update_price($request->last_price);
-            }
-        }else{
-            $drug->update($request->all());
+        $drug->update($request->all());
+        $repacks = $drug->repacks();
+        foreach ($repacks as $item) {
+            $item->update_price();
         }
         return redirect()->back();
     }
-    public function repack(Request $request,Drug $drug,Repack $repack)
+    public function repack(Request $request, Drug $drug, Repack $repack)
     {
-        if($request->isMethod('DELETE')){
-            if($repack->quantity!=$drug->piece_quantity*$drug->piece_netto && $repack->quantity!=$drug->piece_netto){
+        if ($request->isMethod('DELETE')) {
+            if ($repack->quantity != $drug->piece_quantity * $drug->piece_netto && $repack->quantity != $drug->piece_netto) {
                 $repack->delete();
             }
-        }else{
+        } else {
             $quantity = $request->quantity;
-            if($request->piece_unit=="pcs"){
-                $quantity = $request->quantity*$drug->piece_netto;
+            if ($request->piece_unit == "pcs") {
+                $quantity = $request->quantity * $drug->piece_netto;
             }
             // dd($quantity);
             Repack::create([
-                "drug_id"=>$drug->id,
-                "name"=>$request->name,
-                "quantity"=>$request->quantity,
-                "margin"=>$request->margin,
-                "price"=>$drug->calculate_price($quantity,$request->margin)
+                "drug_id" => $drug->id,
+                "name" => $request->name,
+                "quantity" => $quantity,
+                "margin" => $request->margin,
+                "price" => $drug->calculate_price($quantity, $request->margin)
             ]);
         }
         return back();
@@ -90,8 +97,16 @@ class DrugController extends Controller
             return redirect()->back()->with('error', 'Obat gagal dihapus')->setStatusCode(400);
         }
     }
-    function generateCode(Category $category):string {
-        $paddedNumber = str_pad($category->drugs()->count()+1, 4, '0', STR_PAD_LEFT);
+    function generateCode(Category $category): string
+    {
+        $lastDrug = $category->drugs()->last();
+        if (!$lastDrug) {
+            $nextNumber = 1;
+        } else {
+            $lastNumber = (int) substr($lastDrug->code, -4);
+            $nextNumber = $lastNumber + 1;
+        }
+        $paddedNumber = str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
         return $category->code . $paddedNumber;
     }
 }

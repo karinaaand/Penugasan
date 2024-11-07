@@ -13,16 +13,16 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Drug::class);
             $table->integer('quantity');
-            $table->date('oldest');
-            $table->date('latest');
+            $table->date('oldest')->nullable();
+            $table->date('latest')->nullable();
             $table->timestamps();
         });
         Schema::create('clinic_inventory', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Drug::class);
             $table->integer('quantity');
-            $table->date('oldest');
-            $table->date('latest');
+            $table->date('oldest')->nullable();
+            $table->date('latest')->nullable();
             $table->timestamps();
         });
     }

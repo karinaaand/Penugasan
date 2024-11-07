@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction\Bill;
 use Illuminate\Http\Request;
 
 class ManagementController extends Controller
 {
     public function bills(){
-        return view("pages.management.bill");
+        $bills = Bill::all();
+        $judul = "Tagihan Obat";
+        return view("pages.management.bill",compact('judul','bills'));
     }
     public function bill(){
         return view("pages.management.billDetail");        
