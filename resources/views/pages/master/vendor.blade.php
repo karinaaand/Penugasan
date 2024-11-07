@@ -74,7 +74,7 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-6">
+    <div class="p-6">
         {{ $vendors->links() }}
     </div>
     </div>

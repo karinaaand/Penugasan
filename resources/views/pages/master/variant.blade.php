@@ -52,7 +52,7 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-6">
+    <div class="p-6">
         {{ $variants->links() }}
     </div>
 </div>
@@ -123,7 +123,7 @@
 <script>
     function showDeleteModal(id) {
         console.log(id)
-        document.getElementById('deleteForm').setAttribute('action', `variants/${id}`)
+        document.getElementById('deleteForm').setAttribute('action', `variant/${id}`)
         document.getElementById('deleteModal').classList.remove('hidden');
     }
 

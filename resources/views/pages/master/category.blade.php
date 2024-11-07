@@ -60,7 +60,7 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-6">
+    <div class="p-6">
         {{ $categories->links() }}
     </div>
 </div>
@@ -69,12 +69,12 @@
         <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
         </p>
         <div class="flex justify-center space-x-4">
-            <form id="deleteForm" action="" method="POST" class="inline">
+            <form id="deleteForm" method="POST" class="inline">
                 @csrf
                 @method('DELETE')
                 <button type="reset" onclick="return closeDeleteModal()"
                     class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
-                <button onclick="submitDeleteForm()" class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
+                <button class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
             </form>
         </div>
     </div>
@@ -135,7 +135,7 @@
 <script>
     function showDeleteModal(id) {
         console.log(id)
-        document.getElementById('deleteForm').setAttribute('action', `categories/${id}`)
+        document.getElementById('deleteForm').setAttribute('action', `category/${id}`)
         document.getElementById('deleteModal').classList.remove('hidden');
     }
 

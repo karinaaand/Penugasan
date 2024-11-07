@@ -160,8 +160,6 @@
             <form action="{{ route('master.drug.repack.store',$drug->id) }}" method="POST">
                 @csrf
                 <div class="flex items-center mb-4 gap-3">
-                    <input type="text" name="name" class="border border-gray-300 rounded p-2 w-3/4"
-                        placeholder="Nama Repack">
                     <div class="flex">
                         <input type="number" id="quantity" name="quantity"
                             class="rounded-none rounded-s-lg text-gray-900 bg-gray-50 border border-gray-300 block flex-1 w-1/5 text-sm p-2.5"
@@ -193,27 +191,27 @@
                 <table class="min-w-full leading-normal">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">NO</th>
-                            <th class="py-3 px-6 text-left">NAMA</th>
-                            <th class="py-3 px-6 text-left">HARGA</th>
-                            <th class="py-3 px-6 text-left">MARGIN</th>
+                            <th class="py-3 px-6 text-center">NO</th>
+                            <th class="py-3 px-6 text-center">NAMA</th>
+                            <th class="py-3 px-6 text-center">HARGA</th>
+                            <th class="py-3 px-6 text-center">MARGIN</th>
                             <th class="py-3 px-6 text-center">ACTION</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700 text-sm font-light">
                         @foreach ($repacks as $number => $item)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-left">{{ $number + 1}}</td>
+                                <td class="py-3 px-6 text-center">{{ $number + 1}}</td>
                                 <td class="py-3 px-6 text-left">{{ $item->name }}</td>
                                 <td class="py-3 px-6 text-left">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
                                 </td>
-                                <td class="py-3 px-6 text-left">{{ $item->margin }}%</td>
+                                <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
                                 <td class="py-3 px-6 text-center">
                                     <form action="{{ route('master.drug.repack.destroy',[$drug->id,$item->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('Yakin ingin dihapus?')" type="submit"
-                                            class="bg-red-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
+                                            class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
                                             <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z" fill="white"/>
                                             </svg>

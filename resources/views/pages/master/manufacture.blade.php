@@ -53,7 +53,7 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-6">
+    <div class="p-6">
         {{ $manufactures->links() }}
     </div>
     </div>
@@ -124,7 +124,7 @@
 <script>
     function showDeleteModal(id) {
         console.log(id)
-        document.getElementById('deleteForm').setAttribute('action', `manufactures/${id}`)
+        document.getElementById('deleteForm').setAttribute('action', `manufacture/${id}`)
         document.getElementById('deleteModal').classList.remove('hidden');
     }
 
