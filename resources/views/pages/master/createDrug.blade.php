@@ -3,7 +3,7 @@
     @section('container')
 
     <div class="container mx-auto">
-    <div class="bg-white shadow-md rounded-lg py-12 px-6">
+    <div class="p-6 bg-white rounded-lg shadow-lg">
         <form action="{{ route('master.drug.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-6 gap-6">

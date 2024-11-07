@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('container')
+<div class="p-6 bg-white rounded-lg shadow-lg">
     <button onclick="showTambahModal()" class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+ Tambah</button>
     <div id="tambahModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-96">
@@ -134,7 +135,8 @@
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
             </svg>
         </button>
-    </div>  
+    </div> 
+</div>
     <script>
         const toast = document.getElementById('toast-success');
         toast.classList.remove('hidden'); // Tampilkan toast
