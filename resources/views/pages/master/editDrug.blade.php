@@ -3,7 +3,7 @@
 @section('container')
     <div class="container mx-auto">
         <div class="bg-white shadow-md rounded-lg py-12 px-6">
-            <form action="{{ route('master.drug.update',$drug->id) }}" method="POST">
+            <form action="{{ route('master.drug.update', $drug->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-6 gap-6">
@@ -105,7 +105,8 @@
                                                 </option>
                                                 <option {{ $drug->piece_unit == 'gr' ? 'selected' : '' }} value="gr">gr
                                                 </option>
-                                                <option {{ $drug->piece_unit == 'butir' ? 'selected' : '' }} value="butir">butir
+                                                <option {{ $drug->piece_unit == 'butir' ? 'selected' : '' }}
+                                                    value="butir">butir
                                                 </option>
                                             </select>
                                         </div>
@@ -157,7 +158,7 @@
         <h2 class="text-2xl font-bold text-gray-700 mt-8">Repackaging</h2>
 
         <div class="bg-white shadow-md rounded-lg p-6 mt-4">
-            <form action="{{ route('master.drug.repack.store',$drug->id) }}" method="POST">
+            <form action="{{ route('master.drug.repack.store', $drug->id) }}" method="POST">
                 @csrf
                 <div class="flex items-center mb-4 gap-3">
                     <div class="flex">
@@ -167,10 +168,10 @@
                         <select id="piece_unit" name="piece_unit"
                             class="border border-gray-300 rounded-e-lg p-2 text-gray-900 bg-gray-50">
                             <option>Satuan</option>
-                            @if ($unit=$drug->piece_unit != "butir")
-                            <option value="{{ $unit }}">{{ $drug->piece_unit }}</option>
-                            @else 
-                            <option value="{{ $unit }}">{{ $drug->piece_unit }}</option>
+                            @if ($unit = $drug->piece_unit != 'butir')
+                                <option value="{{ $unit }}">{{ $drug->piece_unit }}</option>
+                            @else
+                                <option value="{{ $unit }}">{{ $drug->piece_unit }}</option>
                             @endif
                             <option value="pcs">pcs</option>
                         </select>
@@ -201,19 +202,23 @@
                     <tbody class="text-gray-700 text-sm font-light">
                         @foreach ($repacks as $number => $item)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-center">{{ $number + 1}}</td>
+                                <td class="py-3 px-6 text-center">{{ $number + 1 }}</td>
                                 <td class="py-3 px-6 text-left">{{ $item->name }}</td>
                                 <td class="py-3 px-6 text-left">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
                                 </td>
                                 <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
                                 <td class="py-3 px-6 text-center">
-                                    <form action="{{ route('master.drug.repack.destroy',[$drug->id,$item->id]) }}" method="post">
+                                    <form action="{{ route('master.drug.repack.destroy', [$drug->id, $item->id]) }}"
+                                        method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('Yakin ingin dihapus?')" type="submit"
                                             class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
-                                            <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z" fill="white"/>
+                                            <svg width="20" height="21" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z"
+                                                    fill="white" />
                                             </svg>
                                         </button>
                                     </form>
@@ -224,4 +229,36 @@
                 </table>
             </div>
         </div>
-    @endsection
+        @session('success')
+            <div id="toast-success"
+                class="fixed right-5 top-5 mb-4 flex w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow light:bg-gray-800 light:text-gray-400"
+                role="alert">
+                <div
+                    class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 light:bg-green-800 light:text-green-200">
+                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="sr-only">Check icon</span>
+                </div>
+                <div class="ml-3 text-sm font-normal">{{ session('success') }}</div>
+                <button type="button" onclick=""
+                    class="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 light:bg-gray-800 light:text-gray-500 light:hover:bg-gray-700 light:hover:text-white"
+                    aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <script>
+            setTimeout(() => {
+                document.getElementById('toast-success').classList.add('hidden');
+            }, 2000);
+        </script>
+    @endsession
+@endsection
