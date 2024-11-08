@@ -145,7 +145,7 @@
                             </div>
                         </div>
                         <button type="submit"
-                            class="bg-indigo-500 w-full mt-6 text-white rounded hover:bg-indigo-700 px-6 py-2">Simpan</button>
+                            class="bg-purple-500 w-full mt-6 text-white rounded hover:bg-purple-700 px-6 py-2">Simpan</button>
                     </div>
                 </div>
                 <div class="mt-6 text-center">
