@@ -26,10 +26,15 @@ class ManufactureController extends Controller
         }
         return back()->with('error','Produsen gagal dibuat');
     }
-    public function update(Request $request, Manufacture $manufactures)
+    public function update(Request $request, Manufacture $manufacture)
     {
-        $manufactures->update($request->all());
-        return redirect()->route('master.manufacture.index')->with('success','Produsen berhasil diubah');
+        // dd($manufacture);
+        try {
+            $manufacture->update($request->all());
+            return redirect()->route('master.manufacture.index')->with('success','Produsen berhasil diubah');
+        } catch (\Throwable $e) {
+            return redirect()->route('master.manufacture.index')->with('error','Produsen gagal diubah');
+        }
     }
     public function destroy(Manufacture $manufacture)
     {
