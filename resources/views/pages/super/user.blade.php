@@ -18,7 +18,7 @@
             <thead>
                 <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
                     <th class="w-1 py-3 px-6 text-center">NO</th>
-                    <th class="w-48 py-3 px-6 text-center">USERNAME</th>
+                    <th class="w-30 py-3 px-6 text-center">USERNAME</th>
                     <th class="w-24 py-3 px-6 text-center">ROLE</th>
                     <th class="w-24 py-3 px-6 text-center">EMAIL</th>
                     <th class="w-48 py-3 px-6 text-center">ACTION</th>
