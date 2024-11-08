@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory\Warehouse;
 use App\Models\Master\Category;
 use App\Models\Master\Drug;
 use App\Models\Master\Manufacture;
@@ -16,7 +17,7 @@ class DrugController extends Controller
     public function getSuggestions(Request $request)
     {
         $query = $request->input('query');
-        $drugs = Drug::where('name', 'like', "%{$query}%")->get();
+        $drugs = Drug::where('name', 'like', "%{$query}%")->with('warehouse')->get();
 
         return response()->json($drugs);
     }
@@ -42,7 +43,7 @@ class DrugController extends Controller
         $drug = Drug::create($request->all());
         $drug->default_repacks();
         $drug->default_stock();
-        return redirect()->route('master.drug.edit', $drug->id);
+        return redirect()->route('master.drug.edit', $drug->id)->with('success', 'Obat berhasil dibuat');
         try {
         } catch (\Throwable $th) {
             return redirect()->route('master.drug.index')->with('error', 'Obat gagal dibuat');

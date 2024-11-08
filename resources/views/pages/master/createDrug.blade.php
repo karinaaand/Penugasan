@@ -4,7 +4,7 @@
 
     <div class="container mx-auto">
     <div class="p-6 bg-white rounded-lg shadow-lg">
-        <form action="{{ route('master.drug.store') }}" method="POST">
+        <form action="{{ route('master.drug.store') }}" id="submitForm" method="POST">
             @csrf
             <div class="grid grid-cols-6 gap-6">
                 <div class="flex flex-wrap col-span-4">
@@ -126,10 +126,28 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6 text-center">
-                <button type="submit" class="bg-purple-500 text-white rounded hover:bg-purple-600 px-6 py-2">Simpan</button>
-            </div>
         </form>
+        <div class="mt-6 text-center">
+            <button onclick="showSubmitModal()" class="bg-purple-500 text-white rounded hover:bg-purple-600 px-6 py-2">Simpan</button>
+        </div>
     </div>
+    <div id="submitModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menambahkan data ini?</p>
+            <div class="flex justify-center space-x-4">
+                <button type="button" onclick="closeSubmitModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Batal</button>
+                <button type="submit" form="submitForm" class="px-4 py-2 bg-purple-500 text-white rounded-lg">Simpan</button>
+            </div>
+        </div>
+    </div>
+@endsection
 
-    @endsection
+<script>
+    function showSubmitModal() {
+        document.getElementById('submitModal').classList.remove('hidden');
+    }
+    function closeSubmitModal() {   
+        document.getElementById('submitModal').classList.add('hidden');
+    }
+</script>
+
