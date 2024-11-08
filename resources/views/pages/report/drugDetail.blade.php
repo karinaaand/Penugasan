@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('container')
+
     <head>
         <title>Laporan Obat</title>
         <script src="https://cdn.tailwindcss.com"></script>
@@ -52,16 +53,17 @@
         </div>
     </div>
     <h2 class="text-xl font-semibold font-inter mb-4">STOK OBAT</h2>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden p-6">
+      <!-- Table Stok Obat -->
+      <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal">
             <thead>
-                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                    <th class="border p-2 text-base font-inter">No</th>
-                    <th class="border p-2 text-base font-inter">Jenis Packaging Obat</th>
-                    <th class="border p-2 text-base font-inter">Margin</th>
-                    <th class="border p-2 text-base font-inter">Stok konversi</th>
-                    <th class="border p-2 text-base font-inter">Harga Jual</th>
-                </tr>
+                    <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                        <th class="border p-2">No</th>
+                        <th class="border p-2">Jenis Packaging Obat</th>
+                        <th class="border p-2">Margin</th>
+                        <th class="border p-2">Stok konversi</th>
+                        <th class="border p-2">Harga Jual</th>
+                    </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-light">
                 @for ($i = 1; $i < 8; $i++)
@@ -80,33 +82,33 @@
             <div class="flex justify-end">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                     <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">
-                        << /a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                    <a href="#"
+                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                    <a href="#"
+                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                    <a href="#"
+                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
                 </nav>
             </div>
         </div>
     </div>
     <h2 class="text-xl font-semibold font-inter my-4 mt-4">KATEGORI BERDASARKAN EXP DATE</h2>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden p-6">
-        <table class="min-w-full leading-normal">
-            <thead>
-                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                    <th class="border p-2 text-base font-inter">No</th>
-                    <th class="border p-2 text-base font-inter">Waktu Expired Obat</th>
-                    <th class="border p-2 text-base font-inter">Kuantiti</th>
-                    <th class="border p-2 text-base font-inter">Action</th>
-                </tr>
-            </thead>
+        <!-- Table berdasarkan exp -->
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full leading-normal">
+                <thead>
+                        <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                            <th class="border p-2">No</th>
+                            <th class="border p-2">Waktu Expired Obat</th>
+                            <th class="border p-2">Kuantiti</th>
+                            <th class="border p-2">Action</th>
+                        </tr>
+                </thead>
             <tbody class="text-gray-700 text-sm font-light">
                 @for ($i = 1; $i < 8; $i++)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
@@ -145,41 +147,40 @@
             <div class="flex justify-end">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                     <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">
-                        << /a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
                 </nav>
             </div>
         </div>
     </div>
     <!-- Tabel Histori Transaksi -->
     <h2 class="text-xl font-inter font-semibold my-4 mt-4">HISTORI TRANSAKSI</h2>
-    <div class="bg-white shadow-md rounded-lg overflow-hidden p-6">
-        <div style="overflow-x: auto;">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <div style="overflow-x: auto;"> <!-- Tambahkan style inline untuk scroll horizontal -->
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
-                        <th class="border p-2 text-base font-inter" rowspan="2">No</th>
-                        <th class="border p-2 text-base font-inter" rowspan="2">Jenis Packaging Obat</th>
-                        <th class="border p-2 text-base font-inter" rowspan="2">Margin</th>
-                        <th class="border p-2 text-base font-inter" rowspan="2">Harga Jual</th>
-                        <th class="border p-2 text-base font-inter" rowspan="2">Kuantiti</th>
-                        <th class="border p-2 text-base font-inter" colspan="3">Status</th>
-                        <th class="border p-2 text-base font-inter" rowspan="2">Subtotal</th>
+                        <th class="border p-2" rowspan="2">No</th>
+                        <th class="border p-2" rowspan="2">Jenis Packaging Obat</th>
+                        <th class="border p-2" rowspan="2">Margin</th>
+                        <th class="border p-2" rowspan="2">Harga Jual</th>
+                        <th class="border p-2" rowspan="2">Kuantiti</th>
+                        <th class="border p-2" colspan="3">Status</th>
+                        <th class="border p-2" rowspan="2">Subtotal</th>
                     </tr>
                     <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
-                        <th class="border p-2 text-base font-inter">Terjual</th>
-                        <th class="border p-2 text-base font-inter">Retur</th>
-                        <th class="border p-2 text-base font-inter">Buang</th>
+                        <th class="border p-2">Terjual</th>
+                        <th class="border p-2">Retur</th>
+                        <th class="border p-2">Buang</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 text-sm font-inter font-light">
@@ -205,18 +206,17 @@
             <div class="flex justify-end">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                     <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">
-                        << /a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                            <a href="#"
-                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                    <a href="#"
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
                 </nav>
             </div>
         </div>
