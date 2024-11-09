@@ -1,114 +1,52 @@
 @extends('layouts.main')
 @section('container')
-
-    <head>
-        <title>List Obat</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    </head>
-    <div class="container mx-auto p-4">
-        <div class="flex items-center mb-4">
-            <a class="text-blue-600 flex items-center mr-4" href="{{ route('clinic.stocks.index') }}">
-                <i class="fas fa-arrow-left mr-2"></i></a>
-            <h1 class="text-2xl font-bold">List Stock Obat</h1>
-        </div>
-    </div>
     <div class="bg-white shadow-md rounded-lg mb-6">
         <div class="bg-gray-200 p-4 rounded-t-lg">
-            <h2 class="font-semibold text-base font-inter">Detail Obat</h2>
+            <h2 class="font-semibold">Detail Obat</h2>
         </div>
         <div class="p-4">
             <table class="w-full">
                 <tbody>
                     <tr class="border-b">
-                        <td class="py-2 text-base font-inter">Nama</td>
-                        <td class="py-2 text-base font-inter">NULL</td>
+                        <td class="py-2">Nama</td>
+                        <td class="py-2">{{ $drug->name }}</td>
                     </tr>
                     <tr class="border-b">
-                        <td class="py-2 text-base font-inter">Kode Obat</td>
-                        <td class="py-2 text-base font-inter">#abc111</td>
+                        <td class="py-2">Kode Obat</td>
+                        <td class="py-2">{{ $drug->code }}</td>
                     </tr>
                     <tr class="border-b">
-                        <td class="py-2 text-base font-inter">Jenis</td>
-                        <td class="py-2 text-base font-inter">NULL</td>
+                        <td class="py-2">Jenis</td>
+                        <td class="py-2">{{ $drug->variant()->name }}</td>
                     </tr>
                     <tr class="border-b">
-                        <td class="py-2 text-base font-inter">Kategori</td>
-                        <td class="py-2 text-base font-inter">NULL</td>
+                        <td class="py-2">Kategori</td>
+                        <td class="py-2">{{ $drug->category()->name }}</td>
                     </tr>
                     <tr class="border-b">
-                        <td class="py-2 text-base font-inter">Produsen</td>
-                        <td class="py-2 text-base font-inter">NULL</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="py-2 text-base font-inter">Vendor</td>
-                        <td class="py-2 text-base font-inter">NULL</td>
+                        <td class="py-2">Produsen</td>
+                        <td class="py-2">{{ $drug->manufacture()->name }}</td>
                     </tr>
                     <tr>
-                        <td class="py-2 text-base font-inter">Sisa</td>
-                        <td class="py-2 text-base font-inter">123</td>
+                        <td class="py-2">Sisa</td>
+                        <td class="py-2">{{ $stock->quantity / $drug->piece_netto }} pcs</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <h2 class="text-xl font-semibold font-inter mb-4">STOK OBAT</h2>
-      <!-- Table Stok Obat -->
-      <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <h2 class="text-xl font-semibold font-inter my-4 mt-4">KATEGORI BERDASARKAN EXP DATE</h2>
+    <!-- Table berdasarkan exp -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal">
             <thead>
-                    <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                        <th class="border p-2">No</th>
-                        <th class="border p-2">Jenis Packaging Obat</th>
-                        <th class="border p-2">Margin</th>
-                        <th class="border p-2">Stok konversi</th>
-                        <th class="border p-2">Harga Jual</th>
-                    </tr>
+                <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                    <th class="border p-2">No</th>
+                    <th class="border p-2">Waktu Expired Obat</th>
+                    <th class="border p-2">Kuantiti</th>
+                    <th class="border p-2">Action</th>
+                </tr>
             </thead>
-            <tbody class="text-gray-700 text-sm font-light">
-                @for ($i = 1; $i < 8; $i++)
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-center text-base font-inter">{{ $i }}</td>
-                        <td class="py-3 px-6 text-center text-base font-inter">Antibiotik (100ml)</td>
-                        <td class="py-3 px-6 text-center text-base font-inter">15%</td>
-                        <td class="py-3 px-6 text-center text-base font-inter">100</td>
-                        <td class="py-3 px-6 text-center text-base font-inter">15.000</td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>
-        <div class="flex justify-end items-center mt-4 gap-4">
-            <div class="text-sm">Showing 1 to 10 of 50 entries</div>
-            <div class="flex justify-end">
-                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                    <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                    <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                    <a href="#"
-                            class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <h2 class="text-xl font-semibold font-inter my-4 mt-4">KATEGORI BERDASARKAN EXP DATE</h2>
-        <!-- Table berdasarkan exp -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full leading-normal">
-                <thead>
-                        <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                            <th class="border p-2">No</th>
-                            <th class="border p-2">Waktu Expired Obat</th>
-                            <th class="border p-2">Kuantiti</th>
-                            <th class="border p-2">Action</th>
-                        </tr>
-                </thead>
             <tbody class="text-gray-700 text-sm font-light">
                 @for ($i = 1; $i < 8; $i++)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
@@ -147,17 +85,18 @@
             <div class="flex justify-end">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                     <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">
+                        << /a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
                 </nav>
             </div>
         </div>
@@ -206,17 +145,18 @@
             <div class="flex justify-end">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                     <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                    <a href="#"
-                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
+                        class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100">
+                        << /a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
+                            <a href="#"
+                                class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
                 </nav>
             </div>
         </div>
