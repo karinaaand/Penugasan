@@ -36,7 +36,7 @@ class UserController extends Controller
         }
     }
     public function logout(){
-        return view('login',["title"=>"Login"]);
+        return redirect()->route('user.login');
     }
     public function forgot(Request $request){
         if($request->isMethod("get")){
