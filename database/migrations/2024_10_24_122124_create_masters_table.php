@@ -4,6 +4,8 @@ use App\Models\Master\Category;
 use App\Models\Master\Drug;
 use App\Models\Master\Manufacture;
 use App\Models\Master\Variant;
+use App\Models\Transaction\Transaction;
+use App\Models\Transaction\TransactionDetail;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -40,6 +42,7 @@ return new class extends Migration
             $table->foreignIdFor(Category::class)->constrained()->onDelete('restrict');
             $table->foreignIdFor(Variant::class)->constrained()->onDelete('restrict');
             $table->foreignIdFor(Manufacture::class)->constrained()->onDelete('restrict');
+            $table->foreignId('used')->nullable();
             $table->string('name');
             $table->char('code','6')->unique();
             $table->integer('last_price')->nullable();

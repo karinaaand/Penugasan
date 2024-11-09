@@ -32,6 +32,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Transaction::class);
             $table->foreignIdFor(Drug::class);
+            $table->integer('stock');
+            $table->boolean('used');
+            $table->date('expired');
             $table->string('quantity');
             $table->integer('piece_price');
             $table->integer('total_price');

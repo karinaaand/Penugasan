@@ -4,6 +4,7 @@ namespace App\Models\Master;
 
 use App\Models\Inventory\Clinic;
 use App\Models\Inventory\Warehouse;
+use App\Models\Transaction\TransactionDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,9 @@ class Drug extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function used(){
+        return $this->hasOne(TransactionDetail::class,'transaction_detail_id','used');
+    }
     public function category(){
         return $this->belongsTo(Category::class)->first();
     }

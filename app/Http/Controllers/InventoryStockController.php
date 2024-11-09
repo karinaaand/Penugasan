@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory\Warehouse;
 use App\Models\Master\Drug;
+use App\Models\Transaction\Transaction;
+use App\Models\Transaction\TransactionDetail;
 use Illuminate\Http\Request;
 
 class InventoryStockController extends Controller
@@ -19,7 +21,9 @@ class InventoryStockController extends Controller
         $judul = "Stok ".$stock->name;
         $drug = $stock;
         $stock = Warehouse::where('drug_id',$drug->id)->first();
-        return view("pages.inventory.stockDetail",compact('drug','stock','judul'));
+        $inflow = Transaction::where('variant','LPB')->pluck('id');
+        $details = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->paginate(10,['*'],'expired');
+        return view("pages.inventory.stockDetail",compact('drug','stock','judul','details'));
     }
     public function destroy(string $id)
     {

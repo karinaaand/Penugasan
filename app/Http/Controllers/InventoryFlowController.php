@@ -50,9 +50,11 @@ class InventoryFlowController extends Controller
                 "transaction_id"=>$transaction->id,
                 "drug_id"=>Drug::where('name',$item->name)->first()->id,
                 "quantity"=>$item->quantity." " . $item->unit,
+                "stock"=>$item->quantity,
+                "expired"=>$item->expired,
                 "piece_price"=>$item->piece_price,
                 "total_price"=>$item->price,
-                
+                "used"=>false
             ]);
             $drug = $detail->drug();
             if($item->unit=="pcs"){
@@ -76,11 +78,24 @@ class InventoryFlowController extends Controller
             };
             $stock = Warehouse::where('drug_id',$drug->id)->first();
             $stock->quantity = $stock->quantity + $quantity;
+            $detail->stock = $quantity;
+            $detail->save();
             if ($stock->oldest == null) {
                 $stock->oldest = $item->expired;
                 $stock->latest = $item->expired;
+                $drug->used = $detail->id;
+                $detail->used = true;
+                $detail->save();
+                $drug->save();
             }else{
                 if ($stock->oldest > $item->expired) {
+                    $old = TransactionDetail::find($drug->used);
+                    $old->used = false;
+                    $old->save();
+                    $drug->used = $detail->id;
+                    $detail->used = true;
+                    $detail->save();
+                    $drug->save();
                     $stock->oldest = $item->expired;
                 }
                 if ($stock->latest < $item->expired) {
