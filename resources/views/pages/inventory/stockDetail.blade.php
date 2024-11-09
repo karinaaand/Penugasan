@@ -1,16 +1,6 @@
 @extends('layouts.main')
 @section('container')
 <div class="p-6 bg-white rounded-lg shadow-lg">
-    <head><title>List Stok Obat</title>
-     <script src="https://cdn.tailwindcss.com"></script>
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/></head>
-        <div class="container mx-auto p-4">
-            <div class="flex items-center mb-4">
-                <a class="text-blue-600 flex items-center mr-4" href="{{ route('inventory.stocks.index') }}">
-                    <i class="fas fa-arrow-left mr-2"></i></a>
-                <h1 class="text-2xl font-bold">List Stok Obat</h1>
-            </div>
-      </div>
       <div class="bg-white shadow-md rounded-lg mb-6">
        <div class="bg-gray-200 p-4 rounded-t-lg">
         <h2 class="font-semibold">Detail Obat</h2>
@@ -73,20 +63,6 @@
             </tbody>
         </table>
     </div>
-    <div class="flex justify-end items-center mt-4 gap-4">
-        <div class="text-sm">Showing 1 to 10 of 50 entries</div>
-            <!-- Pagination -->
-            <div class="flex justify-end">
-                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                    <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
-                </nav>
-            </div>
-        </div>
     <h2 class="text-xl font-semibold mb-4">KATEGORI BERDASARKAN EXP DATE</h2>
            <!-- Table berdasarkan exp -->
            <div class="bg-white shadow-md rounded-lg overflow-hidden">

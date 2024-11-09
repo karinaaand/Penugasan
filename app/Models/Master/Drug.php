@@ -23,17 +23,20 @@ class Drug extends Model
     public function repacks(){
         return $this->hasMany(Repack::class)->get();
     }
+    public function warehouse(){
+        return $this->hasOne(Warehouse::class);
+    }
     public function default_repacks(){
         Repack::create([
             "drug_id"=>$this->id,
-            "name"=>$this->name." 1 Pack",
+            "name"=>$this->name." 1 pack",
             "quantity"=> $this->piece_quantity*$this->piece_netto,
             "margin"=>$this->pack_margin,
             "price"=>$this->calculate_price($this->piece_quantity*$this->piece_netto,$this->pack_margin)
         ]);
         Repack::create([
             "drug_id"=>$this->id,
-            "name"=>$this->name." 1 Pcs",
+            "name"=>$this->name." 1 pcs",
             "quantity"=> $this->piece_netto,
             "margin"=>$this->piece_margin,
             "price"=>$this->calculate_price($this->piece_netto,$this->piece_margin)
@@ -48,9 +51,6 @@ class Drug extends Model
             "drug_id"=>$this->id,
             "quantity"=> 0,
         ]);
-    }
-    public function update_repacks(){
-        return $this->hasMany(Repack::class)->get();
     }
 
     public function calculate_price(int $quantity,int $margin){

@@ -39,8 +39,8 @@
                         <table class="w-full">
                             <tbody>
                                 <tr>
-                                    <td rowspan="3" class="w-44">Konversi</td>
-                                    <td class="py-2 pe-24">
+                                    <td rowspan="3" class="w-48">Konversi</td>
+                                    <td class="py-2 pe-24 pl-2">
                                         <div class="flex">
                                             <input value="{{ $drug->pack_quantity }}" type="number" id="pack_quantity"
                                                 name="pack_quantity"
@@ -52,7 +52,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="py-2 pe-24">
+                                    <td class="py-2 pe-24 pl-2">
                                         <div class="flex">
                                             <input value="{{ $drug->pack_margin }}" type="number" id="pack_margin"
                                                 name="pack_margin"
@@ -66,7 +66,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="py-2 pe-24">
+                                    <td class="py-2 pe-24 pl-2">
                                         <div class="flex">
                                             <input value="{{ $drug->piece_quantity }}" type="number" id="piece_quantity"
                                                 name="piece_quantity"
@@ -78,7 +78,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="py-2 pe-24">
+                                    <td class="py-2 pe-24 pl-2">
                                         <div class="flex">
                                             <input value="{{ $drug->piece_margin }}" type="number" id="piece_margin"
                                                 name="piece_margin"
@@ -92,7 +92,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="py-2 pe-24">
+                                    <td class="py-2 pe-24 pl-2">
                                         <span class="text-xs italic text-gray-400">Netto</span>
                                         <div class="flex">
                                             <input disabled value="{{ $drug->piece_netto }}" type="number"
@@ -124,7 +124,7 @@
                                     Rp
                                 </span>
                                 <input value="{{ $drug->last_price }}" type="number" id="last_price" name="last_price"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-40 text-sm p-2.5"
                                     placeholder="Inputkan harga">
                                 <span
                                     class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -168,10 +168,10 @@
                         <select id="piece_unit" name="piece_unit"
                             class="border border-gray-300 rounded-e-lg p-2 text-gray-900 bg-gray-50">
                             <option>Satuan</option>
-                            @if ($unit = $drug->piece_unit != 'butir')
-                                <option value="{{ $unit }}">{{ $drug->piece_unit }}</option>
+                            @if ($drug->piece_unit != 'butir')
+                                <option value="{{ $drug->piece_unit }}">{{ $drug->piece_unit }}</option>
                             @else
-                                <option value="{{ $unit }}">{{ $drug->piece_unit }}</option>
+                                <option value="{{ $drug->piece_unit }}">{{ $drug->piece_unit }}</option>
                             @endif
                             <option value="pcs">pcs</option>
                         </select>

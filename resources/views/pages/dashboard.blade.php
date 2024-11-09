@@ -23,7 +23,7 @@
                             <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
                         </div>
                     </div>
-                    <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
+                    <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
                 </li>
                 <li class="notification-item all jatuh-tempo flex items-center justify-between px-4 py-2 rounded-lg">
                     <div class="flex items-center">
@@ -35,7 +35,7 @@
                             <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
                         </div>
                     </div>
-                    <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
+                    <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
                 </li>
                 <li class="notification-item all stok flex items-center justify-between px-4 py-2 rounded-lg">
                     <div class="flex items-center">
@@ -47,7 +47,7 @@
                             <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
                         </div>
                     </div>
-                    <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Stok Menipis</span>
+                    <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Stok Menipis</span>
                 </li>
                 <li class="notification-item all expired flex items-center justify-between px-4 py-2 rounded-lg">
                     <div class="flex items-center">

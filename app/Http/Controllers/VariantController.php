@@ -36,9 +36,9 @@ class VariantController extends Controller
     {
         try {
             $variant->delete();
-            return back()->with('success', 'Kategori berhasil dihapus');
+            return back()->with('success', 'Jenis obat berhasil dihapus');
         } catch (\Throwable $e) {
-            return back()->with('error', 'Kategori gagal dihapus');
+            return back()->with('error', 'Jenis obat gagal dihapus');
         }
     }
 }

@@ -50,8 +50,8 @@
                     <table class="w-full">
                         <tbody>
                             <tr>
-                                <td rowspan="3" class="w-44">Konversi</td>
-                                <td class="py-2 pe-24">
+                                <td rowspan="3" class="w-48">Konversi</td>
+                                <td class="py-2 pe-24 pl-2">
                                     <div class="flex">
                                         <input type="number" id="pack_quantity" name="pack_quantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -69,7 +69,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="py-2 pe-24">
+                                <td class="py-2 pe-24 pl-2">
                                     <div class="flex">
                                         <input type="number" id="piece_quantity" name="piece_quantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -87,7 +87,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="py-2 pe-24">
+                                <td class="py-2 pe-24 pl-2">
                                     <span class="text-xs italic text-gray-400">Netto</span>
                                     <div class="flex">
                                         <input type="number" id="piece_netto" name="piece_netto" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="Margin">
@@ -109,7 +109,7 @@
                             <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
                               Rp
                             </span>
-                            <input type="number" id="last_price" name="last_price" class="bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="Inputkan harga">
+                            <input type="number" id="last_price" name="last_price" class="bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-40 text-sm p-2.5" placeholder="Inputkan harga">
                             <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
                               / pcs
                             </span>
