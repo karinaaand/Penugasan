@@ -1,422 +1,173 @@
 @extends('layouts.main')
 @section('container')
-        <div class="bg-white p-8 rounded-lg border-2 border-gray-200 shadow-lg mb-8">
-            <div class="mb-4 flex justify-center">
-                <input type="text" placeholder="Inputkan nama" class="w-1/2 p-2 border-2 border-purple-400 rounded-md focus:outline-none focus:border-purple-600">
+    <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+            <input type="hidden" name="code">
+            <input type="text" id="drugInput" name="drug" class="w-full rounded border border-gray-300 p-2"
+                placeholder="Inputkan nama obat" autocomplete="off">
+            <ul id="suggestions" class="absolute mt-10 border border-gray-300 bg-white rounded hidden"></ul>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="flex">
+                    <input type="number" max="1" id="quantity" name="quantity"
+                    class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                    placeholder="0">
+                    <span
+                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
+                    pcs
+                </span>
             </div>
-            <div class="mb-4 flex justify-center">
-                <input type="text" placeholder="Inputkan jumlah" class="w-1/6 p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-gray-400 text-center">
+            <div class="flex">
+                <span
+                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
+                    Sisa
+                </span>
+                <input disabled type="number" id="sisa" name="sisa"
+                    class="rounded-none bg-gray-100 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                    placeholder="0">
+                <span
+                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
+                    pcs
+                </span>
             </div>
-            <div class="flex  justify-center mt-16">
-                <button onclick="showToast()"  class="w-1/4 bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600">SIMPAN</button>
-            </div>
-            <div id="toast-success" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                    </svg>
-                    <span class="sr-only">Check icon</span>
-                </div>
-                <div class="ml-3 text-sm font-normal">Berhasil disimpan.</div>
-                <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
+            <button onclick="addStuff()" class="rounded-lg bg-purple-500 py-2 text-white hover:bg-purple-600">
+                    Tambah
                 </button>
             </div>
         </div>
+    </div>
 
-        <div class="bg-white p-8 rounded-lg border-2 border-gray-200 shadow-lg mb-8">
-            <div class="mb-4 flex justify-end">
-                <input type="text" placeholder="Pencarian obat" class="w-1/3 p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-gray-400">
-            </div>
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <table class="min-w-full leading-normal">
+    <div class="w-full flex justify-end mt-8">
+        <button onclick="submitForm()" class="rounded-lg bg-green-500 py-2 px-4 text-white hover:bg-green-600">
+            Save
+        </button>
+    </div>
+    <div class="bg-white p-8 rounded-lg border-2 border-gray-200 shadow-lg mt-4">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full leading-normal">
                 <thead>
                     <tr class="bg-gray-200 text-center">
                         <th class="p-2 text-center">NO</th>
-                        <th class="p-2 text-center">#</th>
+                        <th class="p-2 text-center">KODE OBAT</th>
                         <th class="p-2 text-center">NAMA OBAT</th>
                         <th class="p-2 text-center">JUMLAH</th>
-                        <th class="p-2 text-center">EXPIRED</th>
                         <th class="p-2 text-center">ACTION</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">1</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">2</td>
-                        <td class="p-2 text-center  text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">3</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">4</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">5</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">6</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">7</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">8</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">9</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
-                    <tr class="border-b text-center">
-                        <td class="p-2 text-center">10</td>
-                        <td class="p-2 text-center text-blue-500">#aaa1111</td>
-                        <td class="p-2 text-center">Jordan Stevenson</td>
-                        <td class="p-2 text-center">111</td>
-                        <td class="p-2 text-center">22 Oct 2019</td>
-                        <td class="p-2 text-center">
-                            <div class="flex items-center justify-center">
-                                <button onclick="showDeleteToast()" class="bg-red-500 text-white p-2 rounded-xl">
-                                    <i class="fas fa-trash"></i>
-                                    <img src="{{ asset('assets/Vector sampah.png') }}" alt="Deskripsi Gambar" class="inline-block" style="height: 20px; width: 20px; vertical-align: middle;">
-                                </button>
-                            </div>
-                        </td>
-
-                        <div id="toast-delete" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                                </svg>
-                                <span class="sr-only">Check icon</span>
-                            </div>
-                            <div class="ml-3 text-sm font-normal">Berhasil dihapus.</div>
-                            <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </tr>
+                <tbody id="drugTable">                        
+                    
                 </tbody>
             </table>
-            </div>
-            <div class="flex flex-col items-end mt-4">
-                <div class="flex justify-end items-center mt-4 gap-4">
-                    <div class="text-sm">Showing 1 to 10 of 50 entries</div>
-                        <!-- Pagination -->
-                        <div class="flex justify-end">
-                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-l-md hover:bg-gray-100"><</a>
-                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">1</a>
-                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">2</a>
-                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">...</a>
-                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">10</a>
-                                <a href="#" class="px-3 py-2 border border-gray-300 bg-white text-gray-500 rounded-r-md hover:bg-gray-100">></a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-end mt-4 gap-4">
-                    <button onclick="showToast()" class="bg-green-500 text-white px-12 py-2 rounded-lg hover:bg-green-600">SAVE</button>
-                </div>
-                <div id="toast-success" class="hidden fixed flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 top-5 right-5" role="alert">
-                    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                        </svg>
-                        <span class="sr-only">Check icon</span>
-                    </div>
-                    <div class="ml-3 text-sm font-normal">Berhasil disimpan.</div>
-                    <button type="button" onclick="hideToast()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" aria-label="Close">
-                        <span class="sr-only">Close</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- JavaScript for showing and hiding the toast -->
-                <script>
-                    function showToast() {
-                        const toast = document.getElementById('toast-success');
-                        toast.classList.remove('hidden'); // Show success toast
-                        setTimeout(() => {
-                            hideToast(); // Automatically hide after 3 seconds
-                        }, 3000);
-                    }
-
-                    function showDeleteToast() {
-                        const toastDelete = document.getElementById('toast-delete');
-                        toastDelete.classList.remove('hidden'); // Show delete toast
-                        setTimeout(() => {
-                            hideToast(); // Automatically hide after 3 seconds
-                        }, 3000);
-                    }
-
-                    function hideToast() {
-                        document.getElementById('toast-success').classList.add('hidden'); // Hide success toast
-                        document.getElementById('toast-delete').classList.add('hidden'); // Hide delete toast
-                    }
-                </script>
-
-            </div>
         </div>
     </div>
+    </div>
+    <form action="{{ route('clinic.inflows.store') }}" method="POST">
+        @csrf
+        <input type="text" name="transaction">
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const drugInput = document.querySelector("input[name='drug']")
+            let timeout = null;
+    
+            drugInput.addEventListener('input', function() {
+                clearTimeout(timeout);
+                const query = this.value;
+    
+                // Tunda 500 ms sebelum kirim permintaan
+                timeout = setTimeout(() => {
+                    if (query.length > 0) {
+                        fetch(`/drug-suggestions?query=${query}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const suggestions = document.getElementById('suggestions');
+                                suggestions.innerHTML = '';
+    
+                                if (data.length > 0) {
+                                    suggestions.classList.remove('hidden');
+                                    data.forEach(item => {
+                                        const option = document.createElement('li');
+                                        option.textContent = `${item.name}`;
+                                        option.classList.add('p-2', 'cursor-pointer',
+                                            'hover:bg-gray-100');
+                                        option.addEventListener('click', () => {
+                                            document.getElementById('drugInput')
+                                                .value = item.name;
+                                            suggestions.classList.add('hidden');
+                                            document.querySelector("input[name='code']").value = item.code
+                                            document.querySelector("input[name='sisa']").value = Math.floor(item.warehouse.quantity/item.piece_netto);
+                                            document.querySelector("input[name='quantity']").setAttribute('max',Math.floor(item.warehouse.quantity/item.piece_netto))    
+                                        });
+                                        suggestions.appendChild(option);
+                                    });
+                                } else {
+                                    suggestions.classList.add('hidden');
+                                }
+                            });
+                    } else {
+                        document.getElementById('suggestions').classList.add('hidden');
+                    }
+                }, 400);
+            });
+    
+        });
+        let data = []
+        function addStuff() {
+        let code = document.querySelector("input[name='code']")
+        let drug = document.querySelector("input[name='drug']")
+        let quantity = document.querySelector("input[name='quantity']")
+        let input = [code,drug,quantity]
+        let datainput = input.map(e => e.value)
+        const status = true
+        datainput.forEach(e => {
+            if (e == "") {
+                status = false
+            }
+        });
+        if (status) {
+            data.push(datainput)
+            draw()
+            input.forEach(e => {
+                e.value = null
+            });
+        }
+    }
+    function draw() {
+        document.querySelector("#drugTable").innerHTML = ""
+        data.forEach((e, i) => {
+            document.querySelector("#drugTable").innerHTML += row(e, i)
+        });
+    }
+    function row(datainput, i) {
+        [code,drug,quantity] = datainput
+        return `<tr class="border-b text-center">
+                        <td class="p-2 text-center">${i}</td>
+                        <td class="p-2 text-center text-blue-500">${code}</td>
+                        <td class="p-2 text-center">${drug}</td>
+                        <td class="p-2 text-center">${quantity}</td>
+                        <td class="py-2">
+                            <button onclick="deleteItem(${i})" class="rounded-md bg-red-500 p-1">
+                                <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z"
+                                    fill="white" />
+                            </svg>
+                            </button>
+                        </td>
+                    </tr>`
+    }
+    function deleteItem(index) {
+        data.splice(index, 1)
+        draw()
+    }
+    function submitForm() {
+        data = data.map(function(e) {
+            return {
+                name: e[1],
+                quantity: parseInt(e[2]),
+            };
+        });
+        document.querySelector("input[name='transaction']").value = JSON.stringify(data)
+        document.querySelector("form").submit()
+    }
+    </script>
 @endsection

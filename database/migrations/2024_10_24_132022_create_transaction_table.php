@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Vendor::class)->nullable();
             $table->enum('destination',['customer','clinic','warehouse']);
             $table->enum('method',['credit','cash'])->nullable();
-            $table->enum('variant',['LPB','LPB-K','Checkout',''])->nullable();
+            $table->enum('variant',['LPB','LPK','Checkout','Trash'])->nullable();
             $table->integer('income')->nullable();
             $table->integer('outcome')->nullable();
             $table->integer('profit')->nullable();

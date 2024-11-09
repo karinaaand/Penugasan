@@ -22,7 +22,7 @@ class Transaction extends Model
     {
         match ($this->variant) {
             "LPB" => $pre = "LPB",
-            "LPB-K" => $pre = "LPK",
+            "LPK" => $pre = "LPK",
             "Checkout" => $pre = "CHO",
             "Trash" => $pre = "TRS",
         };
