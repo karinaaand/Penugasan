@@ -1,34 +1,28 @@
 @extends('layouts.form')
 @section('container')
-    <div class="w-96 rounded-xl p-12 shadow-lg ring-black">
-        <h1 class="mb-8 text-center text-3xl font-bold">Forgot Password</h1>
-        <form action="">
-            <div class="mb-5">
-                <label for="email" class="mb-2 block text-sm font-medium text-gray-900">Your email</label>
-                <input
-                    type="email"
-                    id="email"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="name@flowbite.com"
-                    required
-                />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+    <h2 class="mb-6 text-2xl font-semibold text-center text-gray-800">Sign in</h2>
+    <form>
+        <div class="mb-4">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="email">Email or username</label>
+            <input class="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="email" name="email">
+        </div>
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-medium text-gray-700" for="password">Your password</label>
+                <span class="flex items-center text-sm leading-5 text-gray-500 cursor-pointer">
+                    <i class="fas fa-eye-slash mr-2"></i> Hide
+                </span>
             </div>
-            <div class="mb-5">
-                <label for="email" class="mb-2 block text-sm font-medium text-gray-900">Your password</label>
-                <input
-                    type="passsword"
-                    id="email"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="name@flowbite.com"
-                    required
-                />
-            </div>
-            <button type="submit" class="w-full rounded-full bg-lavender py-2 text-white hover:bg-lavender-700">
-                Log In
-            </button>
-            <h1 class="mt-3 text-center">
-                <a href="{{ route('user.forgot') }}" class="m-auto text-center text-xs hover:underline">Lupa sandi?</a>
-            </h1>
-        </form>
+            <input class="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" id="password" name="password">
+        </div>
+        <button class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" type="submit">Log in</button>
+    </form>
+    <div class="mt-4 text-center">
+        <a class="text-sm font-medium text-gray-700 hover:underline" href="{{ route('user.forgot') }}">Forget your password</a>
     </div>
+</div>
+
 @endsection
+
