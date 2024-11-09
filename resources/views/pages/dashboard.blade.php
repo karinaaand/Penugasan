@@ -140,10 +140,10 @@ function filterNotifications(category, button) {
             });
 
             buttons.forEach(btn => {
-                btn.classList.remove('bg-blue-500', 'text-white', 'translate-y-[-2px]');
+                btn.classList.remove('bg-blue-500', 'text-white', 'translate-y-[-10px]');
                 btn.classList.add('bg-gray-200', 'text-gray-700');
             });
-            button.classList.add('bg-blue-500', 'text-white', 'translate-y-[-2px]');
+            button.classList.add('bg-blue-500', 'text-white', 'translate-y-[-10px]');
             button.classList.remove('bg-gray-200', 'text-gray-700');
         }
 
