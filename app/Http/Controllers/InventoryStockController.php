@@ -22,23 +22,27 @@ class InventoryStockController extends Controller
         $drug = $stock;
         $stock = Warehouse::where('drug_id',$drug->id)->first();
         $inflow = Transaction::where('variant','LPB')->pluck('id');
-        $details = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->paginate(10,['*'],'expired');
-        return view("pages.inventory.stockDetail",compact('drug','stock','judul','details'));
+        $details = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->whereNot('stock',0)->orderBy('expired')->paginate(10,['*'],'expired');
+        $transactions = TransactionDetail::with('transaction')->where('drug_id',$drug->id)->orderBy('created_at')->paginate(5,['*'],'transaction');
+        return view("pages.inventory.stockDetail",compact('drug','stock','judul','details','transactions'));
     }
     public function destroy(string $id)
     {
         //
     }
-    public function retur(Request $request,string $batch)
+    public function retur(Request $request,TransactionDetail $batch)
     {
         if($request->isMethod('get')){
-            return view("pages.inventory.retur");
+            return view("pages.inventory.retur",compact('batch'));
         }
     }
-    public function trash(Request $request,string $batch)
+    public function trash(Request $request,TransactionDetail $batch)
     {
+        $judul = "Buang Obat ". $batch->drug()->name;
         if($request->isMethod('get')){
-            return view("pages.inventory.trash");
+            return view("pages.inventory.trash",compact('batch','judul'));
+        }elseif($request->isMethod('post')){
+
         }
     }
 }

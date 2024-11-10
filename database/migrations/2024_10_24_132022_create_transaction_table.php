@@ -4,6 +4,7 @@ use App\Models\Master\Drug;
 use App\Models\Master\Repack;
 use App\Models\Master\Vendor;
 use App\Models\Transaction\Transaction;
+use App\Models\Transaction\TransactionDetail;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(Vendor::class)->nullable();
             $table->enum('destination',['customer','clinic','warehouse']);
             $table->enum('method',['credit','cash'])->nullable();
-            $table->enum('variant',['LPB','LPK','Checkout','Trash'])->nullable();
+            $table->enum('variant',['LPB','LPK','Checkout','Trash','Retur'])->nullable();
             $table->integer('income')->nullable();
             $table->integer('outcome')->nullable();
             $table->integer('profit')->nullable();
@@ -32,9 +33,11 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Transaction::class);
             $table->foreignIdFor(Drug::class);
-            $table->integer('stock');
-            $table->boolean('used');
+            $table->integer('stock')->nullable();
+            $table->boolean('used')->nullable();
+            $table->boolean('margin')->nullable();
             $table->date('expired');
+            $table->string('name');
             $table->string('quantity');
             $table->integer('piece_price');
             $table->integer('total_price');
@@ -52,7 +55,8 @@ return new class extends Migration
         Schema::create('returs',function(Blueprint $table){
             $table->id();
             $table->foreignIdFor(Drug::class);
-            $table->foreignIdFor(Vendor::class);
+            $table->foreignIdFor(Transaction::class);
+            $table->foreignIdFor(TransactionDetail::class);
             $table->integer('quantity');
             $table->enum('status',['Belum Bayar','Done']);
             $table->text('reason')->nullable();
@@ -63,7 +67,8 @@ return new class extends Migration
         Schema::create('trashes',function(Blueprint $table){
             $table->id();
             $table->foreignIdFor(Drug::class);
-            $table->foreignIdFor(Vendor::class);
+            $table->foreignIdFor(Transaction::class);
+            $table->foreignIdFor(TransactionDetail::class);
             $table->integer('quantity');
             $table->text('reason')->nullable();
             $table->timestamps();

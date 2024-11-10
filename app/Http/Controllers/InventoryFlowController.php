@@ -45,10 +45,11 @@ class InventoryFlowController extends Controller
             ]);
         };
         foreach ($datas as $item) {
-            // dd($item);
+            $drug = Drug::where('name',$item->name)->first();
             $detail = TransactionDetail::create([
                 "transaction_id"=>$transaction->id,
-                "drug_id"=>Drug::where('name',$item->name)->first()->id,
+                "drug_id"=>$drug->id,
+                "name"=>$drug->name." 1 ". $item->unit,
                 "quantity"=>$item->quantity." " . $item->unit,
                 "stock"=>$item->quantity,
                 "expired"=>$item->expired,
@@ -56,7 +57,6 @@ class InventoryFlowController extends Controller
                 "total_price"=>$item->price,
                 "used"=>false
             ]);
-            $drug = $detail->drug();
             if($item->unit=="pcs"){
                 $newPrice = $item->piece_price;
             }elseif($item->unit=="pack"){

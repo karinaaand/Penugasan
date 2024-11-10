@@ -25,6 +25,7 @@ class Transaction extends Model
             "LPK" => $pre = "LPK",
             "Checkout" => $pre = "CHO",
             "Trash" => $pre = "TRS",
+            "Retur" => $pre = "RTR",
         };
         $count = Transaction::where('variant', $this->variant)->get()->count();
         $date = now()->format('ymd');

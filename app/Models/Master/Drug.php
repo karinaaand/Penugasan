@@ -4,6 +4,7 @@ namespace App\Models\Master;
 
 use App\Models\Inventory\Clinic;
 use App\Models\Inventory\Warehouse;
+use App\Models\Transaction\Transaction;
 use App\Models\Transaction\TransactionDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ class Drug extends Model
     use HasFactory;
     protected $guarded = [];
     public function used(){
-        return $this->hasOne(TransactionDetail::class,'transaction_detail_id','used');
+        return $this->hasOne(TransactionDetail::class,'id','used')->first();
     }
     public function category(){
         return $this->belongsTo(Category::class)->first();
@@ -69,5 +70,16 @@ class Drug extends Model
     }
     public function getPackPriceAttribute(){
         return $this->piece_quantity*$this->last_price;
+    }
+    public function nextStock(){
+        $inflow = Transaction::where('variant','LPB')->pluck('id');
+        $details = TransactionDetail::where('drug_id',$this->id)->whereIn('transaction_id',$inflow)->whereNot('stock',0)->orderBy('expired')->first();
+        $used = $this->used();
+        $used->used = false;
+        $used->save();
+        $this->used = $details->id;
+        $used = $this->used();
+        $used->used = true;
+        $used->save();
     }
 }

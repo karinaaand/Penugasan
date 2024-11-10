@@ -14,4 +14,7 @@ class TransactionDetail extends Model
     public function drug(){
         return $this->belongsTo(Drug::class)->first();
     }
+    public function transaction(){
+        return $this->belongsTo(Transaction::class);
+    }
 }

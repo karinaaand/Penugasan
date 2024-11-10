@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory\Warehouse;
+use App\Models\Transaction\Transaction;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
     public function drugs(){
-        return view("pages.report.drug");    }
-    public function drug(){
-        return view("pages.report.drugDetail");
+        $judul = "Laporan Obat";
+        $stocks = Warehouse::paginate(5);
+        return view("pages.report.drug",compact('judul','stocks'));    
     }
     public function drugPrint(){
 
     }
     public function transactions(){
-        return view("pages.report.transaction");
-    }
-    public function transaction(){
-        return view("pages.report.transactionDetail");
+        $judul = "Laporan Transaksi";
+        $transactions = Transaction::paginate(1);
+        return view("pages.report.transaction",compact('judul','transactions'));
     }
     public function transactionPrint(){
 
