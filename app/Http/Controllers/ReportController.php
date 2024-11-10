@@ -18,7 +18,7 @@ class ReportController extends Controller
     }
     public function transactions(){
         $judul = "Laporan Transaksi";
-        $transactions = Transaction::paginate(1);
+        $transactions = Transaction::paginate(10);
         return view("pages.report.transaction",compact('judul','transactions'));
     }
     public function transactionPrint(){
