@@ -71,7 +71,7 @@
         <div class="mt-8">
             <div class="flex justify-between mb-4">
                     <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-                    <button onclick="confirmSave()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
+                    <button onclick="submitForm()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
                         SAVE
                     </button>
                 </div>
