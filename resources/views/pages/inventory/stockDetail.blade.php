@@ -1,5 +1,14 @@
 @php
     use Carbon\Carbon;
+    function getStatus(string $variant){
+        match ($variant) {
+            "LPB" => $status = "Masuk",
+            "LPK" => $status = "Klinik",
+            "Checkout" => $status = "Keluar",
+            "Trash" => $status = "Buang",
+        };
+        return $status;
+    }
 @endphp
 @extends('layouts.main')
 @section('container')
@@ -87,7 +96,7 @@
                     <td class="py-3 px-6 text-center">{{ floor($item->stock/$item->drug()->piece_netto) }}</td>
                     <td class="py-3 px-6 text-center">
                         <div class="flex space-x-2 justify-center items-center">
-                            <a href="{{ route('inventory.retur', 1) }}"
+                            <a href="{{ route('inventory.retur', $item->id) }}"
                                 class="p-2 rounded-lg shadow bg-yellow-300 transition-colors duration-200 flex items-center justify-center">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +105,7 @@
                                         fill="white" />
                                 </svg>
                             </a>
-                            <a href="{{ route('inventory.stocks.show', 1) }}"
+                            <a href="{{ route('inventory.trash', $item->id) }}"
                                 class="p-2 rounded-lg shadow bg-pink-600 transition-colors duration-200 flex items-center justify-center">
                                 <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -122,83 +131,33 @@
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
-                        <th class="border p-2" rowspan="2">No</th>
-                        <th class="border p-2" rowspan="2">Jenis Packaging Obat</th>
-                        <th class="border p-2" rowspan="2">Margin</th>
-                        <th class="border p-2" rowspan="2">Harga Jual</th>
-                        <th class="border p-2" rowspan="2">Kuantiti</th>
-                        <th class="border p-2" colspan="3">Status</th>
-                        <th class="border p-2" rowspan="2">Subtotal</th>
-                    </tr>
-                    <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
-                        <th class="border p-2">Terjual</th>
-                        <th class="border p-2">Retur</th>
-                        <th class="border p-2">Buang</th>
+                        <th class="border p-2">No</th>
+                        <th class="border p-2">Jenis Packaging Obat</th>
+                        <th class="border p-2">Margin</th>
+                        <th class="border p-2">Harga</th>
+                        <th class="border p-2">Jumlah</th>
+                        <th class="border p-2">Status</th>
+                        <th class="border p-2">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 text-sm font-light">
-                <!-- Data Row 1 -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">1</td>
-                    <td class="py-3 px-6 text-center">Jenis Packaging Obat</td>
-                    <td class="py-3 px-6 text-center">Margin</td>
-                    <td class="py-3 px-6 text-center">Harga Jual</td>
-                    <td class="py-3 px-6 text-center">Kuantiti</td>
-                    <td class="py-3 px-6 text-center">Terjual</td>
-                    <td class="py-3 px-6 text-center">Retur</td>
-                    <td class="py-3 px-6 text-center">Buang</td>
-                    <td class="py-3 px-6 text-center">Subtotal</td>
-                </tr>
-                <!-- Data Row 2 -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">2</td>
-                    <td class="py-3 px-6 text-center">Jenis Packaging Obat</td>
-                    <td class="py-3 px-6 text-center">Margin</td>
-                    <td class="py-3 px-6 text-center">Harga Jual</td>
-                    <td class="py-3 px-6 text-center">Kuantiti</td>
-                    <td class="py-3 px-6 text-center">Terjual</td>
-                    <td class="py-3 px-6 text-center">Retur</td>
-                    <td class="py-3 px-6 text-center">Buang</td>
-                    <td class="py-3 px-6 text-center">Subtotal</td>
-                </tr>
-                <!-- Data Row 3 -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">3</td>
-                    <td class="py-3 px-6 text-center">Jenis Packaging Obat</td>
-                    <td class="py-3 px-6 text-center">Margin</td>
-                    <td class="py-3 px-6 text-center">Harga Jual</td>
-                    <td class="py-3 px-6 text-center">Kuantiti</td>
-                    <td class="py-3 px-6 text-center">Terjual</td>
-                    <td class="py-3 px-6 text-center">Retur</td>
-                    <td class="py-3 px-6 text-center">Buang</td>
-                    <td class="py-3 px-6 text-center">Subtotal</td>
-                </tr>
-                <!-- Data Row 4 -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">4</td>
-                    <td class="py-3 px-6 text-center">Jenis Packaging Obat</td>
-                    <td class="py-3 px-6 text-center">Margin</td>
-                    <td class="py-3 px-6 text-center">Harga Jual</td>
-                    <td class="py-3 px-6 text-center">Kuantiti</td>
-                    <td class="py-3 px-6 text-center">Terjual</td>
-                    <td class="py-3 px-6 text-center">Retur</td>
-                    <td class="py-3 px-6 text-center">Buang</td>
-                    <td class="py-3 px-6 text-center">Subtotal</td>
-                </tr>
-                <!-- Data Row 5 -->
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6 text-center">5</td>
-                    <td class="py-3 px-6 text-center">Jenis Packaging Obat</td>
-                    <td class="py-3 px-6 text-center">Margin</td>
-                    <td class="py-3 px-6 text-center">Harga Jual</td>
-                    <td class="py-3 px-6 text-center">Kuantiti</td>
-                    <td class="py-3 px-6 text-center">Terjual</td>
-                    <td class="py-3 px-6 text-center">Retur</td>
-                    <td class="py-3 px-6 text-center">Buang</td>
-                    <td class="py-3 px-6 text-center">Subtotal</td>
-                </tr>
+                    @foreach ($transactions as $number => $item)
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-center">{{ $number+1 }}</td>
+                        <td class="py-3 px-6 text-center">{{ $item->name }}</td>
+                        <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
+                        <td class="py-3 px-6 text-center">{{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}</td>
+                        <td class="py-3 px-6 text-center">{{ $item->quantity }}</td>
+                        <td class="py-3 px-6 text-center">{{ getStatus($item->transaction->variant) }}</td>
+                        <td class="py-3 px-6 text-center">{{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}</td>
+                    </tr>
+                        
+                    @endforeach
             </tbody>
             </table>
+            <div class="p-6">
+                {{ $transactions->links() }}
+            </div>
         </div>
     </div>
 

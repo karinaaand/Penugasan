@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction\Bill;
+use App\Models\Transaction\Trash;
 use Illuminate\Http\Request;
 
 class ManagementController extends Controller
@@ -28,10 +29,13 @@ class ManagementController extends Controller
         return view("pages.management.returDetail");
     }
     public function trashes(){
-        return view("pages.management.trash");        
+        $trashes = Trash::all();
+        $judul = "Manajemen Obat Buang";
+        return view("pages.management.trash",compact('trashes','judul'));        
     }
-    public function trash(){
-        return view("pages.management.trashDetail");
+    public function trash(Trash $trash){
+        $judul = "Laporan Pembuangan Obat ".$trash->drug()->name;
+        return view("pages.management.trashDetail",compact('trash','judul'));
     }
     public function returPrint(){
 
