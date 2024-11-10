@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction\Bill;
+use App\Models\Transaction\Transaction;
 use App\Models\Transaction\Trash;
 use Illuminate\Http\Request;
 
@@ -13,14 +14,17 @@ class ManagementController extends Controller
         $judul = "Tagihan Obat";
         return view("pages.management.bill",compact('judul','bills'));
     }
-    public function bill(){
-        return view("pages.management.billDetail");        
+    public function bill(Bill $bill){
+        $judul = "Tagihan Vendor ".$bill->transaction()->vendor()->name;
+        return view("pages.management.billDetail",compact('bill','judul'));      
     }
     public function billPrint(){
         
     }
-    public function billPay(){
-        
+    public function billPay(Bill $bill){
+        $bill->status = "Done";
+        $bill->save();
+        return redirect()->route('management.bill.index');
     }
     public function returs(){
         return view("pages.management.retur");        
