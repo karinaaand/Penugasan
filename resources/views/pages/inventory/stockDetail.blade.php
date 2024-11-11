@@ -6,6 +6,7 @@
             "LPK" => $status = "Klinik",
             "Checkout" => $status = "Keluar",
             "Trash" => $status = "Buang",
+            "Retur" => $status = "Retur",
         };
         return $status;
     }

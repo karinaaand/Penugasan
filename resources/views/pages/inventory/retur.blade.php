@@ -1,109 +1,70 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @extends('layouts.main')
 
 @section('container')
-    <div class="rounded-lg bg-white p-6 shadow-lg">
-        <h2 class="mb-4 text-xl font-semibold">Retur Obat</h2>
-
-        <div class="mb-4 grid grid-cols-2 gap-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Nama Obat</label>
-                <p class="mt-1 text-gray-600">Paracetamol</p>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Tanggal Expired</label>
-                <p class="mt-1 text-gray-600">20/12/2024</p>
-            </div>
+<div class="rounded-lg bg-white p-6 shadow-lg grid grid-cols-2">
+    <div class="flex flex-col gap-6">
+        <div>
+            <label class="block text-md font-bold text-gray-700">Nama Obat</label>
+            <p class="mt-1 text-gray-600">{{ $batch->drug()->name }}</p>
         </div>
-
-        <div class="mb-4 grid grid-cols-2 gap-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Jumlah Obat (pcs)</label>
-                <input
-                    type="number"
-                    class="h-10 w-full rounded border border-gray-300 p-4"
-                    placeholder="Inputkan jumlah obat"
-                />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                <textarea
-                    class="h-40 w-full rounded border border-gray-300 p-4"
-                    placeholder="Tuliskan alasan"
-                    rows="4"
-                ></textarea>
-            </div>
+        <div>
+            <label class="block text-md font-bold text-gray-700">Produsen</label>
+            <p class="mt-1 text-gray-600">{{ $batch->drug()->manufacture()->name }}</p>
         </div>
-
-        <div class="mt-4 flex justify-end">
-            <button
-                onclick="showToast()"
-                class="rounded-lg bg-yellow-400 px-6 py-2 font-bold text-black shadow-md transition-colors hover:bg-yellow-500"
-                style="width: 100px; height: 40px"
-            >
-                Retur
-            </button>
+        <div>
+            <label class="block text-md font-bold text-gray-700">Tanggal Expired</label>
+            <p class="mt-1 text-gray-600">{{ Carbon::parse($batch->expired)->translatedFormat('j F Y') }}</p>
         </div>
-
-        <!-- Elemen Toast -->
-        <div
-            id="toast-success"
-            class="fixed right-5 top-5 mb-4 flex hidden w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400"
-            role="alert"
-        >
-            <div
-                class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200"
-            >
-                <svg
-                    class="h-5 w-5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                >
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                    />
-                </svg>
-                <span class="sr-only">Check icon</span>
-            </div>
-            <div class="ml-3 text-sm font-normal">Retur berhasil dilakukan!</div>
-            <button
-                type="button"
-                onclick="hideToast()"
-                class="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-white"
-                aria-label="Close"
-            >
-                <span class="sr-only">Close</span>
-                <svg
-                    class="h-3 w-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
-                >
-                    <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                    />
-                </svg>
-            </button>
+        <div>
+            <label class="block text-md font-bold text-gray-700">Tanggal Diterima</label>
+            <p class="mt-1 text-gray-600">{{ Carbon::parse($batch->created_at)->translatedFormat('j F Y') }}</p>
         </div>
     </div>
+    <div class="flex flex-col gap-6">
+        <div>
+            <label class="block text-md font-bold text-gray-700">Vendor Pengirim</label>
+            <p class="mt-1 text-gray-600">{{ $batch->transaction()->first()->vendor()->name }}</p>
+        </div>
+        <div class="flex">
+            <input type="number" id="inputQuantity" name="inputQuantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="0">
+            <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
+                pcs
+            </span>
+        </div>
+        <textarea name="inputReason" rows="4" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Tuliskan alasan..."></textarea>
+        <div class="flex justify-end">
+            <button onclick="showDeleteModal()" class="py-2 px-4 rounded-md bg-orange-500 hover:bg-orange-700 text-white">Retur</button>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+        <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk mengembalikan obat ini?
+        </p>
+        <div class="flex justify-center space-x-4">
+            <form id="deleteForm" method="POST" action="{{ route('inventory.retur',$batch->id) }}" class="inline">
+                @csrf
+                <input type="hidden" name="quantity">
+                <input type="hidden" name="reason">
+                <button type="reset" onclick="return closeDeleteModal()"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-lg">Retur</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function showDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.querySelector('input[name=quantity]').value = document.querySelector('input[name=inputQuantity]').value
+        document.querySelector('input[name=reason]').value = document.querySelector('textarea[name=inputReason]').value
+    }
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
 
-    <script>
-        function showToast() {
-            const toast = document.getElementById('toast-success');
-            toast.classList.remove('hidden'); // Tampilkan toast
-            setTimeout(() => {
-                hideToast(); // Sembunyikan otomatis setelah 3 detik
-            }, 3000);
-        }
-
-        function hideToast() {
-            document.getElementById('toast-success').classList.add('hidden'); // Sembunyikan toast
-        }
-    </script>
+</script>
 @endsection
