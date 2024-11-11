@@ -10,54 +10,46 @@
                 @csrf
                 <input type="hidden" name="transaction">
                 <input type="hidden" name="total">
-            <div class="grid grid-cols-2  gap-4">
-                <select name="vendor_id" class="w-full rounded border border-gray-300 p-3">
-                    <option selected disabled>Inputkan vendor</option>
-                    @foreach ($vendors as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                <div class="flex">
-                    <select name="method" class="w-full rounded-s border border-gray-300 p-2">
-                        <option selected disabled>Bayar Langsung / Bayar Tempo</option>
-                        <option value="cash">Bayar Langsung</option>
-                        <option value="credit">Bayar Tempo</option>
+                <div class="grid grid-cols-2  gap-4">
+                    <select name="vendor_id" class="w-full rounded border border-gray-300 p-3">
+                        <option selected disabled>Inputkan vendor</option>
+                        @foreach ($vendors as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
-                    <input name="due" type="date" class="w-full rounded-e border border-gray-300 p-2"
-                        placeholder="Masukkan tanggal tempo" />
+                    <div class="flex">
+                        <select name="method" class="w-full rounded-s border border-gray-300 p-2">
+                            <option selected disabled>Bayar Langsung / Bayar Tempo</option>
+                            <option value="cash">Bayar Langsung</option>
+                            <option value="credit">Bayar Tempo</option>
+                        </select>
+                        <input name="due" type="date" class="w-full rounded-e border border-gray-300 p-2"
+                            placeholder="Masukkan tanggal tempo" />
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
             <div class="grid grid-cols-2 gap-4">
                 <input type="text" id="drugInput" name="drug" class="w-full rounded border border-gray-300 p-2"
                     placeholder="Inputkan nama obat" autocomplete="off">
                 <ul id="suggestions" class="absolute mt-10 border border-gray-300 bg-white rounded hidden"></ul>
 
-                {{-- <input type="text" class="w-full rounded border border-gray-300 p-2" placeholder="Inputkan nama" />
-                <select name="drug" class="w-full rounded border border-gray-300 p-2">
-                    <option selected>Inputkan obat</option>
-                    @foreach ($drugs as $item)
-                        <option value="{{ $item->id }}_{{ $item->name }}_{{ $item->code }}">{{ $item->name }}
-                        </option>
-                    @endforeach
-                </select> --}}
                 <div class="grid grid-cols-3 gap-4">
-                        <div class="flex">
-                            <input name="quantity" type="number" class="w-full rounded-s border border-gray-300 p-2"
-                                placeholder="Jumlah" />
-                            <select name="unit" class="w-full rounded-e border border-gray-300 p-2">
-                                <option class="pcs">pcs</option>
-                                <option class="pack">pack</option>
-                                <option class="box">box</option>
-                            </select>
-                        </div>
-                        <input name="price" type="number" class="w-full rounded border border-gray-300 p-2"
-                            placeholder="Harga Satuan" />
-                        <div class="flex">
-                            <a class="w-full rounded-s border border-gray-300 p-2 bg-gray-200">EXP</a>
-                            <input name="expired" type="date" class="w-full rounded-e border border-gray-300 p-2"
-                                placeholder="Inputkan expired obat" />
-                        </div>
+                    <div class="flex">
+                        <input name="quantity" type="number" class="w-full rounded-s border border-gray-300 p-2"
+                            placeholder="Jumlah" />
+                        <select name="unit" class="w-full rounded-e border border-gray-300 p-2">
+                            <option class="pcs">pcs</option>
+                            <option class="pack">pack</option>
+                            <option class="box">box</option>
+                        </select>
+                    </div>
+                    <input name="price" type="number" class="w-full rounded border border-gray-300 p-2"
+                        placeholder="Harga Satuan" />
+                    <div class="flex">
+                        <a class="w-full rounded-s border border-gray-300 p-2 bg-gray-200">EXP</a>
+                        <input name="expired" type="date" class="w-full rounded-e border border-gray-300 p-2"
+                            placeholder="Inputkan expired obat" />
+                    </div>
                 </div>
             </div>
             <div class="flex justify-center">
@@ -70,11 +62,11 @@
     <div class="rounded-lg bg-white p-6 shadow-lg mt-4">
         <div class="mt-8">
             <div class="flex justify-between mb-4">
-                    <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-                    <button onclick="submitForm()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
-                        SAVE
-                    </button>
-                </div>
+                <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
+                <button onclick="submitModal()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
+                    SAVE
+                </button>
+            </div>
             <div class="overflow-hidden rounded-lg bg-white shadow-md">
                 <table class="min-w-full leading-normal">
                     <thead>
@@ -98,13 +90,9 @@
             <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
             </p>
             <div class="flex justify-center space-x-4">
-                <form id="deleteForm" action="" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
                     <button type="reset" onclick="return closeDeleteModal()"
                         class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
                     <button onclick="deleteItem()" class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
-                </form>
             </div>
         </div>
     </div>
@@ -112,19 +100,17 @@
         <div class="bg-white rounded-lg shadow-lg p-6 w-96">
             <p class="text-center text-lg font-semibold mb-4">Apakah Anda yakin ingin menyimpan transaksi ini?</p>
             <div class="flex justify-center space-x-4">
-                <form id="saveForm" action="" method="POST" class="inline">
-                    @csrf
                     <button type="reset" onclick="return closeSaveModal()"
                         class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
-                    <button type="button" onclick="submitSaveForm()" class="px-4 py-2 bg-green-500 text-white rounded-lg">Simpan</button>
-                </form>
+                    <button type="button" onclick="submitForm()"
+                        class="px-4 py-2 bg-green-500 text-white rounded-lg">Simpan</button>
             </div>
         </div>
     </div>
-
 @endsection
 
 <script>
+    let deleteForItem = null;
     document.addEventListener('DOMContentLoaded', function() {
         const drugInput = document.querySelector("input[name='drug']")
         const unitInput = document.querySelector("select[name='unit']")
@@ -269,33 +255,28 @@
                         </tr>`
     }
 
-    // Fungsi untuk menampilkan modal penghapusan
-function showDeleteModal(index) {
-    console.log(index); // Melihat index yang dikirim
-    window.deleteIndex = index; // Menyimpan index yang dipilih dalam variabel global untuk penghapusan nanti
-    document.getElementById('deleteModal').classList.remove('hidden');
-}
-
-// Fungsi untuk menutup modal penghapusan
-function closeDeleteModal() {
-    document.getElementById('deleteModal').classList.add('hidden');
-}
-
-// Fungsi untuk menghapus item yang dipilih menggunakan deleteItem()
-function submitDeleteForm() {
-    if (window.deleteIndex !== undefined) {
-        // Langsung menghapus data dari array menggunakan fungsi deleteItem()
-        deleteItem(window.deleteIndex);
+    function showDeleteModal(index) {
+        deleteForItem = index;
+        document.getElementById('deleteModal').classList.remove('hidden');
     }
-    closeDeleteModal(); // Menutup modal setelah penghapusan
-}
-    function deleteItem(index) {
-        data.splice(index, 1)
+    function submitModal() {
+        document.getElementById('saveModal').classList.remove('hidden');
+    }
+    function closeSaveModal() {
+        document.getElementById('saveModal').classList.add('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    function deleteItem() {
+        closeDeleteModal()
+        data.splice(deleteForItem, 1)
         draw()
     }
 
     function submitForm() {
-        if (confirm("Apakah Anda yakin ingin menyimpan semua data?")) {
             data = data.map(function(e) {
                 return {
                     name: e[0],
@@ -305,12 +286,10 @@ function submitDeleteForm() {
                     price: parseFloat(e[3]), // Convert total price to float
                     expired: e[4]
                 };
-        });
-        document.querySelector("input[name='total']").value = total
-        document.querySelector("input[name='transaction']").value = JSON.stringify(data)
-        // document.querySelector("input[name='transaction']").value = JSON.stringify(data).replaceAll('{','[').replaceAll('}',']').replaceAll(':','=>')
-        document.querySelector("form").submit()
-        showToast("Data berhasil disimpan!");
-    }   
+            });
+            document.querySelector("input[name='total']").value = total
+            document.querySelector("input[name='transaction']").value = JSON.stringify(data)
+            // document.querySelector("input[name='transaction']").value = JSON.stringify(data).replaceAll('{','[').replaceAll('}',']').replaceAll(':','=>')
+            document.querySelector("form").submit()
     }
 </script>
