@@ -93,6 +93,35 @@
             </div>
         </div>
     </div>
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
+            </p>
+            <div class="flex justify-center space-x-4">
+                <form id="deleteForm" action="" method="POST" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="reset" onclick="return closeDeleteModal()"
+                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
+                    <button onclick="deleteItem()" class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="saveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <p class="text-center text-lg font-semibold mb-4">Apakah Anda yakin ingin menyimpan transaksi ini?</p>
+            <div class="flex justify-center space-x-4">
+                <form id="saveForm" action="" method="POST" class="inline">
+                    @csrf
+                    <button type="reset" onclick="return closeSaveModal()"
+                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
+                    <button type="button" onclick="submitSaveForm()" class="px-4 py-2 bg-green-500 text-white rounded-lg">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 <script>
@@ -230,17 +259,36 @@
                             <td>${price}</td>
                             <td>${expired}</td>
                             <td class="py-2">
-                                <button type="button" onclick="deleteItem(${i})"
+                                <button type="button" onclick="showDeleteModal(${i})"
                                     class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
                                     <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z" fill="white"/>
                                     </svg>
                                 </button>
-                            </button>
                             </td>
                         </tr>`
     }
 
+    // Fungsi untuk menampilkan modal penghapusan
+function showDeleteModal(index) {
+    console.log(index); // Melihat index yang dikirim
+    window.deleteIndex = index; // Menyimpan index yang dipilih dalam variabel global untuk penghapusan nanti
+    document.getElementById('deleteModal').classList.remove('hidden');
+}
+
+// Fungsi untuk menutup modal penghapusan
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+}
+
+// Fungsi untuk menghapus item yang dipilih menggunakan deleteItem()
+function submitDeleteForm() {
+    if (window.deleteIndex !== undefined) {
+        // Langsung menghapus data dari array menggunakan fungsi deleteItem()
+        deleteItem(window.deleteIndex);
+    }
+    closeDeleteModal(); // Menutup modal setelah penghapusan
+}
     function deleteItem(index) {
         data.splice(index, 1)
         draw()
