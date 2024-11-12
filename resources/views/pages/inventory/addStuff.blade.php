@@ -10,24 +10,24 @@
                 @csrf
                 <input type="hidden" name="transaction">
                 <input type="hidden" name="total">
-            <div class="grid grid-cols-2  gap-4">
-                <select name="vendor_id" class="w-full rounded border border-gray-300 p-3">
-                    <option selected disabled>Inputkan vendor</option>
-                    @foreach ($vendors as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                <div class="flex">
-                    <select name="method" class="w-full rounded-s border border-gray-300 p-2">
-                        <option selected disabled>Bayar Langsung / Bayar Tempo</option>
-                        <option value="cash">Bayar Langsung</option>
-                        <option value="credit">Bayar Tempo</option>
+                <div class="grid grid-cols-2  gap-4">
+                    <select name="vendor_id" class="w-full rounded border border-gray-300 p-3">
+                        <option selected disabled>Inputkan vendor</option>
+                        @foreach ($vendors as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
-                    <input name="due" type="date" class="w-full rounded-e border border-gray-300 p-2"
-                        placeholder="Masukkan tanggal tempo" />
+                    <div class="flex">
+                        <select name="method" class="w-full rounded-s border border-gray-300 p-2">
+                            <option selected disabled>Bayar Langsung / Bayar Tempo</option>
+                            <option value="cash">Bayar Langsung</option>
+                            <option value="credit">Bayar Tempo</option>
+                        </select>
+                        <input name="due" type="date" class="w-full rounded-e border border-gray-300 p-2"
+                            placeholder="Masukkan tanggal tempo" />
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
             <div class="grid grid-cols-2 gap-4">
                 <input type="text" id="drugInput" name="drug" class="w-full rounded border border-gray-300 p-2"
                     placeholder="Inputkan nama obat" autocomplete="off">
@@ -42,22 +42,22 @@
                     @endforeach
                 </select> --}}
                 <div class="grid grid-cols-3 gap-4">
-                        <div class="flex">
-                            <input name="quantity" type="number" class="w-full rounded-s border border-gray-300 p-2"
-                                placeholder="Jumlah" />
-                            <select name="unit" class="w-full rounded-e border border-gray-300 p-2">
-                                <option class="pcs">pcs</option>
-                                <option class="pack">pack</option>
-                                <option class="box">box</option>
-                            </select>
-                        </div>
-                        <input name="price" type="number" class="w-full rounded border border-gray-300 p-2"
-                            placeholder="Harga Satuan" />
-                        <div class="flex">
-                            <a class="w-full rounded-s border border-gray-300 p-2 bg-gray-200">EXP</a>
-                            <input name="expired" type="date" class="w-full rounded-e border border-gray-300 p-2"
-                                placeholder="Inputkan expired obat" />
-                        </div>
+                    <div class="flex">
+                        <input name="quantity" type="number" class="w-full rounded-s border border-gray-300 p-2"
+                            placeholder="Jumlah" />
+                        <select name="unit" class="w-full rounded-e border border-gray-300 p-2">
+                            <option class="pcs">pcs</option>
+                            <option class="pack">pack</option>
+                            <option class="box">box</option>
+                        </select>
+                    </div>
+                    <input name="price" type="number" class="w-full rounded border border-gray-300 p-2"
+                        placeholder="Harga Satuan" />
+                    <div class="flex">
+                        <a class="w-full rounded-s border border-gray-300 p-2 bg-gray-200">EXP</a>
+                        <input name="expired" type="date" class="w-full rounded-e border border-gray-300 p-2"
+                            placeholder="Inputkan expired obat" />
+                    </div>
                 </div>
             </div>
             <div class="flex justify-center">
@@ -70,15 +70,15 @@
     <div class="rounded-lg bg-white p-6 shadow-lg mt-4">
         <div class="mt-8">
             <div class="flex justify-between mb-4">
-                    <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-                    <button onclick="submitForm()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
-                        SAVE
-                    </button>
-                </div>
+                <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
+                <button onclick="submitForm()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
+                    SAVE
+                </button>
+            </div>
             <div class="overflow-hidden rounded-lg bg-white shadow-md">
                 <table class="min-w-full leading-normal">
                     <thead>
-                        <tr class="bg-gray-200 text-sm uppercase leading-normal text-black">
+                        <tr class="bg-gray-200 uppercase leading-normal text-black">
                             <th class="border p-2">Nama Obat</th>
                             <th class="border p-2">Jumlah</th>
                             <th class="border p-2">Harga Satuan</th>
@@ -87,7 +87,7 @@
                             <th class="border p-2">ACTION</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm font-light text-gray-700" id="drugTable">
+                    <tbody class="font-light text-gray-700" id="drugTable">
                     </tbody>
                 </table>
             </div>
@@ -257,12 +257,12 @@
                     price: parseFloat(e[3]), // Convert total price to float
                     expired: e[4]
                 };
-        });
-        document.querySelector("input[name='total']").value = total
-        document.querySelector("input[name='transaction']").value = JSON.stringify(data)
-        // document.querySelector("input[name='transaction']").value = JSON.stringify(data).replaceAll('{','[').replaceAll('}',']').replaceAll(':','=>')
-        document.querySelector("form").submit()
-        showToast("Data berhasil disimpan!");
-    }   
+            });
+            document.querySelector("input[name='total']").value = total
+            document.querySelector("input[name='transaction']").value = JSON.stringify(data)
+            // document.querySelector("input[name='transaction']").value = JSON.stringify(data).replaceAll('{','[').replaceAll('}',']').replaceAll(':','=>')
+            document.querySelector("form").submit()
+            showToast("Data berhasil disimpan!");
+        }
     }
 </script>

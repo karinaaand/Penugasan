@@ -7,17 +7,13 @@
         <div class="mb-4 flex items-center">
             <div class="flex-1">
                 <h2 class="text-2xl font-bold">{{ $transaction->vendor()->name }}</h2>
-                <p class="text-gray-600">Tanggal : {{ Carbon::parse($transaction->created_at)->translatedFormat('j F Y') }}</p>
+                <p class="text-gray-600">Tanggal : {{ Carbon::parse($transaction->created_at)->translatedFormat('j F Y') }}
+                </p>
             </div>
             <div class="flex flex-1 items-center justify-center">
                 <label for="lpb" class="mr-2 text-lg font-normal text-black">No. LPB :</label>
-                <input
-                disabled
-                value="{{ $transaction->code }}"
-                    type="text"
-                    id="lpb"
-                    class="mr-2 border-b border-gray-300 focus:border-gray-500 focus:outline-none"
-                />
+                <input disabled value="{{ $transaction->code }}" type="text" id="lpb"
+                    class="mr-2 border-b border-gray-300 focus:border-gray-500 focus:outline-none" />
             </div>
             <div class="flex flex-1 justify-end">
                 <button id="printButton" class="rounded-lg bg-yellow-400 px-4 py-2 font-bold text-black">CETAK</button>
@@ -49,36 +45,33 @@
                         <th class="border p-2">Subtotal</th>
                     </tr>
                 </thead>
-                <tbody class="text-sm font-light text-gray-700">
-                    @foreach ($details as $number=>$item)
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">{{ $number+1 }}</td>
-                        <td class="px-6 py-3 text-center">{{ $item->drug()->code }}</td>
-                        <td class="px-6 py-3 text-center">{{ $item->drug()->name }}</td>
-                        <td class="px-6 py-3 text-center">{{ $item->quantity }}</td>
-                        <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}</td>
-                        <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}</td>
-                    </tr>
-                        
+                <tbody class="font-light text-gray-700">
+                    @foreach ($details as $number => $item)
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="px-6 py-3 text-center">{{ $number + 1 }}</td>
+                            <td class="px-6 py-3 text-center">{{ $item->drug()->code }}</td>
+                            <td class="px-6 py-3 text-center">{{ $item->drug()->name }}</td>
+                            <td class="px-6 py-3 text-center">{{ $item->quantity }}</td>
+                            <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
         <div class="mt-4 flex items-center justify-end">
             <p class="mr-2 font-semibold">Grand total :</p>
-            <input
-                type="text"
-                value="{{ 'Rp ' . number_format($transaction->outcome, 0, ',', '.') }}"
-                class="w-48 border-b border-gray-400 text-center focus:border-black focus:outline-none"
-                readonly
-            />
+            <input type="text" value="{{ 'Rp ' . number_format($transaction->outcome, 0, ',', '.') }}"
+                class="w-48 border-b border-gray-400 text-center focus:border-black focus:outline-none" readonly />
         </div>
     </div>
     <script>
-        document.getElementById('printButton').onclick = function () {
+        document.getElementById('printButton').onclick = function() {
             document.getElementById('printOptions').classList.toggle('hidden');
         };
-        document.getElementById('confirmPrint').onclick = function () {
+        document.getElementById('confirmPrint').onclick = function() {
             const format = document.getElementById('format').value;
             if (format === 'pdf') {
                 alert('Mencetak dalam format PDF...');
