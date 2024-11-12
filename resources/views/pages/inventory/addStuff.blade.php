@@ -33,6 +33,14 @@
                     placeholder="Inputkan nama obat" autocomplete="off">
                 <ul id="suggestions" class="absolute mt-10 border border-gray-300 bg-white rounded hidden"></ul>
 
+                {{-- <input type="text" class="w-full rounded border border-gray-300 p-2" placeholder="Inputkan nama" />
+                <select name="drug" class="w-full rounded border border-gray-300 p-2">
+                    <option selected>Inputkan obat</option>
+                    @foreach ($drugs as $item)
+                        <option value="{{ $item->id }}_{{ $item->name }}_{{ $item->code }}">{{ $item->name }}
+                        </option>
+                    @endforeach
+                </select> --}}
                 <div class="grid grid-cols-3 gap-4">
                     <div class="flex">
                         <input name="quantity" type="number" class="w-full rounded-s border border-gray-300 p-2"
@@ -63,14 +71,14 @@
         <div class="mt-8">
             <div class="flex justify-between mb-4">
                 <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-                <button onclick="submitModal()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
+                <button onclick="submitForm()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
                     SAVE
                 </button>
             </div>
             <div class="overflow-hidden rounded-lg bg-white shadow-md">
                 <table class="min-w-full leading-normal">
                     <thead>
-                        <tr class="bg-gray-200 text-sm uppercase leading-normal text-black">
+                        <tr class="bg-gray-200 uppercase leading-normal text-black">
                             <th class="border p-2">Nama Obat</th>
                             <th class="border p-2">Jumlah</th>
                             <th class="border p-2">Harga Satuan</th>
@@ -79,38 +87,15 @@
                             <th class="border p-2">ACTION</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm font-light text-gray-700" id="drugTable">
+                    <tbody class="font-light text-gray-700" id="drugTable">
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-            <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
-            </p>
-            <div class="flex justify-center space-x-4">
-                    <button type="reset" onclick="return closeDeleteModal()"
-                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
-                    <button onclick="deleteItem()" class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
-            </div>
-        </div>
-    </div>
-    <div id="saveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-            <p class="text-center text-lg font-semibold mb-4">Apakah Anda yakin ingin menyimpan transaksi ini?</p>
-            <div class="flex justify-center space-x-4">
-                    <button type="reset" onclick="return closeSaveModal()"
-                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
-                    <button type="button" onclick="submitForm()"
-                        class="px-4 py-2 bg-green-500 text-white rounded-lg">Simpan</button>
             </div>
         </div>
     </div>
 @endsection
 
 <script>
-    let deleteForItem = null;
     document.addEventListener('DOMContentLoaded', function() {
         const drugInput = document.querySelector("input[name='drug']")
         const unitInput = document.querySelector("select[name='unit']")
@@ -245,38 +230,24 @@
                             <td>${price}</td>
                             <td>${expired}</td>
                             <td class="py-2">
-                                <button type="button" onclick="showDeleteModal(${i})"
+                                <button type="button" onclick="deleteItem(${i})"
                                     class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
                                     <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z" fill="white"/>
                                     </svg>
                                 </button>
+                            </button>
                             </td>
                         </tr>`
     }
 
-    function showDeleteModal(index) {
-        deleteForItem = index;
-        document.getElementById('deleteModal').classList.remove('hidden');
-    }
-    function submitModal() {
-        document.getElementById('saveModal').classList.remove('hidden');
-    }
-    function closeSaveModal() {
-        document.getElementById('saveModal').classList.add('hidden');
-    }
-
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
-
-    function deleteItem() {
-        closeDeleteModal()
-        data.splice(deleteForItem, 1)
+    function deleteItem(index) {
+        data.splice(index, 1)
         draw()
     }
 
     function submitForm() {
+        if (confirm("Apakah Anda yakin ingin menyimpan semua data?")) {
             data = data.map(function(e) {
                 return {
                     name: e[0],
@@ -291,5 +262,7 @@
             document.querySelector("input[name='transaction']").value = JSON.stringify(data)
             // document.querySelector("input[name='transaction']").value = JSON.stringify(data).replaceAll('{','[').replaceAll('}',']').replaceAll(':','=>')
             document.querySelector("form").submit()
+            showToast("Data berhasil disimpan!");
+        }
     }
 </script>

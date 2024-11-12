@@ -57,10 +57,10 @@ return new class extends Migration
             $table->foreignIdFor(Drug::class);
             $table->foreignIdFor(Transaction::class);
             $table->foreignIdFor(TransactionDetail::class);
-            $table->foreignId('source');
             $table->integer('quantity');
-            $table->enum('status',['Belum Kembali','Done']);
+            $table->enum('status',['Belum Bayar','Done']);
             $table->text('reason')->nullable();
+            $table->date('request');
             $table->date('due')->nullable();
             $table->timestamps();
         });

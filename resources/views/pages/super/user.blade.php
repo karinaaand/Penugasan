@@ -4,16 +4,13 @@
         <h2 class="text-2xl font-bold mb-4">Manage Account</h2>
 
         <div class="flex justify-between items-center mb-4">
+
             <!-- Add Button -->
             <a href="{{ route('user.create') }}">
                 <button
                     class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+
                     Add User</button>
             </a>
-            <form action="">
-                <input type="text" name="" id="" placeholder="Search..."
-                    class="ring-2 ring-gray-300 rounded-full px-6 py-2">
-            </form>
         </div>
 
 
@@ -22,8 +19,8 @@
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                        <th class="w-1 py-3 px-6 text-center w-1">NO</th>
-                        <th class="w-32 py-3 px-6 text-center">NAME</th>
+                        <th class="w-1 py-3 px-6 text-center">NO</th>
+                        <th class="w-32 py-3 px-6 text-center">USERNAME</th>
                         <th class="w-24 py-3 px-6 text-center">ROLE</th>
                         <th class="w-24 py-3 px-6 text-center">EMAIL</th>
                         <th class="w-48 py-3 px-6 text-center">ACTION</th>
@@ -33,9 +30,9 @@
                     <!-- Data Row 1 -->
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-center">1</td>
-                        <td class="py-3 px-6 text-left">Lorem Ipsun</td>
+                        <td class="py-3 px-6 text-center">Lorem Ipsun</td>
                         <td class="py-3 px-6 text-center">Dokter</td>
-                        <td class="py-3 px-6 text-left">loremIpsun@mail.com</td>
+                        <td class="py-3 px-6 text-center">loremIpsun@mail.com</td>
                         <td class="flex justify-center gap-2 py-3">
                             <a href="{{ route('user.edit', 1) }}"
                                 class="flex items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
@@ -76,9 +73,9 @@
                     <!-- Data Row 2 -->
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-center">2</td>
-                        <td class="py-3 px-6 text-left">Lorem Ipsun</td>
+                        <td class="py-3 px-6 text-center">Lorem Ipsun</td>
                         <td class="py-3 px-6 text-center">Dokter</td>
-                        <td class="py-3 px-6 text-left">loremIpsun@mail.com</td>
+                        <td class="py-3 px-6 text-center">loremIpsun@mail.com</td>
                         <td class="flex justify-center gap-2 py-3">
                             <a href="{{ route('user.edit', 1) }}"
                                 class="flex items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
@@ -119,9 +116,9 @@
                     <!-- Data Row 3 -->
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-center">3</td>
-                        <td class="py-3 px-6 text-left">Lorem Ipsun</td>
+                        <td class="py-3 px-6 text-center">Lorem Ipsun</td>
                         <td class="py-3 px-6 text-center">Apoteker</td>
-                        <td class="py-3 px-6 text-left">loremIpsun@mail.com</td>
+                        <td class="py-3 px-6 text-center">loremIpsun@mail.com</td>
                         <td class="flex justify-center gap-2 py-3">
                             <a href="{{ route('user.edit', 1) }}"
                                 class="flex items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
@@ -162,9 +159,9 @@
                     <!-- Data Row 4 -->
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-center">4</td>
-                        <td class="py-3 px-6 text-left">Lorem Ipsun</td>
+                        <td class="py-3 px-6 text-center">Lorem Ipsun</td>
                         <td class="py-3 px-6 text-center">Super Admin</td>
-                        <td class="py-3 px-6 text-left">loremIpsun@mail.com</td>
+                        <td class="py-3 px-6 text-center">loremIpsun@mail.com</td>
                         <td class="flex justify-center gap-2 py-3">
                             <a href="{{ route('user.edit', 1) }}"
                                 class="flex items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
@@ -205,9 +202,9 @@
                     <!-- Data Row 5 -->
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-center">5</td>
-                        <td class="py-3 px-6 text-left">Lorem Ipsun</td>
+                        <td class="py-3 px-6 text-center">Lorem Ipsun</td>
                         <td class="py-3 px-6 text-center">Apoteker</td>
-                        <td class="py-3 px-6 text-left">loremIpsun@mail.com</td>
+                        <td class="py-3 px-6 text-center">loremIpsun@mail.com</td>
                         <td class="flex justify-center gap-2 py-3">
                             <a href="{{ route('user.edit', 1) }}"
                                 class="flex items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
@@ -248,28 +245,13 @@
                 </tbody>
             </table>
         </div>
+
     </div>
-            <!-- Toast Success -->
-        <!-- session('success') -->
-        <div id="toast-success" class="fixed hidden right-5 top-5 mb-4 flex w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow light:bg-gray-800 light:text-gray-400" role="alert">
-            <div class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 light:bg-green-800 light:text-green-200">
-                <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <span class="sr-only">Check icon</span></div>
-            <div class="ml-3 text-sm font-normal">{{ session('success') }}</div>
-            <button type="button" onclick="" class="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 light:bg-gray-800 light:text-gray-500 light:hover:bg-gray-700 light:hover:text-white"
-                aria-label="Close">
-                <span class="sr-only">Close</span>
-                <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                </svg>
-            </button>
-        </div>
 @endsection
 
 <script>
     function showDeleteModal(id) {
+        // Mengatur action form dan menampilkan modal dengan id unik
         document.getElementById('deleteForm-' + id).setAttribute('action', `category/${id}`);
         document.getElementById('deleteModal-' + id).classList.remove('hidden');
     }
@@ -277,16 +259,5 @@
     function closeDeleteModal(id) {
         // Menyembunyikan modal dengan id unik
         document.getElementById('deleteModal-' + id).classList.add('hidden');
-    }
-    function showToast() {
-        const toast = document.getElementById('toast-success');
-        toast.classList.remove('hidden');
-        setTimeout(() => {
-            hideToast();
-        }, 3000);
-    }
-
-    function hideToast() {
-        document.getElementById('toast-success').classList.add('hidden');
     }
 </script>
