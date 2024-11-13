@@ -50,16 +50,22 @@
     </div>
     @endsection
     <script>
-    function showSaveModal() {
-        document.getElementById('saveModal').classList.remove('hidden');
-    }
+        function submitModal() {
+            document.getElementById('saveModal').classList.remove('hidden');
+        }
+        function closeSaveModal() {
+            document.getElementById('saveModal').classList.add('hidden');
+        }
+        function showSaveModal() {
+            document.getElementById('saveModal').classList.remove('hidden');
+        }
 
-    function closeSaveModal() {
-        document.getElementById('saveModal').classList.add('hidden');
-    }
+        function closeSaveModal() {
+            document.getElementById('saveModal').classList.add('hidden');
+        }
 
-    function redirectToUserIndex() {
-        closeSaveModal();
-        window.location.href = "{{ route('user.index') }}";
-    }
-</script>
+        function redirectToUserIndex() {
+            closeSaveModal();
+            window.location.href = "{{ route('user.index') }}";
+        }
+    </script>
