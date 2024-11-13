@@ -12,7 +12,8 @@ class TransactionController extends Controller
     }
     public function create()
     {
-        return view('pages.transaction.checkout');
+        $judul = "Checkout Barang";
+        return view('pages.transaction.checkout',compact('judul'));
     }
     public function store(Request $request)
     {

@@ -12,6 +12,13 @@ class Repack extends Model
     public function drug(){
         return $this->belongsTo(Drug::class)->first();
     }
+    public function stock(){
+        $warehouse = $this->drug()->warehouse;
+        if ($warehouse->quantity == 0) {
+            return 0;
+        }
+        return $warehouse->quantity / $this->quantity;
+    }
     public function update_price(){
         $drug = $this->drug();
         if(str_contains($this->name,'1 pack')){

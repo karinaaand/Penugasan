@@ -25,7 +25,6 @@ class ClinicFlowController extends Controller
     {
         $datas = json_decode($request->transaction);
         $transaction = Transaction::create([
-            "vendor_id"=>$request->vendor_id,
             "destination"=>"clinic",
             "variant"=>"LPK",
         ]);
@@ -61,6 +60,7 @@ class ClinicFlowController extends Controller
                     "drug_id"=>$drugAdd->id,
                     "name"=>$drugAdd->name." 1 pcs",
                     "quantity"=>$item->quantity." pcs",
+                    "stock"=>$quantity,
                     "expired"=>$used->expired,
                     "piece_price"=>$drugAdd->last_price,
                     "total_price"=>$drugAdd->last_price*$item->quantity,                

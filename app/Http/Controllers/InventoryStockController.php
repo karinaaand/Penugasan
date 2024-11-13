@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory\Warehouse;
 use App\Models\Master\Drug;
+use App\Models\Transaction\Retur;
 use App\Models\Transaction\Transaction;
 use App\Models\Transaction\TransactionDetail;
 use App\Models\Transaction\Trash;
@@ -33,8 +34,41 @@ class InventoryStockController extends Controller
     }
     public function retur(Request $request,TransactionDetail $batch)
     {
+        $drug = $batch->drug();
+        $judul = "Retur Obat ". $drug->name;
         if($request->isMethod('get')){
-            return view("pages.inventory.retur",compact('batch'));
+            return view("pages.inventory.retur",compact('batch','judul'));
+        }elseif ($request->isMethod('post')) {
+            $transaction = Transaction::create([
+                "vendor_id"=>$batch->transaction->vendor()->id,
+                "destination"=>"warehouse",
+                "variant"=>"Retur",
+            ]);
+            $detail = TransactionDetail::create([
+                "transaction_id"=>$transaction->id,
+                "drug_id"=> $drug->id,
+                "expired"=>$batch->expired,
+                "name"=>$drug->name." 1 pcs",
+                "quantity"=>$request->quantity." pcs",
+                "piece_price"=>$drug->last_price,
+                "total_price"=>$request->quantity * $drug->last_price
+            ]);
+            $transaction->generate_code();
+            Retur::create([
+                "drug_id"=> $drug->id,
+                "transaction_id"=>$transaction->id,
+                "transaction_detail_id"=>$detail->id,
+                "source"=>$batch->id,
+                "quantity"=>$request->quantity * $drug->piece_netto,
+                "status"=>"Belum Kembali",
+                "reason"=>$request->reason,
+            ]);
+            $batch->stock = $batch->stock - $request->quantity*$drug->piece_netto;
+            $batch->save();
+            $warehouse = Warehouse::where('drug_id',$drug->id)->first();
+            $warehouse->quantity = $warehouse->quantity - $request->quantity*$drug->piece_netto;
+            $warehouse->save();
+            return redirect()->route('inventory.stocks.show',$drug->id);
         }
     }
     public function trash(Request $request,TransactionDetail $batch)

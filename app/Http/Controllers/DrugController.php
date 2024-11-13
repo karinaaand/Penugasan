@@ -21,6 +21,17 @@ class DrugController extends Controller
 
         return response()->json($drugs);
     }
+    public function getRepacks(Request $request)
+    {
+        $query = $request->input('query');
+        $drugs = Repack::where('name', 'like', "%{$query}%")->get();
+        $drugs = $drugs->map(function ($drug) {
+            $drug->stock = $drug->stock();
+            return $drug;
+        });
+
+        return response()->json($drugs);
+    }
 
     public function index(): View
     {

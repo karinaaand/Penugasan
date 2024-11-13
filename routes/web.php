@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
+Route::get('/drug-repack', [DrugController::class, 'getRepacks']);
 
 
 Route::get('/get-drug-price/{name}/{type}', function ($name,$type) {
@@ -64,6 +65,8 @@ Route::prefix("clinic")->as('clinic.')->group(function(){
     Route::resource('inflows',ClinicFlowController::class)->except([
         'edit','update','destroy'
     ]);
+    Route::match(['get','post'],"stocks/retur/{batch}",[ClinicStockController::class,"retur"])->name('retur');
+    Route::match(['get','post'],"stocks/trash/{batch}",[ClinicStockController::class,"trash"])->name('trash');
     Route::resource('stocks',ClinicStockController::class)->only([
         'index','show'
     ]);
