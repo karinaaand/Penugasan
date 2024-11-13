@@ -7,25 +7,25 @@
     <div class="rounded-lg bg-white p-6 shadow-lg grid grid-cols-2">
         <div class="flex flex-col gap-6">
             <div>
-                <label class="block font-bold">Nama Obat</label>
+                <label class="block font-bold text-gray-700">Nama Obat</label>
                 <p class="mt-1 text-gray-600">{{ $batch->drug()->name }}</p>
             </div>
             <div>
-                <label class="block font-bold">Produsen</label>
+                <label class="block font-bold text-gray-700">Produsen</label>
                 <p class="mt-1 text-gray-600">{{ $batch->drug()->manufacture()->name }}</p>
             </div>
             <div>
-                <label class="block font-bold">Tanggal Expired</label>
+                <label class="block font-bold text-gray-700">Tanggal Expired</label>
                 <p class="mt-1 text-gray-600">{{ Carbon::parse($batch->expired)->translatedFormat('j F Y') }}</p>
             </div>
             <div>
-                <label class="block font-bold">Tanggal Diterima</label>
+                <label class="block font-bold text-gray-700">Tanggal Diterima</label>
                 <p class="mt-1 text-gray-600">{{ Carbon::parse($batch->created_at)->translatedFormat('j F Y') }}</p>
             </div>
         </div>
         <div class="flex flex-col gap-6">
             <div>
-                <label class="block font-bold">Vendor Pengirim</label>
+                <label class="block font-bold text-gray-700">Vendor Pengirim</label>
                 <p class="mt-1 text-gray-600">{{ $batch->transaction()->first()->vendor()->name }}</p>
             </div>
             <div class="flex">
@@ -42,7 +42,7 @@
                 placeholder="Tuliskan alasan..."></textarea>
             <div class="flex justify-end">
                 <button onclick="showDeleteModal()"
-                    class="py-1 px-4 rounded-md bg-red-500 hover:bg-red-700 text-white">Buang</button>
+                    class="py-2 px-4 rounded-md bg-red-500 hover:bg-red-700 text-white">Buang</button>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
                     <input type="hidden" name="quantity">
                     <input type="hidden" name="reason">
                     <button type="reset" onclick="return closeDeleteModal()"
-                        class="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
                     <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
                 </form>
             </div>

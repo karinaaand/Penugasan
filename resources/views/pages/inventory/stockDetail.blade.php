@@ -7,6 +7,7 @@
             'LPK' => ($status = 'Klinik'),
             'Checkout' => ($status = 'Keluar'),
             'Trash' => ($status = 'Buang'),
+            'Retur' => ($status = 'Retur'),
         };
         return $status;
     }
@@ -52,9 +53,9 @@
         <h2 class="text-xl font-semibold my-6">STOK OBAT</h2>
         <!-- Table Stok Obat -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full leading-normal">
+            <table class="min-w-full text-sm text-center">
                 <thead>
-                    <tr class="bg-gray-200 text-black uppercase leading-normal">
+                    <tr class="bg-gray-200">
                         <th class="border p-2">No</th>
                         <th class="border p-2">Nama Packaging Obat</th>
                         <th class="border p-2">Margin</th>
@@ -62,43 +63,41 @@
                         <th class="border p-2">Harga Jual</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700 font-light">
+                <tbody class="text-gray-700">
                     @foreach ($drug->repacks() as $number => $item)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-center">{{ $number + 1 }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->name }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
-                            <td class="py-3 px-6 text-center">{{ floor($stock->quantity / $item->quantity) }}</td>
-                            <td class="py-3 px-6 text-center">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
+                            <td class="py-3 px-6">{{ $number + 1 }}</td>
+                            <td class="py-3 px-6 text-left">{{ $item->name }}</td>
+                            <td class="py-3 px-6">{{ $item->margin }}%</td>
+                            <td class="py-3 px-6">{{ floor($stock->quantity / $item->quantity) }}</td>
+                            <td class="py-3 px-6">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <h2 class="text-xl font-semibold my-4">KATEGORI BERDASARKAN EXP DATE</h2>
-        <!-- Table berdasarkan exp -->
+        <h2 class="text-xl font-semibold my-6">KATEGORI BERDASARKAN EXP DATE</h2>
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full leading-normal">
+            <table class="min-w-full text-sm text-center">
                 <thead>
-                    <tr class="bg-gray-200 text-black uppercase leading-normal">
+                    <tr class="bg-gray-200">
                         <th class="border p-2">No</th>
                         <th class="border p-2">Waktu Expired Obat</th>
                         <th class="border p-2">Jumlah</th>
                         <th class="border p-2">Action</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700 font-light">
-                    {{-- {{ dd($details) }} --}}
+                <tbody class="text-gray-700">
                     @foreach ($details as $number => $item)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-center">{{ $number + 1 }}</td>
-                            <td class="py-3 px-6 text-center">
+                            <td class="py-3 px-6">{{ $number + 1 }}</td>
+                            <td class="py-3 px-6">
                                 {{ Carbon::parse($item->expired)->translatedFormat('j F Y') }}</td>
-                            <td class="py-3 px-6 text-center">{{ floor($item->stock / $item->drug()->piece_netto) }}</td>
-                            <td class="py-3 px-6 text-center">
+                            <td class="py-3 px-6">{{ floor($item->stock / $item->drug()->piece_netto) }}</td>
+                            <td class="py-3 px-6">
                                 <div class="flex space-x-2 justify-center items-center">
                                     <a href="{{ route('inventory.retur', $item->id) }}"
-                                        class="p-2 rounded-lg shadow bg-yellow-300 transition-colors duration-200 flex items-center justify-center">
+                                        class="p-2 rounded-lg shadow bg-yellow-300 hover:bg-yellow-500 flex items-center justify-center">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -107,7 +106,7 @@
                                         </svg>
                                     </a>
                                     <a href="{{ route('inventory.trash', $item->id) }}"
-                                        class="p-2 rounded-lg shadow bg-pink-600 transition-colors duration-200 flex items-center justify-center">
+                                        class="p-2 rounded-lg shadow bg-red-600 hover:bg-red-800 flex items-center justify-center">
                                         <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -128,9 +127,9 @@
         <h2 class="text-xl font-semibold my-6">HISTORI TRANSAKSI</h2>
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div style="overflow-x: auto;"> <!-- Tambahkan style inline untuk scroll horizontal -->
-                <table class="min-w-full leading-normal">
+                <table class="min-w-full text-sm text-center">
                     <thead>
-                        <tr class="bg-gray-200 text-gray-700 uppercase leading-normal">
+                        <tr class="bg-gray-200">
                             <th class="border p-2">No</th>
                             <th class="border p-2">Jenis Packaging Obat</th>
                             <th class="border p-2">Margin</th>
@@ -143,14 +142,14 @@
                     <tbody class="text-gray-700 font-light">
                         @foreach ($transactions as $number => $item)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-center">{{ $number + 1 }}</td>
-                                <td class="py-3 px-6 text-center">{{ $item->name }}</td>
-                                <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6">{{ $number + 1 }}</td>
+                                <td class="py-3 px-6">{{ $item->name }}</td>
+                                <td class="py-3 px-6">{{ $item->margin }}%</td>
+                                <td class="py-3 px-6">
                                     {{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}</td>
-                                <td class="py-3 px-6 text-center">{{ $item->quantity }}</td>
-                                <td class="py-3 px-6 text-center">{{ getStatus($item->transaction->variant) }}</td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6">{{ $item->quantity }}</td>
+                                <td class="py-3 px-6">{{ getStatus($item->transaction->variant) }}</td>
+                                <td class="py-3 px-6">
                                     {{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}</td>
                             </tr>
                         @endforeach

@@ -23,8 +23,7 @@
                             <option value="cash">Bayar Langsung</option>
                             <option value="credit">Bayar Tempo</option>
                         </select>
-                        <input name="due" type="date" class="w-full rounded-e border border-gray-300 p-2"
-                            placeholder="Masukkan tanggal tempo" />
+                        <input name="due" type="date" class="w-full rounded-e border border-gray-300 p-2"/>
                     </div>
                 </div>
             </form>
@@ -46,13 +45,13 @@
                     <input name="price" type="number" class="w-full rounded border border-gray-300 p-2"
                         placeholder="Harga Satuan" />
                 </div>
-                <div class="grid grid-cols-2 gap-8">
+                <div class="grid grid-cols-2 gap-12">
                     <div class="flex">
                         <a class="w-full rounded-s border border-gray-300 p-2 bg-gray-200">EXP</a>
                         <input name="expired" type="date" class="w-full rounded-e border border-gray-300 p-2"
                             placeholder="Inputkan expired obat" />
                     </div>
-                    <button onclick="addStuff()" class="rounded-lg bg-purple-500 px-5 py-2 text-white hover:bg-purple-600 text-center">
+                    <button onclick="addStuff()" class="rounded-lg bg-blue-500 py-2 text-white hover:bg-blue-700 text-center">
                         Tambah
                     </button>
                 </div>
@@ -63,23 +62,23 @@
         <div class="mt-8">
             <div class="flex justify-between mb-4">
                 <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-                <button onclick="submitModal()" class="rounded-lg bg-green-500 px-12 py-2 text-white hover:bg-green-600 ">
-                    SAVE
+                <button onclick="submitModal()" class="rounded-lg bg-green-500 px-8 py-1 text-white hover:bg-green-600 ">
+                    Save
                 </button>
             </div>
             <div class="overflow-hidden rounded-lg bg-white shadow-md">
-                <table class="min-w-full leading-normal">
+                <table class="min-w-full text-sm">
                     <thead>
-                        <tr class="bg-gray-200 text-sm uppercase leading-normal text-black">
+                        <tr class="bg-gray-200">
                             <th class="border p-2">Nama Obat</th>
                             <th class="border p-2">Jumlah</th>
                             <th class="border p-2">Harga Satuan</th>
                             <th class="border p-2">Subtotal</th>
                             <th class="border p-2">Expired</th>
-                            <th class="border p-2">ACTION</th>
+                            <th class="border p-2">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm font-light text-gray-700" id="drugTable">
+                    <tbody class="text-gray-700" id="drugTable">
                     </tbody>
                 </table>
             </div>
@@ -177,7 +176,6 @@
             fetch(`/get-drug-price/${name}/${unitInput.value}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Mengisi field price dengan harga yang diterima dari server
                     document.querySelector("input[name='price']").value = data.price * (
                         quantityInput.value == 0 ? 1 : quantityInput.value);
                 })
@@ -188,7 +186,6 @@
             fetch(`/get-drug-price/${name}/${unitInput.value}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Mengisi field price dengan harga yang diterima dari server
                     document.querySelector("input[name='price']").value = data.price * quantityInput
                         .value;
                 })
@@ -199,8 +196,6 @@
         drugInput.addEventListener('input', function() {
             clearTimeout(timeout);
             const query = this.value;
-
-            // Tunda 500 ms sebelum kirim permintaan
             timeout = setTimeout(() => {
                 if (query.length > 0) {
                     fetch(`/drug-suggestions?query=${query}`)
@@ -225,7 +220,6 @@
                                             .then(response => response
                                                 .json())
                                             .then(data => {
-                                                // Mengisi field price dengan harga yang diterima dari server
                                                 document.querySelector(
                                                         "input[name='price']"
                                                     ).value = data
@@ -303,7 +297,7 @@
                             <td>${expired}</td>
                             <td class="py-2">
                                 <button type="button" onclick="showDeleteModal(${i})"
-                                    class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600 transition-colors duration-200">
+                                    class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600">
                                     <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z" fill="white"/>
                                     </svg>
@@ -345,16 +339,15 @@
             data = data.map(function(e) {
                 return {
                     name: e[0],
-                    quantity: parseInt(e[1]), // Convert quantity to integer
+                    quantity: parseInt(e[1]),
                     unit: e[2],
-                    piece_price: parseFloat(e[3]) / e[1], // Convert price to float and calculate piece price
-                    price: parseFloat(e[3]), // Convert total price to float
+                    piece_price: parseFloat(e[3]) / e[1], 
+                    price: parseFloat(e[3]), 
                     expired: e[4]
                 };
             });
             document.querySelector("input[name='total']").value = total
             document.querySelector("input[name='transaction']").value = JSON.stringify(data)
-            // document.querySelector("input[name='transaction']").value = JSON.stringify(data).replaceAll('{','[').replaceAll('}',']').replaceAll(':','=>')
             document.querySelector("form").submit()
     }
 </script>

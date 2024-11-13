@@ -8,25 +8,14 @@
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
             <h1 class="text-lg font-inter text-gray-800">sampai</h1>
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
-            <button class="rounded-2xl bg-indigo-500 px-3 font-bold text-sm font-inter text-white hover:bg-indigo-800"
+            <button class="rounded-2xl bg-blue-500 px-3 font-bold text-sm font-inter text-white hover:bg-blue-800"
                 type="submit">
-                APPLY
+                Apply
             </button>
         </form>
-        <div class="flex flex-1 justify-end">
-            <button id="printButton" class="rounded-lg text-lg font-inter bg-yellow-300 px-4 py-2 font-semibold text-black mb-4">CETAK</button>
+        <div class="flex flex-1 justify-end mb-5">
+            <button onclick="printModal()" class="rounded-lg bg-yellow-300 hover:bg-yellow-500 px-4 py-1 text-white">Cetak</button>
         </div>
-        <div id="printOptions" class="mb-4 hidden">
-            <label for="format" class="text-lg font-inter font-semibold">Pilih format cetak:</label>
-            <select id="format" class="ml-2 rounded-md border">
-                <option class="font-inter text-base" value="pdf">PDF</option>
-                <option class="font-inter text-base" value="excel">Excel</option>
-            </select>
-            <button id="confirmPrint" class="ml-2 rounded-lg font-inter text-lg  bg-green-500 px-4 py-2 font-bold text-white">
-                Download
-            </button>
-        </div>
-
         <div class="flex justify-end">
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
@@ -34,30 +23,30 @@
             </form>
         </div>
 
-        <div class="overflow-hidden rounded-lg bg-white shadow-md">
-            <table class="min-w-full leading-normal">
-                <thead class="bg-gray-200 text-sm">
-                    <th class="py-4 text-center text-base font-inter">NO</th>
-                    <th class="py-4 text-center text-base font-inter">KODE OBAT</th>
-                    <th class="py-4 text-center text-base font-inter">NAMA OBAT</th>
-                    <th class="py-4 text-center text-base font-inter">STOK</th>
-                    <th class="py-4 text-center text-base font-inter">EXP TERDEKAT</th>
-                    <th class="py-4 text-center text-base font-inter">EXP TERBARU</th>
-                    <th class="py-4 text-center text-base font-inter">ACTION</th>
+        <div class="overflow-hidden rounded-lg bg-white shadow-md mt-6">
+            <table class="min-w-full text-sm text-center">
+                <thead class="bg-gray-200">
+                    <th class="py-4">No</th>
+                    <th class="py-4">Kode Obat</th>
+                    <th class="py-4">Nama Obat</th>
+                    <th class="py-4">Stok</th>
+                    <th class="py-4">Expired Terdekat</th>
+                    <th class="py-4">Expired Terbaru</th>
+                    <th class="py-4">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($stocks as $number => $item)
                         
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 text-center text-base font-inter">{{ $number + 1 }}</td>
-                        <td class="py-3 text-center text-base font-inter">{{ $item->drug()->code }}</td>
-                            <td class="py-3 text-center text-base font-inter">{{ $item->drug()->name }}</td>
-                            <td class="py-3 text-center text-base font-inter">{{ floor($item->quantity/$item->drug()->piece_netto) }} pcs</td>
-                            <td class="py-3 text-center text-base font-inter">{{ Carbon::parse($item->oldest)->translatedFormat('j F Y') }}</td>
-                            <td class="py-3 text-center text-base font-inter">{{ Carbon::parse($item->latest)->translatedFormat('j F Y') }}</td>
+                        <td class="py-3">{{ $number + 1 }}</td>
+                        <td class="py-3">{{ $item->drug()->code }}</td>
+                            <td class="py-3 text-left">{{ $item->drug()->name }}</td>
+                            <td class="py-3">{{ floor($item->quantity/$item->drug()->piece_netto) }} pcs</td>
+                            <td class="py-3">{{ Carbon::parse($item->oldest)->translatedFormat('j F Y') }}</td>
+                            <td class="py-3">{{ Carbon::parse($item->latest)->translatedFormat('j F Y') }}</td>
                             <td class="flex justify-center py-3">
                                 <a href="{{ route('inventory.stocks.show', $item->drug()->id) }}"
-                                    class="rounded-md bg-indigo-200 p-1 hover:bg-indigo-500">
+                                    class="rounded-md bg-indigo-200 p-2 hover:bg-indigo-500">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -75,30 +64,58 @@
             {{ $stocks->links() }}
         </div>
     </div>
-@endsection
+    <div id="printModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
+            <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+                onclick="closePrintModal()">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13" />
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="text-center">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Apa format file yang ingin Anda simpan?</h3>
+                <p class="text-sm text-gray-500 mb-5">Pilihlah salah satu format file!</p>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button onclick="closePrintModal()"
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
+                    Excel
+                </button>
+                <button onclick="submitModal()" type="button"
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
+                    PDF
+                </button>
+            </div>
+        </div>
+    </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Event listener untuk tombol CETAK
-        document.getElementById('printButton').addEventListener('click', function() {
-            const printOptions = document.getElementById('printOptions');
-            // Toggle opsi cetak: sembunyikan atau tampilkan
-            if (printOptions.classList.contains('hidden')) {
-                printOptions.classList.remove('hidden');
-            } else {
-                printOptions.classList.add('hidden');
-            }
-        });
+    <script>
+        function printModal() {
+            document.getElementById('printModal').classList.remove('hidden');
+        }
 
-        // Event listener untuk tombol konfirmasi cetak
-        document.getElementById('confirmPrint').addEventListener('click', function() {
+        function closePrintModal() {
+            document.getElementById('printModal').classList.add('hidden');
+        }
+        document.getElementById('printButton').onclick = function() {
+            document.getElementById('printOptions').classList.toggle('invisible');
+        };
+        document.getElementById('confirmPrint').onclick = function() {
             const format = document.getElementById('format').value;
             if (format === 'pdf') {
                 alert('Mencetak dalam format PDF...');
             } else if (format === 'excel') {
                 alert('Mencetak dalam format Excel...');
             }
-            document.getElementById('printOptions').classList.add('hidden');
-        });
-    });
-</script>
+            document.getElementById('printOptions').classList.add('invisible');
+        };
+    </script>
+@endsection

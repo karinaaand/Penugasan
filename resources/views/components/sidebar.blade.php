@@ -435,7 +435,6 @@
     </div>
 </aside>
 
-<!-- Menambahkan Alpine.js ke dalam halaman -->
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 
 

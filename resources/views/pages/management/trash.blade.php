@@ -5,7 +5,6 @@
 
 @section('container')
     <div class="max-w-8xl w-full rounded-xl bg-white p-6 shadow-md">
-        <!-- Form lainnya dan tabel -->
         <form action="" class="flex w-max flex-row justify-between gap-3">
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
             <h1 class="text-lg font-inter text-gray-800">sampai</h1>
@@ -29,30 +28,30 @@
 
         <div class="container mx-auto p-4">
             <div class="overflow-hidden rounded-lg bg-white shadow-md">
-                <table class="min-w-full bg-white">
-                    <thead class="bg-gray-100 text-sm uppercase leading-normal text-gray-600">
+                <table class="min-w-full bg-white text-sm text-center">
+                    <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-6 py-3 text-center text-base font-inter">NO</th>
-                            <th class="px-6 py-3 text-center text-base font-inter">KODE BUANG</th>
-                            <th class="px-6 py-3 text-center text-base font-inter">NAMA OBAT</th>
-                            <th class="px-6 py-3 text-center text-base font-inter">JUMLAH BARANG</th>
-                            <th class="px-6 py-3 text-center text-base font-inter">TGL BUANG</th>
-                            <th class="px-6 py-3 text-base font-inter text-center"  style="width: 10%">ACTION</th>
+                            <th class="px-6 py-3">No</th>
+                            <th class="px-6 py-3">Kode Buang</th>
+                            <th class="px-6 py-3">Nama Obat</th>
+                            <th class="px-6 py-3">Jumlah</th>
+                            <th class="px-6 py-3">Tanggal Buang</th>
+                            <th class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm font-light text-gray-600">
+                    <tbody class="text-sm text-gray-600">
                         @foreach ($trashes as $number => $item)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-3 text-center text-base font-inter">{{ $number+1 }}</td>
-                            <td class="px-6 py-3 text-center text-base font-inter">{{ $item->transaction()->code }}</td>
-                            <td class="px-6 py-3 text-left text-base font-inter">{{ $item->drug()->name }}</td>
-                            <td class="px-6 py-3 text-center text-base font-inter">{{ $item->detail()->quantity }}</td>
-                            <td class="px-6 py-3 text-center text-base font-inter">{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
+                            <td class="px-6 py-3">{{ $number+1 }}</td>
+                            <td class="px-6 py-3">{{ $item->transaction()->code }}</td>
+                            <td class="px-6 py-3 text-left">{{ $item->drug()->name }}</td>
+                            <td class="px-6 py-3">{{ $item->detail()->quantity }}</td>
+                            <td class="px-6 py-3">{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
                      
                             <td class="flex justify-center py-3">
                                 <a
                                     href="{{ route('management.trash.show', $item->id) }}"
-                                    class="rounded-md bg-indigo-200 p-1 hover:bg-indigo-500"
+                                    class="rounded-md bg-indigo-200 p-2 hover:bg-indigo-500"
                                 >
                                     <svg
                                         width="20"

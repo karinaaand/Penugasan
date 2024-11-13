@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@php
+        use Carbon\Carbon;
+    @endphp
 @section('container')
     <div class="p-6 bg-white rounded-lg shadow-lg">
         <div class="mb-4">
@@ -10,24 +13,24 @@
         </div>
 
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full leading-normal text-sm">
+            <table class="min-w-full text-sm">
                 <thead>
-                    <tr class="bg-gray-200 text-black uppercase leading-normal">
-                        <th class="py-3 px-6 text-center">KODE LPB</th>
-                        <th class="py-3 px-6 text-center">NAMA VENDOR</th>
-                        <th class="py-3 px-6 text-center">TGL MASUK</th>
-                        <th class="py-3 px-6 text-center">ACTION</th>
+                    <tr class="bg-gray-200">
+                        <th class="py-3 px-6 text-center">Kode LPB</th>
+                        <th class="py-3 px-6 text-center">Nama Vendor</th>
+                        <th class="py-3 px-6 text-center">Tanggal Masuk</th>
+                        <th class="py-3 px-6 text-center">Action</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700 text-sm font-light">
+                <tbody class="text-gray-700">
                     @foreach ($transactions as $item)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-center">{{ $item->code }}</td>
                             <td class="py-3 px-6 text-center">{{ $item->vendor()->name }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->created_at }}</td>
+                            <td class="py-3 px-6 text-center">{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
                             <td class="flex justify-center py-3">
                                 <a href="{{ route('inventory.inflows.show', $item->id) }}"
-                                    class="bg-indigo-400 hover:bg-indigo-600 p-2 rounded-md">
+                                    class="bg-indigo-200 hover:bg-indigo-500 p-2 rounded-md">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

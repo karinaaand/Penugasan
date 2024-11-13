@@ -7,7 +7,7 @@
             <form action="{{ route('master.variant.store') }}" method="POST">
                 @csrf
                 <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4" placeholder="Inputkan Jenis obat">
-                <button class="bg-purple-500 text-white rounded-lg hover:bg-purple-600 px-6 py-2  ">Submit</button>
+                <button class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Submit</button>
             </form>
         </div>
 
@@ -20,22 +20,22 @@
     </div>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <table class="min-w-full leading-normal">
+        <table class="min-w-full text-sm text-center">
             <thead>
-                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-center w-1">NO</th>
-                    <th class="py-3 px-6 text-center">NAMA Jenis</th>
-                    <th class="py-3 px-6 text-center">ACTION</th>
+                <tr class="bg-gray-200">
+                    <th class="py-3 px-6  w-1">No</th>
+                    <th class="py-3 px-6">Nama Jenis</th>
+                    <th class="py-3 px-6">Action</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-700 text-sm font-light">
+            <tbody class="text-gray-700">
                 @foreach ($variants as $number=>$item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-center">{{ $loop->iteration + ($variants->currentPage() - 1) * $variants->perPage() }}</td>
+                        <td class="py-3 px-6">{{ $loop->iteration + ($variants->currentPage() - 1) * $variants->perPage() }}</td>
                         <td class="py-3 px-6 text-left">{{ $item->name }}</td>
-                        <td class="py-3 px-6 text-center flex justify-center">
+                        <td class="py-3 px-6 flex justify-center">
                             <a onclick="showEditModal('{{ $item->name }}','{{ $item->id }}')"
-                                class="flex items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
+                                class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                                 <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.728 9.68602L14.314 8.27202L5 17.586V19H6.414L15.728 9.68602ZM17.142 8.27202L18.556 6.85802L17.142 5.44402L15.728 6.85802L17.142 8.27202ZM7.242 21H3V16.757L16.435 3.32202C16.6225 3.13455 16.8768 3.02924 17.142 3.02924C17.4072 3.02924 17.6615 3.13455 17.849 3.32202L20.678 6.15102C20.8655 6.33855 20.9708 6.59286 20.9708 6.85802C20.9708 7.12319 20.8655 7.37749 20.678 7.56502L7.243 21H7.242Z" fill="white" />
                                 </svg>

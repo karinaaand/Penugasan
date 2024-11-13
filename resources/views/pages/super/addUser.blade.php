@@ -1,17 +1,15 @@
 @extends('layouts.main')
 @section('container')
     <div class="rounded-lg bg-white p-6 shadow-lg w-1/2 mx-auto">
-        <h2 class="mb-4 text-2xl font-bold">Add Account</h2>
-        
-        <!-- Tambah Username -->
-        <label class="mb-2 block text-lg font-medium">NAME</label>
+        <h2 class="mb-4 text-2xl font-bold">Buat Akun</h2>
+        <label class="mb-2 block text-lg font-medium">Nama</label>
         <div class="relative mb-4">
             <input type="text" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Masukkan Username"/>
+                placeholder="Masukkan nama"/>
         </div>
         
         <!-- Tambah Role -->
-        <label class="mb-2 block text-lg font-medium">ROLE</label>
+        <label class="mb-2 block text-md font-medium">Role</label>
         <div class="relative mb-4">
             <select class="w-full rounded border border-gray-300 p-3">
                 <option selected disabled>Inputkan Role</option>
@@ -22,28 +20,25 @@
         </div>
 
         <!-- Tambah Email -->
-        <label class="mb-2 block text-lg font-medium">E-MAIL</label>
+        <label class="mb-2 block text-md font-medium">Email</label>
         <div class="relative mb-4">
             <input type="text" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Masukkan E-mail"/>
+                placeholder="Masukkan email"/>
         </div>
 
-        <label class="mb-2 block text-lg font-medium">PASSWORD</label>
+        <label class="mb-2 block text-md font-medium">Kata Sandi</label>
         <!-- Tambah PASSWORD -->
         <div class="relative mb-4">
             <input type="password" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Masukkan Password"/>
+                placeholder="Masukkan kata sandi"/>
         </div>
 
         <!-- Save Button -->
-        <div class="flex justify-center">
-            <button id="save-button" onclick="showSaveModal()" class="rounded-lg bg-blue-500 px-8 py-2 text-white transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >SAVE</button>
-        </div>
+        <button id="save-button" onclick="showSaveModal()" class="w-full rounded-lg bg-blue-500 px-8 py-2 text-white transition duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Buat</button>
     </div>
     <div id="saveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
         <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-            <p class="text-center text-lg font-semibold mb-4">Apakah Anda yakin ingin menyimpan transaksi ini?</p>
+            <p class="text-center text-md font-semibold mb-4">Apakah Anda yakin ingin menyimpan transaksi ini?</p>
             <div class="flex justify-center space-x-4">
                     <button type="reset" onclick="return closeSaveModal()"
                         class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>

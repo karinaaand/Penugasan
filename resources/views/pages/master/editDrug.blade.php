@@ -146,12 +146,12 @@
                             </div>
                         </div>
                         <button type="submit"
-                            class="bg-purple-500 w-full mt-6 text-white rounded hover:bg-purple-700 px-6 py-2">Simpan</button>
+                            class="bg-blue-500 w-full mt-6 text-white rounded hover:bg-blue-700 px-6 py-2">Simpan</button>
                     </div>
                 </div>
                 <div class="mt-6 text-center">
                     <button type="submit"
-                        class="bg-purple-500 text-white rounded hover:bg-purple-600 px-6 py-2">Simpan</button>
+                        class="bg-blue-500 text-white rounded hover:bg-blue-700 px-6 py-2">Simpan</button>
                 </div>
             </form>
         </div>
@@ -185,29 +185,29 @@
                             %
                         </span>
                     </div>
-                    <button class="bg-green-500 text-white rounded hover:bg-green-600 px-4 py-2 ml-4 w-28">+ Add</button>
+                    <button class="bg-green-500 text-white rounded hover:bg-green-600 px-4 py-2 w-28">Tambah</button>
                 </div>
             </form>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <table class="min-w-full leading-normal">
+                <table class="min-w-full text-sm text-center">
                     <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-center">NO</th>
-                            <th class="py-3 px-6 text-center">NAMA</th>
-                            <th class="py-3 px-6 text-center">HARGA</th>
-                            <th class="py-3 px-6 text-center">MARGIN</th>
-                            <th class="py-3 px-6 text-center">ACTION</th>
+                        <tr class="bg-gray-200">
+                            <th class="py-3 px-6">No</th>
+                            <th class="py-3 px-6">Nama</th>
+                            <th class="py-3 px-6">Harga</th>
+                            <th class="py-3 px-6">Margin</th>
+                            <th class="py-3 px-6">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-700 text-sm font-light">
+                    <tbody class="text-gray-700">
                         @foreach ($repacks as $number => $item)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-center">{{ $number + 1 }}</td>
+                                <td class="py-3 px-6">{{ $number + 1 }}</td>
                                 <td class="py-3 px-6 text-left">{{ $item->name }}</td>
                                 <td class="py-3 px-6 text-left">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
                                 </td>
-                                <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6">{{ $item->margin }}%</td>
+                                <td class="py-3 px-6">
                                     <form action="{{ route('master.drug.repack.destroy', [$drug->id, $item->id]) }}"
                                         method="post">
                                         @csrf
@@ -229,36 +229,5 @@
                 </table>
             </div>
         </div>
-        @session('success')
-            <div id="toast-success"
-                class="fixed right-5 top-5 mb-4 flex w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow light:bg-gray-800 light:text-gray-400"
-                role="alert">
-                <div
-                    class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 light:bg-green-800 light:text-green-200">
-                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <span class="sr-only">Check icon</span>
-                </div>
-                <div class="ml-3 text-sm font-normal">{{ session('success') }}</div>
-                <button type="button" onclick=""
-                    class="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 light:bg-gray-800 light:text-gray-500 light:hover:bg-gray-700 light:hover:text-white"
-                    aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <script>
-            setTimeout(() => {
-                document.getElementById('toast-success').classList.add('hidden');
-            }, 2000);
-        </script>
-    @endsession
+        
 @endsection

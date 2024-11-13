@@ -5,14 +5,15 @@
         <input type="text" placeholder="Search" class="border rounded-full px-4 py-2">
     </div>
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <table class="min-w-full bg-white">
-            <thead class="bg-gray-100 text-gray-600">
+        <table class="min-w-full bg-white text-sm">
+            <thead class="bg-gray-200">
                 <tr>
                     <th class="py-2 px-4 text-center">NO</th>
                     <th class="py-2 px-4 text-center">KODE OBAT</th>
                     <th class="py-2 px-4 text-center">NAMA OBAT</th>
                     <th class="py-2 px-4 text-center">JUMLAH</th>
                     <th class="py-2 px-4 text-center">EXPIRED TERDEKAT</th>
+                    <th class="py-2 px-4 text-center">EXPIRED TERLAMA</th>
                     <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                     <td class="py-3 px-6 text-center">{{ $item->drug()->name }}</td>
                     <td class="py-3 px-6 text-center">{{ $item->quantity / $item->drug()->piece_netto }}</td>
                     <td class="py-3 px-6 text-center">{{ $item->oldest }}</td>
+                    <td class="py-3 px-6 text-center">{{ $item->latest }}</td>
                     <td class="flex justify-center py-3">
                         <a href="{{ route('clinic.stocks.show', $item->drug()->id) }}" class="bg-indigo-200 hover:bg-indigo-500 p-2 rounded-md">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

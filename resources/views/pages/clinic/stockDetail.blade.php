@@ -38,12 +38,37 @@
             </table>
         </div>
     </div>
-    <h2 class="text-xl font-semibold font-inter my-4 mt-4">KATEGORI BERDASARKAN EXP DATE</h2>
-    <!-- Table berdasarkan exp -->
+    <h2 class="text-xl font-semibold my-6">STOK OBAT</h2>
+        <!-- Table Stok Obat -->
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border p-2">No</th>
+                        <th class="border p-2">Nama Packaging Obat</th>
+                        <th class="border p-2">Margin</th>
+                        <th class="border p-2">Stok Konversi</th>
+                        <th class="border p-2">Harga Jual</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    @foreach ($drug->repacks() as $number => $item)
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-center">{{ $number + 1 }}</td>
+                            <td class="py-3 px-6 text-center">{{ $item->name }}</td>
+                            <td class="py-3 px-6 text-center">{{ $item->margin }}%</td>
+                            <td class="py-3 px-6 text-center">{{ floor($stock->quantity / $item->quantity) }}</td>
+                            <td class="py-3 px-6 text-center">{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    <h2 class="text-xl font-semibold font-inter my-6 mt-4">KATEGORI BERDASARKAN EXP DATE</h2>
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full leading-normal">
             <thead>
-                    <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
+                    <tr class="bg-gray-200 text-sm leading-normal">
                         <th class="border p-2">No</th>
                         <th class="border p-2">Waktu Expired Obat</th>
                         <th class="border p-2">Jumlah</th>
@@ -93,7 +118,7 @@
         <div style="overflow-x: auto;"> <!-- Tambahkan style inline untuk scroll horizontal -->
             <table class="min-w-full leading-normal">
                 <thead>
-                    <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+                    <tr class="bg-gray-200 text-sm leading-normal">
                         <th class="border p-2">No</th>
                         <th class="border p-2">Jenis Packaging Obat</th>
                         <th class="border p-2">Margin</th>

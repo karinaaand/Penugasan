@@ -6,25 +6,25 @@
         </title>
         <!-- Table -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full leading-normal">
+            <table class="min-w-full text-sm text-center">
                 <thead>
-                    <tr class="bg-gray-200 text-black uppercase leading-normal">
-                        <th class="py-3 px-6 text-center w-1">No</th>
-                        <th class="py-3 px-6 text-center">Kode Obat</th>
-                        <th class="py-3 px-6 text-center">Nama Obat</th>
-                        <th class="py-3 px-6 text-center">Jumlah</th>
-                        <th class="py-3 px-6 text-center">Expired Terdekat</th>
-                        <th class="py-3 px-6 text-center">Action</th>
+                    <tr class="bg-gray-200">
+                        <th class="py-3 px-6 w-1">No</th>
+                        <th class="py-3 px-6">Kode Obat</th>
+                        <th class="py-3 px-6">Nama Obat</th>
+                        <th class="py-3 px-6">Jumlah</th>
+                        <th class="py-3 px-6">Expired Terdekat</th>
+                        <th class="py-3 px-6">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 font-light">
                     @foreach ($stocks as $number => $item)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-center w-1">{{ $number + 1 }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->drug()->code }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->drug()->name }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->quantity / $item->drug()->piece_netto }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->oldest }}</td>
+                            <td class="py-3 px-6 w-1">{{ $number + 1 }}</td>
+                            <td class="py-3 px-6">{{ $item->drug()->code }}</td>
+                            <td class="py-3 px-6">{{ $item->drug()->name }}</td>
+                            <td class="py-3 px-6">{{ $item->quantity / $item->drug()->piece_netto }}</td>
+                            <td class="py-3 px-6">{{ $item->oldest }}</td>
                             <td class="flex justify-center py-3">
                                 <a href="{{ route('inventory.stocks.show', $item->drug()->id) }}"
                                     class="bg-indigo-200 hover:bg-indigo-500 p-2 rounded-md">
