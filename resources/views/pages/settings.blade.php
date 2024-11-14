@@ -100,7 +100,7 @@
     </div>
 @endsection
 <script>
-function uploadModal() {
+    function uploadModal() {
         document.getElementById('uploadModal').classList.remove('hidden');
     }
     function closeUploadModal() {
