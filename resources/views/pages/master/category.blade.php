@@ -10,20 +10,17 @@
                         placeholder="Kode">
                     <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4"
                         placeholder="Nama kategori obat">
-                    <button class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
+                    <button onclick="submitModal()" class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
                 </div>
             </form>
         </div>
-
         <div class="flex justify-end">
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
                     class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
             </form>
         </div>
-
     </div>
-
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full text-sm text-center">
             <thead>
@@ -63,44 +60,88 @@
     <div class="p-6">
         {{ $categories->links() }}
     </div>
-</div>
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-        <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
-        </p>
-        <div class="flex justify-center space-x-4">
-            <form id="deleteForm" method="POST" class="inline">
+    </div>
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-96 relative">
+            <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onclick="closeEditModal()">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <h2 class="text-center text-xl font-semibold mb-6">Edit Kategori</h2>
+            <form method="POST">
                 @csrf
-                @method('DELETE')
-                <button type="reset" onclick="return closeDeleteModal()"
-                    class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Cancel</button>
-                <button class="px-4 py-2 bg-red-500 text-white rounded-lg">Hapus</button>
+                @method('PUT')
+                <div class="mb-4">
+                    <label class="block text-start text-gray-700 mb-2" for="phone">Kode</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="code" name="code">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
+                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
+                </div>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <button type="button" id="closeModal" onclick="closeEditModal()"
+                        class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 w-full flex-1">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded-lg w-full flex-1">Edit</button>
+                </div>
             </form>
         </div>
     </div>
-</div>
-<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-8 w-96">
-        <h2 class="text-center text-xl font-semibold mb-6">Edit Kategori</h2>
-        <form method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-4">
-                <label class="block text-start text-gray-700 mb-2" for="phone">Kode</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="code" name="code">
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
+                <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onclick="closeDeleteModal()">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Anda yakin untuk menghapus data ini?</h3>
+                    <p class="text-sm text-gray-500 mb-5">Tindakan ini tidak dapat dibatalkan.</p>
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <form id="deleteForm" method="POST" class="inline">
+                        <button onclick="return closeDeleteModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
+                        Batal</button>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none">
+                            Hapus</button>
+                    </form>
+                </div>
             </div>
-            <div class="mb-4">
-                <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
             </div>
-            <div class="flex justify-center space-x-4 mt-4">
-                <button type="button" id="closeModal" onclick="closeEditModal()"
-                    class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 w-full flex-1">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded-lg w-full flex-1">Edit</button>
+        </div>
+        <div id="saveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
+                <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onclick="closeSaveModal()">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Apakah Anda yakin ingin menyimpan data ini?</h3>
+                    <p class="text-sm text-gray-500 mb-5">Pastikan semua data sudah benar sebelum menyimpan.</p>
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <button onclick="closeSaveModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
+                        Batal
+                    </button>
+                    <button onclick="submitForm()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                        Simpan
+                    </button>
+                </div>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 @endsection
 
 <script>
@@ -123,5 +164,11 @@
 
     function closeEditModal() {
         document.getElementById('editModal').classList.add('hidden');
+    }
+    function submitModal() {
+        document.getElementById('saveModal').classList.remove('hidden');
+    }
+    function closeSaveModal() {
+        document.getElementById('saveModal').classList.add('hidden');
     }
 </script>
