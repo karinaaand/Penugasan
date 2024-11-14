@@ -97,7 +97,7 @@ class ClinicFlowController extends Controller
                 }
             }
         };
-        return redirect()->route('clinic.inflows.show',$transaction->id);
+        return redirect()->route('clinic.inflows.show',$transaction->id)->with('success','Berhasil menambahkan obat');
         
     }
     public function show(string $inflows)

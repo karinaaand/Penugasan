@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory\Clinic;
+use App\Models\Inventory\Warehouse;
 use App\Models\Master\Drug;
+use App\Models\Transaction\Retur;
 use App\Models\Transaction\Transaction;
 use App\Models\Transaction\TransactionDetail;
 use App\Models\Transaction\Trash;
@@ -64,7 +66,7 @@ class ClinicStockController extends Controller
             $warehouse = Warehouse::where('drug_id',$drug->id)->first();
             $warehouse->quantity = $warehouse->quantity - $request->quantity*$drug->piece_netto;
             $warehouse->save();
-            return redirect()->route('inventory.stocks.show',$drug->id);
+            return redirect()->route('inventory.stocks.show',$drug->id)->with('success','Berhasil melakukan retur');
         }
     }
     public function trash(Request $request,TransactionDetail $batch)
@@ -103,7 +105,7 @@ class ClinicStockController extends Controller
             $warehouse = Clinic::where('drug_id',$drug->id)->first();
             $warehouse->quantity = $warehouse->quantity - $request->quantity*$drug->piece_netto;
             $warehouse->save();
-            return redirect()->route('inventory.stocks.show',$drug->id);
+            return redirect()->route('inventory.stocks.show',$drug->id)->with('success','Berhasil melakukan pembuangan');
         }
     }
 }

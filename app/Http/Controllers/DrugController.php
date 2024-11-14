@@ -27,6 +27,7 @@ class DrugController extends Controller
         $drugs = Repack::where('name', 'like', "%{$query}%")->get();
         $drugs = $drugs->map(function ($drug) {
             $drug->stock = $drug->stock();
+            $drug->drug = $drug->drug();
             return $drug;
         });
 
@@ -76,14 +77,16 @@ class DrugController extends Controller
         foreach ($repacks as $item) {
             $item->update_price();
         }
-        return redirect()->back();
+        return redirect()->back()->with('success','Berhasil mengubah data obat');
     }
     public function repack(Request $request, Drug $drug, Repack $repack)
     {
         if ($request->isMethod('DELETE')) {
             if ($repack->quantity != $drug->piece_quantity * $drug->piece_netto && $repack->quantity != $drug->piece_netto) {
                 $repack->delete();
+                return back()->with('success','Berhasil menghapus repack');
             }
+            return back()->with('error','Gagal menghapus repack');
         } else {
             $quantity = $request->quantity;
             if ($request->piece_unit == "pcs") {
@@ -97,16 +100,16 @@ class DrugController extends Controller
                 "margin" => $request->margin,
                 "price" => $drug->calculate_price($quantity, $request->margin)
             ]);
+            return back()->with('success','Berhasil membuat repack');
         }
-        return back();
     }
     public function destroy(Drug $drug)
     {
         try {
             $drug->delete();
-            return redirect()->back()->with('success', 'Obat berhasil dihapus')->setStatusCode(204);
+            return redirect()->back()->with('success', 'Obat berhasil dihapus');
         } catch (\Throwable $e) {
-            return redirect()->back()->with('error', 'Obat gagal dihapus')->setStatusCode(400);
+            return redirect()->back()->with('error', 'Obat gagal dihapus');
         }
     }
     function generateCode(Category $category): string
