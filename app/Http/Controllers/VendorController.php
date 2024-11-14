@@ -29,7 +29,7 @@ class VendorController extends Controller
             Vendor::create($validate);
             return redirect()->route('master.vendor.index')->with('success','Vendor berhasil dibuat');
         } catch (\Throwable $th) {
-            return redirect()->route('master.vendor.index')->with('success','Vendor gagal dibuat');
+            return redirect()->route('master.vendor.index')->with('error','Vendor gagal dibuat');
         }
     }
     public function edit(Vendor $vendor)
@@ -47,7 +47,7 @@ class VendorController extends Controller
             $vendor->delete();
             return back()->with('success', 'Vendor berhasil dihapus');
         } catch (\Throwable $e) {
-            return back()->with('success', 'Vendor gagal dihapus');
+            return back()->with('error', 'Vendor gagal dihapus');
         }
     }
 }

@@ -28,7 +28,7 @@ class ManagementController extends Controller
     {
         $bill->status = "Done";
         $bill->save();
-        return redirect()->route('management.bill.index');
+        return redirect()->route('management.bill.index')->with('success','Tagihan berhasil dibayarkan');
     }
     public function returs()
     {
@@ -75,10 +75,9 @@ class ManagementController extends Controller
     
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->with('error','Gagal mengembalikan obat');
         }
     
-        return redirect()->route('management.retur.index');
+        return redirect()->route('management.retur.index')->with('success','Berhasil mengembalikan obat');
     }
 }

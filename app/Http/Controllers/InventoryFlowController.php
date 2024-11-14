@@ -104,7 +104,7 @@ class InventoryFlowController extends Controller
             }
             $stock->save();
         };
-        return redirect()->route('inventory.inflows.show',$transaction->id);
+        return redirect()->route('inventory.inflows.show',$transaction->id)->with('success','Berhasil memasukkan obat');
     }
     public function show(string $inflows)
     {
