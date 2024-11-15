@@ -10,20 +10,17 @@
                         placeholder="Kode">
                     <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4"
                         placeholder="Nama kategori obat">
-                    <button class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
+                    <button onclick="submitModal()" class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
                 </div>
             </form>
         </div>
-
         <div class="flex justify-end">
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
                     class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
             </form>
         </div>
-
     </div>
-
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full text-sm text-center">
             <thead>
