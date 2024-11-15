@@ -9,7 +9,7 @@
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
             <h1 class="text-lg font-inter text-gray-800">sampai</h1>
             <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
-            <button class="rounded-2xl bg-blue-500 px-3 font-bold text-sm font-inter text-white hover:bg-blue-800" type="submit">
+            <button class="rounded-2xl bg-blue-500 px-3 font-bold text-sm text-white hover:bg-blue-800" type="submit">
                 Apply
             </button>
         </form>

@@ -65,10 +65,10 @@
         </div>
         @if ($bill->status == 'Belum Bayar')
             <div class="justify-end flex">
-                <form action="{{ route('management.bill.pay', $bill->id) }}" method="POST">
+                <form id="edit-bill-form" action="{{ route('management.bill.pay', $bill->id) }}" method="POST">
                     @csrf
-                    <button class="mt-3 bg-green-500 hover:bg-green-700 py-1 px-4 rounded-md text-white">Bayar</button>
                 </form>
+                <button onclick="showModal('save','edit-bill-form')" class="mt-3 bg-green-500 hover:bg-green-700 py-1 px-4 rounded-md text-white">Bayar</button>
 
             </div>
         @endif
@@ -94,11 +94,11 @@
                 <p class="text-sm text-gray-500 mb-5">Pilihlah salah satu format file!</p>
             </div>
             <div class="flex justify-center space-x-4">
-                <button onclick="closePrintModal()"
+                <button onclick=""
                     class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
                     Excel
                 </button>
-                <button onclick="submitModal()" type="button"
+                <button onclick="" type="button"
                     class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
                     PDF
                 </button>
@@ -110,21 +110,8 @@
         function printModal() {
             document.getElementById('printModal').classList.remove('hidden');
         }
-
         function closePrintModal() {
             document.getElementById('printModal').classList.add('hidden');
         }
-        document.getElementById('printButton').onclick = function() {
-            document.getElementById('printOptions').classList.toggle('invisible');
-        };
-        document.getElementById('confirmPrint').onclick = function() {
-            const format = document.getElementById('format').value;
-            if (format === 'pdf') {
-                alert('Mencetak dalam format PDF...');
-            } else if (format === 'excel') {
-                alert('Mencetak dalam format Excel...');
-            }
-            document.getElementById('printOptions').classList.add('invisible');
-        };
     </script>
 @endsection

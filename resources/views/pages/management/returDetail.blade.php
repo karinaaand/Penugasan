@@ -41,10 +41,10 @@
         <textarea disabled name="inputReason" rows="4" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{ $retur->reason }}</textarea>
         @if ($retur->status == "Belum Kembali")
             <div class="justify-end flex">
-                <form action="{{ route('management.retur.pay',$retur->id) }}" method="POST">
+                <form id="edit-retur-form" action="{{ route('management.retur.pay',$retur->id) }}" method="POST">
                     @csrf
-                    <button class="mt-3 bg-orange-500 hover:bg-orange-700 py-1 px-4 rounded-md text-white">Diterima</button>
                 </form>
+                <button onclick="showModal('save','edit-retur-form')" class="mt-3 bg-orange-500 hover:bg-orange-700 py-1 px-4 rounded-md text-white">Diterima</button>
     
             </div>
                 
