@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('warehouse_inventory', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Drug::class);
+            $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->date('oldest')->nullable();
             $table->date('latest')->nullable();
@@ -19,7 +19,7 @@ return new class extends Migration
         });
         Schema::create('clinic_inventory', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Drug::class);
+            $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->date('oldest')->nullable();
             $table->date('latest')->nullable();
