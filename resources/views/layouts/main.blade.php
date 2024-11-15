@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    @include('components.modal')
     @include('components.sidebar')
     <div class="sm:ml-64">
         @include('components.header')
