@@ -8,6 +8,7 @@ use App\Models\Master\Drug;
 use App\Models\Master\Manufacture;
 use App\Models\Master\Repack;
 use App\Models\Master\Variant;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -106,6 +107,9 @@ class DrugController extends Controller
     public function destroy(Drug $drug)
     {
         try {
+            if ($drug->warehouse->quantity > 0 || $drug->clinic->quantity > 0) {
+                throw new Exception('Division by zero.');
+            }
             $drug->delete();
             return redirect()->back()->with('success', 'Obat berhasil dihapus');
         } catch (\Throwable $e) {

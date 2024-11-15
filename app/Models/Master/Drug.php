@@ -31,6 +31,9 @@ class Drug extends Model
     public function warehouse(){
         return $this->hasOne(Warehouse::class);
     }
+    public function clinic(){
+        return $this->hasOne(Clinic::class);
+    }
     public function default_repacks(){
         Repack::create([
             "drug_id"=>$this->id,
