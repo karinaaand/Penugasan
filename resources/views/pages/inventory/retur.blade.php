@@ -1,6 +1,6 @@
 @php
     use Carbon\Carbon;
-@endphp
+    @endphp
 @extends('layouts.main')
 
 @section('container')
@@ -23,48 +23,30 @@
             <p class="mt-1 text-gray-600">{{ Carbon::parse($batch->created_at)->translatedFormat('j F Y') }}</p>
         </div>
     </div>
+    <form id="create-retur-form" method="POST" action="{{ route('inventory.retur',$batch->id) }}" class="inline">
+        @csrf
     <div class="flex flex-col gap-6">
         <div>
             <label class="block text-md font-bold">Vendor Pengirim</label>
             <p class="mt-1 text-gray-600">{{ $batch->transaction()->first()->vendor()->name }}</p>
         </div>
         <div class="flex">
-            <input type="number" id="inputQuantity" name="inputQuantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="0">
+            <input type="number" id="quantity" name="quantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="0">
             <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
                 pcs
             </span>
         </div>
-        <textarea name="inputReason" rows="4" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Tuliskan alasan..."></textarea>
+        <textarea name="reason" rows="4" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Tuliskan alasan..."></textarea>
         <div class="flex justify-end">
-            <button onclick="showDeleteModal()" class="py-1 px-4 rounded-md bg-orange-500 hover:bg-orange-600 text-white">Retur</button>
+            <button class="py-1 px-4 rounded-md bg-orange-500 hover:bg-orange-600 text-white">Retur</button>
         </div>
     </div>
-</div>
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center z-50 justify-center hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-        <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk mengembalikan obat ini?
-        </p>
-        <div class="flex justify-center space-x-4">
-            <form id="deleteForm" method="POST" action="{{ route('inventory.retur',$batch->id) }}" class="inline">
-                @csrf
-                <input type="hidden" name="quantity">
-                <input type="hidden" name="reason">
-                <button type="reset" onclick="return closeDeleteModal()"
-                    class="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-lg">Retur</button>
-            </form>
-        </div>
-    </div>
+</form>
 </div>
 <script>
-    function showDeleteModal() {
-        document.getElementById('deleteModal').classList.remove('hidden');
-        document.querySelector('input[name=quantity]').value = document.querySelector('input[name=inputQuantity]').value
-        document.querySelector('input[name=reason]').value = document.querySelector('textarea[name=inputReason]').value
-    }
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
-
+    document.getElementById('create-retur-form').addEventListener('submit',function(e){
+                e.preventDefault()
+                showModal('save','create-retur-form')
+            })
 </script>
 @endsection
