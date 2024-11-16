@@ -72,10 +72,10 @@ use App\Models\Transaction\Trash;
                         </a></td>
                     @elseif ($item->variant == 'Trash')
                     <td class="text-center py-3">
-                        {{ 'Rp ' . number_format($item->details()->sum('total_price'), 0, ',', '.') }}
+                        {{ '- Rp ' . number_format($item->details()->sum('total_price'), 0, ',', '.') }}
                     </td>
                     <td class="flex justify-center py-3"><a
-                            href="{{ route('inventory.inflows.show', $item->id) }}"
+                            href="{{ route('management.trash.show', $item->id) }}"
                             class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md"><svg width="20"
                                 height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -86,10 +86,10 @@ use App\Models\Transaction\Trash;
                         </a></td>
                     @elseif ($item->variant == 'Retur')
                     <td class="text-center py-3">
-                        {{ 'Rp ' . number_format($item->details()->sum('total_price'), 0, ',', '.') }}
+                        {{ '- Rp ' . number_format($item->details()->sum('total_price'), 0, ',', '.') }}
                     </td>
                     <td class="flex justify-center py-3"><a
-                            href="{{ route('inventory.inflows.show', $item->id) }}"
+                            href="{{ route('management.retur.show', $item->id) }}"
                             class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md"><svg width="20"
                                 height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
