@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div id="deleteItem" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
             <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onclick="closeDeleteModal()">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -283,11 +283,11 @@
     
         function showDeleteModal(index) {
             deleteForItem = index;
-            document.getElementById('deleteModal').classList.remove('hidden');
+            document.getElementById('deleteItem').classList.remove('hidden');
         }
     
         function closeDeleteModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
+            document.getElementById('deleteItem').classList.add('hidden');
         }
         function uploadModal() {
             document.getElementById('uploadModal').classList.remove('hidden');
