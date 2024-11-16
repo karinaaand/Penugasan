@@ -13,11 +13,11 @@
             <table class="min-w-full text-sm text-center">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="w-1 py-3 px-6 w-1">NO</th>
-                        <th class="w-32 py-3 px-6">NAME</th>
-                        <th class="w-24 py-3 px-6">ROLE</th>
-                        <th class="w-24 py-3 px-6">EMAIL</th>
-                        <th class="w-48 py-3 px-6">ACTION</th>
+                        <th class="w-1 py-3 px-6 w-1">No</th>
+                        <th class="w-32 py-3 px-6">Nama</th>
+                        <th class="w-24 py-3 px-6">Role</th>
+                        <th class="w-24 py-3 px-6">Email</th>
+                        <th class="w-48 py-3 px-6">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">

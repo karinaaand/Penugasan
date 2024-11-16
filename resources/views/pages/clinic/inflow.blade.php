@@ -14,12 +14,12 @@
         <div class="bg-white shadow-md rounded-lg overflow-hidden w-full">
             <table class="min-w-full bg-white">
                 <thead>
-                    <tr class="bg-gray-200 text-black uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-center w-1">NO</th>
-                        <th class="py-3 px-6 text-center">KODE LPB</th>
-                        <th class="py-3 px-6 text-center">NAMA VENDOR</th>
-                        <th class="py-3 px-6 text-center">TGL MASUK</th>
-                        <th class="py-3 px-6 text-center">ACTION</th>
+                    <tr class="bg-gray-200 text-black text-sm leading-normal">
+                        <th class="py-3 px-6 text-center w-1">No</th>
+                        <th class="py-3 px-6 text-center">Kode LPB</th>
+                        <th class="py-3 px-6 text-center">Nama Vendor</th>
+                        <th class="py-3 px-6 text-center">Tanggal Masuk</th>
+                        <th class="py-3 px-6 text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 text-sm font-light">

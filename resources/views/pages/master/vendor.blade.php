@@ -17,7 +17,7 @@
             <thead>
                 <tr class="bg-gray-200">
                     <th class="py-3 px-6  w-1">No</th>
-                    <th class="py-3 px-6">Nama Produsen</th>
+                    <th class="py-3 px-6">Nama Vendor</th>
                     <th class="py-3 px-6">Telepon</th>
                     <th class="py-3 px-6">Alamat</th>
                     <th class="py-3 px-6">Action</th>

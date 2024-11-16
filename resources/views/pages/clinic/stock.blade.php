@@ -8,13 +8,13 @@
         <table class="min-w-full bg-white text-sm">
             <thead class="bg-gray-200">
                 <tr>
-                    <th class="py-2 px-4 text-center w-1">NO</th>
-                    <th class="py-2 px-4 text-center">KODE OBAT</th>
-                    <th class="py-2 px-4 text-center">NAMA OBAT</th>
-                    <th class="py-2 px-4 text-center">JUMLAH</th>
-                    <th class="py-2 px-4 text-center">EXPIRED TERDEKAT</th>
-                    <th class="py-2 px-4 text-center">EXPIRED TERLAMA</th>
-                    <th class="py-3 px-6 text-center" style="width: 10%;">ACTION</th>
+                    <th class="py-2 px-4 text-center w-1">No</th>
+                    <th class="py-2 px-4 text-center">Kode Obat</th>
+                    <th class="py-2 px-4 text-center">Nama Obat</th>
+                    <th class="py-2 px-4 text-center">Jumlah</th>
+                    <th class="py-2 px-4 text-center">Expired Terdekat</th>
+                    <th class="py-2 px-4 text-center">Expired Terlama</th>
+                    <th class="py-3 px-6 text-center" style="width: 10%;">Action</th>
                 </tr>
             </thead>
             <tbody>

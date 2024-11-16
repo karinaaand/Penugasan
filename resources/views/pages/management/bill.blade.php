@@ -24,13 +24,13 @@
         <table class="min-w-full text-sm text-center">
             <thead>
                 <tr class="bg-gray-100">
-                    <th class="py-3 px-6" style="width: 10%;">NO</th>
-                    <th class="py-3 px-6" style="width: 15%;">KODE LPB</th>
-                    <th class="py-3 px-6" style="width: 20%;">TANGGAL DATANG</th>
-                    <th class="py-3 px-6" style="width: 20%;">JATUH TEMPO</th>
-                    <th class="py-3 px-6" style="width: 15%;">SUBTOTAL</th>
-                    <th class="py-3 px-6" style="width: 20%;">STATUS</th>
-                    <th class="py-3 px-6" style="width: 10%;">ACTION</th>
+                    <th class="py-3 px-6" style="width: 10%;">No</th>
+                    <th class="py-3 px-6" style="width: 15%;">Kode LPB</th>
+                    <th class="py-3 px-6" style="width: 20%;">Tanggal Datang</th>
+                    <th class="py-3 px-6" style="width: 20%;">Jatuh Tempo</th>
+                    <th class="py-3 px-6" style="width: 15%;">Subtotal</th>
+                    <th class="py-3 px-6" style="width: 20%;">Status</th>
+                    <th class="py-3 px-6" style="width: 10%;">Action</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700">

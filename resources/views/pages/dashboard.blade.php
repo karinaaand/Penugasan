@@ -10,7 +10,7 @@
                     <button onclick="filterNotifications('all', this)" class="filter-btn bg-blue-500 text-white px-3 py-1 rounded-full flex-grow">ALL</button>
                     <button onclick="filterNotifications('expired', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">EXPIRED</button>
                     <button onclick="filterNotifications('stok', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">STOK</button>
-                    <button onclick="filterNotifications('jatuh-tempo', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">Jatuh Tempo</button>
+                    <button onclick="filterNotifications('jatuh-tempo', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">JATUH TEMPO</button>
                 </div>
                 <ul id="notification-list" class="space-y-4 max-h-[50vh] overflow-y-auto">
                     <li class="notification-item all jatuh-tempo flex items-center justify-between px-4 py-2 rounded-lg">

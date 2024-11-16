@@ -46,11 +46,11 @@
         <table class="min-w-full leading-normal text-sm">
             <thead>
                 <tr class="bg-gray-200 text-center">
-                    <th class="p-2 text-center">NO</th>
-                    <th class="p-2 text-center">KODE OBAT</th>
-                    <th class="p-2 text-center">NAMA OBAT</th>
-                    <th class="p-2 text-center">JUMLAH</th>
-                    <th class="p-2 text-center">ACTION</th>
+                    <th class="p-2 text-center">No</th>
+                    <th class="p-2 text-center">Kode Obat</th>
+                    <th class="p-2 text-center">Nama Obat</th>
+                    <th class="p-2 text-center">Jumlah</th>
+                    <th class="p-2 text-center">Action</th>
                 </tr>
             </thead>
             <tbody id="drugTable">
