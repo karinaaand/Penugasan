@@ -185,7 +185,7 @@
                             %
                         </span>
                     </div>
-                    <button class="bg-green-500 text-white rounded hover:bg-green-600 px-4 py-2 w-28">Tambah</button>
+                    <button class="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-2 w-28">Tambah</button>
                 </div>
             </form>
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
