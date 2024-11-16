@@ -47,7 +47,7 @@
                 Batal
             </button>
             <button onclick="submitForm()" type="button"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                 Simpan
             </button>
         </div>
@@ -79,7 +79,7 @@
                 Batal
             </button>
             <button onclick="submitForm()" type="button"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                 Simpan
             </button>
         </div>
