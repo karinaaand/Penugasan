@@ -25,7 +25,7 @@ use Carbon\Carbon;
             <thead class="bg-gray-100">
                 <tr>
                     <th class="px-6 py-3">No</th>
-                    <th class="px-6 py-3">Kode Buang</th>
+                    <th class="px-6 py-3">Kode Retur</th>
                     <th class="px-6 py-3">Nama Obat</th>
                     <th class="px-6 py-3">Jumlah</th>
                     <th class="px-6 py-3">Tanggal Retur</th>
