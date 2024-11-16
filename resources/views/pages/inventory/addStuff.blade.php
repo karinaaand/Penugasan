@@ -70,12 +70,13 @@
                 <table class="min-w-full text-sm">
                     <thead>
                         <tr class="bg-gray-200">
-                            <th class="border p-2">Nama Obat</th>
-                            <th class="border p-2">Jumlah</th>
-                            <th class="border p-2">Harga Satuan</th>
-                            <th class="border p-2">Subtotal</th>
-                            <th class="border p-2">Expired</th>
-                            <th class="border p-2">Action</th>
+                            <th class="border p-2 text-center w-1">No</th> 
+                            <th class="border p-2 text-center">Nama Obat</th>
+                            <th class="border p-2 text-center">Jumlah</th>
+                            <th class="border p-2 text-center">Harga Satuan</th>
+                            <th class="border p-2 text-center">Subtotal</th>
+                            <th class="border p-2 text-center">Expired</th>
+                            <th class="border p-2 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700" id="drugTable">
@@ -263,6 +264,7 @@
             [drug, quantity, unit, price, expired] = datainput
             total += parseInt(price)
             return `<tr class="border-b border-gray-200 hover:bg-gray-100 text-center">
+                                <td>${i + 1}</td>
                                 <td class="text-left">${drug}</td>
                                 <td>${quantity} ${unit}</td>
                                 <td>${price/quantity}</td>
