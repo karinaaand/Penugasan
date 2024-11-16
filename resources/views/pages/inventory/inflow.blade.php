@@ -7,7 +7,7 @@
         <div class="mb-4">
             <a href="{{ route('inventory.inflows.create') }}">
                 <button
-                    class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+
+                    class="bg-blue-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors duration-200">+
                     Tambah</button>
             </a>
         </div>
@@ -16,6 +16,7 @@
             <table class="min-w-full text-sm">
                 <thead>
                     <tr class="bg-gray-200">
+                        <th class="py-3 px-6 text-center w-1">No</th>
                         <th class="py-3 px-6 text-center">Kode LPB</th>
                         <th class="py-3 px-6 text-center">Nama Vendor</th>
                         <th class="py-3 px-6 text-center">Tanggal Masuk</th>
@@ -25,12 +26,13 @@
                 <tbody class="text-gray-700">
                     @foreach ($transactions as $item)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6">{{ $loop->iteration + ($transactions->currentPage() - 1) * $transactions->perPage() }}</td>
                             <td class="py-3 px-6 text-center">{{ $item->code }}</td>
-                            <td class="py-3 px-6 text-center">{{ $item->vendor()->name }}</td>
+                            <td class="py-3 px-6 text-left">{{ $item->vendor()->name }}</td>
                             <td class="py-3 px-6 text-center">{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
                             <td class="flex justify-center py-3">
                                 <a href="{{ route('inventory.inflows.show', $item->id) }}"
-                                    class="bg-indigo-200 hover:bg-indigo-500 p-2 rounded-md">
+                                    class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

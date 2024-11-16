@@ -62,8 +62,8 @@
         <div class="mt-8">
             <div class="flex justify-between mb-4">
                 <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-                <button onclick="buatModal()" class="rounded-lg bg-green-500 px-8 py-1 text-white hover:bg-green-600 ">
-                    Save
+                <button onclick="buatModal()" class="rounded-lg bg-blue-500 px-8 py-1 text-white hover:bg-blue-600 ">
+                    Simpan
                 </button>
             </div>
             <div class="overflow-hidden rounded-lg bg-white shadow-md">
@@ -131,7 +131,7 @@
                 <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                     Batal
                 </button>
-                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                     Tambah
                 </button>
             </div>
@@ -263,7 +263,7 @@
             [drug, quantity, unit, price, expired] = datainput
             total += parseInt(price)
             return `<tr class="border-b border-gray-200 hover:bg-gray-100 text-center">
-                                <td>${drug}</td>
+                                <td class="text-left">${drug}</td>
                                 <td>${quantity} ${unit}</td>
                                 <td>${price/quantity}</td>
                                 <td>${price}</td>

@@ -5,7 +5,7 @@
 @section('container')
 <div class="mb-4 flex items-center">
             <div class="flex flex-1 justify-end mr-5">
-                <button onclick="uploadModal()" class="rounded-lg bg-yellow-300 hover:bg-yellow-500 px-4 py-1 text-white">Cetak</button>
+                <button onclick="uploadModal()" class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-1 text-white">Cetak</button>
             </div>
         </div>
     <div class="rounded-lg bg-white p-6 shadow-lg">
@@ -74,10 +74,10 @@
                 <p class="text-sm text-gray-500 mb-5">Pilihlah salah satu format file!</p>
             </div>
             <div class="flex justify-center space-x-4">
-                <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
+                <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     Excel
                 </button>
-                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
+                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     PDF
                 </button>
             </div>
