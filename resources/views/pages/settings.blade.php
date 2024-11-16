@@ -38,7 +38,7 @@
 
         <!-- Save Button -->
         <div class="flex justify-end space-x-4"> 
-            <button onclick="saveModal()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+            <button onclick="saveModal()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
                 Simpan
             </button>
         </div>
@@ -67,7 +67,7 @@
                 <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                     Batal
                 </button>
-                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
                     Tambah
                 </button>
             </div>
