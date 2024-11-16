@@ -2,7 +2,7 @@
 @section('container')
     <div class="p-6 bg-white rounded-lg shadow-lg">
         <div class="flex justify-between items-center mb-4">
-                <button onclick="showTambahModal()" class="bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition-colors duration-200">+
+                <button onclick="showTambahModal()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition-colors duration-200">+
                     Tambah User</button>
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
@@ -97,7 +97,7 @@
                         <button onclick="closeAddUserModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                             Batal
                         </button>
-                        <button onclick="addUserModal()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                        <button onclick="addUserModal()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                             Simpan
                         </button>
                     </div>
@@ -151,7 +151,7 @@
                     <button onclick="closeEditModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                         Batal
                     </button>
-                    <button onclick="submitEdirForm()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                    <button onclick="submitEdirForm()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                         Simpan
                     </button>
                 </div>
@@ -205,7 +205,7 @@
                 <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                     Batal
                 </button>
-                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                     Tambah
                 </button>
             </div>
@@ -230,7 +230,7 @@
                 <button onclick="closeSaveModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                     Batal
                 </button>
-                <button onclick="submitForm()" type="button" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none">
+                <button onclick="submitForm()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                     Simpan
                 </button>
             </div>
@@ -266,6 +266,7 @@
 
     function addUserModal() {
         document.getElementById('saveModal').classList.remove('hidden');
+        document.getElementById('tambahModal').classList.add('hidden');
     }
 
     function closeAddUserModal() {
@@ -280,6 +281,7 @@
     }
     function submitEdirForm() {
         document.getElementById('saveModal').classList.remove('hidden');
+        document.getElementById('editModal').classList.add('hidden');
     }
 
     function closeSubmitEdirForm() {
