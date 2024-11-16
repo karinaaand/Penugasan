@@ -6,7 +6,7 @@
     <div class="mb-4 flex items-center">
         <div class="flex flex-1 justify-end mr-5">
             <button onclick="printModal()"
-                class="rounded-lg bg-yellow-300 hover:bg-yellow-500 px-4 py-1 text-white">Cetak</button>
+                class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-1 text-white">Cetak</button>
         </div>
     </div>
     <div class="rounded-lg bg-white p-6 shadow-lg">
@@ -68,7 +68,7 @@
                 <form id="edit-bill-form" action="{{ route('management.bill.pay', $bill->id) }}" method="POST">
                     @csrf
                 </form>
-                <button onclick="showModal('save','edit-bill-form')" class="mt-3 bg-green-500 hover:bg-green-700 py-1 px-4 rounded-md text-white">Bayar</button>
+                <button onclick="showModal('save','edit-bill-form')" class="mt-3 bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded-md text-white">Bayar</button>
 
             </div>
         @endif
@@ -95,11 +95,11 @@
             </div>
             <div class="flex justify-center space-x-4">
                 <button onclick=""
-                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     Excel
                 </button>
                 <button onclick="" type="button"
-                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-green-500 focus:outline-none">
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     PDF
                 </button>
             </div>

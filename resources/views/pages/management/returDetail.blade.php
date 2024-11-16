@@ -44,7 +44,7 @@
                 <form id="edit-retur-form" action="{{ route('management.retur.pay',$retur->id) }}" method="POST">
                     @csrf
                 </form>
-                <button onclick="showModal('save','edit-retur-form')" class="mt-3 bg-orange-500 hover:bg-orange-700 py-1 px-4 rounded-md text-white">Diterima</button>
+                <button onclick="showModal('save','edit-retur-form')" class="mt-3 bg-blue-500 hover:bg-blue-700 py-1 px-4 rounded-md text-white">Diterima</button>
     
             </div>
                 
