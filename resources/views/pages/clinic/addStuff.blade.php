@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('container')
+<input type="hidden" name="expired">
 <div class="space-y-4">
     <div class="grid grid-cols-2 gap-4">
         <input type="hidden" name="code">
@@ -145,6 +146,7 @@
                                         document.getElementById('drugInput')
                                             .value = item.name;
                                         suggestions.classList.add('hidden');
+                                        document.querySelector("input[name='expired']").value = item.warehouse.latest
                                         document.querySelector("input[name='code']").value = item.code
                                         document.querySelector("input[name='sisa']").value = Math.floor(item.warehouse.quantity / item.piece_netto);
                                         document.querySelector("input[name='quantity']").setAttribute('max', Math.floor(item.warehouse.quantity / item.piece_netto))
@@ -168,7 +170,8 @@
         let code = document.querySelector("input[name='code']")
         let drug = document.querySelector("input[name='drug']")
         let quantity = document.querySelector("input[name='quantity']")
-        let input = [code, drug, quantity]
+        let expired = document.querySelector("input[name='expired']")
+        let input = [code, drug, quantity,expired]
         let datainput = input.map(e => e.value)
         const status = true
         datainput.forEach(e => {
@@ -193,12 +196,13 @@
     }
 
     function row(datainput, i) {
-        [code, drug, quantity] = datainput
+        [code, drug, quantity,expired] = datainput
         return `<tr class="border-b text-center">
                         <td class="p-2 text-center">${i+1}</td>
                         <td class="p-2 text-center">${code}</td>
                         <td class="p-2 text-center">${drug}</td>
                         <td class="p-2 text-center">${quantity}</td>
+                        <td class="p-2 text-center">${expired}</td>
                         <td class="py-2">
                             <button type="button" onclick="deleteItem()"
                             class="rounded-md bg-red-500 hover:bg-red-700 p-2">
