@@ -41,7 +41,6 @@ class InventoryFlowController extends Controller
                 "transaction_id"=>$transaction->id,
                 "total"=>$transaction->outcome,
                 "status"=>"Belum Bayar",
-                "arrive"=>$transaction->created_at,
                 "due"=>$request->due
             ]);
         };

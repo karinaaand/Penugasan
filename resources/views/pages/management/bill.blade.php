@@ -24,26 +24,27 @@
         <table class="min-w-full text-sm text-center">
             <thead>
                 <tr class="bg-gray-100">
-                    <th class="py-3 px-6" style="width: 10%;">No</th>
-                    <th class="py-3 px-6" style="width: 15%;">Kode LPB</th>
-                    <th class="py-3 px-6" style="width: 20%;">Tanggal Datang</th>
-                    <th class="py-3 px-6" style="width: 20%;">Jatuh Tempo</th>
-                    <th class="py-3 px-6" style="width: 20%;">Tanggal Pembayaran</th>
-                    <th class="py-3 px-6" style="width: 15%;">Subtotal</th>
-                    <th class="py-3 px-6" style="width: 20%;">Status</th>
-                    <th class="py-3 px-6" style="width: 10%;">Action</th>
+                    <th class="py-3 px-4 w-1">No</th>
+                    <th class="px-4">Kode LPB</th>
+                    <th class="px-4">Tanggal Datang</th>
+                    <th class="px-4">Jatuh Tempo</th>
+                    <th class="px-4">Tanggal Pembayaran</th>
+                    <th class="px-4">Subtotal</th>
+                    <th class="px-4">Status</th>
+                    <th class="px-4 w-1">Action</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700">
                 @foreach ($bills as $number => $item)
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-3 px-6">{{ $number+1 }}</td>
-                    <td class="py-3 px-6">{{ $item->transaction()->code }}</td>
-                    <td class="py-3 px-6">{{ Carbon::parse($item->arrive)->translatedFormat('j F Y') }}</td>
-                    <td class="py-3 px-6">{{ Carbon::parse($item->due)->translatedFormat('j F Y') }}</td>
-                    <td class="py-3 px-6">{{ 'Rp ' . number_format($item->total, 0, ',', '.') }}</td>
+                    <td class="py-3">{{ $number+1 }}</td>
+                    <td>{{ $item->transaction()->code }}</td>
+                    <td>{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
+                    <td>{{ Carbon::parse($item->due)->translatedFormat('j F Y') }}</td>
+                    <td>{{ $item->pay==null?Carbon::parse($item->pay)->translatedFormat('j F Y'):'-' }}</td>
+                    <td>{{ 'Rp ' . number_format($item->total, 0, ',', '.') }}</td>
                     @if ($item->status == "Belum Bayar")
-                    <td class="py-3 px-6">
+                    <td>
                         <span class="bg-orange-500 text-white py-1 px-3 text-left rounded-full">Belum Bayar</span>
                     </td>
                     @else

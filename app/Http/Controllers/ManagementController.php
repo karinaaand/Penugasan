@@ -69,7 +69,7 @@ class ManagementController extends Controller
             ]);
             $retur->update([
                 'status' => 'Done',
-                'due' => now(),
+                'pay' => now(),
             ]);    
             DB::commit();
     
