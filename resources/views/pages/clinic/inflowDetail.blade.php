@@ -31,7 +31,7 @@
         <div class="overflow-hidden rounded-lg bg-white shadow-md mt-8">
             <table class="min-w-full leading-normal">
                 <thead>
-                    <tr class="bg-gray-200 text-sm uppercase leading-normal text-black">
+                    <tr class="bg-gray-200 text-sm leading-normal text-black">
                         <th class="border p-2 w-1">No</th>
                         <th class="border p-2">Kode Obat</th>
                         <th class="border p-2">Nama Obat</th>
