@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 5,
             "piece_margin" => 2,
             "piece_netto" => 500,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Paracetamol Syrup",
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 7,
             "piece_margin" => 3,
             "piece_netto" => 400,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Aspirin",
@@ -136,7 +136,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 5,
             "piece_margin" => 2,
             "piece_netto" => 300,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Albendazole",
@@ -152,7 +152,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 10,
             "piece_margin" => 2,
             "piece_netto" => 200,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Mebendazole",
@@ -168,7 +168,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 8,
             "piece_margin" => 3,
             "piece_netto" => 500,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Metronidazole",
@@ -184,7 +184,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 20,
             "piece_margin" => 2,
             "piece_netto" => 250,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Ivermectin",
@@ -200,7 +200,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 4,
             "piece_margin" => 2,
             "piece_netto" => 3,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Vitamin C",
@@ -216,7 +216,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 4,
             "piece_margin" => 1,
             "piece_netto" => 500,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
         [
             "name" => "Vitamin D",
@@ -232,7 +232,7 @@ class DatabaseSeeder extends Seeder
             "piece_quantity" => 15,
             "piece_margin" => 1,
             "piece_netto" => 1000,
-            "piece_unit" => "gr",
+            "piece_unit" => "mg",
         ],
     ];
     

@@ -103,7 +103,7 @@
                                                 class="border border-gray-300 rounded-e-lg p-2 w-2/5 text-gray-900 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                                 <option {{ $drug->piece_unit == 'ml' ? 'selected' : '' }} value="ml">ml
                                                 </option>
-                                                <option {{ $drug->piece_unit == 'gr' ? 'selected' : '' }} value="gr">gr
+                                                <option {{ $drug->piece_unit == 'mg' ? 'selected' : '' }} value="mg">mg
                                                 </option>
                                                 <option {{ $drug->piece_unit == 'butir' ? 'selected' : '' }}
                                                     value="butir">butir
@@ -168,11 +168,7 @@
                         <select id="piece_unit" name="piece_unit"
                             class="border border-gray-300 rounded-e-lg p-2 text-gray-900 bg-gray-50">
                             <option>Satuan</option>
-                            @if ($drug->piece_unit != 'butir')
-                                <option value="{{ $drug->piece_unit }}">{{ $drug->piece_unit }}</option>
-                            @else
-                                <option value="{{ $drug->piece_unit }}">{{ $drug->piece_unit }}</option>
-                            @endif
+                            <option value="{{ $drug->piece_unit }}">{{ $drug->piece_unit }}</option>
                             <option value="pcs">pcs</option>
                         </select>
                     </div>

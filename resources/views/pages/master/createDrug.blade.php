@@ -93,7 +93,7 @@
                                         <input type="number" id="piece_netto" name="piece_netto" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Netto">
                                         <select id="piece_unit" name="piece_unit" class="border border-gray-300 rounded-e-lg p-2 w-2/5 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                             <option value="ml">ml</option>
-                                            <option value="gr">gr</option>
+                                            <option value="mg">mg</option>
                                             <option value="butir">butir</option>
                                         </select>
                                     </div>

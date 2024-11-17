@@ -54,7 +54,7 @@ return new class extends Migration
             $table->integer('piece_quantity');
             $table->integer('piece_margin');
             $table->integer('piece_netto');
-            $table->enum('piece_unit',['ml','gr','butir']);
+            $table->enum('piece_unit',['ml','mg','butir']);
             $table->timestamps();
         });
         Schema::create('repacks',function(Blueprint $table){
