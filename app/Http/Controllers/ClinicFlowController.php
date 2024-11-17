@@ -19,7 +19,8 @@ class ClinicFlowController extends Controller
     }
     public function create()
     {
-        return view('pages.clinic.addStuff');
+        $judul = "Tambah Obat Klinik";
+        return view('pages.clinic.addStuff',compact('judul'));
     }
     public function store(Request $request)
     {

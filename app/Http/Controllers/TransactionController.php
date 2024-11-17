@@ -8,7 +8,8 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        return view('pages.transaction.transactions');
+        $judul = "Log History";
+        return view('pages.transaction.transactions',compact('judul'));
     }
     public function create()
     {
@@ -17,9 +18,11 @@ class TransactionController extends Controller
     }
     public function store(Request $request)
     {
+        dd(json_decode($request->transaction));
     }
     public function show(string $id)
     {
-        return view('pages.transaction.detailTransaction');
+        $judul = "Invoice";
+        return view('pages.transaction.detailTransaction',compact('judul'));
     }
 }

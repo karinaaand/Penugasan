@@ -13,13 +13,8 @@ class VendorController extends Controller
         $vendors = Vendor::paginate(5);
         return view('pages.master.vendor',compact('judul','vendors'));
     }
-    public function create()
-    {
-        return view('pages.master.createVendor');
-    }
     public function store(Request $request)
     {
-        // dd($request);
         $validate = $request->validate([
             "name"=> "required|min:3|max:25|string",
             "phone"=>"required|max:14",
@@ -31,10 +26,6 @@ class VendorController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('master.vendor.index')->with('error','Vendor gagal dibuat');
         }
-    }
-    public function edit(Vendor $vendor)
-    {
-        return view('pages.master.editVendor',compact('vendor'));
     }
     public function update(Request $request, Vendor $vendor)
     {

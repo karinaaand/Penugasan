@@ -1,5 +1,10 @@
 @extends('layouts.main')
 @section('container')
+    <form method="POST" class="hidden" action="{{ route('transaction.store') }}" id="add-stuff-form">
+        @csrf
+        <input type="hidden" name="transaction">
+    </form>
+    <input type="hidden" name="repackQuantity">
     <div class="fixed bottom-8 right-8 flex bg-white shadow-xl p-4 rounded-lg items-end">
         <div class="grid grid-cols-2 gap-2">
 
@@ -80,7 +85,8 @@
                     class="hidden absolute top-36 right-96 mr-24 px-1 border border-gray-300 bg-white rounded">
 
                 </ul>
-                <input type="text" name="quantity" placeholder="Jumlah" class="w-20 rounded-md px-3 py-1 ring-1 ring-gray" />
+                <input type="text" name="quantity" placeholder="Jumlah"
+                    class="w-20 rounded-md px-3 py-1 ring-1 ring-gray" />
 
 
             </div>
@@ -119,8 +125,8 @@
         let discMeth = 'persen';
 
         document.querySelectorAll("input[type='radio']").forEach(function(e) {
-            e.addEventListener('change', (f) =>{
-                discMeth=f.target.value
+            e.addEventListener('change', (f) => {
+                discMeth = f.target.value
                 draw()
             })
         })
@@ -166,12 +172,14 @@
             const drugInput = document.querySelector("#drugInput")
             const drugStock = document.querySelector("input[name='stock']")
             const drugPrice = document.querySelector("input[name='price']")
+            const repackQuantity = document.querySelector("input[name='repackQuantity']")
             const drugDiscount = document.querySelector("input[name='drugDiscount']")
-            document.getElementById('drugInput').value = item.name;
+            document.getElementById('drugInput').value = item.name
             suggestions.classList.add('hidden')
             repackSelected = item.id
             drugStock.value = item.stock
             drugPrice.value = item.price
+            repackQuantity.value = item.quantity
             drugDiscount.value = item.drug.last_discount
         }
 
@@ -182,8 +190,9 @@
             let repackName = document.querySelector("input[name='drug']")
             let repackId = repackSelected
             let quantity = document.querySelector("input[name='quantity']")
+            let repackQuantity = document.querySelector("input[name='repackQuantity']")
 
-            let input = [discDrug, piecePrice, repackName, quantity]
+            let input = [discDrug, piecePrice, repackName, quantity, repackQuantity]
             let datainput = input.map(e => e.value)
             datainput.push(calculateDiscount(quantity.value * piecePrice.value, discDrug.value))
             datainput.push(repackId)
@@ -203,7 +212,7 @@
         } // Output: "Rp 100.000"
 
         function row(datainput, i) {
-            [discDrug, piecePrice, repackName, quantity, priceDiscount, repackId] = datainput
+            [discDrug, piecePrice, repackName, quantity, repackQuantity, priceDiscount, repackId] = datainput
             total += parseInt(piecePrice * quantity)
             totalDisc += parseInt(priceDiscount)
             return `<tr class="border-b">
@@ -236,7 +245,7 @@
             data.forEach((e, i) => {
                 document.querySelector("#drugTable").innerHTML += row(e, i)
             });
-            totalPay= total-totalDisc
+            totalPay = total - totalDisc
             transactionDiscount()
             document.querySelector("#total").innerHTML = new Intl.NumberFormat('id-ID', {
                 style: 'currency',
@@ -260,12 +269,14 @@
         }
 
         function transactionDiscount() {
-            if (discMeth=='rupiah') {
+            if (discMeth == 'rupiah') {
                 totalDisc += parseInt(document.querySelector("input[name='transactionDiscount']").value)
                 totalPay -= parseInt(document.querySelector("input[name='transactionDiscount']").value)
             } else {
-                totalDisc += calculateDiscount(totalPay, parseInt(document.querySelector("input[name='transactionDiscount']").value))
-                totalPay -= calculateDiscount(totalPay, parseInt(document.querySelector("input[name='transactionDiscount']").value))
+                totalDisc += calculateDiscount(totalPay, parseInt(document.querySelector(
+                    "input[name='transactionDiscount']").value))
+                totalPay -= calculateDiscount(totalPay, parseInt(document.querySelector("input[name='transactionDiscount']")
+                    .value))
             }
         }
 
@@ -277,19 +288,25 @@
 
         function buatModal() {
             console.log(data);
-                data = data.map(function(e) {
-                    return {
-                        name: e[0],
-                        quantity: parseInt(e[1]),
-                        unit: e[2],
-                        piece_price: parseFloat(e[3]) / e[1], 
-                        price: parseFloat(e[3]), 
-                        expired: e[4]
-                    };
-                });
-                // document.querySelector("input[name='total']").value = total
-                // document.querySelector("input[name='transaction']").value = JSON.stringify(data)
-                // showModal('add','add-stuff-form')
+            data = data.map(function(e) {
+                return {
+                    discDrug: parseInt(e[0]),
+                    piecePrice: parseInt(e[1]),
+                    repackName: e[2],
+                    quantity: parseInt(e[3]),
+                    repackQuantity: parseInt(e[4]),
+                    priceDiscount: parseInt(e[5]),
+                    repackId: parseInt(e[6])
+                };
+            });
+            const sendData = {
+                data,
+                total,
+                totalDisc,
+                totalPay
+            }
+            document.querySelector("input[name='transaction']").value = JSON.stringify(sendData)
+            showModal('add', 'add-stuff-form')
         }
     </script>
 @endsection

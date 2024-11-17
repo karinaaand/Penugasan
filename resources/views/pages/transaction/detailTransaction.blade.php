@@ -26,27 +26,36 @@
             </div>
         </div>
         <div class="overflow-hidden rounded-lg bg-white shadow-md mt-8">
-            <table class="min-w-full text-sm">
+            <table class="min-w-full text-sm text-center">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="border p-2 w-1">No</th>
-                        <th class="border p-2">Nama Obat</th>
-                        <th class="border p-2">Jumlah</th>
-                        <th class="border p-2">Harga Satuan</th>
-                        <th class="border p-2">Subtotal</th>
+                        <th class="py-4 w-2 px-4">No</th>
+                    <th class="py-4 px-2">Nama Item</th>
+                    <th class="py-4 w-36">Jumlah</th>
+                    <th class="py-4 w-36">Harga Satuan</th>
+                    <th class="py-4 w-36">Total</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="px-6 py-3 text-center">HG</td>
-                        <td class="px-6 py-3 text-center">HG</td>
-                        <td class="px-6 py-3 text-center">HG</td>
-                        <td class="px-6 py-3 text-center">HG</td>
-                        <td class="px-6 py-3 text-center">HG</td>
+                        <td class="">99</td>
+                        <td class="px-6 py-3 text-left">HG</td>
+                        <td class=""></td>
+                        <td class=""></td>
+                        <td class=""></td>
                     </tr>
                 </tbody>
             </table>
-            <h2 type="text" class="text-right mt-6 pe-6 pb-6">Grand total : {{ 'Rp ' . number_format(100000, 0, ',', '.') }}</h2>
+            <div class="flex justify-end p-4">
+                <div class="grid grid-cols-2 gap-2 w-max">
+    
+                    <h1 class="text-end">Jumlah pembelian: </h1><span id="total" class="font-bold">Rp 0</span>
+                    <h1 class="text-end">Discount: </h1><span id="totalDisc" class="font-bold">Rp 0</span>
+                    <h1 class="text-end">Total dibayar: </h1><span id="totalPay" class="font-bold">Rp 0</span>
+        
+                </div>
+
+            </div>
         </div>
     </div>
     <div id="uploadModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">

@@ -2,7 +2,6 @@
 
 @section('container')
 <div class="p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-2xl font-semibold mb-4 text-black">Atur Profil Klinik</h1>
         <p class=" mb-6 text-black">Pastikan profil klinik sudah sesuai dengan keadaan sekarang.</p>
 
         <!-- Avatar Section -->

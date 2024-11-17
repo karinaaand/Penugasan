@@ -8,19 +8,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('pages.super.user');
-    }
-    public function create()
-    {
-        return view('pages.super.addUser');
+        $judul = "Manajemen Akun";
+        return view('pages.super.user',compact('judul'));
     }
     public function store(Request $request)
     {
         //
-    }
-    public function edit(string $id)
-    {
-        return view('pages.super.editUser');
     }
     public function update(Request $request, string $id)
     {
@@ -45,7 +38,8 @@ class UserController extends Controller
     }
     public function settings(Request $request){
         if($request->isMethod("get")){
-            return view('pages.settings',["title"=>"Settings"]);
+            $judul = "Atur Profil Klinik";
+            return view('pages.settings',compact('judul'));
         }        
     }
 }

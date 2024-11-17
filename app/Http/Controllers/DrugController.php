@@ -67,7 +67,7 @@ class DrugController extends Controller
         $categories = Category::all();
         $variants = Variant::all();
         $manufactures = Manufacture::all();
-        $judul = "Edit Obat";
+        $judul = "Edit Obat ". $drug->name;
         $repacks = $drug->repacks();
         return view('pages.master.editDrug', compact('categories', 'variants', 'manufactures', 'drug', 'judul', 'repacks'));
     }

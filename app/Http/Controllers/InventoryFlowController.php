@@ -22,7 +22,8 @@ class InventoryFlowController extends Controller
     {
         $vendors = Vendor::all();
         $drugs = Drug::all();
-        return view("pages.inventory.addStuff",compact('vendors','drugs'));
+        $judul = "Tambah Barang";
+        return view("pages.inventory.addStuff",compact('vendors','drugs','judul'));
     }
     public function store(Request $request)
     {
