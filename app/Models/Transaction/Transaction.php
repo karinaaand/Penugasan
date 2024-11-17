@@ -14,6 +14,14 @@ class Transaction extends Model
     {
         return $this->belongsTo(Vendor::class)->first();
     }
+
+    public function trash(){
+        return $this->hasOne(Trash::class)->first();
+    }
+    public function retur(){
+        return $this->hasOne(Retur::class)->first();
+    }
+
     public function details()
     {
         return $this->hasMany(TransactionDetail::class)->get();
