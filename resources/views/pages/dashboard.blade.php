@@ -103,7 +103,7 @@
                 <span>Scroll ke bawah untuk melihat semua notifikasi...</span>
             </div>
         </div>
-        <div class="w-full rounded-lg shadow-lg p-6 mt-16">
+        <div class="w-full rounded-lg shadow-lg p-6 mt-5">
             <h1 class="font-bold text-lg">Penjualan Obat Terbanyak</h1>
             <canvas id="obat"></canvas>
         </div>
@@ -126,22 +126,26 @@
             </div>
 
         </div>
-        <div class="w-full rounded-lg shadow-lg p-6 mt-16">
+        <div class="w-full rounded-lg shadow-lg p-6 mt-2">
             <h1 class="font-bold text-lg text-center">Riwayat Transaksi Terakhir</h1>
-            <div class="overflow-auto max-h-[55vh] mt-6">
-                <table class="w-full text-sm mt-6">
+            <div class="mt-6">
+                <table class="w-full text-sm">
                     <thead>
                         <th class="py-3 px-6 text-center">No Transaksi</th>
                         <th class="py-3 px-6 text-center">Tanggal</th>
                         <th class="py-3 px-6 text-center">Subtotal</th>
                     </thead>
+                </table>
+            </div>
+            <div class="overflow-auto max-h-[50vh]">
+                <table class="w-full text-sm">
                     <tbody>
-                        @for ($i = 0; $i < 10; $i++)
-                        <tr>
-                        <td class="text-center py-3">CO241114002</td>
-                        <td class="text-center py-3">24/05/2024</td>
-                        <td class="text-center py-3">Rp 50.000</td>
-                        </tr>
+                        @for ($i = 0; $i < 20; $i++)
+                            <tr>
+                            <td class="text-center py-3">CO241114002</td>
+                            <td class="text-center py-3">24/05/2024</td>
+                            <td class="text-center py-3">Rp 50.000</td>
+                            </tr>
                             @endfor
                     </tbody>
                 </table>
@@ -188,24 +192,48 @@
                 data: [20, 18, 16, 14, 12],
                 fill: true,
                 backgroundColor: [
-                    '#666CFFFF',
-                    '#666CFFCC',
-                    '#666CFF99',
-                    '#666CFF66',
-                    '#666CFF33'
+                    '#4E80FFFF',
+                    '#4E80FFD9',
+                    '#4E80FFB3',
+                    '#4E80FF8C',
+                    '#4E80FF66'
                 ],
                 borderRadius: 10
             }]
         },
         options: {
             indexAxis: "y",
+            plugins: {
+                tooltip: {
+                    enabled: true
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true
                 }
             }
-        }
+        },
+        plugins: [{
+            id: 'displayNumbersInside',
+            afterDatasetsDraw: function(chart) {
+                const ctx = chart.ctx;
+                chart.data.datasets.forEach((dataset, index) => {
+                    const meta = chart.getDatasetMeta(index);
+                    meta.data.forEach((bar, i) => {
+                        const value = dataset.data[i];
+                        const xPos = bar.x - 20; // Posisi angka di dalam bar (kiri)
+                        const yPos = bar.y + 2; // Pindahkan angka lebih ke atas
+                        ctx.fillStyle = '#fff'; // Warna teks (putih agar terlihat di batang)
+                        ctx.font = '18px Arial'; // Gaya teks
+                        ctx.textAlign = 'right'; // Teks rata kanan
+                        ctx.fillText(value, xPos, yPos);
+                    });
+                });
+            }
+        }]
     });
+
     let dataset = [12, 19, 10, 53, 51, 5, 20];
     new Chart(penjualan, {
         type: 'bar',
@@ -244,7 +272,7 @@
         if (rank === -1) {
             return -1;
         }
-        return rank < 3 ? '#666CFFFF' : '#666CFF99';
+        return rank < 3 ? '#4E80FF' : '#4E80FF7F';
     }
 </script>
 @endsection
