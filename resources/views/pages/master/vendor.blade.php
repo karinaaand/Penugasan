@@ -7,7 +7,7 @@
         </div>
         <div class="flex justify-end">
             <form action="">
-                <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
+                <input type="text" name="" id="" placeholder="Search..." class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </form>
         </div>
     </div>
@@ -73,15 +73,15 @@
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 mb-2" for="name">Nama</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="name" name="name" placeholder="Masukkan Nama">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 mb-2" for="phone">Telepon</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="phone" name="phone">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="phone" name="phone" placeholder="Masukkan Telepon">
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 mb-2" for="address">Alamat</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="address" name="address">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="address" name="address" placeholder="Masukkan Alamat">
             </div>
             <div class="flex justify-center space-x-4 mt-4">
                 <button type="button" id="closeModal" onclick="closeTambahModal()"
@@ -108,15 +108,15 @@
             @method('PUT')
             <div class="mb-4">
                 <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="name" name="name">
             </div>
             <div class="mb-4">
                 <label class="block text-start text-gray-700 mb-2" for="phone">Telepon</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="phone" name="phone">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="phone" name="phone">
             </div>
             <div class="mb-6">
                 <label class="block text-start text-gray-700 mb-2" for="address">Alamat</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="address" name="address">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="address" name="address">
             </div>
 
             <div class="flex justify-center space-x-4 mt-4">

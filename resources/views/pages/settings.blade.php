@@ -22,18 +22,18 @@
         <div class="mb-4">
             <div>
                 <label class="block text-black text-lg font-semibold mb-1">Nama</label>
-                <input type="name" class="w-full px-3 py-2 bg-gray-100 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="name" class="w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-lg ring-black focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-black text-lg font-semibold mb-1">Alamat</label>
-            <input type="addres" class="w-full px-3 py-2 bg-gray-100 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="addres" class="w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
         <div class="mb-4">
             <label class="block text-black text-lg font-semibold mb-1">No. handphone</label>
-            <input type="phone" class="w-full px-3 py-2 bg-gray-100 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="phone" class="w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
         <!-- Save Button -->

@@ -6,7 +6,7 @@
     <div class="mb-4 flex items-center">
         <div class="flex flex-1 justify-end mr-5">
             <button onclick="printModal()"
-                class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-1 text-white">Cetak</button>
+                class="rounded-lg bg-yellow-500 hover:bg-yellow-600 px-4 py-1 text-white">Cetak</button>
         </div>
     </div>
     <div class="rounded-lg bg-white p-6 shadow-lg">
@@ -68,7 +68,7 @@
                 <form id="edit-bill-form" action="{{ route('management.bill.pay', $bill->id) }}" method="POST">
                     @csrf
                 </form>
-                <button onclick="showModal('save','edit-bill-form')" class="mt-3 bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded-md text-white">Bayar</button>
+                <button onclick="showModal('save','edit-bill-form')" class="mt-3 bg-green-500 hover:bg-green-600 py-1 px-4 rounded-md text-white">Bayar</button>
 
             </div>
         @endif

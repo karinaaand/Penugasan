@@ -46,7 +46,7 @@
                 </div>
                 <div class="mt-4 w-full">
                     <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
-                        <span class="w-20 text-left flex-shrink-0">Username</span>
+                        <span class="w-20 text-left flex-shrink-0">Nama</span>
                         <span class="">:</span>
                         <span class="ml-1">ADMIN123</span>
                     </div>

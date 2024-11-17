@@ -5,7 +5,7 @@
         <div class="w-1/2">
             <form id="create-manufacture-form" action="{{ route('master.manufacture.store') }}" method="POST">
                 @csrf
-                <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4"
+                <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Masukkan Produsen Obat">
                 <button type="submit"
                     class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
@@ -15,7 +15,7 @@
         <div class="flex justify-end">
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
-                    class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
+                    class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </form>
         </div>
 
@@ -84,12 +84,12 @@
             @method('PUT')
             <div class="mb-4">
                 <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
-                <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="name" name="name">
             </div>
             <div class="flex justify-center space-x-4 mt-4">
                 <button type="button" id="closeModal" onclick="closeEditModal()"
                     class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 bg-gray-200 hover:bg-gray-300 w-full flex-1">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-lg w-full flex-1">Edit</button>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-lg w-full flex-1">Simpan</button>
             </div>
         </form>
     </div>

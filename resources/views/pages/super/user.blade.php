@@ -6,7 +6,7 @@
                     Tambah User</button>
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
-                    class="ring-2 ring-gray-300 rounded-full px-6 py-2">
+                    class="ring-2 ring-gray-300 rounded-full px-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </form>
         </div>
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -72,11 +72,11 @@
                             </div>
                             <div class="relative mb-4">
                                 <label class="mb-2 block text-md font-medium text-left">Nama</label>
-                                <input type="text" class="bg-gray-100 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama"/>
+                                <input type="text" class="bg-white w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama"/>
                             </div>
                             <div class="relative mb-4">
                                 <label class="mb-2 block text-md font-medium text-left">Role</label>
-                                <select class="bg-gray-100 w-full rounded border border-gray-300 p-3">
+                                <select class="bg-white w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option selected disabled te>Masukkan Role</option>
                                     <option>Super Admin</option>
                                     <option>SIMKLINIK</option>
@@ -86,11 +86,11 @@
                             </div>
                             <div class="mb-6">
                                 <label class="mb-2 block text-md font-medium text-left">Email</label>
-                                <input type="text" class="bg-gray-100 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan email"/>
+                                <input type="text" class="bg-white w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan email"/>
                             </div>
                             <div class="mb-6">
                                 <label class="mb-2 block text-md font-medium text-left">Kata sandi</label>
-                                <input type="password" class="bg-gray-100 w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan kata sandi"/>
+                                <input type="password" class="bg-white w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan kata sandi"/>
                             </div>
                     </div>
                     <div class="flex justify-center space-x-4">
@@ -134,7 +134,7 @@
                         </div>
                         <div class="relative mb-4">
                             <label class="mb-2 block text-md font-medium text-left">Role</label>
-                            <select class="w-full rounded border border-gray-300 p-3">
+                            <select class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option selected disabled>Masukkan Role</option>
                                 <option>Super Admin</option>
                                 <option>SIMKLINIK</option>

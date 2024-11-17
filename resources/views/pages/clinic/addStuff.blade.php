@@ -3,29 +3,26 @@
 <div class="space-y-4">
     <div class="grid grid-cols-2 gap-4">
         <input type="hidden" name="code">
-        <input type="text" id="drugInput" name="drug" class="w-full rounded border border-gray-300 p-2"
+        <input type="text" id="drugInput" name="drug" class="w-full rounded border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Masukkan nama obat" autocomplete="off">
         <ul id="suggestions" class="absolute mt-10 border border-gray-300 bg-white rounded hidden"></ul>
         <div class="grid grid-cols-3 gap-4">
             <div class="flex">
                 <input type="number" max="1" id="quantity" name="quantity"
-                    class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                    class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="0">
-                <span
-                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
+                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
                     pcs
                 </span>
             </div>
             <div class="flex">
-                <span
-                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
+                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
                     Sisa
                 </span>
                 <input disabled type="number" id="sisa" name="sisa"
                     class="rounded-none bg-gray-100 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
                     placeholder="0">
-                <span
-                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
+                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
                     pcs
                 </span>
             </div>
@@ -50,6 +47,7 @@
                     <th class="p-2 text-center">Kode Obat</th>
                     <th class="p-2 text-center">Nama Obat</th>
                     <th class="p-2 text-center">Jumlah</th>
+                    <th class="p-2 text-center">Expired</th>
                     <th class="p-2 text-center">Action</th>
                 </tr>
             </thead>

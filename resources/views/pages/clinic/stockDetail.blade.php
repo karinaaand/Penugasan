@@ -94,7 +94,7 @@
                                 </svg>
                             </a>
                             <a href="{{ route('inventory.trash', 1) }}"
-                                class="p-2 rounded-lg shadow bg-pink-600 transition-colors duration-200 flex items-center justify-center">
+                                class="p-2 rounded-lg shadow bg-red-600 transition-colors duration-200 flex items-center justify-center">
                                 <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path

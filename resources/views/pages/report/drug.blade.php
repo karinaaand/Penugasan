@@ -5,13 +5,13 @@ use Carbon\Carbon;
 @section('container')
 <div class="rounded-lg bg-white p-6 shadow-lg">
     <div class="flex flex-1 justify-end mb-5">
-        <button onclick="printModal()" class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-1 text-white">Cetak</button>
+        <button onclick="printModal()" class="rounded-lg bg-yellow-500 hover:bg-yellow-600 px-4 py-1 text-white">Cetak</button>
     </div>
     <div class="flex items-center justify-between w-full">
-        <form action="" class="flex w-auto flex-row justify-between gap-3">
-            <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
+        <form action="" class="flex w-auto flex-row justify-between gap-3 ">
+            <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" type="date" name="" id="" />
             <h1 class="text-lg font-inter text-gray-800">sampai</h1>
-            <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500" type="date" name="" id="" />
+            <input class="rounded-sm px-2 py-1 ring-2 ring-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" type="date" name="" id="" />
             <button class="rounded-2xl bg-blue-500 px-3 font-bold text-sm font-inter text-white hover:bg-blue-600"
                 type="submit">
                 TERAPKAN
@@ -19,7 +19,7 @@ use Carbon\Carbon;
         </form>
         <form action="" class="flex">
             <input type="text" name="" id="" placeholder="Search..."
-                class="rounded-full px-6 py-2 ring-2 ring-gray-300" />
+                class="rounded-full px-6 py-2 ring-2 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
         </form>
     </div>
 

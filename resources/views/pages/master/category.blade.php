@@ -1,38 +1,37 @@
 @extends('layouts.main')
 @section('container')
-    <div class="p-6 bg-white rounded-lg shadow-lg">
-        <div class="flex justify-between mb-4">
-            <div class="w-1/2">
-                <form id="create-category-form" action="{{ route('master.category.store') }}" method="POST">
-                    @csrf
-                    <div class="flex gap-2">
-                        <input type="text" maxlength="2" name="code" class="border border-gray-300 rounded-lg p-2 w-16"
-                            placeholder="Kode">
-                        <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4"
-                            placeholder="Tambahkan Kategori Obat">
-                        <button onclick="submitModal()"
-                            class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
-                    </div>
-                </form>
-            </div>
-            <div class="flex justify-end">
-                <form action="">
-                    <input type="text" name="" id="" placeholder="Search..."
-                        class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
-                </form>
-            </div>
+<div class="p-6 bg-white rounded-lg shadow-lg">
+    <div class="flex justify-between mb-4">
+        <div class="w-1/2">
+            <form id="create-category-form" action="{{ route('master.category.store') }}" method="POST">
+                @csrf
+                <div class="flex gap-2">
+                    <input type="text" maxlength="2" name="code" class="border border-gray-300 rounded-lg p-2 w-16 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Kode">
+                    <input type="text" name="name" class="border border-gray-300 rounded-lg p-2 w-3/4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Tambahkan Kategori Obat">
+                    <button onclick="submitModal()" class="bg-blue-500 text-white rounded-lg hover:bg-blue-600 px-6 py-2  ">Tambah</button>
+                </div>
+            </form>
         </div>
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full text-sm text-center">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="py-3 px-6 w-1">No</th>
-                        <th class="py-3 px-6 w-6">Kode</th>
-                        <th class="py-3 px-6">Nama Kategori</th>
-                        <th class="py-3 px-6">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div class="flex justify-end">
+            <form action="">
+                <input type="text" name="" id="" placeholder="Search..."
+                    class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </form>
+        </div>
+    </div>
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full text-sm text-center">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="py-3 px-6 w-1">No</th>
+                    <th class="py-3 px-6 w-6">Kode</th>
+                    <th class="py-3 px-6">Nama Kategori</th>
+                    <th class="py-3 px-6">Action</th>
+                </tr>
+            </thead>
+            <tbody>
                 <!-- Data Rows -->
                 @foreach ($categories as $number => $item)
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
@@ -66,63 +65,63 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
-        </div>
-        <div class="p-6">
-            {{ $categories->links() }}
-        </div>
-    </div>
-    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-96 relative">
-            <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-                onclick="closeEditModal()">
-                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13" />
-                </svg>
-                <span class="sr-only">Close modal</span>
-            </button>
-            <h2 class="text-center text-xl font-semibold mb-6">Ubah Kategori</h2>
-            <form method="POST" id="edit-category-form">
-                @csrf
-                @method('PUT')
-                <div class="mb-4">
-                    <label class="block text-start text-gray-700 mb-2" for="phone">Kode</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="code" name="code">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
-                    <input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" name="name">
-                </div>
-                <div class="flex justify-center space-x-4 mt-4">
-                    <button type="button" id="closeModal" onclick="closeEditModal()"
-                        class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 bg-gray-200 hover:bg-gray-300 w-full flex-1">Cancel</button>
-                    <button type="submit"
-                        class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-lg w-full flex-1">Edit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <script>
-        function showEditModal(name, code, id) {
-            document.querySelector('#editModal input[name="code"]').value = code;
-            document.querySelector('#editModal input[name="name"]').value = name;
-            document.querySelector('#editModal form').setAttribute('action', {{ route('master.category.index') }}/${id});
-            document.getElementById('editModal').classList.remove('hidden');
-        }
 
-        function closeEditModal() {
-            document.getElementById('editModal').classList.add('hidden');
-        }
-        document.getElementById('create-category-form').addEventListener('submit', function(e) {
-            e.preventDefault()
-            showModal('add', 'create-category-form')
-        })
-        document.getElementById('edit-category-form').addEventListener('submit', function(e) {
-            e.preventDefault()
-            document.getElementById('editModal').classList.add('hidden');
-            showModal('save', 'edit-category-form')
-        })
-    </script>
+        </table>
+    </div>
+    <div class="p-6">
+        {{ $categories->links() }}
+    </div>
+</div>
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-96 relative">
+        <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+            onclick="closeEditModal()">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+        </button>
+        <h2 class="text-center text-xl font-semibold mb-6">Ubah Kategori</h2>
+        <form method="POST" id="edit-category-form">
+            @csrf
+            @method('PUT')
+            <div class="mb-4">
+                <label class="block text-start text-gray-700 mb-2" for="phone">Kode</label>
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="code" name="code">
+            </div>
+            <div class="mb-4">
+                <label class="block text-start text-gray-700 mb-2" for="name">Nama</label>
+                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="name" name="name">
+            </div>
+            <div class="flex justify-center space-x-4 mt-4">
+                <button type="button" id="closeModal" onclick="closeEditModal()"
+                    class="px-4 py-2 border rounded-lg text-gray-700 border-gray-300 bg-gray-200 hover:bg-gray-300 w-full flex-1">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-lg w-full flex-1">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function showEditModal(name, code, id) {
+        document.querySelector('#editModal input[name="code"]').value = code;
+        document.querySelector('#editModal input[name="name"]').value = name;
+        document.querySelector('#editModal form').setAttribute('action', `{{ route('master.category.index') }}/${id}`);
+        document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.add('hidden');
+    }
+    document.getElementById('create-category-form').addEventListener('submit', function(e) {
+        e.preventDefault()
+        showModal('add', 'create-category-form')
+    })
+    document.getElementById('edit-category-form').addEventListener('submit', function(e) {
+        e.preventDefault()
+        document.getElementById('editModal').classList.add('hidden');
+        showModal('save', 'edit-category-form')
+    })
+</script>
 @endsection

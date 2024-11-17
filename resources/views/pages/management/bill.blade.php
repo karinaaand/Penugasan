@@ -17,7 +17,7 @@
         </form>
         <form action="" class="flex">
             <input type="text" name="" id="" placeholder="Search..."
-                class="rounded-full px-6 py-2 ring-2 ring-gray-300" />
+                class="rounded-full px-6 py-2 ring-2 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </form>
     </div>
     <div class="overflow-hidden rounded-lg bg-white shadow-md mt-6">
@@ -28,6 +28,7 @@
                     <th class="py-3 px-6" style="width: 15%;">Kode LPB</th>
                     <th class="py-3 px-6" style="width: 20%;">Tanggal Datang</th>
                     <th class="py-3 px-6" style="width: 20%;">Jatuh Tempo</th>
+                    <th class="py-3 px-6" style="width: 20%;">Tanggal Pembayaran</th>
                     <th class="py-3 px-6" style="width: 15%;">Subtotal</th>
                     <th class="py-3 px-6" style="width: 20%;">Status</th>
                     <th class="py-3 px-6" style="width: 10%;">Action</th>

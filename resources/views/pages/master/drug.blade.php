@@ -6,7 +6,7 @@
             <button class="bg-blue-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-blue-600">+ Tambah</button>
         </a>
         <input type="text" name="" id="" placeholder="Search..."
-            class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
+            class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full text-sm text-center">

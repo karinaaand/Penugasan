@@ -31,12 +31,12 @@
             <p class="mt-1 text-gray-600">{{ $batch->transaction()->first()->vendor()->name }}</p>
         </div>
         <div class="flex">
-            <input type="number" id="quantity" name="quantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5" placeholder="0">
+            <input type="number" id="quantity" name="quantity" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0">
             <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
                 pcs
             </span>
         </div>
-        <textarea name="reason" rows="4" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Tuliskan alasan..."></textarea>
+        <textarea name="reason" rows="4" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 " placeholder="Tuliskan alasan..."></textarea>
         <div class="flex justify-end">
             <button class="py-1 px-4 rounded-md bg-orange-500 hover:bg-orange-600 text-white">Retur</button>
         </div>

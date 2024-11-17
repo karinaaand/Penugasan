@@ -8,9 +8,9 @@
                 </div>
                 <div class="flex justify-between space-x-2 mb-4">
                     <button onclick="filterNotifications('all', this)" class="filter-btn bg-blue-500 text-white px-3 py-1 rounded-full flex-grow">ALL</button>
-                    <button onclick="filterNotifications('expired', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">EXPIRED</button>
-                    <button onclick="filterNotifications('stok', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">STOK</button>
-                    <button onclick="filterNotifications('jatuh-tempo', this)" class="filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full flex-grow">JATUH TEMPO</button>
+                    <button onclick="filterNotifications('expired', this)" class="filter-btn bg-blue-200 text-white px-3 py-1 rounded-full flex-grow">EXPIRED</button>
+                    <button onclick="filterNotifications('stok', this)" class="filter-btn bg-blue-200 text-white px-3 py-1 rounded-full flex-grow">STOK</button>
+                    <button onclick="filterNotifications('jatuh-tempo', this)" class="filter-btn bg-blue-200 text-white px-3 py-1 rounded-full flex-grow">JATUH TEMPO</button>
                 </div>
                 <ul id="notification-list" class="space-y-4 max-h-[50vh] overflow-y-auto">
                     <li class="notification-item all jatuh-tempo flex items-center justify-between px-4 py-2 rounded-lg">
@@ -110,12 +110,12 @@
     </div>
     <div class="w-full">
         <div class="w-full rounded-lg shadow-lg p-6">
-            <h1 class="font-bold text-lg">Grafik Keuntungan 7 Hari Terakhir</h1>
+            <h1 class="font-bold text-lg">Grafik Keuntungan Penjualan Obat 7 Hari Terakhir</h1>
             <canvas id="penjualan"></canvas>
             <div class="flex justify-between">
                 <div>
                     <h1 class="font-bold text-lg">Hari dengan Keuntungan Tertinggi</h1>
-                    <h1 class="text-gray-400 font-bold text-lg">Senin</h1>
+                    <h1 class="text-gray-400 font-bold text-lg">Kamis</h1>
                 </div>
                 <div class="mb-4">
                     <a href="{{ route('report.transactions.index') }}">
@@ -173,11 +173,11 @@
         });
 
         buttons.forEach(btn => {
-            btn.classList.remove('bg-blue-500', 'text-white', 'translate-y-[-10px]');
-            btn.classList.add('bg-gray-200', 'text-gray-700');
+            btn.classList.remove('bg-blue-500', 'translate-y-[-10px]');
+            btn.classList.add('bg-blue-200');
         });
-        button.classList.add('bg-blue-500', 'text-white', 'translate-y-[-10px]');
-        button.classList.remove('bg-gray-200', 'text-gray-700');
+        button.classList.add('bg-blue-500','translate-y-[-10px]');
+        button.classList.remove('bg-blue-200');
     }
 
     const obat = document.getElementById('obat')
@@ -188,7 +188,7 @@
             labels: ["Obat 1", "Obat 2", "Obat 3", "Obat 4", "Obat 5"],
             datasets: [{
                 axis: "y",
-                label: '# of Votes',
+                label: '# jumlah obat',
                 data: [20, 18, 16, 14, 12],
                 fill: true,
                 backgroundColor: [

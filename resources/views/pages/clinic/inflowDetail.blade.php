@@ -5,7 +5,7 @@
 @section('container')
 <div class="mb-4 flex items-center">
             <div class="flex flex-1 justify-end mr-5">
-                <button onclick="uploadModal()" class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-1 text-white">Cetak</button>
+                <button onclick="uploadModal()" class="rounded-lg bg-yellow-500 hover:bg-yellow-600 px-4 py-1 text-white">Cetak</button>
             </div>
         </div>
     <div class="rounded-lg bg-white p-6 shadow-lg">

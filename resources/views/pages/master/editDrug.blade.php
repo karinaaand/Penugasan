@@ -27,13 +27,13 @@
                         <div class="flex w-full mb-4">
                             <label for="maximum_capacity" class="w-1/4 text-gray-700">PKMa</label>
                             <input type="number" value="{{ $drug->maximum_capacity }}" id="maximum_capacity"
-                                name="maximum_capacity" class="border border-gray-300 rounded p-2 w-3/4"
+                                name="maximum_capacity" class="border border-gray-300 rounded p-2 w-3/4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Inputkan maksimum PKMa">
                         </div>
                         <div class="flex w-full mb-4">
                             <label for="minimum_capacity" class="w-1/4 text-gray-700">PKMi</label>
                             <input type="number" value="{{ $drug->minimum_capacity }}" id="minimum_capacity"
-                                name="minimum_capacity" class="border border-gray-300 rounded p-2 w-3/4"
+                                name="minimum_capacity" class="border border-gray-300 rounded p-2 w-3/4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Inputkan minimum PKMi">
                         </div>
                         <table class="w-full">
@@ -44,7 +44,7 @@
                                         <div class="flex">
                                             <input value="{{ $drug->pack_quantity }}" type="number" id="pack_quantity"
                                                 name="pack_quantity"
-                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 placeholder="0">
                                             <span
                                                 class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -56,7 +56,7 @@
                                         <div class="flex">
                                             <input value="{{ $drug->pack_margin }}" type="number" id="pack_margin"
                                                 name="pack_margin"
-                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 placeholder="Margin">
                                             <span
                                                 class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -70,7 +70,7 @@
                                         <div class="flex">
                                             <input value="{{ $drug->piece_quantity }}" type="number" id="piece_quantity"
                                                 name="piece_quantity"
-                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 placeholder="0">
                                             <span
                                                 class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -82,7 +82,7 @@
                                         <div class="flex">
                                             <input value="{{ $drug->piece_margin }}" type="number" id="piece_margin"
                                                 name="piece_margin"
-                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                                class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 placeholder="Margin">
                                             <span
                                                 class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -97,10 +97,10 @@
                                         <div class="flex">
                                             <input disabled value="{{ $drug->piece_netto }}" type="number"
                                                 id="piece_netto" name="piece_netto"
-                                                class="rounded-none rounded-s-lg text-gray-900 bg-gray-200 border border-gray-300 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                                class="rounded-none rounded-s-lg text-gray-900 bg-gray-200 border border-gray-300 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 placeholder="Margin">
                                             <select disabled id="piece_unit" name="piece_unit"
-                                                class="border border-gray-300 rounded-e-lg p-2 w-2/5 text-gray-900 bg-gray-200">
+                                                class="border border-gray-300 rounded-e-lg p-2 w-2/5 text-gray-900 bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                                 <option {{ $drug->piece_unit == 'ml' ? 'selected' : '' }} value="ml">ml
                                                 </option>
                                                 <option {{ $drug->piece_unit == 'gr' ? 'selected' : '' }} value="gr">gr
@@ -124,7 +124,7 @@
                                     Rp
                                 </span>
                                 <input value="{{ $drug->last_price }}" type="number" id="last_price" name="last_price"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-40 text-sm p-2.5"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-40 text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Inputkan harga">
                                 <span
                                     class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -137,7 +137,7 @@
                             <div class="flex">
                                 <input value="{{ $drug->last_discount }}" type="number" id="last_discount"
                                     name="last_discount"
-                                    class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                                    class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Inputkan discount">
                                 <span
                                     class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">
@@ -163,7 +163,7 @@
                 <div class="flex items-center mb-4 gap-3">
                     <div class="flex">
                         <input type="number" id="quantity" name="quantity"
-                            class="rounded-none rounded-s-lg text-gray-900 bg-gray-50 border border-gray-300 block flex-1 w-1/5 text-sm p-2.5"
+                            class="rounded-none rounded-s-lg text-gray-900 bg-gray-50 border border-gray-300 block flex-1 w-1/5 text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Jumlah">
                         <select id="piece_unit" name="piece_unit"
                             class="border border-gray-300 rounded-e-lg p-2 text-gray-900 bg-gray-50">
@@ -178,7 +178,7 @@
                     </div>
                     <div class="flex">
                         <input type="number" id="margin" name="margin"
-                            class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block w-1/12 flex-1 text-sm p-2.5"
+                            class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 block w-1/12 flex-1 text-sm p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Margin">
                         <span
                             class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-e-md">

@@ -7,7 +7,7 @@
         <div class="flex justify-end">
             <form action="">
                 <input type="text" name="" id="" placeholder="Search..."
-                    class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4">
+                    class="ring-2 ring-gray-300 rounded-full px-6 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </form>
         </div>
         <!-- Table -->

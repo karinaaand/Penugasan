@@ -2,7 +2,7 @@
 @section('container')
 <div class="p-6 bg-white rounded-lg shadow-lg">
     <div class="flex justify-end mb-4">
-        <input type="text" placeholder="Search" class="border rounded-full px-4 py-2">
+        <input type="text" placeholder="Search" class="border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full bg-white text-sm">
