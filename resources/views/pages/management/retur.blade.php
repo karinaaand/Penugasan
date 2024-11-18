@@ -41,7 +41,7 @@ use Carbon\Carbon;
                     <td class="px-6 py-3 text-left">{{ $item->drug()->name }}</td>
                     <td class="px-6 py-3">{{ $item->detail()->quantity }}</td>
                     <td class="px-6 py-3">{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
-                    <td class="px-6 py-3">{{ $item->due?Carbon::parse($item->due)->translatedFormat('j F Y'):"-" }}</td>
+                    <td class="px-6 py-3">{{ $item->arrive?Carbon::parse($item->arrive)->translatedFormat('j F Y'):"-" }}</td>
 
                     <td class="flex justify-center py-3">
                         <a

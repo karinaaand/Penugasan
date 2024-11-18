@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('outcome')->nullable();
             $table->integer('profit')->nullable();
             $table->integer('loss')->nullable();
+            $table->integer('discount')->nullable();
             $table->timestamps();
         });
         Schema::create('transaction_details', function (Blueprint $table) {
@@ -41,6 +42,7 @@ return new class extends Migration
             $table->string('quantity');
             $table->integer('piece_price');
             $table->integer('total_price');
+            $table->integer('discount_price')->nullable();
             $table->timestamps();
         });
         Schema::create('bills',function(Blueprint $table){
@@ -48,7 +50,7 @@ return new class extends Migration
             $table->foreignIdFor(Transaction::class);
             $table->integer('total');
             $table->enum('status',['Belum Bayar','Done']);
-            $table->date('arrive');
+            $table->date('pay')->nullable();
             $table->date('due');
             $table->timestamps();
         });
@@ -61,7 +63,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->enum('status',['Belum Kembali','Done']);
             $table->text('reason')->nullable();
-            $table->date('due')->nullable();
+            $table->date('arrive')->nullable();
             $table->timestamps();
         });
         Schema::create('trashes',function(Blueprint $table){

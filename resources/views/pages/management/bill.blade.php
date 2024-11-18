@@ -41,7 +41,7 @@
                     <td>{{ $item->transaction()->code }}</td>
                     <td>{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
                     <td>{{ Carbon::parse($item->due)->translatedFormat('j F Y') }}</td>
-                    <td>{{ $item->pay==null?Carbon::parse($item->pay)->translatedFormat('j F Y'):'-' }}</td>
+                    <td>{{ $item->pay?Carbon::parse($item->pay)->translatedFormat('j F Y'):'-' }}</td>
                     <td>{{ 'Rp ' . number_format($item->total, 0, ',', '.') }}</td>
                     @if ($item->status == "Belum Bayar")
                     <td>

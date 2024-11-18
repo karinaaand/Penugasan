@@ -26,9 +26,18 @@ class ManagementController extends Controller
     public function billPrint() {}
     public function billPay(Bill $bill)
     {
-        $bill->status = "Done";
-        $bill->save();
-        return redirect()->route('management.bill.index')->with('success','Tagihan berhasil dibayarkan');
+        
+        DB::beginTransaction();
+        try {
+            $bill->status = "Done";
+            $bill->pay = now();
+            $bill->save();
+            DB::commit();
+            return redirect()->route('management.bill.index')->with('success','Tagihan berhasil dibayarkan');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->route('management.bill.index')->with('error','Tagihan gagal dibayarkan');
+        }
     }
     public function returs()
     {
@@ -69,7 +78,7 @@ class ManagementController extends Controller
             ]);
             $retur->update([
                 'status' => 'Done',
-                'pay' => now(),
+                'arrive' => now(),
             ]);    
             DB::commit();
     
