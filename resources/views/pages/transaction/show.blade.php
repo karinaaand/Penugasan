@@ -18,11 +18,12 @@
             <div class="flex-[1.5] flex flex-col  items-center justify-center">
                 <div class="flex items-center">
                     <span class="mr-2 font-normal text-black">No. LPB :</span>
-                    <span>CHO087877</span>
+                    <span>{{ $transaction->code }}</span>
                 </div>
                 <h1 class="text-center text-2xl font-bold">Invoice</h1>
             </div>
             <div class="flex-1 ml-10">
+                <p class="text-sm mb-4 text-left">Tanggal: {{ Carbon::parse($transaction->created_at)->translatedFormat('j F Y') }}</p>
             </div>
         </div>
         <div class="overflow-hidden rounded-lg bg-white shadow-md mt-8">
@@ -37,21 +38,24 @@
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
+                    @foreach ($transaction->details() as $number=> $item)
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="">99</td>
-                        <td class="px-6 py-3 text-left">HG</td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
+                        <td class="">{{ $number+1 }}</td>
+                        <td class="px-6 py-3 text-left">{{ $item->name }}</td>
+                        <td class="">{{ $item->quantity }}</td>
+                        <td class="">{{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}</td>
+                        <td class="">{{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}</td>
                     </tr>
+                        
+                    @endforeach
                 </tbody>
             </table>
             <div class="flex justify-end p-4">
                 <div class="grid grid-cols-2 gap-2 w-max">
     
-                    <h1 class="text-end">Jumlah pembelian: </h1><span id="total" class="font-bold">Rp 0</span>
-                    <h1 class="text-end">Discount: </h1><span id="totalDisc" class="font-bold">Rp 0</span>
-                    <h1 class="text-end">Total dibayar: </h1><span id="totalPay" class="font-bold">Rp 0</span>
+                    <h1 class="text-end">Jumlah pembelian: </h1><span id="total" class="font-bold">{{ 'Rp ' . number_format($transaction->income+$transaction->discount, 0, ',', '.') }}</span>
+                    <h1 class="text-end">Discount: </h1><span id="totalDisc" class="font-bold">{{ 'Rp ' . number_format($transaction->discount, 0, ',', '.') }}</span>
+                    <h1 class="text-end">Total dibayar: </h1><span id="totalPay" class="font-bold">{{ 'Rp ' . number_format($transaction->income, 0, ',', '.') }}</span>
         
                 </div>
 

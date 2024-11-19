@@ -13,70 +13,83 @@ class Drug extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function used(){
-        return $this->hasOne(TransactionDetail::class,'id','used')->first();
+    public function used()
+    {
+        return $this->hasOne(TransactionDetail::class, 'id', 'used')->first();
     }
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class)->first();
     }
-    public function variant(){
+    public function variant()
+    {
         return $this->belongsTo(Variant::class)->first();
     }
-    public function manufacture(){
+    public function manufacture()
+    {
         return $this->belongsTo(Manufacture::class)->first();
     }
-    public function repacks(){
+    public function repacks()
+    {
         return $this->hasMany(Repack::class)->get();
     }
-    public function warehouse(){
+    public function warehouse()
+    {
         return $this->hasOne(Warehouse::class);
     }
-    public function clinic(){
+    public function clinic()
+    {
         return $this->hasOne(Clinic::class);
     }
-    public function default_repacks(){
+    public function default_repacks()
+    {
         Repack::create([
-            "drug_id"=>$this->id,
-            "name"=>$this->name." 1 pack",
-            "quantity"=> $this->piece_quantity*$this->piece_netto,
-            "margin"=>$this->pack_margin,
-            "price"=>$this->calculate_price($this->piece_quantity*$this->piece_netto,$this->pack_margin)
+            "drug_id" => $this->id,
+            "name" => $this->name . " 1 pack",
+            "quantity" => $this->piece_quantity * $this->piece_netto,
+            "margin" => $this->pack_margin,
+            "price" => $this->calculate_price($this->piece_quantity * $this->piece_netto, $this->pack_margin)
         ]);
         Repack::create([
-            "drug_id"=>$this->id,
-            "name"=>$this->name." 1 pcs",
-            "quantity"=> $this->piece_netto,
-            "margin"=>$this->piece_margin,
-            "price"=>$this->calculate_price($this->piece_netto,$this->piece_margin)
+            "drug_id" => $this->id,
+            "name" => $this->name . " 1 pcs",
+            "quantity" => $this->piece_netto,
+            "margin" => $this->piece_margin,
+            "price" => $this->calculate_price($this->piece_netto, $this->piece_margin)
         ]);
     }
-    public function default_stock(){
+    public function default_stock()
+    {
         Warehouse::create([
-            "drug_id"=>$this->id,
-            "quantity"=> 0,
+            "drug_id" => $this->id,
+            "quantity" => 0,
         ]);
         Clinic::create([
-            "drug_id"=>$this->id,
-            "quantity"=> 0,
+            "drug_id" => $this->id,
+            "quantity" => 0,
         ]);
     }
 
-    public function calculate_price(int $quantity,int $margin){
-        $nett_price = $this->last_price/$this->piece_netto;
-        if($this->last_price!=0){
-            return $quantity*$nett_price*(100+$margin)/100;
+    public function calculate_price(int $quantity, int $margin)
+    {
+        $nett_price = $this->last_price / $this->piece_netto;
+        if ($this->last_price != 0) {
+            return $quantity * $nett_price * (100 + $margin) / 100;
         }
         return 0;
     }
-    public function getBoxPriceAttribute(){
-        return $this->pack_quantity*$this->piece_quantity*$this->last_price;
+    public function getBoxPriceAttribute()
+    {
+        return $this->pack_quantity * $this->piece_quantity * $this->last_price;
     }
-    public function getPackPriceAttribute(){
-        return $this->piece_quantity*$this->last_price;
+    public function getPackPriceAttribute()
+    {
+        return $this->piece_quantity * $this->last_price;
     }
-    public function nextStock(){
-        $inflow = Transaction::where('variant','LPB')->pluck('id');
-        $details = TransactionDetail::where('drug_id',$this->id)->whereIn('transaction_id',$inflow)->whereNot('stock',0)->orderBy('expired')->first();
+    public function nextStock()
+    {
+        $inflow = Transaction::where('variant', 'LPB')->pluck('id');
+        $details = TransactionDetail::where('drug_id', $this->id)->whereIn('transaction_id', $inflow)->whereNot('stock', 0)->orderBy('expired')->first();
         $used = $this->used();
         $used->used = false;
         $used->save();
@@ -84,5 +97,92 @@ class Drug extends Model
         $used = $this->used();
         $used->used = true;
         $used->save();
+    }
+
+    public function customerUseWarehouse(Transaction $transaction, int $require, int $repackQuantity,string $repackName,int $piecePrice,int $priceDiscount)
+    {
+        $remain = $require;
+        $used = $this->used();
+        $warehouse = $this->warehouse()->first();
+        $warehouse->quantity = $warehouse->quantity-$remain;
+        $warehouse->save();
+        TransactionDetail::create([
+            "transaction_id"=>$transaction->id,
+            "drug_id"=>$this->id,
+            "expired"=>$this->warehouse()->first()->oldest,
+            "name"=>$repackName,
+            "quantity"=>$require/$repackQuantity,
+            "piece_price"=>$piecePrice,
+            "total_price"=>$piecePrice*($require/$repackQuantity),
+            "discount_price"=>$priceDiscount,
+        ]);
+        if ($used->stock > $require) {
+            $used->stock = $used->stock - $require;
+            $used->save();
+        } else {
+            while ($remain > 0) {
+                if ($used->stock > $remain) {
+                    $used->stock = $used->stock - $remain;
+                    $remain = 0;
+                    $used->save();
+                } else {
+                    $stockQuantity = $remain;
+                    $remain = $remain - $used->stock;
+                    $used->stock = 0;
+                    $used->save();
+                    $this->nextStock();
+                    $used = $this->used();
+                }
+            }
+        }
+    }
+    public function clinicUseWarehouse(Transaction $transaction, int $require, int $repackQuantity)
+    {
+        $remain = $require;
+        $used = $this->used();
+        if ($used->stock > $require) {
+            $used->stock = $used->stock - $require;
+            $used->save();
+            TransactionDetail::create([
+                "transaction_id" => $transaction->id,
+                "drug_id" => $this->id,
+                "name" => $this->name . " 1 pcs",
+                "quantity" => $repackQuantity . " pcs",
+                "stock" => $require,
+                "expired" => $used->expired,
+                "piece_price" => $this->last_price,
+                "total_price" => $this->last_price * $repackQuantity,
+            ]);
+        } else {
+            while ($remain > 0) {
+                $expired = $used->expired;
+                if ($used->stock > $remain) {
+                    $used->stock = $used->stock - $remain;
+                    $usedQuantity = floor($remain / $this->piece_netto);
+                    $stockQuantity = $remain;
+                    $remain = 0;
+                    $used->save();
+                } else {
+                    $stockQuantity = $remain;
+                    $remain = $remain - $used->stock;
+                    $stockQuantity = $used->stock;
+                    $usedQuantity = ceil($used->stock / $this->piece_netto);
+                    $used->stock = 0;
+                    $used->save();
+                    $this->nextStock();
+                    $used = $this->used();
+                }
+                TransactionDetail::create([
+                    "transaction_id" => $transaction->id,
+                    "drug_id" => $this->id,
+                    "stock" => $stockQuantity,
+                    "name" => $this->name . " 1 pcs",
+                    "quantity" => $usedQuantity . " pcs",
+                    "expired" => $expired,
+                    "piece_price" => $this->last_price,
+                    "total_price" => $this->last_price * $usedQuantity,
+                ]);
+            }
+        }
     }
 }

@@ -51,52 +51,8 @@ class ClinicFlowController extends Controller
             }
             $clinic->save();
             $require = $quantity;
-            $remain = $require;
-            $used = $drugAdd->used();
-            if($used->stock > $require){
-                $used->stock = $used->stock - $require;
-                $used->save();
-                TransactionDetail::create([
-                    "transaction_id"=>$transaction->id,
-                    "drug_id"=>$drugAdd->id,
-                    "name"=>$drugAdd->name." 1 pcs",
-                    "quantity"=>$item->quantity." pcs",
-                    "stock"=>$quantity,
-                    "expired"=>$used->expired,
-                    "piece_price"=>$drugAdd->last_price,
-                    "total_price"=>$drugAdd->last_price*$item->quantity,                
-                ]);
-            }else{
-                while ($remain > 0) {
-                    $expired = $used->expired;
-                    if ($used->stock > $remain) {
-                        $used->stock = $used->stock - $remain;
-                        $usedQuantity = floor($remain/$drugAdd->piece_netto);
-                        $stockQuantity = $remain;
-                        $remain = 0;
-                        $used->save();
-                    }else{
-                        $stockQuantity = $remain;
-                        $remain = $remain - $used->stock;
-                        $stockQuantity = $used->stock;
-                        $usedQuantity = ceil($used->stock/$drugAdd->piece_netto);
-                        $used->stock = 0;
-                        $used->save();
-                        $drugAdd->nextStock();
-                        $used = $drugAdd->used();
-                    }
-                    TransactionDetail::create([
-                        "transaction_id"=>$transaction->id,
-                        "drug_id"=>$drugAdd->id,
-                        "stock"=>$stockQuantity,
-                        "name"=>$drugAdd->name." 1 pcs",
-                        "quantity"=>$usedQuantity." pcs",
-                        "expired"=>$expired,
-                        "piece_price"=>$drugAdd->last_price,
-                        "total_price"=>$drugAdd->last_price*$usedQuantity,                
-                    ]);                    
-                }
-            }
+            $drugAdd->clinicUseWarehouse($transaction,$require,$item->quantity);
+            
         };
         return redirect()->route('clinic.inflows.show',$transaction->id)->with('success','Berhasil menambahkan obat');
         
