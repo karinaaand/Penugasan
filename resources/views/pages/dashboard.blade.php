@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @extends('layouts.main')
 @section('container')
 <div class="grid grid-cols-2 gap-10">
@@ -140,13 +143,14 @@
             <div class="overflow-auto max-h-[50vh]">
                 <table class="w-full text-sm">
                     <tbody>
-                        @for ($i = 0; $i < 20; $i++)
-                            <tr>
-                            <td class="text-center py-3">CO241114002</td>
-                            <td class="text-center py-3">24/05/2024</td>
-                            <td class="text-center py-3">Rp 50.000</td>
-                            </tr>
-                            @endfor
+                        @foreach ($histories as $item)
+                        <tr>
+                        <td class="text-center py-3">{{ $item->code }}</td>
+                        <td class="text-center py-3">{{ Carbon::parse($item->created_at)->translatedFormat('j F Y') }}</td>
+                        <td class="text-center py-3">{{ 'Rp ' . number_format($item->income, 0, ',', '.') }}</td>
+                        </tr>
+                            
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClinicFlowController;
 use App\Http\Controllers\ClinicStockController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\InventoryFlowController;
 use App\Http\Controllers\InventoryStockController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\VendorController;
 use App\Models\Master\Drug;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
 Route::get('/drug-repack', [DrugController::class, 'getRepacks']);
@@ -37,7 +38,7 @@ Route::redirect('/drive','https://drive.google.com/drive/folders/1SQLVZcn1y_XOcj
 Route::redirect('/figma','https://www.figma.com/design/4NIUdh1KTOoyEH3WYWPRH6/SIMBAT-PAD-24?node-id=0-1&t=bbnNvAjBdq5SYAoq-1');
 // 'index','create','store','show','edit','update','destroy'
 Route::redirect('/','/dashboard');
-Route::view('/dashboard', 'pages.dashboard')->name("dashboard");
+Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
 
 Route::controller(UserController::class)->group(function () {
     Route::match(['get','post'],'/login','login')->name('user.login');
