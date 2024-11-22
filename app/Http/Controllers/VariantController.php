@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class VariantController extends Controller
 {
+    public function searchVariant(Request $request)
+    {
+        $query = $request->input('query');
+        $variants = Variant::where('name', 'like', "%{$query}%")->get();
+
+        return response()->json($variants);
+    }
     public function index()
     {
         $judul = "Jenis Obat";

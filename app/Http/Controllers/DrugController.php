@@ -14,7 +14,13 @@ use Illuminate\Http\Request;
 
 class DrugController extends Controller
 {
-    // DrugController.php
+    public function searchDrug(Request $request)
+    {
+        $query = $request->input('query');
+        $drugs = Drug::where('name', 'like', "%{$query}%")->orWhere('code', 'like', "%{$query}%")->get();
+
+        return response()->json($drugs);
+    }
     public function getSuggestions(Request $request)
     {
         $query = $request->input('query');

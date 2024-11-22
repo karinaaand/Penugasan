@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ManufactureController extends Controller
 {
+    public function searchManufacture(Request $request)
+    {
+        $query = $request->input('query');
+        $manufactures = Manufacture::where('name', 'like', "%{$query}%")->get();
+
+        return response()->json($manufactures);
+    }
     public function index()
     {
         $judul = "Produsen Obat";

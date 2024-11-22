@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function searchCategory(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::where('name', 'like', "%{$query}%")->get();
+
+        return response()->json($categories);
+    }
     public function index()
     {
         $judul = "Kategori Obat";

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
+    public function searchVendor(Request $request)
+    {
+        $query = $request->input('query');
+        $vendors = Vendor::where('name', 'like', "%{$query}%")->get();
+
+        return response()->json($vendors);
+    }
     public function index()
     {
         $judul = "Vendor Obat";

@@ -15,12 +15,18 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\VendorController;
 use App\Models\Master\Drug;
+use App\Models\Master\Variant;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
 Route::get('/drug-repack', [DrugController::class, 'getRepacks']);
+Route::get('/category-search', [CategoryController::class, 'searchCategory']);
+Route::get('/variant-search', [VariantController::class, 'searchVariant']);
+Route::get('/manufacture-search', [ManufactureController::class, 'searchManufacture']);
+Route::get('/vendor-search', [VendorController::class, 'searchVendor']);
+Route::get('/drug-search', [DrugController::class, 'searchDrug']);
 
 
 Route::get('/get-drug-price/{name}/{type}', function ($name,$type) {

@@ -111,7 +111,12 @@
         formData = null;
     }
     function submitForm(){
-        formData.removeEventListener('submit',()=>{});        
+        try {
+            
+            formData.removeEventListener('submit',()=>{});        
+        } catch (error) {
+            
+        }
         formData.submit()
     }
 </script>
