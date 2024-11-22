@@ -14,5 +14,8 @@ class Warehouse extends Model
     public function drug(){
         return $this->belongsTo(Drug::class)->first();
     }
+    public function data(){
+        return $this->belongsTo(Drug::class,'drug_id','id');
+    }
 
 }

@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 
 class ClinicStockController extends Controller
 {
+    public function searchClinicStock(Request $request)
+    {
+        $query = $request->input('query');
+        $drugs = Drug::where('name', 'like', "%{$query}%")->orWhere('code', 'like', "%{$query}%")->pluck('id');
+        $clinic = Clinic::with('data')->whereIn('drug_id',$drugs)->get();
+
+        return response()->json($clinic);
+    }
     public function index()
     {
         $judul = "Stok Obat Klinik";

@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class InventoryStockController extends Controller
 {
+    public function searchInventoryStock(Request $request)
+    {
+        $query = $request->input('query');
+        $drugs = Drug::where('name', 'like', "%{$query}%")->orWhere('code', 'like', "%{$query}%")->pluck('id');
+        $warehouse = Warehouse::with('data')->whereIn('drug_id',$drugs)->get();
+
+        return response()->json($warehouse);
+    }
     public function index()
     {
         $judul = "Stok Obat Gudang";

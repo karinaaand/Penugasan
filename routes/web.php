@@ -27,6 +27,8 @@ Route::get('/variant-search', [VariantController::class, 'searchVariant']);
 Route::get('/manufacture-search', [ManufactureController::class, 'searchManufacture']);
 Route::get('/vendor-search', [VendorController::class, 'searchVendor']);
 Route::get('/drug-search', [DrugController::class, 'searchDrug']);
+Route::get('/inventory-stock-search', [InventoryStockController::class, 'searchInventoryStock']);
+Route::get('/clinic-stock-search', [ClinicStockController::class, 'searchClinicStock']);
 
 
 Route::get('/get-drug-price/{name}/{type}', function ($name,$type) {
