@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class ClinicStockController extends Controller
 {
+    //function API endpoint untuk melakukan live search pada stok obat klinik
     public function searchClinicStock(Request $request)
     {
         $query = $request->input('query');
@@ -31,10 +32,10 @@ class ClinicStockController extends Controller
     {
         $judul = "Stok ".$stock->name;
         $drug = $stock;
+        //mengambil data stok obat klinik
         $stock = Clinic::where('drug_id',$drug->id)->first();
         $inflow = Transaction::where('variant','LPK')->pluck('id');
         $details = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->whereNot('stock',0)->orderBy('expired')->paginate(10,['*'],'expired');
-        // dd($details);
         $transactions = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->orderBy('created_at')->paginate(10,['*'],'transaction');
         return view("pages.clinic.stockDetail",compact('drug','stock','judul','details','transactions'));
     }
@@ -44,9 +45,10 @@ class ClinicStockController extends Controller
         $judul = "Retur Obat ". $drug->name;
         if($request->isMethod('get')){
             return view("pages.inventory.retur",compact('batch','judul'));
-        }elseif ($request->isMethod('post')) {
-            $transaction = Transaction::create([
-                "vendor_id"=>$batch->transaction->vendor()->id,
+        //pembuatan barang retur
+    }elseif ($request->isMethod('post')) {
+        $transaction = Transaction::create([
+            "vendor_id"=>$batch->transaction->vendor()->id,
                 "destination"=>"warehouse",
                 "variant"=>"Retur",
             ]);
@@ -83,8 +85,8 @@ class ClinicStockController extends Controller
         $judul = "Buang Obat ". $drug->name;
         if($request->isMethod('get')){
             return view("pages.inventory.trash",compact('batch','judul'));
+            //pembuatan barang buang
         }elseif($request->isMethod('post')){
-            // dd($request);
             $transaction = Transaction::create([
                 "vendor_id"=>$batch->transaction->vendor()->id,
                 "destination"=>"warehouse",

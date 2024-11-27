@@ -24,6 +24,7 @@ class ManagementController extends Controller
         return view("pages.management.billDetail", compact('bill', 'judul'));
     }
     public function billPrint() {}
+    //melakukan pembayaran tagihan
     public function billPay(Bill $bill)
     {
         
@@ -62,6 +63,7 @@ class ManagementController extends Controller
         return view("pages.management.trashDetail", compact('trash', 'judul'));
     }
     public function returPrint() {}
+    //melakukan penerimaan barang retur
     public function returPay(Retur $retur)
     {
         DB::beginTransaction();

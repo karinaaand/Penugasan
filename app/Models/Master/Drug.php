@@ -13,34 +13,42 @@ class Drug extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    //mengambil data stok mana yang seharusnya dikeluarkan
     public function used()
     {
         return $this->hasOne(TransactionDetail::class, 'id', 'used')->first();
     }
+    //mengambil data kategori obat
     public function category()
     {
         return $this->belongsTo(Category::class)->first();
     }
+    //mengambil data jenis obat
     public function variant()
     {
         return $this->belongsTo(Variant::class)->first();
     }
+    //mengambil data produsen obat
     public function manufacture()
     {
         return $this->belongsTo(Manufacture::class)->first();
     }
+    //mengambil data repack obat
     public function repacks()
     {
         return $this->hasMany(Repack::class)->get();
     }
+    //mengambil data stok obat di gudang
     public function warehouse()
     {
         return $this->hasOne(Warehouse::class);
     }
+    //mengambil data stok obat di klinik
     public function clinic()
     {
         return $this->hasOne(Clinic::class);
     }
+    //membuat data repack default yaitu 1pcs dan 1 pack
     public function default_repacks()
     {
         Repack::create([
@@ -58,6 +66,7 @@ class Drug extends Model
             "price" => $this->calculate_price($this->piece_netto, $this->piece_margin)
         ]);
     }
+    //membuat data stok default di klinik dan gudang
     public function default_stock()
     {
         Warehouse::create([
@@ -69,7 +78,7 @@ class Drug extends Model
             "quantity" => 0,
         ]);
     }
-
+    //kalkulasi harga berdasarkan harga netto satuan
     public function calculate_price(int $quantity, int $margin)
     {
         $nett_price = $this->last_price / $this->piece_netto;
@@ -86,6 +95,7 @@ class Drug extends Model
     {
         return $this->piece_quantity * $this->last_price;
     }
+    //melakukan pemindahan stok yang digunakan berdasarkan expire date(khusus transaksi checkout)
     public function nextStock()
     {
         $inflow = Transaction::where('variant', 'LPB')->pluck('id');
@@ -98,7 +108,8 @@ class Drug extends Model
         $used->used = true;
         $used->save();
     }
-
+    
+    //melakukan pengurangan stok pada gudang berdasarkan expire terdekat
     public function customerUseWarehouse(Transaction $transaction, int $require, int $repackQuantity,string $repackName,int $piecePrice,int $priceDiscount)
     {
         $remain = $require;
@@ -136,6 +147,7 @@ class Drug extends Model
             }
         }
     }
+    //melakukan pemindahan stok yang digunakan berdasarkan expire date(khusus transaksi obat masuk klinik)
     public function clinicUseWarehouse(Transaction $transaction, int $require, int $repackQuantity)
     {
         $remain = $require;

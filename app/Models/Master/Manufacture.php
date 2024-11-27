@@ -9,6 +9,7 @@ class Manufacture extends Model
 {
     use HasFactory;
     protected $fillable = ["name"];
+    //sebuah data kategori memiliki relasi dengan banyak master obat
     public function drugs(){
         return $this->hasMany(Drug::class)->get();
     }

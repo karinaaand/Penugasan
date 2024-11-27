@@ -27,6 +27,7 @@ class InventoryFlowController extends Controller
     }
     public function store(Request $request)
     {
+        //data yang dikirimkan FE berupa JSON
         $datas = json_decode($request->transaction);
         $transaction = Transaction::create([
             "vendor_id"=>$request->vendor_id,
@@ -36,6 +37,7 @@ class InventoryFlowController extends Controller
             "outcome"=>$request->total
         ]);
         $transaction->generate_code();
+        //melakukan pembuatan tagihan
         if($transaction->method=="credit"){
             Bill::create([
                 "transaction_id"=>$transaction->id,
@@ -57,6 +59,7 @@ class InventoryFlowController extends Controller
                 "total_price"=>$item->price,
                 "used"=>false
             ]);
+            //kalkulasi harga satuan dari barang
             if($item->unit=="pcs"){
                 $newPrice = $item->piece_price;
             }elseif($item->unit=="pack"){
@@ -64,13 +67,16 @@ class InventoryFlowController extends Controller
             }elseif($item->unit=="box"){
                 $newPrice = $item->piece_price/($drug->piece_quantity*$drug->pack_quantity);
             }
+            //menentukan apakah harga perlu diubah dengan yang terbaru(jika lebih tinggi)
             if($drug->last_price < $newPrice){
                 $drug->last_price = $newPrice;
                 $drug->save();
             }
+            //melakukan update semua harga repack
             foreach ($drug->repacks() as $repack) {
                 $repack->update_price();
             }
+            //kalkulasi jumlah pcs berdasarkan master data
             match ($item->unit) {
                 "pcs" => $quantity= $item->quantity*$drug->piece_netto,
                 "pack" => $quantity= $item->quantity*($drug->piece_netto*$drug->piece_quantity),
@@ -80,6 +86,7 @@ class InventoryFlowController extends Controller
             $stock->quantity = $stock->quantity + $quantity;
             $detail->stock = $quantity;
             $detail->save();
+            //mengubah nilai expired terakhir
             if ($stock->oldest == null) {
                 $stock->oldest = $item->expired;
                 $stock->latest = $item->expired;

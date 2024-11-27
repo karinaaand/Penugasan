@@ -29,12 +29,14 @@ class TransactionController extends Controller
             "discount"=>$request->totalDisc
         ]);
         $transaction->generate_code();
-        // $transaction = Transaction::find(2);
+
+        //data yang dikirimkan FE berupa JSON
         $dataInput = json_decode($request->transaction);
         $totalProfit = 0;
         foreach ($dataInput->data as $item) {
             $repack = Repack::find($item->repackId);
             $drug = $repack->drug();
+            //kalkulasi keuntungan
             $pieceProfit = $item->piecePrice - $drug->last_price*($item->repackQuantity/$drug->piece_netto);
             $totalProfit = $totalProfit + $pieceProfit*$item->quantity;
             $totalProfit = $totalProfit - $item->priceDiscount;
@@ -45,7 +47,6 @@ class TransactionController extends Controller
         $transaction->discount = $dataInput->totalDisc;
         $transaction->income = $dataInput->totalPay;
         $transaction->save();
-        // dd($dataInput,$transaction,$totalProfit);
         return redirect()->route('transaction.show',$transaction->id);
     }
     public function show(Transaction $transaction)

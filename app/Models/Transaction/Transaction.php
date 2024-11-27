@@ -10,22 +10,26 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    //transaksi memiliki relasi one-one dengan vendor
     public function vendor()
     {
         return $this->belongsTo(Vendor::class)->first();
     }
-
+    //transaksi memiliki relasi one-one dengan obat buang(opsional)
     public function trash(){
         return $this->hasOne(Trash::class)->first();
     }
+    //transaksi memiliki relasi one-one dengan retur obat(opsional)
     public function retur(){
         return $this->hasOne(Retur::class)->first();
     }
-
+    
+    //transaksi memiliki relasi one-many dengan detail transaksi
     public function details()
     {
         return $this->hasMany(TransactionDetail::class)->get();
     }
+    //melakukan generate kode berdasarkan jenis transaksi
     public function generate_code()
     {
         match ($this->variant) {

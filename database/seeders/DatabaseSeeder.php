@@ -13,6 +13,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    //definisi data yang perlu dimasukkan kedalam database
     private $categories = [
         [
             "name" => "Paracetamol",
@@ -236,7 +237,7 @@ class DatabaseSeeder extends Seeder
         ],
     ];
     
-    
+    //melakukan pembuatan data dengan foreach
     public function run(): void
     {
         foreach ($this->categories as $item) {

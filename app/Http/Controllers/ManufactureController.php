@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class ManufactureController extends Controller
 {
+    //function API endpoint untuk melakukan live search pada produsen obat
     public function searchManufacture(Request $request)
     {
         $query = $request->input('query');
@@ -35,12 +36,11 @@ class ManufactureController extends Controller
     }
     public function update(Request $request, Manufacture $manufacture)
     {
-        // dd($manufacture);
         try {
             $manufacture->update($request->all());
-            return redirect()->route('master.manufacture.index')->with('success','Produsen berhasil diubah');
+            return redirect()->back()->with('success','Produsen berhasil diubah');
         } catch (\Throwable $e) {
-            return redirect()->route('master.manufacture.index')->with('error','Produsen gagal diubah');
+            return redirect()->back()->with('error','Produsen gagal diubah');
         }
     }
     public function destroy(Manufacture $manufacture)

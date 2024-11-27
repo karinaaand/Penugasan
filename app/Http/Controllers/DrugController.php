@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 class DrugController extends Controller
 {
+    //function API endpoint untuk melakukan live search pada master obat berdasarkan nama dan kode
     public function searchDrug(Request $request)
     {
         $query = $request->input('query');
@@ -21,6 +22,7 @@ class DrugController extends Controller
 
         return response()->json($drugs);
     }
+    //function API endpoint untuk melakukan live search obat pada obat masuk berdasarkan nama
     public function getSuggestions(Request $request)
     {
         $query = $request->input('query');
@@ -28,6 +30,7 @@ class DrugController extends Controller
 
         return response()->json($drugs);
     }
+    //function API endpoint untuk melakukan live search semua repack pada checkout
     public function getRepacks(Request $request)
     {
         $query = $request->input('query');
@@ -57,15 +60,17 @@ class DrugController extends Controller
     }
     public function store(Request $request)
     {
-        $category = Category::find($request->category_id);
-        $request["code"] = $this->generateCode($category);
-        $drug = Drug::create($request->all());
-        $drug->default_repacks();
-        $drug->default_stock();
-        return redirect()->route('master.drug.edit', $drug->id)->with('success', 'Obat berhasil dibuat');
         try {
+            $category = Category::find($request->category_id);
+            //membuat kode untuk obat yang dibuat
+            $request["code"] = $this->generateCode($category);
+            $drug = Drug::create($request->all());
+            //membuat repack dan stok default untuk obat yang dibuat
+            $drug->default_repacks();
+            $drug->default_stock();
+            return redirect()->route('master.drug.edit', $drug->id)->with('success', 'Obat berhasil dibuat');
         } catch (\Throwable $th) {
-            return redirect()->route('master.drug.index')->with('error', 'Obat gagal dibuat');
+            return redirect()->back()->with('error', 'Obat gagal dibuat');
         }
     }
     public function edit(Drug $drug)
@@ -73,7 +78,7 @@ class DrugController extends Controller
         $categories = Category::all();
         $variants = Variant::all();
         $manufactures = Manufacture::all();
-        $judul = "Edit Obat ". $drug->name;
+        $judul = "Edit Obat " . $drug->name;
         $repacks = $drug->repacks();
         return view('pages.master.editDrug', compact('categories', 'variants', 'manufactures', 'drug', 'judul', 'repacks'));
     }
@@ -81,19 +86,21 @@ class DrugController extends Controller
     {
         $drug->update($request->all());
         $repacks = $drug->repacks();
+        //melakukan update data harga terhadap semua data repack
         foreach ($repacks as $item) {
             $item->update_price();
         }
-        return redirect()->back()->with('success','Berhasil mengubah data obat');
+        return redirect()->back()->with('success', 'Berhasil mengubah data obat');
     }
     public function repack(Request $request, Drug $drug, Repack $repack)
     {
         if ($request->isMethod('DELETE')) {
+            //melakukan pengecekan apakah repack adalah repack default (1 pack dan 1pcs)
             if ($repack->quantity != $drug->piece_quantity * $drug->piece_netto && $repack->quantity != $drug->piece_netto) {
                 $repack->delete();
-                return back()->with('success','Berhasil menghapus repack');
+                return back()->with('success', 'Berhasil menghapus repack');
             }
-            return back()->with('error','Gagal menghapus repack');
+            return back()->with('error', 'Gagal menghapus repack');
         } else {
             $quantity = $request->quantity;
             if ($request->piece_unit == "pcs") {
@@ -102,17 +109,18 @@ class DrugController extends Controller
             // dd($quantity);
             Repack::create([
                 "drug_id" => $drug->id,
-                "name" => $drug->name." ".$request->quantity." ".$request->piece_unit,
+                "name" => $drug->name . " " . $request->quantity . " " . $request->piece_unit,
                 "quantity" => $quantity,
                 "margin" => $request->margin,
                 "price" => $drug->calculate_price($quantity, $request->margin)
             ]);
-            return back()->with('success','Berhasil membuat repack');
+            return back()->with('success', 'Berhasil membuat repack');
         }
     }
     public function destroy(Drug $drug)
     {
         try {
+            //melakukan pengecekan bahwa obat yang dihapus haruslah tidak memiliki stok di gudang maupun klinik
             if ($drug->warehouse->quantity > 0 || $drug->clinic->quantity > 0) {
                 throw new Exception('Division by zero.');
             }
@@ -122,6 +130,7 @@ class DrugController extends Controller
             return redirect()->back()->with('error', 'Obat gagal dihapus');
         }
     }
+    //fungsi untuk membuat kode obat berdasarkan kategori
     function generateCode(Category $category): string
     {
         $lastDrug = $category->drugs()->last();

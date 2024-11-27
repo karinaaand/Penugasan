@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class InventoryStockController extends Controller
 {
+    //function API endpoint untuk melakukan live search pada inventori stok
     public function searchInventoryStock(Request $request)
     {
         $query = $request->input('query');
@@ -35,10 +36,6 @@ class InventoryStockController extends Controller
         $details = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->whereNot('stock',0)->orderBy('expired')->paginate(10,['*'],'expired');
         $transactions = TransactionDetail::with('transaction')->where('drug_id',$drug->id)->orderBy('created_at')->paginate(5,['*'],'transaction');
         return view("pages.inventory.stockDetail",compact('drug','stock','judul','details','transactions'));
-    }
-    public function destroy(string $id)
-    {
-        //
     }
     public function retur(Request $request,TransactionDetail $batch)
     {

@@ -24,6 +24,7 @@ class ClinicFlowController extends Controller
     }
     public function store(Request $request)
     {
+        //data yang dikirimkan FE berupa JSON
         $datas = json_decode($request->transaction);
         $transaction = Transaction::create([
             "destination"=>"clinic",
@@ -38,6 +39,7 @@ class ClinicFlowController extends Controller
             $warehouse->save();
             $clinic = Clinic::where('drug_id',$drugAdd->id)->first();
             $clinic->quantity = $clinic->quantity + $quantity;
+            //pengondisian untuk memastikan data expire
             if ($clinic->oldest == null) {
                 $clinic->oldest = $warehouse->oldest;
                 $clinic->latest = $warehouse->oldest;
@@ -51,6 +53,7 @@ class ClinicFlowController extends Controller
             }
             $clinic->save();
             $require = $quantity;
+            //mengambil obat dari inventory menggunakan fungsi pada model
             $drugAdd->clinicUseWarehouse($transaction,$require,$item->quantity);
             
         };

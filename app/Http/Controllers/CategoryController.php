@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    // controller API endpoint untuk melakukan live search
     public function searchCategory(Request $request)
     {
         $query = $request->input('query');
@@ -26,19 +27,13 @@ class CategoryController extends Controller
             "name"=> "required|alpha:ascii|min:3|max:25|string",
             "code"=> "required|alpha|min:2|max:2"
         ]);
+        //try catch-block untuk menghindari error dan otomatis akan mengeluarkan toast
         try {
             Category::create($validate);
             return back()->with('success','Kategori berhasil dibuat');
         } catch (\Throwable $e) {
             return back()->with('error','Kategori gagal dibuat');
         }
-    }
-    public function edit(Category $category)
-    {
-        $judul = "Edit Kategori Obat";
-        $categories = Category::all();
-        $edit = true;
-        return view('pages.master.category',compact('judul','categories','edit','category'));
     }
     public function update(Request $request, Category $category)
     {
@@ -47,6 +42,7 @@ class CategoryController extends Controller
     }
     public function destroy(Category $category)
     {
+        //try catch-block untuk menghindari error dan otomatis akan mengeluarkan toast
         try {
             $category->delete();
             return back()->with('success', 'Kategori berhasil dihapus');

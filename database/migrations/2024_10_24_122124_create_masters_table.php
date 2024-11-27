@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('address');
             $table->timestamps();
         });
+        //obat memiliki 3 relasi dengan constrain onDelete cascade sehingga tidak akan bisa dihapus untuk menghindari kekosongan data
         Schema::create('drugs', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Category::class)->constrained()->onDelete('restrict');
@@ -57,6 +58,7 @@ return new class extends Migration
             $table->enum('piece_unit',['ml','mg','butir']);
             $table->timestamps();
         });
+        //repack memiliki relasi dengan obat menggunakan constraint onDelete cascade sehingga akan ikut terhapus untuk menghindari kekosongan data
         Schema::create('repacks',function(Blueprint $table){
             $table->id();
             $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');

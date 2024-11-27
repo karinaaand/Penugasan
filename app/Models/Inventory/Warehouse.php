@@ -11,9 +11,11 @@ class Warehouse extends Model
     use HasFactory;
     protected $table = 'warehouse_inventory';
     protected $guarded = [];
+    //sebuah data stok memiliki relasi dengan master obat
     public function drug(){
         return $this->belongsTo(Drug::class)->first();
     }
+    //sebuah data stok memiliki relasi dengan master obat, dibedakan dengan method drug karena agar dapat menggunakan keyword with
     public function data(){
         return $this->belongsTo(Drug::class,'drug_id','id');
     }

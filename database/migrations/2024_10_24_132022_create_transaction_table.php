@@ -16,6 +16,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //banyak field yang nullable karena hanya diperlukan pada beberapa transaksi
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->char('code',12)->nullable();
@@ -30,10 +31,11 @@ return new class extends Migration
             $table->integer('discount')->nullable();
             $table->timestamps();
         });
+        //detail memiliki constrain onDelete cascade terhadap 2 table sehingga akan ikut terhapus
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Transaction::class);
-            $table->foreignIdFor(Drug::class);
+            $table->foreignIdFor(Transaction::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');
             $table->integer('stock')->nullable();
             $table->boolean('used')->nullable();
             $table->boolean('margin')->nullable();
@@ -45,20 +47,22 @@ return new class extends Migration
             $table->integer('discount_price')->nullable();
             $table->timestamps();
         });
+        //bill memiliki constrain onDelete cascade sehingga akan ikut terhapus
         Schema::create('bills',function(Blueprint $table){
             $table->id();
-            $table->foreignIdFor(Transaction::class);
+            $table->foreignIdFor(Transaction::class)->constrained()->onDelete('cascade');
             $table->integer('total');
             $table->enum('status',['Belum Bayar','Done']);
             $table->date('pay')->nullable();
             $table->date('due');
             $table->timestamps();
         });
+        //bill memiliki constrain onDelete cascade terhadap 3 tabel sehingga akan ikut terhapus
         Schema::create('returs',function(Blueprint $table){
             $table->id();
-            $table->foreignIdFor(Drug::class);
-            $table->foreignIdFor(Transaction::class);
-            $table->foreignIdFor(TransactionDetail::class);
+            $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Transaction::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(TransactionDetail::class)->constrained()->onDelete('cascade');
             $table->foreignId('source');
             $table->integer('quantity');
             $table->enum('status',['Belum Kembali','Done']);
@@ -66,11 +70,12 @@ return new class extends Migration
             $table->date('arrive')->nullable();
             $table->timestamps();
         });
+        //trash memiliki constrain onDelete cascade terhadap 3 tabel sehingga akan ikut terhapus
         Schema::create('trashes',function(Blueprint $table){
             $table->id();
-            $table->foreignIdFor(Drug::class);
-            $table->foreignIdFor(Transaction::class);
-            $table->foreignIdFor(TransactionDetail::class);
+            $table->foreignIdFor(Drug::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Transaction::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(TransactionDetail::class)->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->text('reason')->nullable();
             $table->timestamps();

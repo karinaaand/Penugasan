@@ -9,9 +9,11 @@ class Repack extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    //repack memiliki relasi one-one dengan obat
     public function drug(){
         return $this->belongsTo(Drug::class)->first();
     }
+    //kalkulasi stok gudang berdasarkan konfigurasi repack
     public function stock(){
         $warehouse = $this->drug()->warehouse;
         if ($warehouse->quantity == 0) {
@@ -19,6 +21,7 @@ class Repack extends Model
         }
         return $warehouse->quantity / $this->quantity;
     }
+    //melakukan perubahan harga repack berdasarkan master data
     public function update_price(){
         $drug = $this->drug();
         if(str_contains($this->name,'1 pack')){

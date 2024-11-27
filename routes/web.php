@@ -66,7 +66,7 @@ Route::prefix("inventory")->as('inventory.')->group(function(){
     Route::match(['get','post'],"stocks/retur/{batch}",[InventoryStockController::class,"retur"])->name('retur');
     Route::match(['get','post'],"stocks/trash/{batch}",[InventoryStockController::class,"trash"])->name('trash');
     Route::resource('stocks',InventoryStockController::class)->only([
-        'index','show','destroy'
+        'index','show'
     ]);
 });
 

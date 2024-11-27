@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
+    //function API endpoint untuk live search pada master vendor obat
     public function searchVendor(Request $request)
     {
         $query = $request->input('query');
@@ -29,15 +30,15 @@ class VendorController extends Controller
         ]);
         try {
             Vendor::create($validate);
-            return redirect()->route('master.vendor.index')->with('success','Vendor berhasil dibuat');
+            return redirect()->back()->with('success','Vendor berhasil dibuat');
         } catch (\Throwable $th) {
-            return redirect()->route('master.vendor.index')->with('error','Vendor gagal dibuat');
+            return redirect()->back()->with('error','Vendor gagal dibuat');
         }
     }
     public function update(Request $request, Vendor $vendor)
     {
         $vendor->update($request->all());
-        return redirect()->route('master.vendor.index')->with('success','Vendor berhasil diubah');
+        return redirect()->back()->with('success','Vendor berhasil diubah');
     }
     public function destroy(Vendor $vendor)
     {
