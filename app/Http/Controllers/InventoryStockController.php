@@ -56,7 +56,8 @@ class InventoryStockController extends Controller
                 "name"=>$drug->name." 1 pcs",
                 "quantity"=>$request->quantity." pcs",
                 "piece_price"=>$drug->last_price,
-                "total_price"=>$request->quantity * $drug->last_price
+                "total_price"=>$request->quantity * $drug->last_price,
+                "flow"=>0
             ]);
             $transaction->generate_code();
             Retur::create([
@@ -97,7 +98,8 @@ class InventoryStockController extends Controller
                 "name"=>$drug->name." 1 pcs",
                 "quantity"=>$request->quantity." pcs",
                 "piece_price"=>$drug->last_price,
-                "total_price"=>$request->quantity * $drug->last_price
+                "total_price"=>$request->quantity * $drug->last_price,
+                "flow"=>$request->quantity*$drug->piece_netto*-1
             ]);
             $transaction->generate_code();
             Trash::create([

@@ -12,10 +12,9 @@
     <div class="rounded-lg bg-white p-6 shadow-lg">
         <div class="mb-4 flex items-center">
             <div class="flex-1 mr-5">
-                <h2 class="text-xl font-bold text-left">Klinik Dokter hewan Hendrik</h2>
-                <h2 class="text-sm text-left">Pakuwon Asri, Jl. Sadewa No.3, Karangtengah Lor, Kaliwungu, Kendal, Jawa Tengah
-                    51372</h2>
-                <h2 class="text-sm text-left">085290078739</h2>
+                <h2 class="text-xl font-bold text-left">{{ App\Models\Profile::first()->name }}</h2>
+                <h2 class="text-sm text-left">{{ App\Models\Profile::first()->address }}</h2>
+                <h2 class="text-sm text-left">{{ App\Models\Profile::first()->phone }}</h2>
             </div>
             <div class="flex-[1.5] flex flex-col  items-center justify-center">
                 <div class="flex items-center">

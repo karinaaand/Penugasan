@@ -15,6 +15,10 @@ class Retur extends Model
     {
         return $this->belongsTo(Transaction::class)->first();
     }
+    public function trans()
+    {
+        return $this->belongsTo(Transaction::class,'transaction_id','id');
+    }
     //retur memiliki relasi one-one dengan obat
     public function drug()
     {

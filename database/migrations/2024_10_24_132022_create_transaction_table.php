@@ -45,6 +45,7 @@ return new class extends Migration
             $table->integer('piece_price');
             $table->integer('total_price');
             $table->integer('discount_price')->nullable();
+            $table->integer('flow')->nullable();
             $table->timestamps();
         });
         //bill memiliki constrain onDelete cascade sehingga akan ikut terhapus

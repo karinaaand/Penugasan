@@ -85,6 +85,7 @@ class InventoryFlowController extends Controller
             $stock = Warehouse::where('drug_id',$drug->id)->first();
             $stock->quantity = $stock->quantity + $quantity;
             $detail->stock = $quantity;
+            $detail->flow = $quantity;
             $detail->save();
             //mengubah nilai expired terakhir
             if ($stock->oldest == null) {

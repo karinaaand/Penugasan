@@ -15,6 +15,10 @@ class Trash extends Model
     {
         return $this->belongsTo(Transaction::class)->first();
     }
+    public function trans()
+    {
+        return $this->belongsTo(Transaction::class,'transaction_id','id');
+    }
     //obat buang memiliki relasi one-one dengan obat
     public function drug()
     {

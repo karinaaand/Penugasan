@@ -58,6 +58,8 @@ class UserController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/');
+            }else{
+                return back()->with('error','GAGAL');
             }
         }
     }

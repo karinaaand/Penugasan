@@ -29,6 +29,10 @@ class Transaction extends Model
     {
         return $this->hasMany(TransactionDetail::class)->get();
     }
+    public function detail()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
     //melakukan generate kode berdasarkan jenis transaksi
     public function generate_code()
     {
