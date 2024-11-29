@@ -7,9 +7,11 @@ use App\Models\Master\Drug;
 use App\Models\Master\Manufacture;
 use App\Models\Master\Variant;
 use App\Models\Master\Vendor;
+use App\Models\Profile;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,8 +42,8 @@ class DatabaseSeeder extends Seeder
             "code" => "VT"
         ],
     ];
-    private $variants = [["name"=>"Cair"],["name"=>"Padat"],["name"=>"Butir"],["name"=>"Bubuk"],["name"=>"Kapsul"],["name"=>"Pil"]];
-    private $manufactures = [["name"=>"Kimia Farma"],["name"=>"Darya"],["name"=>"Kalbe"],["name"=>"Sidomuncul"],["name"=>"Aipeak"],["name"=>"Sanbe"]];
+    private $variants = [["name" => "Cair"], ["name" => "Padat"], ["name" => "Butir"], ["name" => "Bubuk"], ["name" => "Kapsul"], ["name" => "Pil"]];
+    private $manufactures = [["name" => "Kimia Farma"], ["name" => "Darya"], ["name" => "Kalbe"], ["name" => "Sidomuncul"], ["name" => "Aipeak"], ["name" => "Sanbe"]];
     private $vendors = [
         [
             "name" => "PT Farmasi Sejahtera",
@@ -236,10 +238,20 @@ class DatabaseSeeder extends Seeder
             "piece_unit" => "mg",
         ],
     ];
-    
-    //melakukan pembuatan data dengan foreach
+    private $users = [
+        [
+            "name" => "Super Arsyad",
+            "email" => "super@gmail.com",
+            "role" => "super",
+            "avatar" => "avatar/avatar.jpg"
+        ]
+    ];
     public function run(): void
     {
+        foreach ($this->users as $item) {
+            $item["password"] = Hash::make("admin");
+            User::create($item);
+        }
         foreach ($this->categories as $item) {
             Category::create($item);
         }
@@ -258,5 +270,11 @@ class DatabaseSeeder extends Seeder
             $drug->default_repacks();
             $drug->default_stock();
         }
+        Profile::create([
+            "name" => "Klinik Dokter Hendrik",
+            "logo" => "profile/logo simbat.png",
+            "address" => "Surabaya",
+            "phone" => "08987654321"
+        ]);
     }
 }

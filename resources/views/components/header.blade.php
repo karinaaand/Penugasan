@@ -30,7 +30,7 @@
         </a>
 <div class="relative inline-block text-left">
     <button onclick="toggleModal()" class="flex items-center justify-center w-10 h-10 bg-white border-none rounded-full focus:outline-none">
-        <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar" class="w-10 h-10 rounded-full">
+        <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="Avatar" class="w-10 h-10 rounded-full">
     </button>
 </div>
         <div id="modal" class="fixed inset-0 hidden bg-black bg-opacity-50 z-50">
@@ -48,21 +48,23 @@
                     <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
                         <span class="w-20 text-left flex-shrink-0">Nama</span>
                         <span class="">:</span>
-                        <span class="ml-1">ADMIN123</span>
+                        <span class="ml-1">{{ auth()->user()->name }}</span>
                     </div>
                     <div class="flex items-center text-sm text-gray-600 font-semibold mb-2">
                         <span class="w-20 text-left flex-shrink-0">Role</span>
                         <span class="">:</span>
-                        <span class="ml-1">ADMIN</span>
+                        <span class="ml-1">{{ auth()->user()->role }}</span>
                     </div>
                     <div class="flex items-center text-sm text-gray-600 font-semibold mb-4">
                         <span class="w-20 text-left flex-shrink-0">Email</span>
                         <span class="">:</span>
-                        <span class="ml-1">ADMIN@gmail.com</span>
+                        <span class="ml-1">{{ auth()->user()->email }}</span>
                     </div>
                 </div>
                 <div class="mt-4 flex justify-center">
-                    <!-- Icon Setting -->
+                    @if (auth()->user()->role=="super")
+                        
+                    
                     <a href="{{ route('user.settings') }}" class="bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-700 py-2 px-4 rounded-lg flex items-center justify-center w-full text-center">
                         <svg class="mr-2"  fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                             viewBox="0 0 478.703 478.703" xml:space="preserve">
@@ -93,6 +95,7 @@
                             </g>
                         </svg>    
                     Atur Profile Klinik</a>
+                    @endif
                 </div>
                 <div class="mt-10 flex justify-center">
                     <!-- Icon Logout -->

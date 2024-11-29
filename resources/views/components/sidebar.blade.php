@@ -15,7 +15,7 @@
         <ul class="space-y-2 font-medium">
             <li>
                 <div style="margin-bottom: 30px; margin-left: 40px;">
-                    <img src="{{ asset('assets/logo simbat.png') }}" alt="Simbat Logo"
+                    <img src="{{ Storage::url(App\Models\Profile::first()->logo) }}" alt="Simbat Logo"
                         style="width: 40px; height: 40px; margin-right: 3px; vertical-align: middle; display: inline-block;">
                     <span
                         style="font-size: 20px; font-weight: bold; vertical-align: middle; display: inline-block;">Simbat</span>
@@ -37,6 +37,9 @@
                         class="inline-flex items-center justify-center w-6 h-6 p-2 ml-8 text-sm font-medium text-red-800 bg-red-100 rounded-full dark:bg-orange-600 dark:text-white">6</span>
                 </a>
             </li>
+            @if (auth()->user()->role != 'doctor')
+                
+            
             <li>
                 <button type="button"
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
@@ -212,6 +215,7 @@
                     </li>
                 </ul>
             </li>
+            @endif
             <li>
                 <button type="button"
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
@@ -273,6 +277,7 @@
                     </li>
                 </ul>
             </li>
+            @if (auth()->user()->role != 'doctor')
             <li>
                 <button type="button"
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
@@ -415,6 +420,7 @@
                     </li>
                 </ul>
             </li>
+            @endif
             <li>
                 <a href="{{ route('user.index') }}"
                     class="flex items-center p-2 transition duration-75 rounded-lg group

@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
     <h2 class="mb-6 text-2xl font-semibold text-center text-gray-800">Masuk</h2>
-    <form>
+    <form action="{{ route('login') }}" method="POST">
+        @csrf
         <div class="mb-4">
             <label class="block mb-2 text-sm font-medium text-gray-700" for="email">Email</label>
             <input class="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="email" name="email">
