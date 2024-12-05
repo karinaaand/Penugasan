@@ -37,7 +37,7 @@
                             @method('DELETE')
                         </form>
                         <td class="flex justify-center gap-2 py-3">
-                            <a onclick="showEditModal()" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
+                            <a onclick="showEditModal('{{ $item->id }}','{{ $item->avatar }}','{{ $item->name }}','{{ $item->role }}','{{ $item->email }}')" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                                 <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.728 9.68602L14.314 8.27202L5 17.586V19H6.414L15.728 9.68602ZM17.142 8.27202L18.556 6.85802L17.142 5.44402L15.728 6.85802L17.142 8.27202ZM7.242 21H3V16.757L16.435 3.32202C16.6225 3.13455 16.8768 3.02924 17.142 3.02924C17.4072 3.02924 17.6615 3.13455 17.849 3.32202L20.678 6.15102C20.8655 6.33855 20.9708 6.59286 20.9708 6.85802C20.9708 7.12319 20.8655 7.37749 20.678 7.56502L7.243 21H7.242Z" fill="white"/>
                                 </svg>
@@ -64,7 +64,7 @@
                             @method('DELETE')
                         </form>
                         <td class="flex justify-center gap-2 py-3">
-                            <a onclick="showEditModal()" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
+                            <a onclick="showEditModal('{{ $item->id }}','{{ $item->avatar }}','{{ $item->name }}','{{ $item->role }}','{{ $item->email }}')" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                                 <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.728 9.68602L14.314 8.27202L5 17.586V19H6.414L15.728 9.68602ZM17.142 8.27202L18.556 6.85802L17.142 5.44402L15.728 6.85802L17.142 8.27202ZM7.242 21H3V16.757L16.435 3.32202C16.6225 3.13455 16.8768 3.02924 17.142 3.02924C17.4072 3.02924 17.6615 3.13455 17.849 3.32202L20.678 6.15102C20.8655 6.33855 20.9708 6.59286 20.9708 6.85802C20.9708 7.12319 20.8655 7.37749 20.678 7.56502L7.243 21H7.242Z" fill="white"/>
                                 </svg>
@@ -92,10 +92,10 @@
                         <h2 class="text-center text-xl font-semibold mb-6">Tambah Akun</h2>
                             <div class="flex items-center mb-4">
                                 <div class="w-28 h-28 rounded-full bg-gray-700 overflow-hidden">
-                                    <img id="avatar-image" src="https://via.placeholder.com/64" alt="Avatar" class="w-full h-full">
+                                    <img id="avatar-image" src="https://via.placeholder.com/64" alt="Avatar" class="object-cover w-full h-full">
                                 </div>
                                 <div class="ml-4">
-                                    <div onclick="uploadModal()" class="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-500">
+                                    <div onclick="uploadModal('add')" class="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-500">
                                         Pilih gambar
                                     </div>
                                     <p class="text-gray-400 text-xs mt-1">JPG, GIF or PNG. 1MB max.</p>
@@ -110,7 +110,7 @@
                                 <select name="role" class="bg-white w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option selected disabled te>Masukkan Role</option>
                                     <option value="super">Super Admin</option>
-                                    <option value="super">SIMKLINIK</option>
+                                    <option value="clinic">SimKlinik</option>
                                     <option value="doctor">Dokter</option>
                                     <option value="admin">Apoteker</option>
                                 </select>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="flex justify-center space-x-4">
                         <button onclick="closeAddUserModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
-                            Batals
+                            Batal
                         </button>
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                             Simpan
@@ -135,10 +135,11 @@
                 </div>
             </form>
         </div>
-    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <form method="POST">
-                @csrf
-                @method('POST')
+    <div id="edit-user-form" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <form method="POST" id="save-user-form" enctype="multipart/form-data">
+            @csrf
+                @method('PUT')
+                <input id="edit-avatar-file" name="avatar" type="file" class="hidden">
                 <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
                     <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onclick="closeEditModal()">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -149,40 +150,43 @@
                 <div class="text-center">
                     <h2 class="text-center text-xl font-semibold mb-6">Ubah Akun</h2>
                     <div class="flex items-center mb-4">
-                        <div class="w-30 h-30 rounded-full bg-gray-700 overflow-hidden">
-                                <img src="https://via.placeholder.com/64" alt="Avatar" class="object-cover w-full h-full">
+                        <div class="w-28 h-28 rounded-full bg-gray-700 overflow-hidden">
+                                <img id="avatar" src="https://via.placeholder.com/64" alt="Avatar" class="object-cover w-full h-full">
                             </div>
                             <div class="ml-4">
-                                <button onclick="uploadModal()" class="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-500">
+                                <div onclick="uploadModal('edit')" class="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-500">
                                     Pilih gambar
-                                </button>
+                                </div>
                                 <p class="text-gray-400 text-xs mt-1">JPG, GIF or PNG. 1MB max.</p>
                             </div>
                         </div>
                         <div class="relative mb-4">
                             <label class="mb-2 block text-md font-medium text-left">Nama</label>
-                            <input type="text" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama"/>
+                            <input type="text" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" name="name" placeholder="Masukkan nama"/>
                         </div>
+                        @if (auth()->user()->role=='super')
                         <div class="relative mb-4">
                             <label class="mb-2 block text-md font-medium text-left">Role</label>
-                            <select class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select name="role" class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option selected disabled>Masukkan Role</option>
-                                <option>Super Admin</option>
-                                <option>SIMKLINIK</option>
-                                <option>Dokter</option>
-                                <option>Apoteker</option>
+                                <option value="super">Super Admin</option>
+                                <option value="clinic">SimKlinik</option>
+                                <option value="doctor">Dokter</option>
+                                <option value="admin">Apoteker</option>
                             </select>
                         </div>
+                            
+                        @endif
                         <div class="mb-6">
                             <label class="mb-2 block text-md font-medium text-left">Email</label>
-                            <input type="text" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan email"/>
+                            <input name="email" type="text" class="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan email"/>
                         </div>
                 </div>
                 <div class="flex justify-center space-x-4">
                     <button onclick="closeEditModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
                         Batal
                     </button>
-                    <button onclick="submitEdirForm()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
                         Simpan
                     </button>
                 </div>
@@ -191,6 +195,7 @@
     </div>
     <div id="uploadModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
+            <input type="hidden" name="method" value="add">
             <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600" onclick="closeUploadModal()">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"/>
@@ -230,23 +235,50 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('avatar-image').src = e.target.result
+                    // if(document.querySelector('#uploadModal input[name="method"]').value=='add'){
+                    // }else{
+                    //     document.querySelector('#edit-user-form img').src = e.target.result
+
+                    // }
                 };
                 reader.readAsDataURL(file);
             }
             closeUploadModal()
         })
-        function showEditModal(image, name, role, email) {
-            document.querySelector('#editModal input[name="code"]').value = code;
-                document.querySelector('#editModal input[name="name"]').value = name;
-                document.querySelector('#editModal form').setAttribute('action', `{{ route('master.category.index') }}/${id}`);
-            document.getElementById('editModal').classList.remove('hidden');
+        document.getElementById('edit-avatar-file').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // if(document.querySelector('#uploadModal input[name="method"]').value=='add'){
+                    //     document.getElementById('avatar-image').src = e.target.result
+                    // }else{
+                        
+                    // }
+                    document.querySelector('#edit-user-form img').src = e.target.result
+                };
+                reader.readAsDataURL(file);
+            }
+            closeUploadModal()
+        })
+        function showEditModal(id,image, name, role, email) {
+            document.querySelector('#edit-user-form input[name="name"]').value = name;
+            document.querySelector('#edit-user-form input[name="email"]').value = email;
+            document.querySelector('#edit-user-form img').src = image;
+            document.querySelector('#edit-user-form form').setAttribute('action', `user/${id}`);
+            document.querySelectorAll('edit-user-form select[name="role"] option').forEach(e => {
+                if (e.value==role) {
+                    e.setAttribute('selected',true)
+                }
+            });
+            document.getElementById('edit-user-form').classList.remove('hidden');
         }
         function showTambahModal() {
             document.getElementById('tambahModal').classList.remove('hidden');
         }
     
         function closeEditModal() {
-            document.getElementById('editModal').classList.add('hidden');
+            document.getElementById('edit-user-form').classList.add('hidden');
         }
     
         function closeTambahModal() {
@@ -257,25 +289,29 @@
             document.getElementById('saveModal').classList.remove('hidden');
             document.getElementById('tambahModal').classList.add('hidden');
         }
-    
+        
         function closeAddUserModal() {
             document.getElementById('saveModal').classList.add('hidden');
         }
-        function submitEdirForm() {
-            document.getElementById('saveModal').classList.remove('hidden');
-            document.getElementById('editModal').classList.add('hidden');
-        }
-    
-        function closeSubmitEdirForm() {
-            document.getElementById('saveModal').classList.add('hidden');
-        }
-        function uploadModal() {
+        document.getElementById('save-user-form').addEventListener('submit', function(e) {
+            e.preventDefault()
+            document.getElementById('edit-user-form').classList.add('hidden');
+            showModal('save', 'save-user-form')
+        })
+        function uploadModal(method) {
             document.getElementById('uploadModal').classList.remove('hidden');
+            document.querySelector('#uploadModal input[name="method"]').value = method;
+            if(method=='edit'){
+                document.querySelector('#uploadModal label').setAttribute('for','edit-avatar-file')
+            }else{
+                document.querySelector('#uploadModal label').setAttribute('for','avatar-file')
+            }
+            console.log(method);
         }
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.add('hidden');
-        }
-            
+    function closeUploadModal() {
+        document.getElementById('uploadModal').classList.add('hidden');
+    }
+    
     </script>
 @endsection
 

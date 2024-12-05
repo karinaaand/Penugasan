@@ -241,7 +241,6 @@ class DatabaseSeeder extends Seeder
     private $users = [
         [
             "name" => "Super Arsyad",
-            "email" => "super@gmail.com",
             "role" => "super",
             "avatar" => "avatar/avatar.jpg"
         ]
@@ -249,7 +248,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->users as $item) {
-            $item["password"] = Hash::make("admin");
+            $item["password"] = Hash::make(env("SUPER_PASSWORD"));
+            $item["email"] = env("SUPER_EMAIL");
             User::create($item);
         }
         foreach ($this->categories as $item) {

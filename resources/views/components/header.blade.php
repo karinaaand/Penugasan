@@ -41,7 +41,7 @@
                     </svg>
                 </button>
                <div class="relative w-16 h-16 bg-gray-200 rounded-full flex justify-start">
-                    <img src="{{ asset('assets/avatar.jpg') }}" alt="Avatar" class="rounded-full w-full h-full">
+                    <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="Avatar" class="rounded-full w-full h-full">
                     <span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
                 </div>
                 <div class="mt-4 w-full">

@@ -34,9 +34,20 @@ class UserController extends Controller
             return back()->with('error','Gagal membuat user');
         }
     }
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        try {
+            $user->update($request->except(['avatar']));
+            if ($request->hasFile('avatar')) {
+                Storage::disk('public')->delete($user->avatar);
+                $new = Storage::disk('public')->put('avatar',$request->file('avatar'));
+                $user->avatar =$new;
+                $user->save();
+            }
+            return back()->with('success','Berhasil mengubah user');
+        } catch (\Throwable $th) {
+            return back()->with('error','Gagal mengubah user');
+        }
     }
     public function destroy(User $user)
     {
