@@ -18,11 +18,11 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        // Schema::create('password_reset_tokens', function (Blueprint $table) {
-            //     $table->string('email')->primary();
-        //     $table->string('token');
-        //     $table->timestamp('created_at')->nullable();
-        // });
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
         
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
@@ -44,7 +44,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        // Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('profiles');
         Schema::dropIfExists('sessions');
     }

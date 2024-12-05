@@ -52,6 +52,9 @@ Route::redirect('/figma', 'https://www.figma.com/design/4NIUdh1KTOoyEH3WYWPRH6/S
 Route::controller(UserController::class)->group(function () {
     Route::match(['get', 'post'], '/login', 'login')->name('login');
     Route::match(['get', 'post'], '/forgot', 'forgot')->name('user.forgot');
+    Route::get('reset-password/{token}', 'showResetForm')->name('password.reset');
+    Route::post('reset-password', 'resetPassword')->name('user.password');
+
     Route::match(['get', 'put'], '/settings', 'settings')->name('user.settings')->middleware('auth');
     Route::get("/logout", 'logout')->name("user.logout");
 });
