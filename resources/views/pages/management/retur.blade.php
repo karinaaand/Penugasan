@@ -63,6 +63,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="p-6">
+            {{ $returs->links() }}
+        </div>
     </div>
     <script>
         let timeout = null;

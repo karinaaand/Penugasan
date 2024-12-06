@@ -26,6 +26,8 @@
         @endforeach
         </tbody>
     </table>
-
+<div class="p-6">
+{{ $transactions->links() }}
+</div>
 </div>
 @endsection

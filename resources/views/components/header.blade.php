@@ -58,7 +58,11 @@
                     <div class="flex items-center text-sm text-gray-600 font-semibold mb-4">
                         <span class="w-20 text-left flex-shrink-0">Email</span>
                         <span class="">:</span>
-                        <span class="ml-1">{{ auth()->user()->email }}</span>
+                        <span class="ml-1">{{ substr(auth()->user()->email,0,15) }}
+                            @if (strlen(auth()->user()->email)>15)
+                                {{ "***" }}
+                            @endif
+                        </span>
                     </div>
                 </div>
                 <div class="mt-4 flex justify-center">

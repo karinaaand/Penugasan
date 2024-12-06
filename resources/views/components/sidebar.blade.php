@@ -33,8 +33,8 @@
                             fill="@if (str_contains(request()->route()->getName(), 'dashboard')) white @else black @endif" />
                     </svg>
                     <span class="ms-3">Dashboards</span>
-                    <span
-                        class="inline-flex items-center justify-center w-6 h-6 p-2 ml-8 text-sm font-medium text-red-800 bg-red-100 rounded-full dark:bg-orange-600 dark:text-white">6</span>
+                    {{-- <span
+                        class="inline-flex items-center justify-center w-6 h-6 p-2 ml-8 text-sm font-medium text-red-800 bg-red-100 rounded-full dark:bg-orange-600 dark:text-white">6</span> --}}
                 </a>
             </li>
             @if (auth()->user()->role != 'doctor')

@@ -63,5 +63,8 @@ use Carbon\Carbon;
             </tbody>
         </table>
     </div>
+    <div class="p-6">
+        {{ $trashes->links() }}
+    </div>
 </div>
 @endsection

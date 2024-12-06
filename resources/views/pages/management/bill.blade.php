@@ -67,6 +67,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="p-6">
+            {{ $bills->links() }}
+        </div>
     </div>
     </div>
 

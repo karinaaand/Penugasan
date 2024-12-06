@@ -76,9 +76,10 @@ class ManagementController extends Controller
         $judul = "Manajemen Obat Retur";
         return view("pages.management.retur", compact('returs', 'judul'));
     }
-    public function retur(Transaction $retur)
+    public function retur(Retur $retur)
     {
-        $retur = $retur->retur();
+        // dd($retur);
+        // $retur = $retur->retur();
         $judul = "Laporan Retur Obat " . $retur->drug()->name;
         return view("pages.management.returDetail", compact('retur', 'judul'));
     }
@@ -93,9 +94,9 @@ class ManagementController extends Controller
         $judul = "Manajemen Obat Buang";
         return view("pages.management.trash", compact('trashes', 'judul'));
     }
-    public function trash(Transaction $trash)
+    public function trash(Trash $trash)
     {
-        $trash = $trash->trash();
+        // $trash = $trash->trash();
         $judul = "Laporan Pembuangan Obat " . $trash->drug()->name;
         return view("pages.management.trashDetail", compact('trash', 'judul'));
     }

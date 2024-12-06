@@ -12,7 +12,7 @@ class TransactionController extends Controller
     public function index()
     {
         $judul = "Log History";
-        $transactions = Transaction::where('variant','Checkout')->paginate(2);
+        $transactions = Transaction::where('variant','Checkout')->paginate(20);
         return view('pages.transaction.index',compact('judul','transactions'));
     }
     public function create()
