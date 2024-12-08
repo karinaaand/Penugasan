@@ -74,6 +74,10 @@ class InventoryStockController extends Controller
             $warehouse = Warehouse::where('drug_id',$drug->id)->first();
             $warehouse->quantity = $warehouse->quantity - $request->quantity*$drug->piece_netto;
             $warehouse->save();
+            if (auth()->user()->role=='doctor') {
+                return redirect()->route('clinic.stocks.show',$drug->id)->with('success','Berhasil melakukan retur');
+            }
+            
             return redirect()->route('inventory.stocks.show',$drug->id)->with('success','Berhasil melakukan retur');
         }
     }
@@ -114,6 +118,9 @@ class InventoryStockController extends Controller
             $warehouse = Warehouse::where('drug_id',$drug->id)->first();
             $warehouse->quantity = $warehouse->quantity - $request->quantity*$drug->piece_netto;
             $warehouse->save();
+            if (auth()->user()->role=='doctor') {
+                return redirect()->route('clinic.stocks.show',$drug->id)->with('success','Berhasil melakukan retur');
+            }
             return redirect()->route('inventory.stocks.show',$drug->id)->with('success','Berhasil melakukan pembuangan');
         }
     }

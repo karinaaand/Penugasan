@@ -191,7 +191,13 @@
             let repackId = repackSelected
             let quantity = document.querySelector("input[name='quantity']")
             let repackQuantity = document.querySelector("input[name='repackQuantity']")
-
+            if (parseInt(document.querySelector("input[name='stock']").value) < parseInt(quantity.value)) {
+                let input = [discDrug, piecePrice, repackName, quantity, repackQuantity]
+                input.forEach(e => {
+                    e.value = null
+                });
+                return alert('kurang');
+            }
             let input = [discDrug, piecePrice, repackName, quantity, repackQuantity]
             let datainput = input.map(e => e.value)
             datainput.push(calculateDiscount(quantity.value * piecePrice.value, discDrug.value))

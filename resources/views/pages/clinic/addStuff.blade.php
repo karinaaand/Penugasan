@@ -173,12 +173,14 @@
         let expired = document.querySelector("input[name='expired']")
         let input = [code, drug, quantity,expired]
         let datainput = input.map(e => e.value)
+        if (parseInt(document.querySelector("input[name='sisa']").value) < parseInt(quantity.value)) {
+            
+            input.forEach(e => {
+                e.value = null
+            });
+            return alert('kurang');
+        }
         const status = true
-        datainput.forEach(e => {
-            if (e == "") {
-                status = false
-            }
-        });
         if (status) {
             data.push(datainput)
             draw()

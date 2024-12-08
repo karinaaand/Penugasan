@@ -25,6 +25,9 @@
                 </thead>
                 <tbody class="text-gray-700">
                     @foreach ($users as $number => $item)
+                    @php
+                        $av = Storage::url($item->avatar);
+                    @endphp
                     @if (auth()->user()->role=='super')
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6">{{ $number+1 }}</td>
@@ -37,7 +40,7 @@
                             @method('DELETE')
                         </form>
                         <td class="flex justify-center gap-2 py-3">
-                            <a onclick="showEditModal('{{ $item->id }}','{{ $item->avatar }}','{{ $item->name }}','{{ $item->role }}','{{ $item->email }}')" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
+                            <a onclick="showEditModal('{{ $item->id }}','{{ $av }}','{{ $item->name }}','{{ $item->role }}','{{ $item->email }}')" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                                 <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.728 9.68602L14.314 8.27202L5 17.586V19H6.414L15.728 9.68602ZM17.142 8.27202L18.556 6.85802L17.142 5.44402L15.728 6.85802L17.142 8.27202ZM7.242 21H3V16.757L16.435 3.32202C16.6225 3.13455 16.8768 3.02924 17.142 3.02924C17.4072 3.02924 17.6615 3.13455 17.849 3.32202L20.678 6.15102C20.8655 6.33855 20.9708 6.59286 20.9708 6.85802C20.9708 7.12319 20.8655 7.37749 20.678 7.56502L7.243 21H7.242Z" fill="white"/>
                                 </svg>
@@ -64,7 +67,7 @@
                             @method('DELETE')
                         </form>
                         <td class="flex justify-center gap-2 py-3">
-                            <a onclick="showEditModal('{{ $item->id }}','{{ $item->avatar }}','{{ $item->name }}','{{ $item->role }}','{{ $item->email }}')" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
+                            <a onclick="showEditModal('{{ $item->id }}','{{ $av }}','{{ $item->name }}','{{ $item->role }}','{{ $item->email }}')" class="flex cursor-pointer items-center bg-yellow-300 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-yellow-400 transition-colors duration-200 mr-2">
                                 <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.728 9.68602L14.314 8.27202L5 17.586V19H6.414L15.728 9.68602ZM17.142 8.27202L18.556 6.85802L17.142 5.44402L15.728 6.85802L17.142 8.27202ZM7.242 21H3V16.757L16.435 3.32202C16.6225 3.13455 16.8768 3.02924 17.142 3.02924C17.4072 3.02924 17.6615 3.13455 17.849 3.32202L20.678 6.15102C20.8655 6.33855 20.9708 6.59286 20.9708 6.85802C20.9708 7.12319 20.8655 7.37749 20.678 7.56502L7.243 21H7.242Z" fill="white"/>
                                 </svg>
@@ -266,7 +269,7 @@
             document.querySelector('#edit-user-form input[name="email"]').value = email;
             document.querySelector('#edit-user-form img').src = image;
             document.querySelector('#edit-user-form form').setAttribute('action', `user/${id}`);
-            document.querySelectorAll('edit-user-form select[name="role"] option').forEach(e => {
+            document.querySelectorAll('#edit-user-form select[name="role"] option').forEach(e => {
                 if (e.value==role) {
                     e.setAttribute('selected',true)
                 }
