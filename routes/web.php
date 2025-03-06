@@ -20,6 +20,10 @@ use App\Models\Transaction\Transaction;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+// menambahkan excel
+use Maatwebsite\Excel\Facades\Excel;
+
+
 
 Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
 Route::get('/drug-repack', [DrugController::class, 'getRepacks']);
@@ -136,4 +140,7 @@ Route::middleware('auth')->group(function () {
             });
         });
     });
+    // menambahkan route untuk mendonwload excel
+    Route::get('/inventory/export/{id}', [InventoryFlowController::class, 'export'])->name('inventory.export');
+
 });

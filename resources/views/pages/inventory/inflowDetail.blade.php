@@ -51,7 +51,7 @@
                         <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->piece_price, 0, ',', '.') }}</td>
                         <td class="px-6 py-3 text-center">{{ 'Rp ' . number_format($item->total_price, 0, ',', '.') }}</td>
                     </tr>
-                        
+
                     @endforeach
                 </tbody>
             </table>
@@ -74,23 +74,47 @@
                 <p class="text-sm text-gray-500 mb-5">Pilihlah salah satu format file!</p>
             </div>
             <div class="flex justify-center space-x-4">
-                <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
+                {{-- <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
+                    Excel
+                </button> --}}
+                <button data-transaction-id="1" onclick="closeUploadModal(this.getAttribute('data-transaction-id'))"
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     Excel
                 </button>
+
                 <button onclick="submitModal()" type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     PDF
                 </button>
             </div>
         </div>
     </div>
-    
+
     <script>
             function uploadModal() {
             document.getElementById('uploadModal').classList.remove('hidden');
         }
-        function closeUploadModal() {
+        // function closeUploadModal(transaction_id) {
+        //     document.getElementById('uploadModal').classList.add('hidden');
+
+        //     console.log("Download button clicked, transaction ID:", transaction_id); // Debugging
+
+        //     // Redirect langsung ke endpoint Laravel
+        //     window.location.href = `/inventory/export/${transaction_id}`;
+        // }
+        function closeUploadModal(transaction_id) {
             document.getElementById('uploadModal').classList.add('hidden');
+
+            if (!transaction_id) {
+                console.error("Transaction ID is missing!");
+                return;
+            }
+
+            console.log("Download button clicked, transaction ID:", transaction_id); // Debugging
+
+            // Redirect langsung ke endpoint Laravel
+            window.location.href = `/inventory/export/${transaction_id}`;
         }
+
         document.getElementById('printButton').onclick = function () {
             document.getElementById('printOptions').classList.toggle('invisible');
         };
