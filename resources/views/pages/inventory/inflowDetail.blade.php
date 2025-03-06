@@ -77,12 +77,12 @@
                 {{-- <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     Excel
                 </button> --}}
-                <button data-transaction-id="1" onclick="closeUploadModal(this.getAttribute('data-transaction-id'))"
+                <button data-transaction-id="{{ $transaction->id }}" onclick="closeUploadModal(this.getAttribute('data-transaction-id'))"
                     class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     Excel
                 </button>
 
-                <button onclick="submitModal()" type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
+                <button data-transaction-id="{{ $transaction->id }}" onclick="submitModal(this.getAttribute('data-transaction-id'))" type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     PDF
                 </button>
             </div>
@@ -114,6 +114,21 @@
             // Redirect langsung ke endpoint Laravel
             window.location.href = `/inventory/export/${transaction_id}`;
         }
+
+        function submitModal(transaction_id) {
+            document.getElementById('uploadModal').classList.add('hidden');
+
+            if (!transaction_id) {
+                console.error("Transaction ID is missing!");
+                return;
+            }
+
+            console.log("Download button clicked, transaction ID:", transaction_id); // Debugging
+
+            // Redirect langsung ke endpoint Laravel
+            window.location.href = `/generate-pdf/${transaction_id}`;
+        }
+
 
         document.getElementById('printButton').onclick = function () {
             document.getElementById('printOptions').classList.toggle('invisible');

@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // menambahkan excel
 use Maatwebsite\Excel\Facades\Excel;
+// menambahkan pdf
+use App\Http\Controllers\PdfInventoryController;
 
 
 
@@ -142,5 +144,8 @@ Route::middleware('auth')->group(function () {
     });
     // menambahkan route untuk mendonwload excel
     Route::get('/inventory/export/{id}', [InventoryFlowController::class, 'export'])->name('inventory.export');
+    // menambahakan pdf
+    Route::get('/generate-pdf/{transaction_id}', [PdfInventoryController::class, 'generatePdf']);
+    Route::get('/download-zip/{transaction_id}', [PdfInventoryController::class, 'createZip']);
 
 });
