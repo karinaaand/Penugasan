@@ -43,7 +43,7 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ $item->drug_code ?? '-' }}</td>
             <td>{{ $item->drug_name ?? '-' }}</td>
-            <td>{{ $item->quantity }} pcs</td>
+            <td>{{ $item->quantity }} </td>
             <td>Rp {{ number_format($item->piece_price, 0, ',', '.') }}</td>
             <td>Rp {{ number_format($item->total_price, 0, ',', '.') }}</td>
         </tr>
