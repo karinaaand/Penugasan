@@ -17,7 +17,7 @@
     <table class="header">
         <tr>
             <td><b>Klinik Dokter Hendrik</b><br>Surabaya<br>08987654321</td>
-            <td class="right"><b>No. LPB:</b> LPB241206002<br><b>Tanggal:</b> 6 Desember 2024</td>
+            <td class="right"><b>No. LPB:</b> {{ $no_lpb}}<br><b>Tanggal:</b>{{ $tanggal_transaksi }}</td>
         </tr>
     </table>
 
