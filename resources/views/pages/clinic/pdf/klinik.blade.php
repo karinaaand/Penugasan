@@ -21,7 +21,7 @@
         <tr>
             <td><b>{{ $clinic_name }}</b><br>{{ $clinic_address }}<br>{{ $clinic_phone }}</td>
             <td class="right"><b>No. LPB:</b> {{ $no_lpb}}<br><b>Tanggal:</b>
-                {{ Carbon::parse($tanggal_transaksi)->format('d F Y') }}
+                {{ Carbon::parse($tanggal_transaksi)->format('d M Y') }}
                 </td>
         </tr>
     </table>
