@@ -11,7 +11,7 @@ class Clinic extends Model
     use HasFactory;
     protected $table = 'clinic_inventory';
     protected $guarded = [];
-    //sebuah data stok memiliki relasi dengan master obat 
+    //sebuah data stok memiliki relasi dengan master obat
     public function drug(){
         return $this->belongsTo(Drug::class)->first();
     }

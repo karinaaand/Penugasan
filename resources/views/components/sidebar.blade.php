@@ -24,7 +24,7 @@
                     class="flex items-center p-2
                 @if (str_contains(request()->route()->getName(), 'dashboard')) bg-blue-500 text-white hover:bg-gray-400
                 @else
-                    bg-gray-100 text-gray-900 hover:bg-gray-300 @endif
+                    bg-white text-gray-900 hover:bg-gray-300 @endif
                 rounded-lg group mb-4">
                     <svg width="22" height="19" viewBox="0 0 22 19" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -38,13 +38,13 @@
                 </a>
             </li>
             @if (auth()->user()->role != 'doctor')
-                
-            
+
+
             <li>
                 <button type="button"
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
                     @if (str_contains(request()->route()->getName(), 'masterdata')) bg-gray-300 hover:bg-gray-400
-                    @else bg-gray-100 hover:bg-gray-300 text-gray-900 @endif"
+                    @else bg-white hover:bg-gray-300 text-gray-900 @endif"
                     aria-controls="dropdown-masterdata" data-collapse-toggle="dropdown-masterdata"
                     x-data="{ open: {{ str_contains(request()->route()->getName(), 'master') ? 'true' : 'false' }} }" @click="open = !open">
                     <svg width="19" height="22" viewBox="0 0 19 22" fill="none"
@@ -157,7 +157,7 @@
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
                 @if (str_contains(request()->route()->getName(), 'inventory')) bg-gray-300 hover:bg-gray-400
                 @else
-                    bg-gray-100 hover:bg-gray-300 text-gray-900 @endif"
+                    bg-white hover:bg-gray-300 text-gray-900 @endif"
                     aria-controls="dropdown-inventory" data-collapse-toggle="dropdown-inventory" x-data="{ open: {{ str_contains(request()->route()->getName(), 'inventory') ? 'true' : 'false' }} }"
                     @click="open = !open">
                     <svg width="20" height="22" viewBox="0 0 20 22" fill="none"
@@ -221,7 +221,7 @@
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
                     @if (str_contains(request()->route()->getName(), 'clinic')) bg-gray-300 hover:bg-gray-400
                     @else
-                        bg-gray-100 hover:bg-gray-300 text-gray-900 @endif"
+                        bg-white hover:bg-gray-300 text-gray-900 @endif"
                     aria-controls="dropdown-klinik" data-collapse-toggle="dropdown-klinik" x-data="{ open: {{ str_contains(request()->route()->getName(), 'clinic') ? 'true' : 'false' }} }"
                     @click="open = !open">
                     <svg width="16" height="20" viewBox="0 0 16 20" fill="none"
@@ -283,7 +283,7 @@
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
                     @if (str_contains(request()->route()->getName(), 'report')) bg-gray-300 hover:bg-gray-400
                     @else
-                        bg-gray-100 hover:bg-gray-300 text-gray-900 @endif"
+                        bg-white hover:bg-gray-300 text-gray-900 @endif"
                     aria-controls="dropdown-laporan" data-collapse-toggle="dropdown-laporan" x-data="{ open: {{ str_contains(request()->route()->getName(), 'report') ? 'true' : 'false' }} }"
                     @click="open = !open">
                     <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
@@ -344,7 +344,7 @@
                     class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group
                 @if (str_contains(request()->route()->getName(), 'management')) bg-gray-300 hover:bg-gray-400
                 @else
-                    bg-gray-100 hover:bg-gray-300 text-gray-900 @endif"
+                    bg-white hover:bg-gray-300 text-gray-900 @endif"
                     aria-controls="dropdown-manajementransaksi" data-collapse-toggle="dropdown-manajementransaksi"
                     x-data="{ open: {{ str_contains(request()->route()->getName(), 'management') ? 'true' : 'false' }} }" @click="open = !open">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -426,7 +426,7 @@
                     class="flex items-center p-2 transition duration-75 rounded-lg group
                 @if (str_contains(request()->route()->getName(), 'user.index')) bg-blue-500 hover:bg-gray-400 text-white
                 @else
-                    bg-gray-100 hover:bg-gray-300 text-gray-900 @endif
+                    bg-white hover:bg-gray-300 text-gray-900 @endif
                 ">
                     <svg width="20px" height="20px" viewBox="0 0 24 24" fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg" class="mr-0">

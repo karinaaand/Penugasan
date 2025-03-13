@@ -11,6 +11,7 @@ use App\Models\Transaction\TransactionDetail;
 use Illuminate\Http\Request;
 // menambahkan untuk mendonwload excel
 use App\Exports\InventoryExport;
+use App\Models\Profile;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
 
@@ -123,8 +124,11 @@ class InventoryFlowController extends Controller
         $transaction = Transaction::find($inflows);
         $judul = "Transaksi Obat Masuk";
         $details = $transaction->details();
-        return view("pages.inventory.inflowDetail",compact('transaction','judul','details'));
+        $profile = Profile::first();
+        // dd($profile);
+        return view("pages.inventory.inflowDetail",compact('transaction','judul','details', 'profile'));
     }
+
     public function print()
     {
 

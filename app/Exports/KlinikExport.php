@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\Profile;
 use App\Models\Transaction\TransactionDetail;
+use App\Models\Profile;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
@@ -12,8 +12,9 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
-class InventoryExport implements FromCollection, WithHeadings, WithTitle, WithStyles, WithColumnWidths
+class KlinikExport implements FromCollection, WithHeadings, WithTitle, WithStyles, WithColumnWidths
 {
     protected $transaction_id;
 
@@ -24,7 +25,13 @@ class InventoryExport implements FromCollection, WithHeadings, WithTitle, WithSt
 
     public function collection(): Collection
     {
-        // Ambil satu TransactionDetail sebagai acuan (pakai first)
+        // Ambil informasi klinik dari tabel Profile
+        $profile = Profile::first();
+        $clinic_name = $profile->name ?? 'Nama Klinik';
+        $clinic_address = $profile->address ?? 'Alamat Klinik';
+        $clinic_phone = $profile->phone ?? 'No. Telepon Klinik';
+
+        // Ambil satu TransactionDetail sebagai acuan
         $transactionDetail = TransactionDetail::where('transaction_id', $this->transaction_id)
             ->with('transaction')
             ->first();
@@ -39,10 +46,10 @@ class InventoryExport implements FromCollection, WithHeadings, WithTitle, WithSt
         $transaction = $transactionDetail->transaction;
         $no_lpb = $transaction->code ?? 'N/A';
         $tanggal_transaksi = $transaction->created_at
-            ? \Carbon\Carbon::parse($transaction->created_at)->format('d F Y')
-            : now()->format('d F Y');
+            ? Carbon::parse($transaction->created_at)->translatedFormat('j F Y')
+            : now()->translatedFormat('j F Y');
 
-        // Ambil semua detail transaksi dengan kode dan nama obat
+        // Ambil detail transaksi
         $details = TransactionDetail::select(
                 'transaction_details.*',
                 'drugs.code as drug_code',
@@ -64,20 +71,7 @@ class InventoryExport implements FromCollection, WithHeadings, WithTitle, WithSt
         $data[] = ['', '', 'LAPORAN PENERIMAAN BARANG', '', '', ''];
         $data[] = ['']; // Baris kosong
 
-        // Ambil data pemasok dari transaksi
-        $vendor = $transaction->vendor();
-        // dd($vendor);
 
-        // Pastikan vendor ditemukan
-        $vendor_name = $vendor ? $vendor->name : 'Vendor Tidak Diketahui';
-        $vendor_address = $vendor ? $vendor->address : '-';
-        $vendor_phone = $vendor ? $vendor->phone : '-';
-
-        // Header Pemasok (Menggunakan Database)
-        $data[] = [$vendor_name, '', '', '', '', ''];
-        $data[] = [$vendor_address, '', '', '', '', ''];
-        $data[] = [$vendor_phone, '', '', '', '', ''];
-        $data[] = ['']; // Baris kosong
 
         // Header Tabel
         $data[] = ['No', 'Kode Obat', 'Nama Obat', 'Jumlah', 'Harga Satuan', 'Subtotal'];
@@ -105,21 +99,21 @@ class InventoryExport implements FromCollection, WithHeadings, WithTitle, WithSt
 
     public function styles(Worksheet $sheet)
     {
-        $rowCount = count($this->collection()) + 1; // Menghitung total baris termasuk header
+        $rowCount = count($this->collection()) + 1;
 
         return [
             5 => ['font' => ['bold' => true, 'size' => 14]], // Judul laporan
-            10 => ['font' => ['bold' => true, 'size' => 12]], // Header tabel
-            11 => ['font' => ['bold' => true]], // Kolom judul tabel
+            8 => ['font' => ['bold' => true, 'size' => 12]], // Header tabel
+            9 => ['font' => ['bold' => true]], // Kolom judul tabel
             $rowCount => ['font' => ['bold' => true]], // Grand Total
 
             // Mengatur alignment
-            'A10:F10' => ['alignment' => ['horizontal' => 'center']], // Header tabel
-            'A11:A' . $rowCount => ['alignment' => ['horizontal' => 'center']], // No urut
-            'B11:B' . $rowCount => ['alignment' => ['horizontal' => 'center']], // Kode Obat (tengah)
-            'C11:C' . $rowCount => ['alignment' => ['horizontal' => 'left']], // Nama Obat (kiri)
-            'D11:F' . $rowCount => ['alignment' => ['horizontal' => 'center']], // Jumlah, Harga, dan Subtotal
-            'F' . $rowCount => ['alignment' => ['horizontal' => 'right']], // Grand Total (kanan)
+            'A8:F8' => ['alignment' => ['horizontal' => 'center']], // Header tabel
+            'A9:A' . $rowCount => ['alignment' => ['horizontal' => 'center']], // No urut
+            'B9:B' . $rowCount => ['alignment' => ['horizontal' => 'center']], // Kode Obat
+            'C9:C' . $rowCount => ['alignment' => ['horizontal' => 'left']], // Nama Obat
+            'D9:F' . $rowCount => ['alignment' => ['horizontal' => 'center']], // Jumlah, Harga, dan Subtotal
+            'F' . $rowCount => ['alignment' => ['horizontal' => 'right']], // Grand Total
         ];
     }
 
@@ -142,6 +136,6 @@ class InventoryExport implements FromCollection, WithHeadings, WithTitle, WithSt
 
     public function title(): string
     {
-        return 'Laporan Penerimaan Barang';
+        return 'Laporan Penerimaan Klinik';
     }
 }

@@ -74,9 +74,6 @@
                 <p class="text-sm text-gray-500 mb-5">Pilihlah salah satu format file!</p>
             </div>
             <div class="flex justify-center space-x-4">
-                {{-- <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
-                    Excel
-                </button> --}}
                 <button data-transaction-id="{{ $transaction->id }}" onclick="closeUploadModal(this.getAttribute('data-transaction-id'))"
                     class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                     Excel
@@ -93,14 +90,6 @@
             function uploadModal() {
             document.getElementById('uploadModal').classList.remove('hidden');
         }
-        // function closeUploadModal(transaction_id) {
-        //     document.getElementById('uploadModal').classList.add('hidden');
-
-        //     console.log("Download button clicked, transaction ID:", transaction_id); // Debugging
-
-        //     // Redirect langsung ke endpoint Laravel
-        //     window.location.href = `/inventory/export/${transaction_id}`;
-        // }
         function closeUploadModal(transaction_id) {
             document.getElementById('uploadModal').classList.add('hidden');
 
@@ -126,7 +115,7 @@
             console.log("Download button clicked, transaction ID:", transaction_id); // Debugging
 
             // Redirect langsung ke endpoint Laravel
-            window.location.href = `/generate-pdf/${transaction_id}`;
+            window.location.href = `/inventory/generate-pdf/${transaction_id}`;
         }
 
 
