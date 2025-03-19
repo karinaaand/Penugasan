@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\InventoryFlowController;
 use App\Http\Controllers\InventoryStockController;
+use App\Http\Controllers\KlinikController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\ReportController;
@@ -20,6 +21,11 @@ use App\Models\Transaction\Transaction;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+// menambahkan excel
+use Maatwebsite\Excel\Facades\Excel;
+// menambahkan pdf
+use App\Http\Controllers\PdfInventoryController;
+use App\Http\Controllers\PDFKlinikController;
 
 Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
 Route::get('/drug-repack', [DrugController::class, 'getRepacks']);
@@ -72,6 +78,8 @@ Route::middleware('auth')->group(function () {
             'update',
             'destroy'
         ]);
+
+
         Route::match(['get', 'post'], "stocks/retur/{batch}", [InventoryStockController::class, "retur"])->name('retur');
         Route::match(['get', 'post'], "stocks/trash/{batch}", [InventoryStockController::class, "trash"])->name('trash');
         Route::resource('stocks', InventoryStockController::class)->only([
@@ -136,4 +144,16 @@ Route::middleware('auth')->group(function () {
             });
         });
     });
+    // menambahkan route untuk mendonwload excel
+    Route::get('/inventory/export/{id}', [InventoryFlowController::class, 'export'])->name('inventory.export');
+    // menambahakan pdf
+    Route::get('/inventory/generate-pdf/{transaction_id}', [PdfInventoryController::class, 'generatePdf']);
+
+    // menambahkan excel untuk klinik
+    Route::get('/clinic/export/{transaction_id}', [KlinikController::class, 'export']);
+    // menambahakan pdf
+    Route::get('/clinic/generate-pdf/{transaction_id}', [PDFKlinikController::class, 'generatePdf']);
+
+
+
 });

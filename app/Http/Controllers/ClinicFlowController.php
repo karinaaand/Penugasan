@@ -48,24 +48,25 @@ class ClinicFlowController extends Controller
                     $clinic->oldest = $warehouse->oldest;
                 }
                 if ($clinic->latest < $warehouse->latest) {
-                    $clinic->latest = $warehouse->latest;  
+                    $clinic->latest = $warehouse->latest;
                 }
             }
             $clinic->save();
             $require = $quantity;
             //mengambil obat dari inventory menggunakan fungsi pada model
             $drugAdd->clinicUseWarehouse($transaction,$require,$item->quantity);
-            
+
         };
         return redirect()->route('clinic.inflows.show',$transaction->id)->with('success','Berhasil menambahkan obat');
-        
+
     }
     public function show(string $inflows)
     {
         $transaction = Transaction::find($inflows);
         $judul = "Transaksi Obat Masuk";
         $details = $transaction->details();
+        // dd($transaction);
         return view("pages.clinic.inflowDetail",compact('transaction','judul','details'));
     }
-    
+
 }
