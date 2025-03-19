@@ -41,6 +41,8 @@ class InventoryFlowController extends Controller
             "variant"=>"LPB",
             "outcome"=>$request->total
         ]);
+        // dd($transaction, $datas);
+
         $transaction->generate_code();
         //melakukan pembuatan tagihan
         if($transaction->method=="credit"){
@@ -51,8 +53,12 @@ class InventoryFlowController extends Controller
                 "due"=>$request->due
             ]);
         };
+        // dd($datas);
+
         foreach ($datas as $item) {
+            // dd($item);
             $drug = Drug::where('name',$item->name)->first();
+            // dd($drug);
             $detail = TransactionDetail::create([
                 "transaction_id"=>$transaction->id,
                 "drug_id"=>$drug->id,
@@ -63,7 +69,11 @@ class InventoryFlowController extends Controller
                 "piece_price"=>$item->piece_price,
                 "total_price"=>$item->price,
                 "used"=>false
+
             ]);
+
+
+
             //kalkulasi harga satuan dari barang
             if($item->unit=="pcs"){
                 $newPrice = $item->piece_price;

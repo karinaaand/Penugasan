@@ -174,7 +174,7 @@
         let input = [code, drug, quantity,expired]
         let datainput = input.map(e => e.value)
         if (parseInt(document.querySelector("input[name='sisa']").value) < parseInt(quantity.value)) {
-            
+
             input.forEach(e => {
                 e.value = null
             });
@@ -243,5 +243,7 @@
         // console.log(document.querySelector("input[name='transaction']").value);
         showModal('add', 'add-stuff-form')
     }
+
+   
 </script>
 @endsection

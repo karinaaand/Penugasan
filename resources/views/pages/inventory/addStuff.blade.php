@@ -73,7 +73,7 @@
     <div class="mt-8">
         <div class="flex justify-between mb-4">
             <h1>Total: <span id="total" class="font-bold">Rp 0</span></h1>
-            <button onclick="buatModal()" class="rounded-lg bg-blue-500 px-8 py-1 text-white hover:bg-blue-600 ">
+            <button onclick="customBuatModal('saveDrug', 'add-stuff-form')" class="rounded-lg bg-blue-500 px-8 py-1 text-white hover:bg-blue-600 ">
                 Simpan
             </button>
         </div>
@@ -331,6 +331,24 @@
         document.querySelector("input[name='total']").value = total
         document.querySelector("input[name='transaction']").value = JSON.stringify(data)
         showModal('add', 'add-stuff-form')
+    }
+
+    function customBuatModal(method,form) {
+        
+        data = data.map(function(e) {
+            return {
+                name: e[0],
+                quantity: parseInt(e[1]),
+                unit: e[2],
+                piece_price: parseFloat(e[3]) / e[1],
+                price: parseFloat(e[3]),
+                expired: e[4]
+            };
+        });
+        document.querySelector("input[name='total']").value = total
+        document.querySelector("input[name='transaction']").value = JSON.stringify(data)
+        // console.log(document.querySelector("input[name='transaction']").value);
+        showModal(method, form)
     }
 </script>
 @endsection

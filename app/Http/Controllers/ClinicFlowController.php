@@ -26,6 +26,7 @@ class ClinicFlowController extends Controller
     {
         //data yang dikirimkan FE berupa JSON
         $datas = json_decode($request->transaction);
+        // dd($datas);
         $transaction = Transaction::create([
             "destination"=>"clinic",
             "variant"=>"LPK",
