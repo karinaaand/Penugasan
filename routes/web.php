@@ -68,6 +68,8 @@ Route::controller(UserController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/dashboard');
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('dashboard/chart-penjualan', [DashboardController::class, 'penjualan'])->name('dashboard.chart-penjualan');
+    Route::get('dashboard/chart-obat', [DashboardController::class, 'obat'])->name('dashboard.chart-obat');
     Route::resource('transaction', TransactionController::class)->except(['edit', 'update', 'destroy']);
     Route::resource('user', UserController::class)->except(['show']);
 
