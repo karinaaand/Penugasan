@@ -15,92 +15,59 @@
                     <button onclick="filterNotifications('stok', this)" class="filter-btn bg-blue-200 text-white px-3 py-1 rounded-full flex-grow">STOK</button>
                     <button onclick="filterNotifications('jatuh-tempo', this)" class="filter-btn bg-blue-200 text-white px-3 py-1 rounded-full flex-grow">JATUH TEMPO</button>
                 </div>
-                <ul id="notification-list" class="space-y-4 max-h-[50vh] overflow-y-auto">
-                    <li class="notification-item all jatuh-tempo flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M19.4 15a8 8 0 11-14.8 0m14.8 0A7.97 7.97 0 0112 17m0-2a7.97 7.97 0 014.8-1.8m-4.8 1.8A7.97 7.97 0 017.2 15"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Tagihan Obat Masuk 1</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
+                @if(isset($notifications) && $notifications->isNotEmpty())
+    <ul id="notification-list" class="space-y-4 max-h-[50vh] overflow-y-auto">
+        @foreach ($notifications as $notification)
+            @if (isset($notification->vendor_name)) 
+                {{-- Notifikasi Jatuh Tempo --}}
+                <li class="notification-item all jatuh-tempo flex items-center justify-between px-4 py-2 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M19.4 15a8 8 0 11-14.8 0m14.8 0A7.97 7.97 0 0112 17m0-2a7.97 7.97 0 014.8-1.8m-4.8 1.8A7.97 7.97 0 017.2 15"></path>
+                        </svg>
+                        <div>
+                            <p class="text-sm font-medium">Tagihan dari {{ $notification->vendor_name }}</p>
+                            <p class="text-xs text-gray-500">Jatuh Tempo: {{ \Carbon\Carbon::parse($notification->due)->format('d M') }}</p>
                         </div>
-                        <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
-                    </li>
-                    <li class="notification-item all jatuh-tempo flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M19.4 15a8 8 0 11-14.8 0m14.8 0A7.97 7.97 0 0112 17m0-2a7.97 7.97 0 014.8-1.8m-4.8 1.8A7.97 7.97 0 017.2 15"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Tagihan Obat Masuk 2</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
+                    </div>
+                    <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
+                </li>
+
+            @elseif (isset($notification->location)) 
+                {{-- Notifikasi Stok Menipis --}}
+                <li class="notification-item all stok flex items-center justify-between px-4 py-2 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m-5 2a9 9 0 100 9m0 0a9 9 0 0018 0"></path>
+                        </svg>
+                        <div>
+                            <p class="text-sm font-medium">{{ $notification->drug_name }}</p>
+                            <p class="text-xs text-gray-500">Sisa Stok: {{ $notification->quantity }} ({{ $notification->location }})</p>
                         </div>
-                        <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">Jatuh Tempo</span>
-                    </li>
-                    <li class="notification-item all stok flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m-5 2a9 9 0 100 9m0 0a9 9 0 0018 0"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Obat 23</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
+                    </div>
+                    <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Stok Menipis</span>
+                </li>
+
+            @elseif (isset($notification->expired)) 
+                {{-- Notifikasi Obat Akan Expired --}}
+                <li class="notification-item all expired flex items-center justify-between px-4 py-2 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h1m-1-4h.01"></path>
+                        </svg>
+                        <div>
+                            <p class="text-sm font-medium">{{ $notification->drug_name }}</p>
+                            <p class="text-xs text-gray-500">Expired: {{ \Carbon\Carbon::parse($notification->expired)->format('d M') }}</p>
                         </div>
-                        <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Stok Menipis</span>
-                    </li>
-                    <li class="notification-item all expired flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h1m-1-4h.01"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Obat 15</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
-                        </div>
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">Akan Expired</span>
-                    </li>
-                    <li class="notification-item all expired flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h1m-1-4h.01"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Obat 15</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
-                        </div>
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">Akan Expired</span>
-                    </li>
-                    <li class="notification-item all expired flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h1m-1-4h.01"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Obat 15</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
-                        </div>
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">Akan Expired</span>
-                    </li>
-                    <li class="notification-item all expired flex items-center justify-between px-4 py-2 rounded-lg">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h1m-1-4h.01"></path>
-                            </svg>
-                            <div>
-                                <p class="text-sm font-medium">Obat 15</p>
-                                <p class="text-xs text-gray-500">21 Jul | 08:20-10:30</p>
-                            </div>
-                        </div>
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">Akan Expired</span>
-                    </li>
-                </ul>
+                    </div>
+                    <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">Akan Expired</span>
+                </li>
+            @endif
+        @endforeach
+    </ul>
+@endif
+
+
             </div>
             <div id="unread-indicator" class="text-center text-blue-500 font-semibold">
                 <span>Scroll ke bawah untuk melihat semua notifikasi...</span>
@@ -118,7 +85,7 @@
             <div class="flex justify-between">
                 <div>
                     <h1 class="font-bold text-lg">Hari dengan Keuntungan Tertinggi</h1>
-                    <h1 class="text-gray-400 font-bold text-lg">Kamis</h1>
+                    <h1 class="text-gray-400 font-bold text-lg" id="highestDay"></h1>
                 </div>
                 <div class="mb-4">
                     <a href="{{ route('report.transactions.index') }}">
@@ -186,97 +153,96 @@
 
     const obat = document.getElementById('obat')
     const penjualan = document.getElementById('penjualan')
-    new Chart(obat, {
-        type: 'bar',
-        data: {
-            labels: ["Obat 1", "Obat 2", "Obat 3", "Obat 4", "Obat 5"],
-            datasets: [{
-                axis: "y",
-                label: '# jumlah obat',
-                data: [20, 18, 16, 14, 12],
-                fill: true,
-                backgroundColor: [
-                    '#4E80FFFF',
-                    '#4E80FFD9',
-                    '#4E80FFB3',
-                    '#4E80FF8C',
-                    '#4E80FF66'
-                ],
-                borderRadius: 10
-            }]
-        },
-        options: {
-            indexAxis: "y",
-            plugins: {
-                tooltip: {
-                    enabled: true
+    
+    fetch("{{ route('dashboard.chart-obat') }}")
+    .then(response => response.json())
+    .then(data => {
+        const ctx = document.getElementById('obat').getContext('2d');
+        function getColor(data, value) {
+            let sortedData = [...data].sort((a, b) => b - a);
+            let rank = sortedData.indexOf(value);
+            let opacity = 1 - (rank * 0.2);
+            return `rgba(78, 128, 255, ${opacity})`;
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    axis: "y",
+                    label: 'Jumlah Obat Terjual',
+                    data: data.dataset,
+                    fill: true,
+                    backgroundColor: data.dataset.map(value => getColor(data.dataset, value)), 
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                plugins: {
+                    tooltip: { enabled: true }
+                },
+                scales: {
+                    x: { beginAtZero: true }
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        },
-        plugins: [{
-            id: 'displayNumbersInside',
-            afterDatasetsDraw: function(chart) {
-                const ctx = chart.ctx;
-                chart.data.datasets.forEach((dataset, index) => {
-                    const meta = chart.getDatasetMeta(index);
-                    meta.data.forEach((bar, i) => {
-                        const value = dataset.data[i];
-                        const xPos = bar.x - 20; // Posisi angka di dalam bar (kiri)
-                        const yPos = bar.y + 2; // Pindahkan angka lebih ke atas
-                        ctx.fillStyle = '#fff'; // Warna teks (putih agar terlihat di batang)
-                        ctx.font = '18px Arial'; // Gaya teks
-                        ctx.textAlign = 'right'; // Teks rata kanan
-                        ctx.fillText(value, xPos, yPos);
+            plugins: [{
+                id: 'displayNumbersInside',
+                afterDatasetsDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    chart.data.datasets.forEach((dataset, index) => {
+                        const meta = chart.getDatasetMeta(index);
+                        meta.data.forEach((bar, i) => {
+                            const value = dataset.data[i];
+                            const xPos = bar.x - 10;
+                            const yPos = bar.y + 6;
+                            ctx.fillStyle = '#fff';
+                            ctx.font = 'bold 14px Arial';
+                            ctx.textAlign = 'right';
+                            ctx.fillText(value, xPos, yPos);
+                        });
                     });
-                });
-            }
-        }]
+                }
+            }]
+        });
     });
 
-    let dataset = [12, 19, 10, 53, 51, 5, 20];
-    new Chart(penjualan, {
-        type: 'bar',
-        data: {
-            labels: ["S", "S", "R", "K", "J", "S", "M"],
-            datasets: [{
-                axis: "X",
-                label: '# of Votes',
-                data: dataset,
-                fill: true,
-                backgroundColor: [
-                    getColor(dataset, dataset[0]),
-                    getColor(dataset, dataset[1]),
-                    getColor(dataset, dataset[2]),
-                    getColor(dataset, dataset[3]),
-                    getColor(dataset, dataset[4]),
-                    getColor(dataset, dataset[5]),
-                    getColor(dataset, dataset[6]),
-                ],
-                borderRadius: 10
-            }]
-        },
-        options: {
-            indexAxis: "x",
-            scales: {
-                y: {
-                    beginAtZero: true
+
+
+    fetch("{{ route('dashboard.chart-penjualan') }}")
+    .then(response => response.json())
+    .then(data => {
+        const ctx = document.getElementById('penjualan').getContext('2d');
+
+        function getColor(data, needle) {
+            let sortedData = [...data].sort((a, b) => b - a);
+            let rank = sortedData.indexOf(needle);
+            if (rank === -1) return '#4E80FF7F';
+            return rank < 3 ? '#4E80FF' : '#4E80FF7F'; 
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Keuntungan (Rp)',
+                    data: data.dataset,
+                    backgroundColor: data.dataset.map(value => getColor(data.dataset, value)),
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                indexAxis: "x",
+                scales: {
+                    y: { beginAtZero: true }
                 }
             }
-        }
+        });
+
+        document.getElementById('highestDay').textContent = `${data.highestDay}`;
     });
 
-    function getColor(data, needle) {
-        let sortedData = [...data].sort((a, b) => b - a);
-        let rank = sortedData.indexOf(needle);
-        if (rank === -1) {
-            return -1;
-        }
-        return rank < 3 ? '#4E80FF' : '#4E80FF7F';
-    }
 </script>
 @endsection
