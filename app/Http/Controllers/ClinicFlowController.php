@@ -56,8 +56,9 @@ class ClinicFlowController extends Controller
             $require = $quantity;
             //mengambil obat dari inventory menggunakan fungsi pada model
             $drugAdd->clinicUseWarehouse($transaction,$require,$item->quantity);
-
+            var_dump('test');
         };
+        die;
         return redirect()->route('clinic.inflows.show',$transaction->id)->with('success','Berhasil menambahkan obat');
 
     }

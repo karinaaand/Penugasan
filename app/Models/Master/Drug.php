@@ -108,7 +108,7 @@ class Drug extends Model
         $used->used = true;
         $used->save();
     }
-    
+
     //melakukan pengurangan stok pada gudang berdasarkan expire terdekat
     public function customerUseWarehouse(Transaction $transaction, int $require, int $repackQuantity,string $repackName,int $piecePrice,int $priceDiscount)
     {

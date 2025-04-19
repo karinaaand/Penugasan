@@ -10,11 +10,11 @@
     Upload
 </button>
 
-        <button class=" rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600 flex items-center">
+        <a href="{{ route('export.template') }}" class=" rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600 flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download mr-2" viewBox="0 0 16 16">
   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
   <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-</svg>Template</button>
+</svg>Template</a>
     </div>
     <div class="space-y-4">
         <form id="add-stuff-form" action="{{ route('inventory.inflows.store') }}" method="post" class="space-y-4">
@@ -91,6 +91,26 @@
                     </tr>
                 </thead>
                 <tbody class="text-gray-700" id="drugTable">
+                    @if(isset($importedData) && $importedData->isNotEmpty())
+                        @foreach($importedData as $index => $data)
+                            <tr>
+                                <td class="border p-2 text-center">{{ $index + 1 }}</td>
+                                <td class="border p-2 text-center">{{ $data['nama_obat'] ?? '-' }}</td>
+                                <td class="border p-2 text-center">{{ $data['jumlah'] ?? '0' }}</td>
+                                <td class="border p-2 text-center">{{ $data['harga_satuan'] ?? '0' }}</td>
+                                <td class="border p-2 text-center">{{ ($data['jumlah'] ?? 0) * ($data['harga_satuan'] ?? 0) }}</td>
+                                <td class="border p-2 text-center">{{ $data['tanggal_exp'] ?? '-' }}</td>
+                                <td class="border p-2 text-center">
+                                    <button type="button" onclick="showDeleteModal({{$index}})" class="bg-red-500 text-white text-sm px-2 py-2 rounded-lg shadow hover:bg-red-600">
+                                        <svg width="20" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14.167 5.50002H18.3337V7.16669H16.667V18C16.667 18.221 16.5792 18.433 16.4229 18.5893C16.2666 18.7456 16.0547 18.8334 15.8337 18.8334H4.16699C3.94598 18.8334 3.73402 18.7456 3.57774 18.5893C3.42146 18.433 3.33366 18.221 3.33366 18V7.16669H1.66699V5.50002H5.83366V3.00002C5.83366 2.77901 5.92146 2.56704 6.07774 2.41076C6.23402 2.25448 6.44598 2.16669 6.66699 2.16669H13.3337C13.5547 2.16669 13.7666 2.25448 13.9229 2.41076C14.0792 2.56704 14.167 2.77901 14.167 3.00002V5.50002ZM15.0003 7.16669H5.00033V17.1667H15.0003V7.16669ZM7.50033 3.83335V5.50002H12.5003V3.83335H7.50033Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -127,28 +147,43 @@
             </svg>
             <span class="sr-only">Close modal</span>
         </button>
-        <div class="flex items-center justify-center w-full mb-6 mt-6">
-            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 gray:hover:bg-gray-800 gray:bg-gray-700 hover:bg-gray-100 gray:border-gray-600 gray:hover:border-gray-500 gray:hover:bg-gray-600">
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                    </svg>
-                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">File format .xls (Max. 10Mb)</p>
+
+        <!-- Tambahkan Form -->
+        <form action="{{ route('inventory.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf  <!-- Token CSRF wajib untuk keamanan Laravel -->
+
+            <div class="flex items-center justify-center w-full mb-6 mt-6">
+                <label for="dropzone-file" id="dropzone-label" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                    <div id="dropzone-content" class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500">File format .xls (Max. 10Mb)</p>
+                    </div>
+                    <input id="dropzone-file" name="file" type="file" class="hidden" required />
+                </label>
+
+                <!-- Info File yang Diunggah -->
+                <div id="file-info" class="hidden w-full mt-2 flex flex-col items-center bg-gray-100 p-4 rounded-lg">
+                    <p id="file-name" class="text-sm font-medium text-gray-700"></p>
+                    <button type="button" id="remove-file" class="mt-2 text-red-500 text-sm hover:underline">Ganti File</button>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" />
-            </label>
-        </div>
-        <div class="flex justify-center space-x-4">
-            <button onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
-                Batal
-            </button>
-            <button onclick="submitModal()" type="button" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
-                Tambah
-            </button>
-        </div>
+            </div>
+
+
+            <div class="flex justify-center space-x-4">
+                <button type="button" onclick="closeUploadModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
+                    Batal
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none">
+                    Tambah
+                </button>
+            </div>
+        </form>
     </div>
 </div>
+
 
 <script>
     let deleteForItem = null;
@@ -235,6 +270,22 @@
     let data = []
     let total = 0;
 
+    @if(isset($importedData) && $importedData->isNotEmpty())
+        @php
+            $jsonData = $importedData->map(function($data){
+                return [
+                    $data["nama_obat"],
+                    $data["jumlah"],
+                    $data["satuan"],
+                    $data["harga_satuan"],
+                    $data["tanggal_exp"],
+                ];
+            });
+            $jsonData = json_encode($jsonData);
+        @endphp
+        data = JSON.parse(`{!! $jsonData !!}`)
+    @endif
+
     function addStuff() {
         let drug = document.querySelector("input[name='drug']")
         let quantity = document.querySelector("input[name='quantity']")
@@ -309,7 +360,27 @@
         document.getElementById('uploadModal').classList.add('hidden');
     }
 
+    document.getElementById('dropzone-file').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const dropzoneLabel = document.getElementById('dropzone-label');
+        const dropzoneContent = document.getElementById('dropzone-content');
+        const fileInfo = document.getElementById('file-info');
+        const fileName = document.getElementById('file-name');
+        const removeFileBtn = document.getElementById('remove-file');
 
+        if (file) {
+            fileName.textContent = "File diunggah: " + file.name;
+            dropzoneLabel.classList.add("hidden");
+            fileInfo.classList.remove("hidden");
+        }
+
+        // Jika tombol "Ganti File" diklik
+        removeFileBtn.addEventListener("click", function () {
+            document.getElementById('dropzone-file').value = ""; // Reset input file
+            dropzoneLabel.classList.remove("hidden");
+            fileInfo.classList.add("hidden");
+        });
+    });
 
     function deleteItem() {
         closeDeleteModal()
@@ -334,7 +405,7 @@
     }
 
     function customBuatModal(method,form) {
-        
+
         data = data.map(function(e) {
             return {
                 name: e[0],

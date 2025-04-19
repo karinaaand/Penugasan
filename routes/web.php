@@ -27,6 +27,14 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\PdfInventoryController;
 use App\Http\Controllers\PDFKlinikController;
 
+// menambahkan template
+use App\Exports\InventoryTemplateExport;
+use App\Exports\PDFReport;
+use App\Exports\TransactionExport;
+// route inventoryupload template excel
+use App\Http\Controllers\InventoryUploadController;
+use Illuminate\Http\Request;
+
 Route::get('/drug-suggestions', [DrugController::class, 'getSuggestions']);
 Route::get('/drug-repack', [DrugController::class, 'getRepacks']);
 Route::get('/category-search', [CategoryController::class, 'searchCategory']);
@@ -119,7 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix("report")->as("report.")->group(function () {
         Route::controller(ReportController::class)->group(function () {
             Route::get("drugs", 'drugs')->name('drugs.index');
-            Route::get("drug/{id}", 'drug')->name('drugs.show');
+            Route::get("drug/{stock}", 'drugDetail')->name('drugs.show');
             Route::get("drug/{id}/print", 'drugPrint')->name("drugs.print");
             Route::get("transactions", 'transactions')->name("transactions.index");
             Route::get("transaction/{id}", 'transaction')->name("transactions.show");
@@ -156,6 +164,37 @@ Route::middleware('auth')->group(function () {
     // menambahakan pdf
     Route::get('/clinic/generate-pdf/{transaction_id}', [PDFKlinikController::class, 'generatePdf']);
 
+    // menambahakan tempalte inventory
+
+    Route::get('/export-template', function () {
+        return Excel::download(new InventoryTemplateExport, 'template_inventory.xlsx');
+    })->name('export.template');
+
+
+    // route inventoryupload template excel
+    Route::post('/import-inventory', [InventoryUploadController::class, 'import'])->name('inventory.import');
+
+    // route excelreport
+    Route::get('/export-excel/{transaction_id?}', [ReportController::class, 'exportExcel']);
+
+    // route pdfreport
+    Route::get('/export-pdf', function () {
+        return (new ReportController())->generate();
+    });
+
+    //Route exceldetailreport
+    Route::get('/drug/{id}/export', [ReportController::class, 'exportExcelDetail'])->name('drug.export');
+
+    //Route pdfdetailreport
+    Route::get('/drug/{id}/export-pdf', [ReportController::class, 'exportPdfDetail'])->name('drug.export.pdf');
+
+    //Route exceltransactionreport
+    Route::get('/transactions/export/excel', function (Request $request) {
+        return Excel::download(new TransactionExport($request->start, $request->end), 'laporan_transaksi.xlsx');
+    })->name('transaction.export.excel');
+
+    //Route pdftransactionreport
+    Route::get('/transactions/export/pdf', [ReportController::class, 'exportPdf'])->name('transaction.export.pdf');
 
 
 });

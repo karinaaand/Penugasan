@@ -45,7 +45,7 @@ use Carbon\Carbon;
                     <td class="py-3">{{ Carbon::parse($item->oldest)->translatedFormat('j F Y') }}</td>
                     <td class="py-3">{{ Carbon::parse($item->latest)->translatedFormat('j F Y') }}</td>
                     <td class="flex justify-center py-3">
-                        <a href="{{ route('inventory.stocks.show', $item->drug()->id) }}"
+                        <a href="{{ route('report.drugs.show', $item->drug()->id) }}"
                             class="rounded-md bg-blue-500 p-2 hover:bg-blue-600">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@ use Carbon\Carbon;
             <p class="text-sm text-gray-500 mb-5">Pilihlah salah satu format file!</p>
         </div>
         <div class="flex justify-center space-x-4">
-            <button onclick="closePrintModal()"
+            <button onclick="exportToExcel()"
                 class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none">
                 Excel
             </button>
@@ -98,13 +98,27 @@ use Carbon\Carbon;
 </div>
 
 <script>
-    function printModal() {
+       function printModal() {
         document.getElementById('printModal').classList.remove('hidden');
     }
 
     function closePrintModal() {
-        document.getElementById('printModal').classList.add('hidden');
+        const modal = document.getElementById('printModal');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
     }
+
+    function exportToExcel() {
+        closePrintModal();
+        window.location.href = "/export-excel";
+    }
+
+    function submitModal() {
+        closePrintModal();
+        window.location.href = "/export-pdf";
+    }
+
     document.getElementById('printButton').onclick = function() {
         document.getElementById('printOptions').classList.toggle('invisible');
     };
