@@ -107,11 +107,11 @@
         </div>
         <div class="flex justify-center space-x-4">
             <button onclick="submitForm()"
-                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
+                class="px-4 py-2 bg-gray-200 text-white text-gray-900 rounded-lg hover:bg-blue-600 focus:outline-none">
                Inventory
             </button>
             <button onclick="customSubmitForm(@js(route('clinic.inflows.store')))" type="button"
-                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none">
+                class="px-4 py-2 bg-gray-200 text-white text-gray-900 rounded-lg hover:bg-blue-600 focus:outline-none">
                 Klinik
             </button>
         </div>

@@ -196,5 +196,8 @@ Route::middleware('auth')->group(function () {
     //Route pdftransactionreport
     Route::get('/transactions/export/pdf', [ReportController::class, 'exportPdf'])->name('transaction.export.pdf');
 
+    //Menambahkan redirect pada Log History
+    Route::get('/log', [TransactionController::class, 'index'])->name('transaction.index');
+
 
 });

@@ -1,9 +1,27 @@
 @extends('layouts.main')
 @section('container')
+
+
     <form method="POST" class="hidden" action="{{ route('transaction.store') }}" id="add-stuff-form">
         @csrf
         <input type="hidden" name="transaction">
     </form>
+    <body style="margin: 40px; font-family: sans-serif;">
+        <div class="flex justify-center mb-6">
+            <div class="flex w-full rounded-xl overflow-hidden shadow">
+                <div id="inventoryTab"
+                    onclick="setActiveTab('inventory')"
+                    class="flex-1 text-center py-3 bg-indigo-400 font-bold  text-white cursor-pointer">
+                    Inventory
+                </div>
+                <div id="klinikTab"
+                    onclick="setActiveTab('klinik')"
+                    class="flex-1 text-center py-3 bg-indigo-400 font-bold bg-white text-gray-800 cursor-pointer">
+                    Klinik
+                </div>
+            </div>
+        </div>
+
     <input type="hidden" name="repackQuantity">
     <div class="fixed bottom-8 right-8 flex bg-white shadow-xl p-4 rounded-lg items-end">
         <div class="grid grid-cols-2 gap-2">
@@ -17,7 +35,6 @@
             class="h-max inline-block px-6 rounded-xl bg-indigo-400 hover:bg-indigo-600 py-2 text-center font-bold text-white hover:bg-lavender-700">
             Checkout
         </button>
-
     </div>
     <div class="flex gap-6">
         <div class="rounded-lg p-6 shadow-lg">
@@ -314,5 +331,27 @@
             document.querySelector("input[name='transaction']").value = JSON.stringify(sendData)
             showModal('add', 'add-stuff-form')
         }
+
+
+        function setActiveTab(tab) {
+            const inventory = document.getElementById('inventoryTab');
+            const klinik = document.getElementById('klinikTab');
+
+            if (tab === 'inventory') {
+              inventory.classList.add('text-white');
+              inventory.classList.remove('bg-white', 'text-gray-800');
+
+              klinik.classList.add('bg-white', 'text-gray-800');
+              klinik.classList.remove('text-white');
+            } else {
+              klinik.classList.add('text-white');
+              klinik.classList.remove('bg-white', 'text-gray-800');
+
+              inventory.classList.add('bg-white', 'text-gray-800');
+              inventory.classList.remove('text-white');
+            }
+          }
+
+
     </script>
 @endsection
