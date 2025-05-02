@@ -242,7 +242,7 @@ class DatabaseSeeder extends Seeder
         [
             "name" => "Super Arsyad",
             "role" => "super",
-            "avatar" => "avatar/avatar.jpg"
+            "avatar" => "avatar/Avatar.jpg"
         ]
     ];
     public function run(): void

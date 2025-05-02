@@ -21,8 +21,12 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $avatar = Storage::disk('public')->put('avatar', $request->file('avatar'));
         try {
+            $avatar = 'avatar/Avatar.jpg';
+
+            if ($request->hasFile('avatar')) {
+                $avatar = Storage::disk('public')->put('avatar', $request->file('avatar'));
+            }
             $user = new User();
             $user->name = $request->name;
             $user->role = $request->role;

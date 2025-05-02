@@ -95,7 +95,7 @@
                         <h2 class="text-center text-xl font-semibold mb-6">Tambah Akun</h2>
                             <div class="flex items-center mb-4">
                                 <div class="w-28 h-28 rounded-full bg-gray-700 overflow-hidden">
-                                    <img id="avatar-image" src="https://via.placeholder.com/64" alt="Avatar" class="object-cover w-full h-full">
+                                    <img id="avatar-image" src="{{ asset('storage/avatar/Avatar.jpg') }}" alt="Avatar" class="object-cover w-full h-full">
                                 </div>
                                 <div class="ml-4">
                                     <div onclick="uploadModal('add')" class="bg-blue-600 text-sm text-white px-4 py-2 rounded-lg hover:bg-blue-500">

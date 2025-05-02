@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role',['super','admin','doctor','clinic']);
-            $table->string('avatar');
+            $table->string('avatar')->nullable()->default('avatar/Avatar.jpg');
             $table->timestamps();
         });
         
