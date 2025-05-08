@@ -39,7 +39,7 @@ class Transaction extends Model
         match ($this->variant) {
             "LPB" => $pre = "LPB",
             "LPK" => $pre = "LPK",
-            "Checkout" => $pre = "CHO",
+            "Checkout" => $pre = request()->source === 'warehouse' ? "WCHO" : "KCHO",
             "Trash" => $pre = "TRS",
             "Retur" => $pre = "RTR",
         };
