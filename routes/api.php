@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ReportController;
 use App\Http\Controllers\Api\V1\ManagementController;
 use App\Http\Controllers\Api\V1\CheckoutController;
+use App\Http\Controllers\Api\V1\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -133,6 +134,11 @@ Route::prefix('v1')->group(function () {
             Route::get('/drugs', [CheckoutController::class, 'getAvailableDrugs']);
             Route::post('/', [CheckoutController::class, 'checkout']);
             Route::get('/history', [CheckoutController::class, 'history']);
+        });
+
+        // Transaction routes
+        Route::prefix('transactions')->group(function () {
+            Route::get('/top-selling', [TransactionController::class, 'topSelling']);
         });
     });
 });
