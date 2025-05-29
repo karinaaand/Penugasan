@@ -19,6 +19,7 @@ class VariantController extends ApiController
      * @OA\Get(
      *     path="/api/v1/variants",
      *     tags={"Variants"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of variants",
      *     description="Returns a paginated list of drug variants with optional search functionality",
      *     @OA\Parameter(
@@ -81,6 +82,7 @@ class VariantController extends ApiController
      * @OA\Post(
      *     path="/api/v1/variants",
      *     tags={"Variants"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new variant",
      *     description="Creates a new drug variant",
      *     @OA\RequestBody(
@@ -148,6 +150,7 @@ class VariantController extends ApiController
      * @OA\Get(
      *     path="/api/v1/variants/{id}",
      *     tags={"Variants"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Get variant details",
      *     description="Returns detailed information about a specific variant",
      *     @OA\Parameter(
@@ -190,6 +193,7 @@ class VariantController extends ApiController
      * @OA\Put(
      *     path="/api/v1/variants/{id}",
      *     tags={"Variants"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Update variant details",
      *     description="Updates the details of an existing variant",
      *     @OA\Parameter(
@@ -257,6 +261,7 @@ class VariantController extends ApiController
      * @OA\Delete(
      *     path="/api/v1/variants/{id}",
      *     tags={"Variants"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a variant",
      *     description="Deletes a variant if it has no associated drugs",
      *     @OA\Parameter(
@@ -313,6 +318,7 @@ class VariantController extends ApiController
      * @OA\Get(
      *     path="/api/v1/variants/search",
      *     tags={"Variants"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Search variants",
      *     description="Search variants by name",
      *     @OA\Parameter(

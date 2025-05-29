@@ -19,6 +19,7 @@ class ManufactureController extends ApiController
      * @OA\Get(
      *     path="/api/v1/manufactures",
      *     tags={"Manufactures"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of manufacturers",
      *     description="Returns a paginated list of manufacturers with optional search functionality",
      *     @OA\Parameter(
@@ -85,6 +86,7 @@ class ManufactureController extends ApiController
      * @OA\Post(
      *     path="/api/v1/manufactures",
      *     tags={"Manufactures"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new manufacturer",
      *     description="Creates a new manufacturer with a unique code",
      *     @OA\RequestBody(
@@ -154,6 +156,7 @@ class ManufactureController extends ApiController
      * @OA\Get(
      *     path="/api/v1/manufactures/{id}",
      *     tags={"Manufactures"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Get manufacturer details",
      *     description="Returns detailed information about a specific manufacturer",
      *     @OA\Parameter(
@@ -197,6 +200,7 @@ class ManufactureController extends ApiController
      * @OA\Put(
      *     path="/api/v1/manufactures/{id}",
      *     tags={"Manufactures"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Update manufacturer details",
      *     description="Updates the details of an existing manufacturer",
      *     @OA\Parameter(
@@ -265,6 +269,7 @@ class ManufactureController extends ApiController
      * @OA\Delete(
      *     path="/api/v1/manufactures/{id}",
      *     tags={"Manufactures"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a manufacturer",
      *     description="Deletes a manufacturer if it has no associated drugs",
      *     @OA\Parameter(
@@ -322,6 +327,7 @@ class ManufactureController extends ApiController
      * @OA\Get(
      *     path="/api/v1/manufactures/search",
      *     tags={"Manufactures"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Search manufacturers",
      *     description="Search manufacturers by name or code",
      *     @OA\Parameter(

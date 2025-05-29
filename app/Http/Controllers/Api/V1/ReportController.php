@@ -23,6 +23,7 @@ class ReportController extends ApiController
      *     path="/api/v1/reports/drugs",
      *     summary="Get drug inventory report",
      *     tags={"Reports"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="per_page",
      *         in="query",
@@ -74,6 +75,7 @@ class ReportController extends ApiController
      *     path="/api/v1/reports/drugs/{id}",
      *     summary="Get detailed drug report",
      *     tags={"Reports"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -192,6 +194,7 @@ class ReportController extends ApiController
      *     path="/api/v1/reports/transactions",
      *     summary="Get transaction report",
      *     tags={"Reports"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="start",
      *         in="query",
@@ -268,6 +271,7 @@ class ReportController extends ApiController
      *     path="/api/v1/reports/transactions/search",
      *     summary="Search transactions",
      *     tags={"Reports"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="query",
      *         in="query",

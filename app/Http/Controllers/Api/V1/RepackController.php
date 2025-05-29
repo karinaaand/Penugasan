@@ -20,6 +20,7 @@ class RepackController extends ApiController
      * @OA\Get(
      *     path="/api/v1/repacks",
      *     tags={"Repacks"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of repacks",
      *     description="Returns a paginated list of drug repacks with optional search and filtering",
      *     @OA\Parameter(
@@ -99,6 +100,7 @@ class RepackController extends ApiController
      * @OA\Post(
      *     path="/api/v1/repacks",
      *     tags={"Repacks"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new repack",
      *     description="Creates a new drug repack with calculated price based on drug's base price and margin",
      *     @OA\RequestBody(
@@ -185,6 +187,7 @@ class RepackController extends ApiController
      * @OA\Get(
      *     path="/api/v1/repacks/{id}",
      *     tags={"Repacks"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Get repack details",
      *     description="Returns detailed information about a specific repack",
      *     @OA\Parameter(
@@ -232,6 +235,7 @@ class RepackController extends ApiController
      * @OA\Put(
      *     path="/api/v1/repacks/{id}",
      *     tags={"Repacks"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Update repack details",
      *     description="Updates the margin and recalculates the price of an existing repack",
      *     @OA\Parameter(
@@ -314,6 +318,7 @@ class RepackController extends ApiController
      * @OA\Delete(
      *     path="/api/v1/repacks/{id}",
      *     tags={"Repacks"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a repack",
      *     description="Deletes a repack if it is not a default repack and has no existing stock",
      *     @OA\Parameter(
@@ -380,6 +385,7 @@ class RepackController extends ApiController
      * @OA\Get(
      *     path="/api/v1/repacks/search",
      *     tags={"Repacks"},
+     *     security={{"bearerAuth":{}}},
      *     summary="Search repacks",
      *     description="Search repacks by name",
      *     @OA\Parameter(

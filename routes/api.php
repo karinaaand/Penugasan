@@ -96,15 +96,16 @@ Route::prefix('v1')->group(function () {
             Route::get('/stocks/search', [InventoryController::class, 'searchStocks']);
 
             // Clinic Stocks
-            Route::get('/clinic/stocks', [InventoryController::class, 'getClinicStocks']);
-            Route::get('/clinic/stocks/{id}', [InventoryController::class, 'getClinicStockDetail']);
-            Route::get('/clinic/stocks/search', [InventoryController::class, 'searchClinicStocks']);
-            Route::post('/clinic/transfer', [InventoryController::class, 'transferToClinic']);
+            Route::get('/clinic-stocks', [InventoryController::class, 'getClinicStocks']);
+            Route::get('/clinic-stocks/{id}', [InventoryController::class, 'getClinicStockDetail']);
+            Route::get('/clinic-stocks/search', [InventoryController::class, 'searchClinicStocks']);
+            Route::post('/transfer-to-clinic', [InventoryController::class, 'transferToClinic']);
         });
 
         // Management routes
         Route::prefix('management')->group(function () {
             // Bills
+            Route::get('/search', [ManagementController::class, 'searchManagement']);
             Route::get('/bills', [ManagementController::class, 'getBills']);
             Route::get('/bills/{id}', [ManagementController::class, 'getBillDetail']);
             Route::post('/bills/{id}/pay', [ManagementController::class, 'payBill']);

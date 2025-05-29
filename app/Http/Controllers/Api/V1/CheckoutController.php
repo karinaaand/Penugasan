@@ -24,9 +24,10 @@ class CheckoutController extends ApiController
 {
     /**
      * @OA\Get(
-     *     path="/api/v1/checkout/available-drugs",
+     *     path="/api/v1/checkout/drugs",
      *     summary="Get available drugs for checkout",
      *     tags={"Checkout"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="source",
      *         in="query",
@@ -106,6 +107,7 @@ class CheckoutController extends ApiController
      *     path="/api/v1/checkout",
      *     summary="Create a checkout transaction",
      *     tags={"Checkout"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -308,6 +310,7 @@ class CheckoutController extends ApiController
      *     path="/api/v1/checkout/history",
      *     summary="Get checkout transaction history",
      *     tags={"Checkout"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="page",
      *         in="query",

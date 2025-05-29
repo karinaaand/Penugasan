@@ -28,6 +28,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/inflows",
      *     summary="Get all inflows",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="per_page",
      *         in="query",
@@ -75,6 +76,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/inflows/{id}",
      *     summary="Get inflow details",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -151,6 +153,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/vendors",
      *     summary="Get all vendors",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Vendors retrieved successfully",
@@ -181,6 +184,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/drugs",
      *     summary="Get all drugs",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Drugs retrieved successfully",
@@ -211,6 +215,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/inflows",
      *     summary="Create a new inflow",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -418,6 +423,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/stocks",
      *     summary="Get all stocks",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="per_page",
      *         in="query",
@@ -452,6 +458,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/stocks/{id}",
      *     summary="Get stock details",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -508,6 +515,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/stocks/search",
      *     summary="Search stocks",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="query",
      *         in="query",
@@ -542,9 +550,10 @@ class InventoryController extends ApiController
 
     /**
      * @OA\Get(
-     *     path="/api/v1/inventory/clinic-stocks",
+     *     path="/api/v1/inventory/clinic/stocks",
      *     summary="Get all clinic stocks",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="per_page",
      *         in="query",
@@ -591,6 +600,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/clinic-stocks/{id}",
      *     summary="Get clinic stock details",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -655,6 +665,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/clinic-stocks/search",
      *     summary="Search clinic stocks",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="query",
      *         in="query",
@@ -704,6 +715,7 @@ class InventoryController extends ApiController
      *     path="/api/v1/inventory/transfer-to-clinic",
      *     summary="Transfer stock to clinic",
      *     tags={"Inventory"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(

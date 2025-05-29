@@ -20,6 +20,7 @@ class VendorController extends ApiController
      *     path="/api/v1/vendors",
      *     summary="Get all vendors",
      *     tags={"Vendors"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="search",
      *         in="query",
@@ -75,6 +76,7 @@ class VendorController extends ApiController
      *     path="/api/v1/vendors",
      *     summary="Create a new vendor",
      *     tags={"Vendors"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -151,6 +153,7 @@ class VendorController extends ApiController
      *     path="/api/v1/vendors/{vendor}",
      *     summary="Get vendor details",
      *     tags={"Vendors"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="vendor",
      *         in="path",
@@ -192,6 +195,7 @@ class VendorController extends ApiController
      *     path="/api/v1/vendors/{vendor}",
      *     summary="Update vendor details",
      *     tags={"Vendors"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="vendor",
      *         in="path",
@@ -275,6 +279,7 @@ class VendorController extends ApiController
      *     path="/api/v1/vendors/{vendor}",
      *     summary="Delete a vendor",
      *     tags={"Vendors"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="vendor",
      *         in="path",
@@ -342,6 +347,7 @@ class VendorController extends ApiController
      *     path="/api/v1/vendors/search",
      *     summary="Search vendors",
      *     tags={"Vendors"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="query",
      *         in="query",

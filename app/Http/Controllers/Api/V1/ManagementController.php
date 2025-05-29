@@ -30,6 +30,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/search",
      *     summary="Search management records",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="variant",
      *         in="query",
@@ -86,6 +87,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/bills",
      *     summary="Get all bills",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="start",
      *         in="query",
@@ -172,6 +174,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/bills/{id}",
      *     summary="Get bill details",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -276,6 +279,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/bills/{id}/pay",
      *     summary="Pay a bill",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -344,6 +348,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/returns",
      *     summary="Get all returns",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="start",
      *         in="query",
@@ -427,6 +432,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/returns/{id}",
      *     summary="Get return details",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -519,6 +525,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/returns",
      *     summary="Create a return",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -651,6 +658,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/returns/{id}/complete",
      *     summary="Complete a return",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -754,6 +762,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/trash",
      *     summary="Get all trash records",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="start",
      *         in="query",
@@ -835,6 +844,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/trash/{id}",
      *     summary="Get trash details",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -908,6 +918,7 @@ class ManagementController extends ApiController
      *     path="/api/v1/management/trash",
      *     summary="Create a trash record",
      *     tags={"Management"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
