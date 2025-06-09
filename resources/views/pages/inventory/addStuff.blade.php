@@ -21,6 +21,7 @@
             @csrf
             <input type="hidden" name="transaction">
             <input type="hidden" name="total">
+            <input type="hidden" name="destination" value="warehouse">
             <div class="grid grid-cols-2  gap-4">
                 <select name="vendor_id" class="w-full rounded border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option selected disabled>Inputkan vendor</option>
@@ -184,6 +185,38 @@
     </div>
 </div>
 
+<!-- Add Destination Selection Modal -->
+<div id="destinationModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative">
+        <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+            onclick="closeDestinationModal()">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+        </button>
+        <div class="text-center">
+            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">Pilih tujuan penempatan obat?</h3>
+        </div>
+        <div class="flex justify-center space-x-4">
+            <button onclick="selectDestination('warehouse')"
+                class="px-4 py-2 bg-gray-200 text-white text-gray-900 rounded-lg hover:bg-blue-600 focus:outline-none">
+               Inventory
+            </button>
+            <button onclick="selectDestination('clinic')" type="button"
+                class="px-4 py-2 bg-gray-200 text-white text-gray-900 rounded-lg hover:bg-blue-600 focus:outline-none">
+                Klinik
+            </button>
+        </div>
+    </div>
+</div>
 
 <script>
     let deleteForItem = null;
@@ -404,7 +437,13 @@
         showModal('add', 'add-stuff-form')
     }
 
-    function customBuatModal(method,form) {
+    function customBuatModal(method, form) {
+        // Check if vendor is selected
+        const vendorSelect = document.querySelector("select[name='vendor_id']");
+        if (!vendorSelect.value) {
+            alert('Silakan pilih vendor terlebih dahulu');
+            return;
+        }
 
         data = data.map(function(e) {
             return {
@@ -416,10 +455,23 @@
                 expired: e[4]
             };
         });
-        document.querySelector("input[name='total']").value = total
-        document.querySelector("input[name='transaction']").value = JSON.stringify(data)
-        // console.log(document.querySelector("input[name='transaction']").value);
-        showModal(method, form)
+        document.querySelector("input[name='total']").value = total;
+        document.querySelector("input[name='transaction']").value = JSON.stringify(data);
+        showDestinationModal();
+    }
+
+    function showDestinationModal() {
+        document.getElementById('destinationModal').classList.remove('hidden');
+    }
+
+    function closeDestinationModal() {
+        document.getElementById('destinationModal').classList.add('hidden');
+    }
+
+    function selectDestination(destination) {
+        document.querySelector("input[name='destination']").value = destination;
+        closeDestinationModal();
+        showModal('add', 'add-stuff-form');
     }
 </script>
 @endsection
