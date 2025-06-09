@@ -7,7 +7,7 @@
             <button onclick="showTambahModal()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow transition-colors duration-200">+
                 Tambah User</button>
                 <form action="">
-                    <input type="text" name="" id="" placeholder="Search..."
+                    <input type="text" id="searchInput" placeholder="Search..."
                     class="ring-2 ring-gray-300 rounded-full px-6 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </form>
             </div>
@@ -23,7 +23,7 @@
                         <th class="w-48 py-3 px-6">Action</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700">
+                <tbody class="text-gray-700" id="userTableBody">
                     @foreach ($users as $number => $item)
                     @php
                         $av = Storage::url($item->avatar);
@@ -314,6 +314,24 @@
     function closeUploadModal() {
         document.getElementById('uploadModal').classList.add('hidden');
     }
+    
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        const searchValue = this.value.toLowerCase();
+        const tableBody = document.getElementById('userTableBody');
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let i = 0; i < rows.length; i++) {
+            const name = rows[i].getElementsByTagName('td')[1]?.textContent.toLowerCase() || '';
+            const role = rows[i].getElementsByTagName('td')[2]?.textContent.toLowerCase() || '';
+            const email = rows[i].getElementsByTagName('td')[3]?.textContent.toLowerCase() || '';
+
+            if (name.includes(searchValue) || role.includes(searchValue) || email.includes(searchValue)) {
+                rows[i].style.display = '';
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+    });
     
     </script>
 @endsection
