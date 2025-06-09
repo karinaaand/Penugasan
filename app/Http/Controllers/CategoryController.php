@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function searchCategory(Request $request)
     {
         $query = $request->input('query');
-        $categories = Category::where('name', 'like', "%{$query}%")->get();
+        $categories = Category::where('name', 'like', "%{$query}%")->orWhere('code', 'like', "%{$query}%")->get();
 
         return response()->json($categories);
     }
@@ -23,12 +23,12 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            "name"=> "required|alpha:ascii|min:3|max:25|string",
-            "code"=> "required|alpha|min:2|max:2"
-        ]);
         //try catch-block untuk menghindari error dan otomatis akan mengeluarkan toast
         try {
+            $validate = $request->validate([
+                "name"=> "required|string|min:3|max:25",
+                "code"=> "required|alpha|min:2|max:2"
+            ]);
             Category::create($validate);
             return back()->with('success','Kategori berhasil dibuat');
         } catch (\Throwable $e) {

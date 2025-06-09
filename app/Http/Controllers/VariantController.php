@@ -23,10 +23,10 @@ class VariantController extends Controller
     }
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            "name"=> "required|min:3|max:25|string"
-        ]);
         try {
+            $validate = $request->validate([
+                "name"=> "required|min:3|max:25|string"
+            ]);
             Variant::create([
                 "name"=>$request->name
             ]);

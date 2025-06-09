@@ -23,16 +23,17 @@ class ManufactureController extends Controller
     }
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            "name"=> "required|min:3|max:25|string"
-        ]);
-        if($validate){
+        try {
+            $validate = $request->validate([
+                "name"=> "required|min:3|max:25|string"
+            ]);
             Manufacture::create([
                 "name"=>$request->name
             ]);
             return back()->with('success','Produsen berhasil dibuat');
+        } catch (\Throwable $e) {
+            return back()->with('error','Produsen gagal dibuat');
         }
-        return back()->with('error','Produsen gagal dibuat');
     }
     public function update(Request $request, Manufacture $manufacture)
     {

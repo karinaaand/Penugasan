@@ -23,12 +23,12 @@ class VendorController extends Controller
     }
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            "name"=> "required|min:3|max:25|string",
-            "phone"=>"required|max:14",
-            "address"=>"required|string|max:255",
-        ]);
         try {
+            $validate = $request->validate([
+                "name"=> "required|min:3|max:25|string",
+                "phone"=>"required|max:14",
+                "address"=>"required|string|max:255",
+            ]);
             Vendor::create($validate);
             return redirect()->back()->with('success','Vendor berhasil dibuat');
         } catch (\Throwable $th) {
