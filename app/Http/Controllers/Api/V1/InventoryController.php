@@ -293,7 +293,7 @@ class InventoryController extends ApiController
                 'vendor_id' => $request->vendor_id,
                 'destination' => $request->destination,
                 'method' => $request->method,
-                'variant' => 'LPB',
+                'variant' => $request->destination === 'clinic' ? 'LPK' : 'LPB',
                 'outcome' => $totalAmount
             ]);
 

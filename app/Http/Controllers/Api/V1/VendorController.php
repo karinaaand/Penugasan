@@ -139,9 +139,6 @@ class VendorController extends ApiController
                 'address' => $request->address
             ]);
             
-            // Load relationships manually
-            $vendor->drugs = $vendor->drugs();
-
             return $this->successResponse($vendor, 'Vendor created successfully', 201);
         } catch (\Exception $e) {
             return $this->errorResponse('Failed to create vendor: ' . $e->getMessage(), [], 500);
@@ -184,9 +181,6 @@ class VendorController extends ApiController
      */
     public function show(Vendor $vendor)
     {
-        // Load relationships manually
-        $vendor->drugs = $vendor->drugs();
-
         return $this->successResponse($vendor, 'Vendor retrieved successfully');
     }
 
@@ -264,9 +258,6 @@ class VendorController extends ApiController
 
         try {
             $vendor->update($request->all());
-            
-            // Load relationships manually
-            $vendor->drugs = $vendor->drugs();
 
             return $this->successResponse($vendor, 'Vendor updated successfully');
         } catch (\Exception $e) {
@@ -326,8 +317,8 @@ class VendorController extends ApiController
     public function destroy(Vendor $vendor)
     {
         try {
-            // Check if vendor has any drugs
-            if (count($vendor->drugs()) > 0) {
+            // Check if vendor has any drugs using the relationship directly
+            if ($vendor->drugs && $vendor->drugs->count() > 0) {
                 return $this->errorResponse('Cannot delete vendor with existing drugs', [], 422);
             }
 
@@ -374,11 +365,20 @@ class VendorController extends ApiController
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $vendors = Vendor::where('name', 'like', "%{$query}%")
-                        ->orWhere('phone', 'like', "%{$query}%")
-                        ->orWhere('address', 'like', "%{$query}%")
-                        ->get();
+        
+        if (empty($query)) {
+            return $this->errorResponse('Search query is required', [], 422);
+        }
 
-        return $this->successResponse($vendors, 'Vendors search results');
+        try {
+            $vendors = Vendor::where('name', 'like', "%{$query}%")
+                            ->orWhere('phone', 'like', "%{$query}%")
+                            ->orWhere('address', 'like', "%{$query}%")
+                            ->get();
+
+            return $this->successResponse($vendors, 'Vendors search results');
+        } catch (\Exception $e) {
+            return $this->errorResponse('Failed to search vendors: ' . $e->getMessage(), [], 500);
+        }
     }
 } 
