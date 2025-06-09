@@ -51,7 +51,7 @@
             <p class="text-center text-lg font-semibold mb-4">Anda yakin untuk menghapus data ini?
             </p>
             <div class="flex justify-center space-x-4">
-                <form id="deleteForm" method="POST" action="{{ route('inventory.trash', $batch->id) }}" class="inline">
+                <form id="deleteForm" method="POST" action="{{ route('clinic.trash', $batch->id) }}" class="inline">
                     @csrf
                     <input type="hidden" name="quantity">
                     <input type="hidden" name="reason">
