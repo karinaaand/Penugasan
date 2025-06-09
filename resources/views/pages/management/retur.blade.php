@@ -113,9 +113,9 @@
         function generateTableRow(item, number) {
             let createdAt = formatDate(item.created_at);
             let arriveDate = item.arrive ? formatDate(item.arrive) : "-";
-            let totalQuantity = item.detail ? item.detail.quantity : "-"; // Menyesuaikan jika data detail ada
-            let drugName = item.drug ? item.drug.name : "-"; // Menyesuaikan jika data drug ada
             let transactionCode = item.trans ? item.trans.code : "-";
+            let drugName = item.drug ? item.drug.name : "-";
+            let quantity = item.detail ? item.detail.quantity : "-";
             let routeUrl = `/management/retur/${item.id}`;
 
             return `
@@ -123,7 +123,7 @@
             <td class="px-6 py-3">${number + 1}</td>
             <td class="px-6 py-3">${transactionCode}</td>
             <td class="px-6 py-3 text-left">${drugName}</td>
-            <td class="px-6 py-3">${totalQuantity}</td>
+            <td class="px-6 py-3">${quantity}</td>
             <td class="px-6 py-3">${createdAt}</td>
             <td class="px-6 py-3">${arriveDate}</td>
             <td class="flex justify-center py-3">
