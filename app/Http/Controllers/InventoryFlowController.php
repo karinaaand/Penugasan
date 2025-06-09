@@ -14,6 +14,7 @@ use App\Exports\InventoryExport;
 use App\Models\Profile;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
+use App\Models\Inventory\Clinic;
 
 class InventoryFlowController extends Controller
 {
@@ -36,9 +37,9 @@ class InventoryFlowController extends Controller
         $datas = json_decode($request->transaction);
         $transaction = Transaction::create([
             "vendor_id"=>$request->vendor_id,
-            "destination"=>"warehouse",
+            "destination"=>$request->destination ?? 'warehouse',
             "method"=>$request->method,
-            "variant"=>"LPB",
+            "variant" => $request->destination === 'clinic' ? 'LPK' : 'LPB',
             "outcome"=>$request->total
         ]);
         // dd($transaction, $datas);
@@ -97,7 +98,14 @@ class InventoryFlowController extends Controller
                 "pack" => $quantity= $item->quantity*($drug->piece_netto*$drug->piece_quantity),
                 "box" => $quantity= $item->quantity*($drug->piece_netto*$drug->piece_quantity*$drug->pack_quantity),
             };
-            $stock = Warehouse::where('drug_id',$drug->id)->first();
+
+            // Update inventori klinik/gudang
+            if ($request->destination === 'clinic') {
+                $stock = Clinic::where('drug_id', $drug->id)->first();
+            } else {
+                $stock = Warehouse::where('drug_id', $drug->id)->first();
+            }
+
             $stock->quantity = $stock->quantity + $quantity;
             $detail->stock = $quantity;
             $detail->flow = $quantity;
