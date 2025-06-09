@@ -5,6 +5,7 @@
     <form method="POST" class="hidden" action="{{ route('transaction.store') }}" id="add-stuff-form">
         @csrf
         <input type="hidden" name="transaction">
+        <input type="hidden" name="source" id="sourceInput" value="warehouse">
     </form>
     <body style="margin: 40px; font-family: sans-serif;">
         <div class="flex justify-center mb-6">
@@ -140,6 +141,7 @@
         let totalDisc = 0;
         let totalPay = 0;
         let discMeth = 'persen';
+        let currentSource = 'warehouse';
 
         document.querySelectorAll("input[type='radio']").forEach(function(e) {
             e.addEventListener('change', (f) => {
@@ -157,7 +159,7 @@
                 const query = this.value;
                 timeout = setTimeout(() => {
                     if (query.length > 0) {
-                        fetch(`/drug-repack?query=${query}`)
+                        fetch(`/drug-repack?query=${query}&source=${currentSource}`)
                             .then(response => response.json())
                             .then(data => {
                                 suggestions.innerHTML = '';
@@ -165,12 +167,9 @@
                                     suggestions.classList.remove('hidden');
                                     data.forEach(item => {
                                         const option = document.createElement('li');
-                                        option.textContent =
-                                            `${item.name} (${formatRupiah(item.price)})`;
-                                        option.classList.add('p-2', 'cursor-pointer',
-                                            'hover:bg-gray-100');
-                                        option.addEventListener('click', () =>
-                                            clickedOption(item));
+                                        option.textContent = `${item.name} (${formatRupiah(item.price)})`;
+                                        option.classList.add('p-2', 'cursor-pointer', 'hover:bg-gray-100');
+                                        option.addEventListener('click', () => clickedOption(item));
                                         suggestions.appendChild(option);
                                     });
                                 } else {
@@ -186,18 +185,19 @@
         });
 
         function clickedOption(item) {
-            const drugInput = document.querySelector("#drugInput")
-            const drugStock = document.querySelector("input[name='stock']")
-            const drugPrice = document.querySelector("input[name='price']")
-            const repackQuantity = document.querySelector("input[name='repackQuantity']")
-            const drugDiscount = document.querySelector("input[name='drugDiscount']")
-            document.getElementById('drugInput').value = item.name
-            suggestions.classList.add('hidden')
-            repackSelected = item.id
-            drugStock.value = item.stock
-            drugPrice.value = item.price
-            repackQuantity.value = item.quantity
-            drugDiscount.value = item.drug.last_discount
+            const drugInput = document.querySelector("#drugInput");
+            const drugStock = document.querySelector("input[name='stock']");
+            const drugPrice = document.querySelector("input[name='price']");
+            const repackQuantity = document.querySelector("input[name='repackQuantity']");
+            const drugDiscount = document.querySelector("input[name='drugDiscount']");
+            
+            drugInput.value = item.name;
+            suggestions.classList.add('hidden');
+            repackSelected = item.id;
+            drugStock.value = item.stock;
+            drugPrice.value = item.price;
+            repackQuantity.value = item.quantity;
+            drugDiscount.value = item.drug.last_discount;
         }
 
         function addStuff() {
@@ -232,7 +232,7 @@
                 currency: 'IDR',
                 minimumFractionDigits: 0
             }).format(angka);
-        } // Output: "Rp 100.000"
+        } // Output: "Rp 100.000"
 
         function row(datainput, i) {
             [discDrug, piecePrice, repackName, quantity, repackQuantity, priceDiscount, repackId] = datainput
@@ -326,7 +326,8 @@
                 data,
                 total,
                 totalDisc,
-                totalPay
+                totalPay,
+                source: currentSource
             }
             document.querySelector("input[name='transaction']").value = JSON.stringify(sendData)
             showModal('add', 'add-stuff-form')
@@ -336,6 +337,7 @@
         function setActiveTab(tab) {
             const inventory = document.getElementById('inventoryTab');
             const klinik = document.getElementById('klinikTab');
+            const sourceInput = document.getElementById('sourceInput');
 
             if (tab === 'inventory') {
               inventory.classList.add('text-white');
@@ -343,13 +345,23 @@
 
               klinik.classList.add('bg-white', 'text-gray-800');
               klinik.classList.remove('text-white');
+              currentSource = 'warehouse';
             } else {
               klinik.classList.add('text-white');
               klinik.classList.remove('bg-white', 'text-gray-800');
 
               inventory.classList.add('bg-white', 'text-gray-800');
               inventory.classList.remove('text-white');
+              currentSource = 'clinic';
             }
+            sourceInput.value = currentSource;
+            document.getElementById('drugInput').value = '';
+            document.querySelector("input[name='stock']").value = '0';
+            document.querySelector("input[name='price']").value = '0';
+            document.querySelector("input[name='repackQuantity']").value = '';
+            document.querySelector("input[name='drugDiscount']").value = '0';
+            repackSelected = null;
+            suggestions.classList.add('hidden');
           }
 
 

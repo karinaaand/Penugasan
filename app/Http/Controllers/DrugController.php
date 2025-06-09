@@ -34,9 +34,11 @@ class DrugController extends Controller
     public function getRepacks(Request $request)
     {
         $query = $request->input('query');
+        $source = $request->input('source', 'warehouse');
+        
         $drugs = Repack::where('name', 'like', "%{$query}%")->get();
-        $drugs = $drugs->map(function ($drug) {
-            $drug->stock = $drug->stock();
+        $drugs = $drugs->map(function ($drug) use ($source) {
+            $drug->stock = $source === 'clinic' ? $drug->clinic_stock() : $drug->stock();
             $drug->drug = $drug->drug();
             return $drug;
         });
