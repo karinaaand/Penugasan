@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Inventory\Clinic;
 
 class ReportController extends Controller
 {
@@ -24,21 +25,105 @@ class ReportController extends Controller
         return response()->json($transactions);
     }
 
-    public function drugs(){
+    public function drugs(Request $request){
         $judul = "Laporan Obat";
-        $stocks = Warehouse::paginate(5);
-        return view("pages.report.drug",compact('judul','stocks'));
+        $query = $request->input('query');
+        
+        if ($query) {
+            $drugs = Drug::where(function($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%")
+                  ->orWhere('code', 'like', "%{$query}%");
+            })->get();
+        } else {
+            $drugs = Drug::all();
+        }
+        
+        $stocks = $drugs->map(function($drug) {
+            $warehouseStock = Warehouse::where('drug_id', $drug->id)->first();
+            $clinicStock = Clinic::where('drug_id', $drug->id)->first();
+            
+            $totalStock = ($warehouseStock ? $warehouseStock->quantity : 0) + 
+                         ($clinicStock ? $clinicStock->quantity : 0);
+            
+            $oldest = null;
+            $latest = null;
+            
+            if ($totalStock > 0) {
+                if ($warehouseStock && $warehouseStock->quantity > 0) {
+                    $oldest = $warehouseStock->oldest;
+                    $latest = $warehouseStock->latest;
+                }
+                if ($clinicStock && $clinicStock->quantity > 0) {
+                    if ($oldest === null || $clinicStock->oldest < $oldest) {
+                        $oldest = $clinicStock->oldest;
+                    }
+                    if ($latest === null || $clinicStock->latest > $latest) {
+                        $latest = $clinicStock->latest;
+                    }
+                }
+            }
+            
+            return (object)[
+                'drug' => $drug,
+                'quantity' => $totalStock,
+                'oldest' => $oldest,
+                'latest' => $latest
+            ];
+        });
+
+        $page = request()->get('page', 1);
+        $perPage = 5;
+        $stocks = new \Illuminate\Pagination\LengthAwarePaginator(
+            $stocks->forPage($page, $perPage),
+            $stocks->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+        
+        return view("pages.report.drug", compact('judul', 'stocks'));
     }
-    //Menambahkan drugDetail
-    public function drugDetail(Drug $stock)
+//Menambahkan drugDetail
+    public function drugDetail(Drug $stock, Request $request)
     {
         $judul = "Stok ".$stock->name;
         $drug = $stock;
-        $stock = Warehouse::where('drug_id',$drug->id)->first();
-        $inflow = Transaction::where('variant','LPB')->pluck('id');
-        $details = TransactionDetail::where('drug_id',$drug->id)->whereIn('transaction_id',$inflow)->whereNot('stock',0)->orderBy('expired')->paginate(10,['*'],'expired');
-        $transactions = TransactionDetail::with('transaction')->where('drug_id',$drug->id)->orderBy('created_at')->paginate(5,['*'],'transaction');
-        return view("pages.report.drugDetail",compact('drug','stock','judul','details','transactions'));
+        
+        $warehouseStock = Warehouse::where('drug_id', $drug->id)->first();
+        $clinicStock = Clinic::where('drug_id', $drug->id)->first();
+        
+        $warehouseDetails = TransactionDetail::where('drug_id', $drug->id)
+            ->whereHas('transaction', function($q) {
+                $q->where('variant', 'LPB');
+            })
+            ->orderBy('expired');
+            
+        $clinicDetails = TransactionDetail::where('drug_id', $drug->id)
+            ->whereHas('transaction', function($q) {
+                $q->where('variant', 'LPK');
+            })
+            ->orderBy('expired');
+            
+        $details = $warehouseDetails->union($clinicDetails)
+            ->orderBy('expired')
+            ->paginate(10, ['*'], 'expired');
+        
+        $transactionsQuery = TransactionDetail::with('transaction')
+            ->where('drug_id', $drug->id);
+            
+        if ($request->has('start') && $request->has('end')) {
+            $end = Carbon::parse($request->end)->endOfDay();
+            $transactionsQuery->whereHas('transaction', function($q) use ($request, $end) {
+                $q->whereBetween('created_at', [$request->start, $end]);
+            });
+        }
+        
+        $transactions = $transactionsQuery->orderBy('created_at')->paginate(5, ['*'], 'transaction');
+        
+        $totalStock = ($warehouseStock ? $warehouseStock->quantity : 0) + 
+                      ($clinicStock ? $clinicStock->quantity : 0);
+        
+        return view("pages.report.drugDetail", compact('drug', 'warehouseStock', 'clinicStock', 'judul', 'details', 'transactions', 'totalStock'));
     }
 
     public function drugPrint(){

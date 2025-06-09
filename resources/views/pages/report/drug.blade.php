@@ -17,10 +17,10 @@ use Carbon\Carbon;
                 TERAPKAN
             </button>
         </form>
-        <form action="" class="flex">
-            <input type="text" name="" id="" placeholder="Search..."
-                class="rounded-full px-6 py-2 ring-2 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-        </form>
+            <form action="" class="flex">
+                <input type="text" name="" id="searchInput" placeholder="Search..."
+                    class="rounded-full px-6 py-2 ring-2 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </form>
     </div>
 
     <div class="overflow-hidden rounded-lg bg-white shadow-md mt-6">
@@ -34,18 +34,18 @@ use Carbon\Carbon;
                 <th class="py-4">Expired Terbaru</th>
                 <th class="py-4">Action</th>
             </thead>
-            <tbody>
-                @foreach ($stocks as $number => $item)
 
+            <tbody id="suggestions">
+                @foreach ($stocks as $number => $item)
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3">{{ $number + 1 }}</td>
-                    <td class="py-3">{{ $item->drug()->code }}</td>
-                    <td class="py-3 text-left">{{ $item->drug()->name }}</td>
-                    <td class="py-3">{{ floor($item->quantity/$item->drug()->piece_netto) }} pcs</td>
-                    <td class="py-3">{{ Carbon::parse($item->oldest)->translatedFormat('j F Y') }}</td>
-                    <td class="py-3">{{ Carbon::parse($item->latest)->translatedFormat('j F Y') }}</td>
+                    <td class="py-3">{{ $item->drug->code }}</td>
+                    <td class="py-3 text-left">{{ $item->drug->name }}</td>
+                    <td class="py-3">{{ floor($item->quantity/$item->drug->piece_netto) }} pcs</td>
+                    <td class="py-3">{{ $item->oldest ? Carbon::parse($item->oldest)->translatedFormat('j F Y') : '-' }}</td>
+                    <td class="py-3">{{ $item->latest ? Carbon::parse($item->latest)->translatedFormat('j F Y') : '-' }}</td>
                     <td class="flex justify-center py-3">
-                        <a href="{{ route('report.drugs.show', $item->drug()->id) }}"
+                        <a href="{{ route('report.drugs.show', $item->drug->id) }}"
                             class="rounded-md bg-blue-500 p-2 hover:bg-blue-600">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,82 @@ use Carbon\Carbon;
 </div>
 
 <script>
-       function printModal() {
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        const searchValue = this.value;
+        if (searchValue.length > 0) {
+            fetch(`/report/drugs?query=${searchValue}`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newSuggestions = doc.getElementById('suggestions');
+                    const newPagination = doc.querySelector('.p-6');
+                    
+                    document.getElementById('suggestions').innerHTML = newSuggestions.innerHTML;
+                    document.querySelector('.p-6').innerHTML = newPagination.innerHTML;
+                });
+        } else {
+            fetch('/report/drugs')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newSuggestions = doc.getElementById('suggestions');
+                    const newPagination = doc.querySelector('.p-6');
+                    
+                    document.getElementById('suggestions').innerHTML = newSuggestions.innerHTML;
+                    document.querySelector('.p-6').innerHTML = newPagination.innerHTML;
+                });
+        }
+    });
+
+    let timeout = null;
+    const drugInput = document.getElementById('drug-search')
+    drugInput.addEventListener('input', function() {
+        clearTimeout(timeout);
+        const query = this.value;
+        timeout = setTimeout(() => {
+            if (query.length > 0) {
+                document.getElementById('drug-data').classList.add('hidden')
+                document.getElementById('drug-value').classList.remove('hidden')
+                fetch(`/drug-search?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const suggestions = document.getElementById('drug-value');
+                        suggestions.innerHTML = '';
+                        if (data.length > 0) {
+                            data.forEach((item, number) => {
+                                const warehouse = item.warehouse;
+                                const clinic = item.clinic;
+                                const totalStock = (warehouse ? warehouse.quantity : 0) + (clinic ? clinic.quantity : 0);
+
+                                suggestions.innerHTML += `
+                                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                        <td class="py-3">${number + 1}</td>
+                                        <td class="py-3">${item.code || '-'}</td>
+                                        <td class="py-3">${item.name || '-'}</td>
+                                        <td class="py-3">${Math.floor(totalStock/item.piece_netto)} pcs</td>
+                                        <td class="py-3">${item.oldest ? new Date(item.oldest).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</td>
+                                        <td class="py-3">${item.latest ? new Date(item.latest).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</td>
+                                        <td class="flex justify py-3">
+                                            <a href="/report/drugs/${item.id}" class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md">
+                                                @include('icons.mata')
+                                            </a>
+                                        </td>
+                                    </tr>`;
+                            });
+                        } else {
+                            suggestions.innerHTML = '<tr><td colspan="7" class="py-3 text-center">Tidak ada data</td></tr>';
+                        }
+                    });
+            } else {
+                document.getElementById('drug-data').classList.remove('hidden')
+                document.getElementById('drug-value').classList.add('hidden')
+            }
+        }, 400);
+    });
+
+    function printModal() {
         document.getElementById('printModal').classList.remove('hidden');
     }
 

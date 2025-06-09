@@ -63,8 +63,8 @@
                                 @php
                                     $routes = [
                                         'Checkout' => route('transaction.show', $item->id),
-                                        'Trash' => $item->trash() ? route('management.trash.show', $item->id) : null,
-                                        'Retur' => $item->retur() ? route('management.retur.show', $item->id) : null,
+                                        'Trash' => $item->trash() ? route('management.trash.show', $item->trash()->id) : null,
+                                        'Retur' => $item->retur() ? route('management.retur.show', $item->retur()->id) : null,
                                         'LPB' => route('inventory.inflows.show', $item->id),
                                         'default' => route('clinic.inflows.show', $item->id),
                                     ];
@@ -72,7 +72,7 @@
                                     $route = $routes[$item->variant] ?? $routes['default'];
                                 @endphp
 
-                                <a href="{{ $routes[$item->variant] ?? $routes['default'] }}"
+                                <a href="{{ $route }}"
                                     class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md">
                                     @include('icons.mata')
                                 </a>
@@ -172,8 +172,8 @@
                                     }
                                     let routes = {
                                         'Checkout': `/transaction/${item.id}`,
-                                        'Trash': `/management/trash/${item.id}`,
-                                        'Retur': `/management/retur/${item.id}`,
+                                        'Trash': item.trash ? `/management/trash/${item.trash.id}` : null,
+                                        'Retur': item.retur ? `/management/retur/${item.retur.id}` : null,
                                         'LPB': `/inventory/inflows/${item.id}`,
                                         'default': `/clinic/inflows/${item.id}`
                                     };
