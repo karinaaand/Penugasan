@@ -26,6 +26,7 @@ use Maatwebsite\Excel\Facades\Excel;
 // menambahkan pdf
 use App\Http\Controllers\PdfInventoryController;
 use App\Http\Controllers\PDFKlinikController;
+use App\Http\Controllers\PdfCheckoutController;
 
 // menambahkan template
 use App\Exports\InventoryTemplateExport;
@@ -163,6 +164,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/clinic/export/{transaction_id}', [KlinikController::class, 'export']);
     // menambahakan pdf
     Route::get('/clinic/generate-pdf/{transaction_id}', [PDFKlinikController::class, 'generatePdf']);
+
+    // Export routes  checkout
+    Route::get('/checkout/export/{transaction_id}', [TransactionController::class, 'exportCheckout'])->name('checkout.export');
+    Route::get('/checkout/generate-pdf/{transaction_id}', [PdfCheckoutController::class, 'generatePdf'])->name('checkout.generate-pdf');
 
     // menambahakan tempalte inventory
 
