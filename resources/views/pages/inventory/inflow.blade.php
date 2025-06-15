@@ -77,8 +77,8 @@
     function fetchInflow() {
         api.get(`/inventory/inflows?per_page=${per_page}`)
             .then(response => {
-                console.log('Response data:', response.data);
-                data_inflow = response.data;
+                console.log('Response data:', response);
+                data_inflow = response;
                 renderInflowTable(data_inflow);
                 updatePaginationInfo(data_inflow.pagination);
             })
