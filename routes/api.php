@@ -63,7 +63,7 @@ Route::prefix('v1')->group(function () {
 
         // Vendors
         Route::apiResource('vendors', VendorController::class);
-        Route::get('vendors/search', [VendorController::class, 'search']);
+        Route::get('vendors /search', [VendorController::class, 'search']);
 
         // Repacks
         Route::apiResource('repacks', RepackController::class);

@@ -58,6 +58,7 @@ class InventoryController extends ApiController
 
         $formattedInflows = $inflows->map(function ($inflow) {
             return [
+                'id' => $inflow->id,
                 'No. LPB' => $inflow->code,
                 'Vendor' => $inflow->vendor()->name,
                 'Date' => Carbon::parse($inflow->created_at)->isoFormat('D MMMM Y')
@@ -68,6 +69,12 @@ class InventoryController extends ApiController
             'status' => 'success',
             'message' => 'Inflows retrieved successfully',
             'data' => $formattedInflows,
+            'pagination' => [
+            'current_page' => $inflows->currentPage(),
+            'per_page' => $inflows->perPage(),
+            'total' => $inflows->total(),
+            'last_page' => $inflows->lastPage(),
+            ],
         ]);
     }
 
