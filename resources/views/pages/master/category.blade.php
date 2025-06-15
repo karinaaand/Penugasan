@@ -96,7 +96,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // Configuration
-        const API_BASE_URL = 'http://localhost:8000/api/v1';
+        const API_BASE_URL = 'https://simbat.madanateknologi.web.id/api/v1';
         const per_page = 5;
         const token = localStorage.getItem('token');
 
@@ -109,6 +109,7 @@
 
         // DOM Elements
         const categoryInput = document.getElementById('category-search');
+        console.log(localStorage.getItem('token'));
 
         // API Client
         const api = axios.create({
@@ -131,12 +132,12 @@
                 fetchCategories();
             }
         }
-
         // API Functions
         function fetchCategories(searchQuery = '', page = 1) {
             api.get(`/categories?per_page=${per_page}&search=${searchQuery}&page=${page}`)
                 .then(response => {
                     data_kategori = response.data;
+                    console.log('Data kategori:', response);
                     renderCategoryTable(data_kategori);
                     updatePaginationInfo(data_kategori.data);
                 })

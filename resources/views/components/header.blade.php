@@ -140,10 +140,13 @@
 </div>
 
 <script>
+    console.log('Modal script loaded');
     function toggleModal() {
         const modal = document.getElementById('modal');
         modal.classList.toggle('hidden');
     }
+    {{--  const user = JSON.parse(localStorage.getItem('user'));  --}}
+    console.log(user);
 
     const user = {
         name: '{{ auth()->user()->name }}',
@@ -153,8 +156,10 @@
     };
 
     document.getElementById('user-avatar').src = '/storage/' + user.avatar;
+    console.log('User avatar:', document.getElementById('user-avatar').src);
     document.getElementById('user-avatar-modal').src = '/storage/' + user.avatar;
     document.getElementById('sp-name').innerText = user.name;
+    console.log('User name:', document.getElementById('sp-name').innerText);
     document.getElementById('sp-role').innerText = user.role;
     document.getElementById('sp-email').innerText = user.email;
 
