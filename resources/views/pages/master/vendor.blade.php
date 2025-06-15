@@ -133,7 +133,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // Configuration
-        const API_BASE_URL = 'http://localhost:8000/api/v1';
+        const API_BASE_URL = 'https://simbat.madanateknologi.web.id/api/v1';
         const per_page = 5;
         const token = localStorage.getItem('token');
 
