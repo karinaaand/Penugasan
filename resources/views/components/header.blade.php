@@ -146,14 +146,14 @@
         modal.classList.toggle('hidden');
     }
     {{--  const user = JSON.parse(localStorage.getItem('user'));  --}}
-    console.log(user);
-
+    
     const user = {
         name: '{{ auth()->user()->name }}',
         email: '{{ auth()->user()->email }}',
         role: '{{ auth()->user()->role }}',
         avatar: '{{ auth()->user()->avatar }}'
     };
+    console.log(user);
 
     document.getElementById('user-avatar').src = '/storage/' + user.avatar;
     console.log('User avatar:', document.getElementById('user-avatar').src);
